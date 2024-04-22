@@ -3,6 +3,7 @@ import NavButton from "./navButton";
 import SearchBar from "./searchBar";
 
 function TopBar() {
+
   return (
     <div className="position-relative topBar p-2">
       <div className="position-relative top-50 start-0 translate-middle-y float">
