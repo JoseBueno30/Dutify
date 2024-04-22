@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./styles/searchBarStyle.css";
+import "./searchBarStyle.css";
 import { BiSearch } from "react-icons/bi";
 
 function SearchBar() {

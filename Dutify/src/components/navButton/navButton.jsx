@@ -1,4 +1,4 @@
-import "./styles/navButtonStyle.css"
+import "./navButtonStyle.css"
 
 function NavButton(props) {
     return (

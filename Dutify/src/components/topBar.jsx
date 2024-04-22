@@ -1,10 +1,11 @@
-import { BiArrowBack, BiSearch } from "react-icons/bi";
-import NavButton from "./navButton";
-import SearchBar from "./searchBar";
+import { BiArrowBack } from "react-icons/bi";
+import NavButton from "./navButton/navButton";
+import SearchBar from "./searchBar/searchBar";
+import ThemeSwitch from "./themeSwitch/themeSwitch";
 
 function TopBar() {
   return (
-    <div className="position-relative topBar p-2">
+    <header className="position-relative topBar ps-2 pe-2">
       <div className="position-relative top-50 start-0 translate-middle-y float">
         <button
           className="float-start pt-1 me-2 btn btn-secondary"
@@ -19,9 +20,10 @@ function TopBar() {
         <NavButton texto="Generos"></NavButton>
         <NavButton texto="Listas"></NavButton>
 
+        <ThemeSwitch></ThemeSwitch>
         <SearchBar></SearchBar>
       </div>
-    </div>
+    </header>
   );
 }
 
