@@ -6,3 +6,19 @@
   padding-left: 1rem;
 }
 
+.search-btn {
+  right: 3px;
+  top: 5%;
+  background-color: #655be6;
+  border-radius: 50%;
+  border: 1px solid black;
+  transform: scale(0.9);
+}
+
+.search-btn:hover {
+  background-color: #5d55d6;
+}
+.search-btn:active {
+  transform: scale(0.95);
+  background-color: #534bbf;
+}
