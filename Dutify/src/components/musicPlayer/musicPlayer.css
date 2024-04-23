@@ -1,0 +1,59 @@
+.music-bar {
+    width: 100%;
+    background-color: #504848;
+    color: white;
+    height: 10%;
+}
+
+.music-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.song-container {
+    display: flex;
+}
+
+.simulate-image {
+    width: 75px;
+    height: 75px;
+    margin-left: 30px;
+    background-color: red;
+}
+
+.artist-container {
+    margin-left: 10px;
+    align-content: center;
+}
+
+.progresion-bar {
+    margin-left: 10%;
+    margin-top: -50px;
+    width: 50%;
+    height: 10px;
+    justify-content: center;
+    position: relative;
+}
+
+.song-bar {
+    width: 100%;
+    color: #4976E8;
+}
+
+.song-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.song-buttons img {
+    margin-right: 1%;
+    cursor: pointer;
+}
+
+.sound-bar {
+    margin-right: 5%;
+}
