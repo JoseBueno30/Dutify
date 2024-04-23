@@ -1,5 +1,13 @@
 import "./musicPlayer.css"
+import { useState } from "react";
+
 function MusicPlayer() {
+  const [playing, swtich] = useState(true);
+
+  const switchPlay = () => {
+    swtich(!playing)
+  };
+
   return (
     <>
       <div className="position-absolute bottom-0 start-0 music-bar">
@@ -18,7 +26,7 @@ function MusicPlayer() {
                 <input className="song-bar" type="range"></input>
                 <div className="song-buttons">
                     <img src="src\assets\previous-button.svg"></img>
-                    <img src="src\assets\play-button.svg"></img>
+                    {playing ? <img src="src\assets\play-button.svg" onClick={switchPlay}></img> : <img src="src\assets\stop-button.svg" onClick={switchPlay}></img>}
                     <img src="src\assets\next-button.svg"></img>
                 </div> 
             </div>
