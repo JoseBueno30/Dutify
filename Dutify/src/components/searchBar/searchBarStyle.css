@@ -4,6 +4,8 @@
   border-radius: 20px;
   border: 1px solid black;
   padding-left: 1rem;
+  padding-right: 2rem;
+  margin-top: 3px;
 }
 
 .search-btn {
@@ -13,6 +15,7 @@
   border-radius: 50%;
   border: 1px solid black;
   transform: scale(0.9);
+  margin-top: 3px;
 }
 
 .search-btn:hover {
