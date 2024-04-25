@@ -7,7 +7,7 @@ import GenreCard from "./components/genreCard/genreCard";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className="d-flex">
-      <GenreCard genreName="Pop" background="pop"/>
+      <GenreCard genreName="Pop" background="flamenco"/>
       <GenreCard genreName="Pop" background="pop"/>
     </div>
   </React.StrictMode>
