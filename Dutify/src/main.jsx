@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className="d-flex">
       <GenreCard genreName="Pop" background="flamenco"/>
-      <GenreCard genreName="Pop" background="pop"/>
+      <GenreCard genreName="Pop" background="soul"/>
     </div>
   </React.StrictMode>
 );

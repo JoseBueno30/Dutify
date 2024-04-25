@@ -1,64 +1,49 @@
 :root {
   /* Colores para cada género de música */
   --color-pop: hsl(0, 100%, 50%);
-  --color-pop-analogous-1: hsl(24, 100%, 50%);
-  --color-pop-analogous-2: hsl(348, 100%, 50%);
+  --color-pop-triad-1: hsl(120, 100%, 50%);
 
-  --color-rock: hsl(48, 100%, 50%);
-  --color-rock-analogous-1: hsl(72, 100%, 50%);
-  --color-rock-analogous-2: hsl(24, 100%, 50%);
+  --color-rock: hsl(36, 100%, 50%);
+  --color-rock-triad-1: hsl(156, 100%, 50%);
 
-  --color-hip-hop: hsl(96, 100%, 50%);
-  --color-hip-hop-analogous-1: hsl(120, 100%, 50%);
-  --color-hip-hop-analogous-2: hsl(72, 100%, 50%);
+  --color-hip-hop: hsl(72, 100%, 50%);
+  --color-hip-hop-triad-1: hsl(192, 100%, 50%);
 
-  --color-jazz: hsl(144, 100%, 50%);
-  --color-jazz-analogous-1: hsl(168, 100%, 50%);
-  --color-jazz-analogous-2: hsl(120, 100%, 50%);
+  --color-jazz: hsl(108, 100%, 50%);
+  --color-jazz-triad-1: hsl(228, 100%, 50%);
 
-  --color-reggaeton: hsl(192, 100%, 50%);
-  --color-reggaeton-analogous-1: hsl(216, 100%, 50%);
-  --color-reggaeton-analogous-2: hsl(168, 100%, 50%);
+  --color-reggaeton: hsl(144, 100%, 50%);
+  --color-reggaeton-triad-1: hsl(264, 100%, 50%);
 
-  --color-flamenco: hsl(240, 100%, 50%);
-  --color-flamenco-analogous-1: hsl(264, 100%, 50%);
-  --color-flamenco-analogous-2: hsl(216, 100%, 50%);
+  --color-flamenco: hsl(180, 100%, 50%);
+  --color-flamenco-triad-1: hsl(300, 100%, 50%);
 
-  --color-techno: hsl(288, 100%, 50%);
-  --color-techno-analogous-1: hsl(312, 100%, 50%);
-  --color-techno-analogous-2: hsl(264, 100%, 50%);
+  --color-techno: hsl(216, 100%, 50%);
+  --color-techno-triad-1: hsl(36, 100%, 50%);
 
-  --color-metal: hsl(336, 100%, 50%);
-  --color-metal-analogous-1: hsl(360, 100%, 50%);
-  --color-metal-analogous-2: hsl(312, 100%, 50%);
+  --color-metal: hsl(252, 100%, 50%);
+  --color-metal-triad-1: hsl(72, 100%, 50%);
 
-  --color-k-pop: hsl(24, 100%, 50%);
-  --color-k-pop-analogous-1: hsl(48, 100%, 50%);
-  --color-k-pop-analogous-2: hsl(360, 100%, 50%);
+  --color-k-pop: hsl(288, 100%, 50%);
+  --color-k-pop-triad-1: hsl(108, 100%, 50%);
 
-  --color-soul: hsl(72, 100%, 50%);
-  --color-soul-analogous-1: hsl(96, 100%, 50%);
-  --color-soul-analogous-2: hsl(48, 100%, 50%);
+  --color-soul: hsl(324, 100%, 50%);
+  --color-soul-triad-1: hsl(144, 100%, 50%);
 
-  --color-clasica: hsl(120, 100%, 50%);
-  --color-clasica-analogous-1: hsl(144, 100%, 50%);
-  --color-clasica-analogous-2: hsl(96, 100%, 50%);
+  --color-clasica: hsl(0, 0%, 50%);
+  --color-clasica-triad-1: hsl(120, 100%, 50%);
 
-  --color-instrumental: hsl(168, 100%, 50%);
-  --color-instrumental-analogous-1: hsl(192, 100%, 50%);
-  --color-instrumental-analogous-2: hsl(144, 100%, 50%);
+  --color-instrumental: hsl(36, 100%, 50%);
+  --color-instrumental-triad-1: hsl(156, 100%, 50%);
 
-  --color-anime: hsl(216, 100%, 50%);
-  --color-anime-analogous-1: hsl(240, 100%, 50%);
-  --color-anime-analogous-2: hsl(192, 100%, 50%);
+  --color-anime: hsl(72, 100%, 50%);
+  --color-anime-triad-1: hsl(192, 100%, 50%);
 
-  --color-reggae: hsl(264, 100%, 50%);
-  --color-reggae-analogous-1: hsl(288, 100%, 50%);
-  --color-reggae-analogous-2: hsl(240, 100%, 50%);
+  --color-reggae: hsl(108, 100%, 50%);
+  --color-reggae-triad-1: hsl(228, 100%, 50%);
 
-  --color-latino: hsl(312, 100%, 50%);
-  --color-latino-analogous-1: hsl(336, 100%, 50%);
-  --color-latino-analogous-2: hsl(288, 100%, 50%);
+  --color-latino: hsl(144, 100%, 50%);
+  --color-latino-triad-1: hsl(264, 100%, 50%);
 }
 
 /* Estilo para cada género de música */
@@ -66,8 +51,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-pop),
-    var(--color-pop-analogous-1),
-    var(--color-pop-analogous-2)
+    var(--color-pop-triad-1)
   );
 }
 
@@ -75,8 +59,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-rock),
-    var(--color-rock-analogous-1),
-    var(--color-rock-analogous-2)
+    var(--color-rock-triad-1)
   );
 }
 
@@ -84,8 +67,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-hip-hop),
-    var(--color-hip-hop-analogous-1),
-    var(--color-hip-hop-analogous-2)
+    var(--color-hip-hop-triad-1)
   );
 }
 
@@ -93,8 +75,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-jazz),
-    var(--color-jazz-analogous-1),
-    var(--color-jazz-analogous-2)
+    var(--color-jazz-triad-1)
   );
 }
 
@@ -102,8 +83,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-reggaeton),
-    var(--color-reggaeton-analogous-1),
-    var(--color-reggaeton-analogous-2)
+    var(--color-reggaeton-triad-1)
   );
 }
 
@@ -111,8 +91,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-flamenco),
-    var(--color-flamenco-analogous-1),
-    var(--color-flamenco-analogous-2)
+    var(--color-flamenco-triad-1)
   );
 }
 
@@ -120,8 +99,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-techno),
-    var(--color-techno-analogous-1),
-    var(--color-techno-analogous-2)
+    var(--color-techno-triad-1)
   );
 }
 
@@ -129,8 +107,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-metal),
-    var(--color-metal-analogous-1),
-    var(--color-metal-analogous-2)
+    var(--color-metal-triad-1)
   );
 }
 
@@ -138,8 +115,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-k-pop),
-    var(--color-k-pop-analogous-1),
-    var(--color-k-pop-analogous-2)
+    var(--color-k-pop-triad-1)
   );
 }
 
@@ -147,8 +123,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-soul),
-    var(--color-soul-analogous-1),
-    var(--color-soul-analogous-2)
+    var(--color-soul-triad-1)
   );
 }
 
@@ -156,8 +131,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-clasica),
-    var(--color-clasica-analogous-1),
-    var(--color-clasica-analogous-2)
+    var(--color-clasica-triad-1)
   );
 }
 
@@ -165,8 +139,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-instrumental),
-    var(--color-instrumental-analogous-1),
-    var(--color-instrumental-analogous-2)
+    var(--color-instrumental-triad-1)
   );
 }
 
@@ -174,8 +147,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-anime),
-    var(--color-anime-analogous-1),
-    var(--color-anime-analogous-2)
+    var(--color-anime-triad-1)
   );
 }
 
@@ -183,8 +155,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-reggae),
-    var(--color-reggae-analogous-1),
-    var(--color-reggae-analogous-2)
+    var(--color-reggae-triad-1)
   );
 }
 
@@ -192,8 +163,7 @@
   background: linear-gradient(
     to bottom,
     var(--color-latino),
-    var(--color-latino-analogous-1),
-    var(--color-latino-analogous-2)
+    var(--color-latino-triad-1)
   );
 }
 
