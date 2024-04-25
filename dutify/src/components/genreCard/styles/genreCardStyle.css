@@ -1,0 +1,193 @@
+:root {
+    /* Colores para cada género de música con 
+    saturación al 100% y luminancia al 50%*/
+    --color-pop: hsl(0, 100%, 50%);
+    --color-pop-comp: hsl(180, 100%, 50%);
+  
+    --color-rock: hsl(24, 100%, 50%);
+    --color-rock-comp: hsl(204, 100%, 50%);
+  
+    --color-hip-hop: hsl(48, 100%, 50%);
+    --color-hip-hop-comp: hsl(228, 100%, 50%);
+  
+    --color-jazz: hsl(72, 100%, 50%);
+    --color-jazz-comp: hsl(252, 100%, 50%);
+  
+    --color-reggaeton: hsl(96, 100%, 50%);
+    --color-reggaeton-comp: hsl(276, 100%, 50%);
+  
+    --color-flamenco: hsl(120, 100%, 50%);
+    --color-flamenco-comp: hsl(300, 100%, 50%);
+  
+    --color-techno: hsl(144, 100%, 50%);
+    --color-techno-comp: hsl(324, 100%, 50%);
+  
+    --color-metal: hsl(168, 100%, 50%);
+    --color-metal-comp: hsl(348, 100%, 50%);
+  
+    --color-k-pop: hsl(192, 100%, 50%);
+    --color-k-pop-comp: hsl(12, 100%, 50%);
+  
+    --color-soul: hsl(216, 100%, 50%);
+    --color-soul-comp: hsl(36, 100%, 50%);
+  
+    --color-clasica: hsl(240, 100%, 50%);
+    --color-clasica-comp: hsl(60, 100%, 50%);
+  
+    --color-instrumental: hsl(264, 100%, 50%);
+    --color-instrumental-comp: hsl(84, 100%, 50%);
+  
+    --color-anime: hsl(288, 100%, 50%);
+    --color-anime-comp: hsl(108, 100%, 50%);
+  
+    --color-reggae: hsl(312, 100%, 50%);
+    --color-reggae-comp: hsl(132, 100%, 50%);
+  
+    --color-latino: hsl(336, 100%, 50%);
+    --color-latino-comp: hsl(156, 100%, 50%);
+  }
+
+/* Estilo para cada género de música */
+.pop {
+  background: linear-gradient(
+    to bottom,
+    var(--color-pop),
+    var(--color-pop-comp)
+  );
+}
+
+.rock {
+  background: linear-gradient(
+    to bottom,
+    var(--color-rock),
+    var(--color-rock-comp)
+  );
+}
+
+.hip-hop {
+  background: linear-gradient(
+    to bottom,
+    var(--color-hip-hop),
+    var(--color-hip-hop-comp)
+  );
+}
+
+.jazz {
+  background: linear-gradient(
+    to bottom,
+    var(--color-jazz),
+    var(--color-jazz-comp)
+  );
+}
+
+.reggaeton {
+  background: linear-gradient(
+    to bottom,
+    var(--color-reggaeton),
+    var(--color-reggaeton-comp)
+  );
+}
+
+.flamenco {
+  background: linear-gradient(
+    to bottom,
+    var(--color-flamenco),
+    var(--color-flamenco-comp)
+  );
+}
+
+.techno {
+  background: linear-gradient(
+    to bottom,
+    var(--color-techno),
+    var(--color-techno-comp)
+  );
+}
+
+.metal {
+  background: linear-gradient(
+    to bottom,
+    var(--color-metal),
+    var(--color-metal-comp)
+  );
+}
+
+.k-pop {
+  background: linear-gradient(
+    to bottom,
+    var(--color-k-pop),
+    var(--color-k-pop-comp)
+  );
+}
+
+.soul {
+  background: linear-gradient(
+    to bottom,
+    var(--color-soul),
+    var(--color-soul-comp)
+  );
+}
+
+.clasica {
+  background: linear-gradient(
+    to bottom,
+    var(--color-clasica),
+    var(--color-clasica-comp)
+  );
+}
+
+.instrumental {
+  background: linear-gradient(
+    to bottom,
+    var(--color-instrumental),
+    var(--color-instrumental-comp)
+  );
+}
+
+.anime {
+  background: linear-gradient(
+    to bottom,
+    var(--color-anime),
+    var(--color-anime-comp)
+  );
+}
+
+.reggae {
+  background: linear-gradient(
+    to bottom,
+    var(--color-reggae),
+    var(--color-reggae-comp)
+  );
+}
+
+.latino {
+  background: linear-gradient(
+    to bottom,
+    var(--color-latino),
+    var(--color-latino-comp)
+  );
+}
+
+#main_container {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  transition: 0.25s ease;
+  border-radius: 1rem;
+  border-color: gray;
+}
+
+#main_container:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transform: scale(1.005);
+}
+
+p {
+  font-size: 3.5vw;
+  font-weight: 500;
+  letter-spacing: 1.05px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
+}
+
