@@ -1,0 +1,30 @@
+.topBar {
+  height: 6vh;
+}
+
+#dark .topBar{
+    background-color: #4E4848;
+}
+
+#light .topBar{
+    background-color: white;
+}
+
+#dark .btn-back{
+    background-color: #686262;
+    border-color: #686262;
+}
+#dark .btn-back:hover{
+    background-color: #635c5c;
+    border-color: #635c5c;
+}
+
+
+#light .btn-back{
+    background-color: #c3b9b9;
+    border-color: #c3b9b9;
+}
+#light .btn-back:hover{
+    background-color: #b9aeae;
+    border-color: #b9aeae;
+}

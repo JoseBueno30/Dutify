@@ -1,13 +1,14 @@
-import { useState } from "react";
 import "./themeSwitchStyle.css";
 import { BiMoon } from "react-icons/bi";
 import { BiSun } from "react-icons/bi";
+import { useThemeContext } from "../../context/ThemeContext";
+
 
 function ThemeSwitch() {
-  const [theme, setTheme] = useState("dark");
+  const {contextTheme, setContextTheme} = useThemeContext()
 
   const switchTheme = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark");
+    setContextTheme((state) => (state === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -15,7 +16,7 @@ function ThemeSwitch() {
       className="theme-toogle position-absolute top-50 translate-middle-y"
       onClick={switchTheme}
     >
-      {theme === "dark" ? (
+      {contextTheme === "dark" ? (
         <BiSun size={30} color="white"></BiSun>
       ) : (
         <BiMoon size={30} color="black"></BiMoon>

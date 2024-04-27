@@ -2,7 +2,7 @@ import "./navButtonStyle.css"
 
 function NavButton(props) {
     return (
-        <a className="navButton fs-5">
+        <a className="navButton fs-5" id={props.id}>
             {props.texto}
         </a>
     )

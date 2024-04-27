@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
-import TopBar from './components/topBar'
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css'
+import App from './App';
+import { ThemeContextProvider } from './context/ThemeContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <TopBar></TopBar>
-  </React.StrictMode>,
+  <ThemeContextProvider>
+    <App></App>
+  </ThemeContextProvider>
 )

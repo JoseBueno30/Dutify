@@ -5,7 +5,6 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: white;
   padding: 5px 15px 5px 15px;
   margin-left: 15px;
   cursor: pointer;
@@ -20,4 +19,12 @@
   background-color: #655be6;
   transform: scale(1.05);
   transition: 0.25s ease;
+}
+
+#light .navButton{
+  color: rgb(0, 0, 0);
+}
+
+#dark .navButton{
+  color: white;
 }
