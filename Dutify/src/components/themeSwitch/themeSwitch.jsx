@@ -13,13 +13,13 @@ function ThemeSwitch() {
 
   return (
     <button
-      className="theme-toogle position-absolute top-50 translate-middle-y"
+      className="theme-toogle position-absolute top-50 translate-middle-y pb-2"
       onClick={switchTheme}
     >
       {contextTheme === "dark" ? (
-        <BiSun size={30} color="white"></BiSun>
+        <BiSun size={35} color="white"></BiSun>
       ) : (
-        <BiMoon size={30} color="black"></BiMoon>
+        <BiMoon size={35} color="black"></BiMoon>
       )}
     </button>
   );

@@ -28,3 +28,32 @@
     background-color: #b9aeae;
     border-color: #b9aeae;
 }
+
+.mobile-btn{
+    visibility: hidden;
+    height: 70%;
+}
+.mobile-btn:active{
+    background-color: red;
+}
+
+.title{
+    font-size: calc(1.3rem + 0.6vw);
+    left: 5%;
+}
+
+@media only screen and (max-width: 500px){
+    .mobile-btn{
+        visibility: visible;
+    }
+
+    .btn-back{
+        visibility: hidden;
+        width: 0%;
+    }
+
+    .title{
+        font-size: calc(1.375rem + 2vw);
+        left: 2% !important;
+    }
+}

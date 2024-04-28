@@ -6,7 +6,7 @@ function SearchBar() {
   const [text, onChangeText] = useState("");
 
   return (
-    <div className="position-absolute end-0 top-50 translate-middle-y">
+    <div className="position-absolute end-0 top-50 translate-middle-y pb-1">
       <button className="position-absolute search-btn">
         <BiSearch className="" style={{ color: "black" }} />
       </button>
