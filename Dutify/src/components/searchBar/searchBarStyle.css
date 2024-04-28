@@ -1,0 +1,36 @@
+.search-bar {
+  width: 30vw;
+  height: 2rem;
+  border-radius: 20px;
+  border: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 2rem;
+  margin-top: 3px;
+}
+
+.search-btn {
+  right: 3px;
+  top: 6%;
+  background-color: #655be6;
+  border-radius: 50%;
+  border: 1px solid black;
+  transform: scale(0.9);
+  margin-top: 3px;
+}
+
+.search-btn:hover {
+  background-color: #5d55d6;
+}
+.search-btn:active {
+  transform: scale(0.95);
+  background-color: #534bbf;
+}
+
+@media only screen and (max-width: 500px){
+  .search-bar{
+    visibility: hidden;
+  }
+  .search-btn{
+    visibility: hidden;
+  }
+}

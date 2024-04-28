@@ -1,0 +1,39 @@
+.navButton {
+  position: relative;
+  left: 9vw;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2.5px 15px 5px 15px;
+  margin-left: 15px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: 0.25s ease;
+  margin-top: 8px;
+  height: 70%;
+}
+
+.navButton:hover{
+  text-shadow: 0 0 2px;
+  background-color: #655be6;
+  transform: scale(1.05);
+  transition: 0.25s ease;
+}
+
+
+
+#light .navButton{
+  color: rgb(0, 0, 0);
+}
+
+#dark .navButton{
+  color: white;
+}
+
+@media only screen and (max-width: 500px){
+  .navButton{
+    visibility: hidden;
+  }
+}
+
