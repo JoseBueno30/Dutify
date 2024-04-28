@@ -19,7 +19,7 @@ function GenreCard({genreName, background}){
     return (
         <div className={'card m-3 w-100 h-auto ' + background} id="main_container" 
             alt={genreName + '_Imagen'}>
-          <div className={'card-img-overlay ' + background + '-img'}>
+          <div className={'overlay ' + background + '-img genre-img'}>
             <p >{genreName}</p>
           </div>
         </div>
