@@ -11,19 +11,19 @@
 .search-btn {
   right: 3px;
   top: 6%;
-  background-color: #655be6;
+  background-color: transparent;
   border-radius: 50%;
-  border: 1px solid black;
+  border: 0px;
   transform: scale(0.9);
-  margin-top: 3px;
+  margin-top: 3.5px;
 }
 
 .search-btn:hover {
-  background-color: #5d55d6;
+  background-color: rgb(224, 224, 224);
 }
 .search-btn:active {
   transform: scale(0.95);
-  background-color: #534bbf;
+  background-color: rgb(185, 185, 185);
 }
 
 @media only screen and (max-width: 500px){

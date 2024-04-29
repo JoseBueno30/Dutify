@@ -6,9 +6,16 @@ import ThemeSwitch from "../themeSwitch/themeSwitch";
 import { useThemeContext } from "../../context/ThemeContext";
 import { BsList } from "react-icons/bs";
 import "./topBarStyle.css";
+import { useState } from "react";
+
 
 function TopBar() {
   const { contextTheme, setContextTheme } = useThemeContext();
+  const [navMenuOpen, setNavMenuOpen] = useState(false);
+
+  const toggleNavMenu = () =>{
+    setNavMenuOpen(!navMenuOpen);
+  }
 
   return (
     <header
@@ -28,28 +35,31 @@ function TopBar() {
             <BiArrowBack color="white"></BiArrowBack>
           )}
         </button>
-        <h1
-          className="position-absolute title mt-2"
-          style={{ color: "#655BE6" }}
-          id={contextTheme}
-        >
+        <h1 className="title mt-2" id={contextTheme}>
           DutyFy
         </h1>
-        <nav>
+        <nav className={(navMenuOpen ? "open " : "closed ") + "navMenu"} id={contextTheme}>
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>
           <NavButton texto="Listas" id={contextTheme}></NavButton>
         </nav>
         <ThemeSwitch></ThemeSwitch>
         <SearchBar></SearchBar>
-        <button className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item" style={{left: "76%"}}>
+        <button
+          className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item"
+          style={{ left: "76%" }}
+        >
           {contextTheme === "light" ? (
             <BiSearch size={35} color="black"></BiSearch>
           ) : (
             <BiSearch size={35} color="white"></BiSearch>
           )}
         </button>
-        <button className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item" style={{left: "90%"}}>
+        <button
+          className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item"
+          style={{ left: "90%" }}
+          onClick={toggleNavMenu}
+        >
           {contextTheme === "light" ? (
             <BsList size={35} color="black"></BsList>
           ) : (

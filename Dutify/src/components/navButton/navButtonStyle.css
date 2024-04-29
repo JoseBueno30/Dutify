@@ -1,6 +1,6 @@
 .navButton {
   position: relative;
-  left: 9vw;
+  left: 5vw;
   display: inline-block;
   text-decoration: none;
   text-transform: uppercase;
@@ -16,7 +16,7 @@
 
 .navButton:hover{
   text-shadow: 0 0 2px;
-  background-color: #655be6;
+  background-color: #5383E8;
   transform: scale(1.05);
   transition: 0.25s ease;
 }
@@ -33,7 +33,13 @@
 
 @media only screen and (max-width: 500px){
   .navButton{
-    visibility: hidden;
+    left: 0vw;
+    margin: 0;
+    transform: translateX(0%);
+  }
+
+  .navButton:hover{
+    transform: translateX(0%);
   }
 }
 
