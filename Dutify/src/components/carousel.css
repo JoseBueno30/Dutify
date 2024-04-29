@@ -1,0 +1,36 @@
+div {
+    background-color: gray;
+}
+
+.carousel-item div {
+    background-color: black;
+    opacity: 0.3;
+    max-width: 200px;
+    text-align: center;
+    right: 40%;
+    left: 40%;
+    font-size: 20px;
+    bottom: 0.1rem;
+}  
+
+
+.carousel-item img {
+    width: 800px;
+    height: 300px;
+    border-radius: 15px;
+}
+
+.special-div {
+    display: flex;
+    justify-content: center;
+}
+
+#customCarousel {
+    width: 800px;
+    height: 300px;
+    border-radius: 15px;
+}
+
+
+  
+  
