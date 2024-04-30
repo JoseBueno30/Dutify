@@ -3,6 +3,7 @@
     overflow: hidden;
     transition: 0.25s ease;
     border-radius: 1rem;
+    border-color: gray;
 }
 
 #main_container:hover{
@@ -23,4 +24,5 @@ p{
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    color: white;
 }
