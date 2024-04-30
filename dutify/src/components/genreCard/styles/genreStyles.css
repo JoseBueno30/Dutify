@@ -1,59 +1,59 @@
 :root {
   /* Colores para cada género de música */
-  --color-pop: hsl(0, 50%, 50%);
-  --color-pop-2: hsl(60, 50%, 50%);
+  --color-pop: hsl(336, 50%, 50%);
+  --color-pop-2: hsl(36, 50%, 50%);
   --img-pop: url("assets/genreImages/pop-img.png");
 
-  --color-rock: hsl(24, 50%, 50%);
-  --color-rock-2: hsl(84, 50%, 50%);
+  --color-rock: hsl(240, 50%, 50%);
+  --color-rock-2: hsl(270, 50%, 50%);
   --img-rock: url("assets/genreImages/rock-img.png");
 
-  --color-hip-hop: hsl(48, 50%, 50%);
-  --color-hip-hop-2: hsl(108, 50%, 50%);
+  --color-hip-hop: hsl(80, 50%, 50%);
+  --color-hip-hop-2: hsl(140, 50%, 50%);
   --img-hip-hop: url("assets/genreImages/hip-hop-img.png");
 
-  --color-jazz: hsl(72, 50%, 50%);
-  --color-jazz-2: hsl(132, 50%, 50%);
+  --color-jazz: hsl(83, 50%, 50%);
+  --color-jazz-2: hsl(123, 50%, 50%);
   --img-jazz: url("assets/genreImages/jazz-img.png");
 
-  --color-reggaeton: hsl(96, 50%, 50%);
-  --color-reggaeton-2: hsl(156, 50%, 50%);
+  --color-reggaeton: hsl(120, 50%, 50%);
+  --color-reggaeton-2: hsl(180, 50%, 50%);
   --img-reggaeton: url("assets/genreImages/reggaeton-img.png");
 
-  --color-flamenco: hsl(120, 50%, 50%);
-  --color-flamenco-2: hsl(180, 50%, 50%);
+  --color-flamenco: hsl(336, 50%, 50%);
+  --color-flamenco-2: hsl(36, 50%, 50%);
   --img-flamenco: url("assets/genreImages/flamenco-img.png");
 
-  --color-techno: hsl(144, 50%, 50%);
-  --color-techno-2: hsl(204, 50%, 50%);
+  --color-techno: hsl(67, 70%, 36%);
+  --color-techno-2: hsl(67, 92%, 63%);
   --img-techno: url("assets/genreImages/techno-img.png");
 
-  --color-metal: hsl(168, 50%, 50%);
-  --color-metal-2: hsl(228, 50%, 50%);
+  --color-metal: hsl(170, 10%, 36%);
+  --color-metal-2: hsl(200, 10%, 50%);
   --img-metal: url("assets/genreImages/metal-img.png");
 
   --color-k-pop: hsl(192, 50%, 50%);
   --color-k-pop-2: hsl(252, 50%, 50%);
   --img-k-pop: url("assets/genreImages/k-pop-img.png");
 
-  --color-soul: hsl(216, 50%, 50%);
-  --color-soul-2: hsl(276, 50%, 50%);
+  --color-soul: hsl(170, 10%, 36%);
+  --color-soul-2: hsl(200, 10%, 50%);
   --img-soul: url("assets/genreImages/soul-img.png");
 
   --color-clasica: hsl(240, 50%, 50%);
   --color-clasica-2: hsl(270, 50%, 50%);
   --img-clasica: url("assets/genreImages/clasica-img.png");
 
-  --color-videojuegos: hsl(264, 50%, 50%);
-  --color-videojuegos-2: hsl(324, 50%, 50%);
+  --color-videojuegos: hsl(120, 50%, 50%);
+  --color-videojuegos-2: hsl(180, 50%, 50%);
   --img-videojuegos: url("assets/genreImages/videojuegos-img.png");
 
-  --color-anime: hsl(288, 50%, 50%);
-  --color-anime-2: hsl(348, 50%, 50%);
+  --color-anime: hsl(240, 50%, 50%);
+  --color-anime-2: hsl(270, 50%, 50%);
   --img-anime: url("assets/genreImages/anime-img.png");
 
-  --color-trap: hsl(312, 50%, 50%);
-  --color-trap-2: hsl(12, 50%, 50%);
+  --color-trap: hsl(192, 50%, 50%);
+  --color-trap-2: hsl(252, 50%, 50%);
   --img-trap: url("assets/genreImages/trap-img.png");
 
   --color-latino: hsl(336, 50%, 50%);
@@ -71,8 +71,8 @@
 .pop {
   background: linear-gradient(
     to bottom,
-    var(--color-rock),
-    var(--color-rock-2)
+    var(--color-pop),
+    var(--color-pop-2)
   );
 }
 
