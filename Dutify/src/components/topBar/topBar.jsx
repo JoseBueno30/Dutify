@@ -1,5 +1,6 @@
 import { BiArrowBack } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
+import { BsX } from "react-icons/bs";
 import NavButton from "../navButton/navButton";
 import SearchBar from "../searchBar/searchBar";
 import ThemeSwitch from "../themeSwitch/themeSwitch";
@@ -8,14 +9,33 @@ import { BsList } from "react-icons/bs";
 import "./topBarStyle.css";
 import { useState } from "react";
 
-
 function TopBar() {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [navMenuOpen, setNavMenuOpen] = useState(false);
 
-  const toggleNavMenu = () =>{
+  const toggleNavMenu = () => {
     setNavMenuOpen(!navMenuOpen);
-  }
+    const themeToggler  = document.getElementById("themeToggle")
+    themeToggler.classList.contains("occult") ? themeToggler.classList.remove("occult") : themeToggler.classList.add("occult");
+    const searchButton  = document.getElementById("searchButton")
+    searchButton.classList.contains("occult") ? searchButton.classList.remove("occult") : searchButton.classList.add("occult");
+  };
+
+  const navMenuIcon = () => {
+    if (navMenuOpen) {
+      return contextTheme === "light" ? (
+        <BsX size={35} color="black"></BsX>
+      ) : (
+        <BsX size={35} color="white"></BsX>
+      )
+    }else{
+      return contextTheme === "light" ? (
+        <BsList size={35} color="black"></BsList>
+      ) : (
+        <BsList size={35} color="white"></BsList>
+      )
+    }
+  };
 
   return (
     <header
@@ -38,16 +58,20 @@ function TopBar() {
         <h1 className="title mt-2" id={contextTheme}>
           DutyFy
         </h1>
-        <nav className={(navMenuOpen ? "open " : "closed ") + "navMenu"} id={contextTheme}>
+        <nav
+          className={(navMenuOpen ? "open " : "closed ") + "navMenu"}
+          id={contextTheme}
+        >
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>
           <NavButton texto="Listas" id={contextTheme}></NavButton>
         </nav>
-        <ThemeSwitch></ThemeSwitch>
+        <ThemeSwitch visible={navMenuOpen}></ThemeSwitch>
         <SearchBar></SearchBar>
         <button
-          className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item"
-          style={{ left: "76%" }}
+          id="searchButton"
+          className="position-absolute top-50 translate-middle-y mobile-btn list-group-item"
+          style={{ left: "76%"} }
         >
           {contextTheme === "light" ? (
             <BiSearch size={35} color="black"></BiSearch>
@@ -60,11 +84,7 @@ function TopBar() {
           style={{ left: "90%" }}
           onClick={toggleNavMenu}
         >
-          {contextTheme === "light" ? (
-            <BsList size={35} color="black"></BsList>
-          ) : (
-            <BsList size={35} color="white"></BsList>
-          )}
+          {navMenuIcon()}
         </button>
       </div>
     </header>

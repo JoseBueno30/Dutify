@@ -13,7 +13,8 @@ function ThemeSwitch() {
 
   return (
     <button
-      className="theme-toogle position-absolute top-50 translate-middle-y pb-2"
+      id="themeToggle"
+      className="theme-toggle position-absolute top-50 translate-middle-y pb-2"
       onClick={switchTheme}
     >
       {contextTheme === "dark" ? (
