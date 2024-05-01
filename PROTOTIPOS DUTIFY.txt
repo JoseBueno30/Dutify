@@ -1,0 +1,7 @@
+Link de los prototipos en Figma: https://www.figma.com/file/AQG0DVWr4lGPJQx3BQGp5v/Dutify?type=design&node-id=0%3A1&mode=design&t=YiroOYGphrput28S-1
+
+Se pueden visualizar los prototipos en el tablero.
+Para probar la interacción entre vistas se debe pulsar el boton de presentar
+que se encuentra en la parte superior derecha.
+A continuación, escoja el flow que desee visualizar y ajuste el tamaño a la pantalla
+pulsando la tecla Z.
