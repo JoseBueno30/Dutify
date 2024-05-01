@@ -93,3 +93,9 @@
         transition: 0.1s ease;
     }
 }
+
+@media only screen and (max-height: 890px) {
+    .topBar{
+        height: 53.4px;
+    }
+}
