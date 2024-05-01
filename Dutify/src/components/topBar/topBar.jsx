@@ -12,13 +12,23 @@ import { useState } from "react";
 function TopBar() {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [navMenuOpen, setNavMenuOpen] = useState(false);
+  const [searchBarOpen, setSearchBarOpen] = useState(false);
 
   const toggleNavMenu = () => {
     setNavMenuOpen(!navMenuOpen);
-    const themeToggler  = document.getElementById("themeToggle")
-    themeToggler.classList.contains("occult") ? themeToggler.classList.remove("occult") : themeToggler.classList.add("occult");
-    const searchButton  = document.getElementById("searchButton")
-    searchButton.classList.contains("occult") ? searchButton.classList.remove("occult") : searchButton.classList.add("occult");
+    showHideIcons();
+  };
+
+  const toggleSearchBar = () => {
+    setSearchBarOpen(!searchBarOpen);
+    showHideIcons();
+  };
+
+  const showHideIcons = () => {
+    const themeToggler = document.getElementById("themeToggle");
+    themeToggler.classList.contains("d-none")
+      ? themeToggler.classList.remove("d-none")
+      : themeToggler.classList.add("d-none");
   };
 
   const navMenuIcon = () => {
@@ -27,13 +37,16 @@ function TopBar() {
         <BsX size={35} color="black"></BsX>
       ) : (
         <BsX size={35} color="white"></BsX>
-      )
-    }else{
+      );
+    } else if(searchBarOpen){
+      return <BsX size={35} color="black"></BsX>
+    } 
+    else {
       return contextTheme === "light" ? (
         <BsList size={35} color="black"></BsList>
       ) : (
         <BsList size={35} color="white"></BsList>
-      )
+      );
     }
   };
 
@@ -66,12 +79,13 @@ function TopBar() {
           <NavButton texto="Generos" id={contextTheme}></NavButton>
           <NavButton texto="Listas" id={contextTheme}></NavButton>
         </nav>
-        <ThemeSwitch visible={navMenuOpen}></ThemeSwitch>
-        <SearchBar></SearchBar>
+        <ThemeSwitch></ThemeSwitch>
+        <SearchBar isOpen={searchBarOpen}></SearchBar>
         <button
           id="searchButton"
-          className="position-absolute top-50 translate-middle-y mobile-btn list-group-item"
-          style={{ left: "76%"} }
+          className={"position-absolute top-50 translate-middle-y mobile-btn list-group-item" + (navMenuOpen || searchBarOpen ? " d-none" : "")}
+          style={{ left: "76%" }}
+          onClick={toggleSearchBar}
         >
           {contextTheme === "light" ? (
             <BiSearch size={35} color="black"></BiSearch>
@@ -80,9 +94,9 @@ function TopBar() {
           )}
         </button>
         <button
-          className=" position-absolute top-50 translate-middle-y mobile-btn list-group-item"
+          className={"position-absolute top-50 translate-middle-y mobile-btn list-group-item " + (searchBarOpen ? " start-0" : "")}
           style={{ left: "90%" }}
-          onClick={toggleNavMenu}
+          onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
         >
           {navMenuIcon()}
         </button>

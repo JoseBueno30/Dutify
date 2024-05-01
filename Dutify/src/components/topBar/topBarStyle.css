@@ -3,13 +3,6 @@
   width: 100%;
 }
 
-.occult{
-    display: none;
-    transition: 0.1s ease;
-}
-
-
-
 #dark .topBar{
     background-color: #4E4848;
 }
@@ -42,9 +35,6 @@
     height: 70%;
     border-radius: 10px;
 }
-.mobile-btn:active{
-    background-color: #5383E8;
-}
 
 .title{
     font-size: calc(1.3rem + 0.6vw);
@@ -53,7 +43,7 @@
     color: #5383E8;
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 850px){
     .mobile-btn{
         visibility: visible;
     }
@@ -94,7 +84,12 @@
     }
 
     .title{
-        font-size: calc(1.5rem + 2vw);
+        font-size:x-large;
         left: 2% !important;
+    }
+
+    .occult{
+        display: none;
+        transition: 0.1s ease;
     }
 }
