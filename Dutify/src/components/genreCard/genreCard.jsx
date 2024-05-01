@@ -17,7 +17,7 @@ function GenreCard({genreName, background}){
     const [state, dispatch] = useReducer(PlaceHolder , [])
 
     return (
-        <div className={'card m-3 w-100 h-auto ' + background} id="genre_container" 
+        <div className={'card ' + background} id="genre_container" 
             alt={genreName + '_Imagen'}>
           <div className={'genre-overlay ' + background + '-img genre-img'}>
             <p className="genre-title">{genreName}</p>

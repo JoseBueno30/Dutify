@@ -1,0 +1,8 @@
+#cards_container{
+    display: flex;
+    justify-content: center;
+}
+
+#cards_table{
+    width: 768px;
+}
