@@ -1,4 +1,6 @@
 import './carousel.css';
+import left_arrow from '../assets/left_arrow.svg';
+import right_arrow from '../assets/right_arrow.svg';
 
 function Carousel({children}) {
   
@@ -6,24 +8,36 @@ function Carousel({children}) {
     <div id="customCarousel" className="carousel" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img className="d-block w-100" src="https://via.placeholder.com/800x400?text=First+Slide" alt="First slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">{children}</div>
+          <img className="d-block w-100" src="image.jpg" alt="First slide" />
+          <div class="carousel-caption d-none d-md-block fw-bolder">
+            <div className='texto-centrado'>
+              {children}
+            </div>
+          </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="https://via.placeholder.com/800x400?text=Second+Slide" alt="Second slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">{children}</div>
+          <img className="d-block w-100" src="image2.jpg" alt="Second slide" />
+          <div class="carousel-caption d-none d-md-block fw-bolder">
+            <div className='texto-centrado'>
+              {children}
+            </div>
+          </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="https://via.placeholder.com/800x400?text=Third+Slide" alt="Third slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">{children}</div>
+          <img className="d-block w-100" src="image3.jpg" alt="Third slide" />
+          <div class="carousel-caption d-none d-md-block fw-bolder">
+            <div className='texto-centrado'>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
-      <button className="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <button className="carousel-control-prev carousel-button" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
+        <img src={left_arrow} alt="Previous" className='button-svg' />
         <span className="visually-hidden">Previous</span>
       </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <button className="carousel-control-next carousel-button" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
+        <img src={right_arrow} alt="Previous" className='button-svg' />
         <span className="visually-hidden">Next</span>
       </button>
     </div>
