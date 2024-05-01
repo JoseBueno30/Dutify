@@ -38,10 +38,9 @@ function TopBar() {
       ) : (
         <BsX size={35} color="white"></BsX>
       );
-    } else if(searchBarOpen){
-      return <BsX size={35} color="black"></BsX>
-    } 
-    else {
+    } else if (searchBarOpen) {
+      return <BsX size={35} color="black"></BsX>;
+    } else {
       return contextTheme === "light" ? (
         <BsList size={35} color="black"></BsList>
       ) : (
@@ -57,10 +56,10 @@ function TopBar() {
           ? { backgroundColor: "white" }
           : { backgroundColor: "#4E4848" }
       }
-      className="position-relative topBar ps-2 pe-2"
+      className="position-relative topBar ps-2 pe-2 "
       id={contextTheme}
     >
-      <div className="position-relative top-50 translate-middle-y mh-100 d-flex">
+      <div className="d-flex position-relative top-50 translate-middle-y mh-100 justify-content-evenly">
         <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
           {contextTheme === "light" ? (
             <BiArrowBack color="black"></BiArrowBack>
@@ -71,20 +70,22 @@ function TopBar() {
         <h1 className="title mt-2" id={contextTheme}>
           DutyFy
         </h1>
-        <nav
-          className={(navMenuOpen ? "open " : "closed ") + "navMenu"}
-          id={contextTheme}
-        >
+        <nav className={"navMenu me-auto"} id={contextTheme}>
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>
           <NavButton texto="Listas" id={contextTheme}></NavButton>
         </nav>
-        <ThemeSwitch></ThemeSwitch>
-        <SearchBar isOpen={searchBarOpen}></SearchBar>
+        <div className="d-flex align-items-center">
+          <ThemeSwitch></ThemeSwitch>
+          <SearchBar isOpen={searchBarOpen}></SearchBar>
+        </div>
+
         <button
           id="searchButton"
-          className={"position-absolute top-50 translate-middle-y mobile-btn list-group-item" + (navMenuOpen || searchBarOpen ? " d-none" : "")}
-          style={{ left: "76%" }}
+          className={
+            "mobile-btn list-group-item" +
+            (navMenuOpen || searchBarOpen ? " d-none" : "")
+          }
           onClick={toggleSearchBar}
         >
           {contextTheme === "light" ? (
@@ -94,12 +95,21 @@ function TopBar() {
           )}
         </button>
         <button
-          className={"position-absolute top-50 translate-middle-y mobile-btn list-group-item " + (searchBarOpen ? " start-0" : "")}
-          style={{ left: "90%" }}
+          className={
+            "mobile-btn list-group-item " + (searchBarOpen ? " start-0" : "")
+          }
           onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
         >
           {navMenuIcon()}
         </button>
+        <nav
+          className={(navMenuOpen ? "open " : "closed ") + "navMenuMobile"}
+          id={contextTheme}
+        >
+          <NavButton texto="Inicio" id={contextTheme}></NavButton>
+          <NavButton texto="Generos" id={contextTheme}></NavButton>
+          <NavButton texto="Listas" id={contextTheme}></NavButton>
+        </nav>
       </div>
     </header>
   );

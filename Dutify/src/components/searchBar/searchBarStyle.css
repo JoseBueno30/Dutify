@@ -1,5 +1,4 @@
 #section-bar{
-  right: 0;
   padding-bottom: 0.25rem;
 }
 
@@ -11,11 +10,10 @@
   padding-left: 1rem;
   padding-right: 2rem;
   margin-top: 3px;
-  
 }
 
 .search-btn {
-  right: 3px;
+  right: -3%;
   top: 6%;
   background-color: transparent;
   border-radius: 50%;
@@ -66,5 +64,11 @@
   #section-bar{
     left: -3vw;
     padding-bottom: 0;
+  }
+}
+
+@media only screen and (max-height: 890px) {
+  .search-bar{
+    height: 53.4px;
   }
 }

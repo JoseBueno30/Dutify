@@ -9,7 +9,7 @@ function SearchBar({isOpen}) {
   const [text, onChangeText] = useState("");
 
   return (
-    <div id="section-bar" className={"position-absolute top-50 translate-middle-y " + (isOpen ? "" : "occult")}>
+    <div id="section-bar" className={" top-50 translate-middle-y" + (isOpen ? "" : "occult")}>
       <button className="position-absolute search-btn">
         <BiSearch className="" style={{ color: "black" }} />
       </button>

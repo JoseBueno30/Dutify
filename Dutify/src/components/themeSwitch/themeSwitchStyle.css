@@ -1,13 +1,11 @@
 .theme-toggle{
   background-color: transparent;
   border: 0;
-  left: 65%;
   margin-top: 2px;
 }
 
 @media only screen and (max-width: 850px){
   .theme-toggle{
-    left: 60%;
     margin-top: 4px;
   }
 }

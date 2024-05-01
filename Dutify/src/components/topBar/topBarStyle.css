@@ -31,7 +31,7 @@
 }
 
 .mobile-btn{
-    visibility: hidden;
+    display: none;
     height: 70%;
     border-radius: 10px;
 }
@@ -42,25 +42,36 @@
     font-weight: bold;
     color: #5383E8;
 }
+.navMenuMobile{
+    display: none;
+}
+
+@media only screen and (max-height: 890px) {
+    .topBar{
+        height: 53.4px;
+    }
+}
 
 @media only screen and (max-width: 850px){
     .mobile-btn{
         visibility: visible;
     }
-
+    
     .navMenu{
+        display: none;
+    }
+
+    .navMenuMobile{
         width: 100vw;
         left: -2vw;
         display: flex;
-        position: absolute;
         flex-direction: column;
         align-items:center;
         transform: translateX(0);
     }
 
     .closed{
-        opacity: 0;
-        background-color: transparent;
+        display: none;
         top: -4vh;
         transition: 0.3s;
     }
@@ -94,8 +105,11 @@
     }
 }
 
-@media only screen and (max-height: 890px) {
+@media only screen and (max-width: 850px) and (max-height: 890px){
     .topBar{
-        height: 53.4px;
+        min-height: 53.4px;
+        height: auto;
     }
 }
+
+
