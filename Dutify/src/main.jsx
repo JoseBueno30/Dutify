@@ -7,7 +7,7 @@ import GenreCard from "./components/genreCard/genreCard";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className="d-flex">
-      <GenreCard genreName="Pop" background="pop" />
+      <GenreCard genreName="Popfeffefefefefef" background="pop" />
       <GenreCard genreName="Rock" background="rock" />
       <GenreCard genreName="Hip-Hop" background="hip-hop" />
     </div>
@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <GenreCard genreName="Flamenco" background="flamenco" />
     </div>
     <div className="d-flex">
-      <GenreCard genreName="Techno" background="techno" />
+      <ListCard listName="Lo más escuchado" listImage="assets/mora_estrella.jpg"/>
       <GenreCard genreName="Metal" background="metal" />
       <GenreCard genreName="K-Pop" background="k-pop" />
     </div>

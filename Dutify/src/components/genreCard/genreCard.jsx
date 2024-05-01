@@ -1,6 +1,6 @@
 import React from "react"
 import { useReducer } from "react";
-import "./styles/genreCardStyle.css"
+import "./genreCardStyle.css"
 
 function PlaceHolder(state, action){
 
@@ -17,10 +17,10 @@ function GenreCard({genreName, background}){
     const [state, dispatch] = useReducer(PlaceHolder , [])
 
     return (
-        <div className={'card m-3 w-100 h-auto ' + background} id="main_container" 
+        <div className={'card m-3 w-100 h-auto ' + background} id="genre_container" 
             alt={genreName + '_Imagen'}>
-          <div className={'overlay ' + background + '-img genre-img'}>
-            <p >{genreName}</p>
+          <div className={'genre-overlay ' + background + '-img genre-img'}>
+            <p className="genre-title">{genreName}</p>
           </div>
         </div>
       );
