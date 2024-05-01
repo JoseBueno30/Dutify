@@ -1,5 +1,5 @@
 import React, { useReducer} from "react";
-import "./styles/listCardStyle.css";
+import "./listCardStyle.css";
 
 function PlaceHolder(state, action) {
   
@@ -17,13 +17,13 @@ function ListCard({ listName, listImage }) {
 
   return (
     <div
-      className="card w-100 h-auto"
-      id="main_container"
+      className="card w-100 h-auto m-3"
+      id="listCard_container"
       alt={listName + "_Imagen"}
     >
       <img src={listImage} className="card-img" />
-      <div className="card-img-overlay title h-50">
-        <p>{listName}</p>
+      <div className="listCard-overlay title-fade h-50">
+        <p className="listCard-title">{listName}</p>
       </div>
     </div>
   );
