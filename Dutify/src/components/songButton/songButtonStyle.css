@@ -1,0 +1,85 @@
+.playContainer {
+    width: 50px;
+    height: 50px;
+    background-color: lightskyblue;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+  }
+  
+  .playButton{
+    vertical-align: middle;
+    margin-left: 0.15rem;
+    margin-top: 0.6rem;
+    opacity: 0;
+    transition: .2s ease;
+  }
+  
+  .song{
+    background-color: #474747;
+    color:white;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .song:hover .playButton{
+    opacity: 1;
+  }
+  
+  .song .row{
+    height: 100%;
+    align-items:center;
+    padding-bottom: 2px;
+  }
+  
+  .song .options{
+    justify-content: center;
+  }
+  
+  .name{
+    font-size: 1rem;
+  }
+  
+  .author{
+    font-size: 0.75rem;
+  }
+
+  
+  .album{
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .time{
+    font-size: 1rem;
+  }
+  
+  .options{
+    display: flex;
+    justify-content: center;
+  }
+
+  .optionsLabel{
+    height: 100px;
+    width: 200px;
+    background-color: #474747;
+    z-index: 9999;
+    position:absolute;
+    inset: auto 0px auto auto;
+    margin-top: -20px;
+    margin-right: 5px;
+    border-radius: 5px;
+    color:white;
+  }
+
+@media only screen and (max-width: 768px){
+  .album{
+    display: none;
+  }
+}

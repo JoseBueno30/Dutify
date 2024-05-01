@@ -1,10 +1,14 @@
+import SongButton from './components/songButton/songButton'
 import TopBar from './components/topBar/topBar'
 import './index.css'
 
 function App() {
 
   return (
-    <TopBar></TopBar>
+    <div className='container-fluid'>
+      <SongButton/>
+      <SongButton/>
+    </div>
   )
 }
 
