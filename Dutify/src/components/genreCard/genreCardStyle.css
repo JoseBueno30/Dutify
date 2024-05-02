@@ -1,8 +1,10 @@
 @import url("./genreStyle.css");
 
 #genre_container {
+  cursor: pointer;
   aspect-ratio: 16/9;
-  max-width: 300px;
+  width: 300px;
+  min-width: 175px;
   overflow: hidden;
   transition: 0.25s ease;
   border-radius: 1rem;
@@ -25,7 +27,7 @@
 }
 
 .genre-title {
-  font-size: 3.5vw;
+  user-select: none;
   font-weight: 500;
   letter-spacing: 1.05px;
   white-space: nowrap;

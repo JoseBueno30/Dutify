@@ -7,9 +7,9 @@ import "./cardsGridStyle.css";
 function CardsGrid(type) {
   return (
     <div id="cards_container">
-      <div className="row row-cols-md-3 row-cols-2 justify-content-center" id="cards_table">
+      <div className="row row-cols-md-3 row-cols-2 g-2" id="cards_table">
         {genreData.map((genre) => (
-          <div className="col p-2 ">
+          <div className="col d-flex justify-content-center">
             <GenreCard
               key={genre.genreName}
               genreName={genre.genreName}
