@@ -8,20 +8,19 @@
   border-radius: 20px;
   border: 1px solid black;
   padding-left: 1rem;
-  padding-right: 2rem;
+  padding-right: 2.2rem;
   margin-top: 3px;
 }
 
 .search-btn {
   right: 0.3%;
   top: 50%;
-  margin-left: auto;
-  margin-top: auto;
+  right: 4px;
   background-color: transparent;
   border-radius: 50%;
   border: 0px;
   transform: scale(0.9);
-  transform: translateY(-65%);
+  transform: translateY(-58%);
   margin-top: 3.5px;
 }
 
@@ -30,7 +29,7 @@
 }
 .search-btn:active {
   transform: scale(0.95);
-  transform: translateY(-65%);
+  transform: translateY(-58%);
   background-color: rgb(185, 185, 185);
 }
 
@@ -71,3 +70,9 @@
     padding-bottom: 0;
   }
 } 
+
+@media only screen and (max-height: 890px){
+  .topBar{
+      min-height: 53.4px;
+  }
+}
