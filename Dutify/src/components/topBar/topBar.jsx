@@ -1,9 +1,9 @@
 import { BiArrowBack } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
-import NavButton from "../navButton/navButton";
-import SearchBar from "../searchBar/searchBar";
-import ThemeSwitch from "../themeSwitch/themeSwitch";
+import NavButton from "./navButton/navButton";
+import SearchBar from "./searchBar/searchBar";
+import ThemeSwitch from "./themeSwitch/themeSwitch";
 import { useThemeContext } from "../../context/ThemeContext";
 import { BsList } from "react-icons/bs";
 import "./topBarStyle.css";
@@ -61,7 +61,7 @@ function TopBar() {
       className="position-relative topBar ps-2 pe-2 "
       id={contextTheme}
     >
-      <div className="d-flex position-relative top-50 translate-middle-y mh-100 ">
+      <div className={(navMenuOpen ? "flex-wrap" : "") + " d-flex position-relative mh-100 "}>
         <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
           {contextTheme === "light" ? (
             <BiArrowBack color="black"></BiArrowBack>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./searchBarStyle.css";
 import { BiSearch } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
-import { useThemeContext } from "../../context/ThemeContext";
+import { useThemeContext } from "../../../context/ThemeContext";
 
 function SearchBar({ isOpen }) {
   const { contextTheme, setContextTheme } = useThemeContext();

@@ -1,7 +1,7 @@
 import "./themeSwitchStyle.css";
 import { BiMoon } from "react-icons/bi";
 import { BiSun } from "react-icons/bi";
-import { useThemeContext } from "../../context/ThemeContext";
+import { useThemeContext } from "../../../context/ThemeContext";
 
 function ThemeSwitch({visible}) {
   const { contextTheme, setContextTheme } = useThemeContext();
