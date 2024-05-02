@@ -3,6 +3,7 @@
     background-color: #504848;
     color: white;
     height: 10%;
+    position: sticky;
 }
 
 .music-container {
@@ -36,6 +37,9 @@
     height: 10px;
     justify-content: center;
     position: relative;
+    @media screen and (max-width: 768px) {
+        margin-right: 5%;
+    }
 }
 
 .song-bar {
@@ -56,4 +60,95 @@
 
 .sound-bar {
     margin-right: 5%;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 }
+
+/* Estilo para el track (la barra) del input range */
+input[type=range] {
+    -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
+    width: 100%; /* Ancho del input */
+    height: 5px; /* Altura del input */
+    background-color: #4976E8;
+    border-radius: 5px; /* Borde redondeado */
+}
+  
+  /* Estilo para el thumb (el deslizador) del input range */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
+    width: 10px; /* Ancho del thumb */
+    height: 10px; /* Altura del thumb */
+    background: black; /* Color del thumb */
+    border-radius: 50%; /* Borde redondeado */
+    left: calc(100% + 1px); /* Alineación a la derecha del thumb */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/*generated with Input range slider CSS style generator (version 20211225)
+https://toughengineer.github.io/demo/slider-styler*/
+input[type=range].styled-slider {
+    height: 10px;
+    -webkit-appearance: none;
+  }
+  
+  /*progress support*/
+  input[type=range].styled-slider.slider-progress {
+    --range: calc(var(--max) - var(--min));
+    --ratio: calc((var(--value) - var(--min)) / var(--range));
+    --sx: calc(0.5 * 16px + var(--ratio) * (100% - 16px));
+  }
+  
+  input[type=range].styled-slider:focus {
+    outline: none;
+  }
+
+  /*webkit*/
+  input[type=range].styled-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    background: #007CF8;
+    border: none;
+    box-shadow: 0 0 2px black;
+    margin-top: calc(max((8px - 1px - 1px) * 0.5,0px) - 16px * 0.5);
+  }
+  
+  input[type=range].styled-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    border: 1px solid #b2b2b2;
+    border-radius: 8px;
+    background: #efefef;
+    box-shadow: none;
+  }
+  
+  input[type=range].styled-slider::-webkit-slider-thumb:hover {
+    background: #0061C3;
+  }
+  
+  input[type=range].styled-slider:hover::-webkit-slider-runnable-track {
+    background: #e5e5e5;
+  }
+  
+  input[type=range].styled-slider::-webkit-slider-thumb:active {
+    background: #2F98F9;
+  }
+  
+  input[type=range].styled-slider:active::-webkit-slider-runnable-track {
+    background: #f5f5f5;
+    border-color: #c1c1c1;
+  }
+  
+  input[type=range].styled-slider.slider-progress::-webkit-slider-runnable-track {
+    background: linear-gradient(#007CF8,#007CF8) 0/var(--sx) 100% no-repeat, #efefef;
+  }
+  
+  input[type=range].styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
+    background: linear-gradient(#0061c3,#0061c3) 0/var(--sx) 100% no-repeat, #e5e5e5;
+  }
+  
+  input[type=range].styled-slider.slider-progress:active::-webkit-slider-runnable-track {
+    background: linear-gradient(#2f98f9,#2f98f9) 0/var(--sx) 100% no-repeat, #f5f5f5;
+  }
+  
