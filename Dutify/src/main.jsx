@@ -6,6 +6,6 @@ import MusicPlayer from './components/musicPlayer/musicPlayer.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <MusicPlayer />
+      <App />
   </React.StrictMode>,
 )
