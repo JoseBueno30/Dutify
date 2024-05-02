@@ -35,7 +35,7 @@ function MusicPlayer() {
             <div className="progresion-bar">
                 <input className="styled-slider slider-progress" type="range"></input>
                 <div className="song-buttons">
-                    <img onPointerOver={} src="src\assets\previous-button.svg"></img>
+                    <img src="src\assets\previous-button.svg"></img>
                     {playing ? <img src="src\assets\play-button.svg" onClick={switchPlay}></img> : <img src="src\assets\stop-button.svg" onClick={switchPlay}></img>}
                     <img src="src\assets\next-button.svg"></img>
                 </div> 
