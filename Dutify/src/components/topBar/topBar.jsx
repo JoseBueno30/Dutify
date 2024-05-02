@@ -61,7 +61,7 @@ function TopBar() {
       className="position-relative topBar ps-2 pe-2 "
       id={contextTheme}
     >
-      <div className={(navMenuOpen ? "flex-wrap" : "") + " d-flex position-relative mh-100 "}>
+      <div className={(navMenuOpen ? "flex-wrap" : "") + " d-flex position-relative container-fluid mh-100 "}>
         <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
           {contextTheme === "light" ? (
             <BiArrowBack color="black"></BiArrowBack>
