@@ -3,7 +3,7 @@ import { BiMoon } from "react-icons/bi";
 import { BiSun } from "react-icons/bi";
 import { useThemeContext } from "../../context/ThemeContext";
 
-function ThemeSwitch() {
+function ThemeSwitch({visible}) {
   const { contextTheme, setContextTheme } = useThemeContext();
 
   const switchTheme = () => {
@@ -11,7 +11,7 @@ function ThemeSwitch() {
   };
 
   return (
-    <div style={{width: "47px", height:"44px"}} className="me-auto">
+    <div style={{width: "47px", height:"44px"}} className={"me-auto " + (visible ? "" : "d-none")}>
       <button
         id="themeToggle"
         className="theme-toggle position-absolute top-50 translate-middle-y pb-2"

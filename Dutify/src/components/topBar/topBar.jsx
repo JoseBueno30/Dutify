@@ -21,6 +21,8 @@ function TopBar() {
 
   const toggleSearchBar = () => {
     setSearchBarOpen(!searchBarOpen);
+    const input = document.getElementById("search-bar");
+    input.value = "";
     showHideIcons();
   };
 
@@ -59,7 +61,7 @@ function TopBar() {
       className="position-relative topBar ps-2 pe-2 "
       id={contextTheme}
     >
-      <div className="d-flex position-relative top-50 translate-middle-y mh-100 justify-content-evenly">
+      <div className="d-flex position-relative top-50 translate-middle-y mh-100 ">
         <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
           {contextTheme === "light" ? (
             <BiArrowBack color="black"></BiArrowBack>
@@ -67,7 +69,7 @@ function TopBar() {
             <BiArrowBack color="white"></BiArrowBack>
           )}
         </button>
-        <h1 className="title mt-2" id={contextTheme}>
+        <h1 className={"title mt-2 " + (searchBarOpen ? "d-none" : "")} id={contextTheme}>
           DutyFy
         </h1>
         <nav className={"navMenu me-auto"} id={contextTheme}>
@@ -75,33 +77,34 @@ function TopBar() {
           <NavButton texto="Generos" id={contextTheme}></NavButton>
           <NavButton texto="Listas" id={contextTheme}></NavButton>
         </nav>
-        <div className="d-flex align-items-center">
-          <ThemeSwitch></ThemeSwitch>
+        <div className="d-flex justify-content-between align-items-center">
+          <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
           <SearchBar isOpen={searchBarOpen}></SearchBar>
+
+          <button
+            id="searchButton"
+            className={
+              "mobile-btn list-group-item" +
+              (navMenuOpen || searchBarOpen ? " d-none" : "")
+            }
+            onClick={toggleSearchBar}
+          >
+            {contextTheme === "light" ? (
+              <BiSearch size={35} color="black"></BiSearch>
+            ) : (
+              <BiSearch size={35} color="white"></BiSearch>
+            )}
+          </button>
+          <button
+            className={
+              "mobile-btn list-group-item " + (searchBarOpen ? "position-absolute start-0 ms-1" : "")
+            }
+            onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
+          >
+            {navMenuIcon()}
+          </button>
         </div>
 
-        <button
-          id="searchButton"
-          className={
-            "mobile-btn list-group-item" +
-            (navMenuOpen || searchBarOpen ? " d-none" : "")
-          }
-          onClick={toggleSearchBar}
-        >
-          {contextTheme === "light" ? (
-            <BiSearch size={35} color="black"></BiSearch>
-          ) : (
-            <BiSearch size={35} color="white"></BiSearch>
-          )}
-        </button>
-        <button
-          className={
-            "mobile-btn list-group-item " + (searchBarOpen ? " start-0" : "")
-          }
-          onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
-        >
-          {navMenuIcon()}
-        </button>
         <nav
           className={(navMenuOpen ? "open " : "closed ") + "navMenuMobile"}
           id={contextTheme}
