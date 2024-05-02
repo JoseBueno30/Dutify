@@ -5,6 +5,7 @@ import "./songButtonStyle.css";
 
 
 export default function SongButton(){
+
     
     const[areOptionsVisible, setOptionsVisible] = useState(false);
 
@@ -16,31 +17,31 @@ export default function SongButton(){
     }
 
     return(
-            <>
-            <div className='song' onDoubleClick={songClickHandler}>
-                <div className="playContainer" onClick={songClickHandler}>
-                    <image></image>
-                    <div className="playButton"><FaPlay/></div>
-                </div>
-                <div className='container-fluid'>
-                    <div className='row'>
-                        <div className='col ms-3 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
-                            <div className="name">Nombre</div>
-                            <div className="author">autor</div>
-                        </div>
-                        <div className='album col'>album</div>
-                        <div className='time col-3 col-md-2'>mm:ss</div>
-                        <div className='col-md-1 col-2 d-flex justify-content-center' onClick={optionsClickHandler}>
-                                <FaEllipsisVertical className="options"/>
+            <div id="dark" >
+                <div className='songButton' onDoubleClick={songClickHandler}>
+                    <div className="playContainer" onClick={songClickHandler}>
+                        <image></image>
+                        <div className="playButton"><FaPlay/></div>
+                    </div>
+                    <div className='container-fluid'>
+                        <div className='row'>
+                            <div className='col ms-3 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
+                                <div className="name">Nombre</div>
+                                <div className="author">autor</div>
+                            </div>
+                            <div className='album col'>album</div>
+                            <div className='time col-3 col-md-2'>mm:ss</div>
+                            <div className='col-md-1 col-2 d-flex justify-content-center' onClick={optionsClickHandler}>
+                                    <FaEllipsisVertical className="options"/>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
-                
+                {areOptionsVisible &&
+                    <OptionsLabel setOptionsVisible={setOptionsVisible}/>
+                }
             </div>
-            {areOptionsVisible &&
-                <OptionsLabel setOptionsVisible={setOptionsVisible}/>
-            }
-            </>
     );
 }
 

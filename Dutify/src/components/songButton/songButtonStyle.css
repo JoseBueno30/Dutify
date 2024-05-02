@@ -1,7 +1,42 @@
+#dark{
+  --color-1:#484848;
+  --color-2:#4d4d4d;
+  --color-3:#666666;
+  --color-text:white;
+  --border: none;
+  --color-theme:lightskyblue;
+}
+
+#light{
+  --color-1:#f5f5f5;
+  --color-2:#e6e6e6;
+  --color-3:#d5d5d5;
+  --color-text:black;
+  --border: solid;
+  --color-theme:lightskyblue;
+}
+
+.songButton{
+  background-color: var(--color-1);
+  color:var(--color-text);
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: black var(--border) 1px;
+  margin-bottom: 10px;
+  pointer-events:fill;
+  user-select: none;
+}
+
+.songButton:hover{
+  background-color: var(--color-2);
+  transition-duration: 0.25s;
+}
 .playContainer {
     width: 50px;
     height: 50px;
-    background-color: lightskyblue;
+    background-color: var(--color-theme);
     border-radius: 5px;
     text-align: center;
     display: flex;
@@ -18,34 +53,18 @@
     transition: .2s ease;
   }
   
-  .song{
-    background-color: #474747;
-    color:white;
-    vertical-align: middle;
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    pointer-events:fill;
-    user-select: none;
-  }
-
-  .song:hover{
-    background-color: #4d4d4d;
-    transition-duration: 0.25s;
-  }
   
-  .song:hover .playButton{
+  .songButton:hover .playButton{
     opacity: 1;
   }
   
-  .song .row{
+  .songButton .row{
     height: 100%;
     align-items:center;
     padding-bottom: 2px;
   }
   
-  .song .options{
+  .songButton .options{
     justify-content: center;
   }
   
@@ -74,14 +93,14 @@
   }
 
   .options:hover{
-    background-color: #666666;
+    background-color: var(--color-3);
     transition: ease;
     transition-duration: 0.25s;
   }
 
   .optionsLabel{
     width: 200px;
-    background-color: #4d4d4d;
+    background-color: var(--color-2);
     z-index: 9998;
     position:absolute;
     inset: auto 0px auto auto;
@@ -89,13 +108,13 @@
     margin-right: 5px;
     border-radius: 5px;
     border: black solid 1px;
-    color:white;
+    color:var(--color-text);
     font-size: 0.75rem;
   }
 
   .listsLabel{
     width: 200px;
-    background-color: #4d4d4d;
+    background-color: var(--color-2);
     z-index: 9999;
     position:absolute;
     inset: auto 0px auto auto;
@@ -103,7 +122,7 @@
     margin-right: 40px;
     border-radius: 5px;
     border: black solid 1px;
-    color:white;
+    color:var(--color-text);
     font-size: 0.75rem;
   }
 
@@ -114,7 +133,7 @@
   }
 
   .option:hover {
-    background-color: #666666;
+    background-color: var(--color-3);
     transition: ease;
     transition-duration: 0.25s;
   }
