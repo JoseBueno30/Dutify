@@ -58,7 +58,7 @@ function TopBar() {
           ? { backgroundColor: "white" }
           : { backgroundColor: "#4E4848" }
       }
-      className="position-relative topBar ps-2 pe-2 "
+      className="fixed-top topBar ps-2 pe-2 "
       id={contextTheme}
     >
       <div className={(navMenuOpen ? "flex-wrap" : "") + " d-flex position-relative h-100 align-items-center"}>
