@@ -1,8 +1,8 @@
 import { BiArrowBack } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
-import NavButton from "../navButton/navButton";
-import SearchBar from "../searchBar/searchBar";
-import ThemeSwitch from "../themeSwitch/themeSwitch";
+import NavButton from "./navButton/navButton";
+import SearchBar from "./searchBar/searchBar";
+import ThemeSwitch from "./themeSwitch/themeSwitch";
 import { useThemeContext } from "../../context/ThemeContext";
 import { BsList } from "react-icons/bs";
 import "./topBarStyle.css";

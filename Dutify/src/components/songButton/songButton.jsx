@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay } from "react-icons/fa6";
+import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
 
 
 export default function SongButton(){
-
+    const {contextTheme, setContextTheme} = useThemeContext()
     
     const[areOptionsVisible, setOptionsVisible] = useState(false);
 
@@ -17,7 +18,7 @@ export default function SongButton(){
     }
 
     return(
-            <div id="dark" >
+            <div id="" >
                 <div className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
                         <image></image>
