@@ -1,38 +1,40 @@
-#listCard_container{
-    aspect-ratio:16/9;
-    overflow: hidden;
-    transition: 0.25s ease;
-    border-radius: 1rem;
-    border-color: gray;
+#listCard_container {
+  cursor: pointer;
+  aspect-ratio: 16/9;
+  width: 300px;
+  min-width: 175px;
+  overflow: hidden;
+  transition: 0.25s ease;
+  border-radius: 1rem;
+  border-color: gray;
 }
 
-#listCard_container:hover{
-    box-shadow: 0 0 1rem rgba(0,0,0, .50);
-    transform: scale(1.005);
+#listCard_container:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transform: scale(1.005);
 }
 
-
-.title-fade{
-    background: linear-gradient(to bottom, rgba(0,0,0,1),rgb(0,0,0,0));
-    background-size: contain;
+.title-fade {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(0, 0, 0, 0));
+  background-size: contain;
 }
 
-.listCard-overlay{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+.listCard-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-.listCard-title{
-    font-size: 3.5vw;
-    font-weight:500;
-    letter-spacing: 1.05px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    color: white;
+.listCard-title {
+  user-select: none;  
+  font-weight: 500;
+  letter-spacing: 1.05px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
 }

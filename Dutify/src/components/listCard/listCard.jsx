@@ -11,18 +11,18 @@ function handleClick() {
   });
 }
 
-function ListCard({ listName, listImage }) {
+function ListCard({ listName, background }) {
 
   const [state, dispatch] = useReducer(PlaceHolder, []);
 
   return (
     <div
-      className="card w-100 h-auto m-3"
+      className="card m-2"
       id="listCard_container"
       alt={listName + "_Imagen"}
     >
-      <img src={listImage} className="card-img" />
-      <div className="listCard-overlay title-fade h-50">
+      <img src={background} className="card-img" />
+      <div className="listCard-overlay title-fade h-50 fs-2">
         <p className="listCard-title">{listName}</p>
       </div>
     </div>
