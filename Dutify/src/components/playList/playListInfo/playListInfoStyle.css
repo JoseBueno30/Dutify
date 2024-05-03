@@ -1,5 +1,8 @@
 .playListInfo{
     width: 32%;
+    height: 85vh;;
     background-color: var(--color-1);
-
+    position: sticky;
+    top: 6vh;
+    display: flex;
 }

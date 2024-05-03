@@ -14,6 +14,8 @@
   --color-2:#e6e6e6;
   --color-3:#d5d5d5;
   --color-text:black;
-  --border: solid;
+  --border: none;
   --color-theme:lightskyblue;
 }
+
+.html, .body, .root { height: 100%; width: 100%; margin: 0; }

@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay } from "react-icons/fa6";
+import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
 
@@ -8,11 +11,8 @@ import "./songButtonStyle.css";
 export default function SongButton(){
     const {contextTheme, setContextTheme} = useThemeContext()
     
-    const[areOptionsVisible, setOptionsVisible] = useState(false);
 
-    const optionsClickHandler = (e) => {
-        setOptionsVisible(!areOptionsVisible)
-    }
+    
 
     const songClickHandler = (e) => {
     }
@@ -32,51 +32,61 @@ export default function SongButton(){
                             </div>
                             <div className='album col'>album</div>
                             <div className='time col-3 col-md-2'>mm:ss</div>
-                            <div className='col-md-1 col-2 d-flex justify-content-center' onClick={optionsClickHandler}>
-                                    <FaEllipsisVertical className="options"/>
+                            <div className='col-md-1 col-2 d-flex justify-content-center'>
+                                <Options/>
                             </div>
                         </div>
                     </div>
                     
                 </div>
-                {areOptionsVisible &&
-                    <OptionsLabel setOptionsVisible={setOptionsVisible}/>
-                }
             </div>
     );
 }
 
-function OptionsLabel({setOptionsVisible}){
+function Options({}){
 
-    const[areListsVisible, setListsVisible] = useState(false);
+    const menuItemClassName = ({ hover }) => hover ? 'menuitem-hover' : 'menuitem';
 
     const mouseLeaveHandler = (e) => {
-        setOptionsVisible(false);
+        
     }
 
     const listsClickHandler = (e) => {
-        setListsVisible(!areListsVisible)
+        
     }
 
     return(
-        <div onMouseLeave={mouseLeaveHandler}>
-            <div className="optionsLabel " >
-                <div className="option p-1">Añadir a canciones favoritas</div>
-                <div className="option d-flex justify-content-between" onClick={listsClickHandler}>
-                    <div className="p-1">Añadir a la lista</div>
-                    <div className="p-1">{">"}</div>
-                </div>
-            </div>
-            {areListsVisible &&
-                <ListsLabel setListsVisible={setListsVisible}/>
-            }
-        </div>
+        // <div onMouseLeave={mouseLeaveHandler} onLostPointerCapture={mouseLeaveHandler}>
+        //     <div className="optionsLabel " >
+        //         <div className="option p-1">Añadir a canciones favoritas</div>
+        //         <div className="option d-flex justify-content-between" onClick={listsClickHandler}>
+        //             <div className="p-1">Añadir a la lista</div>
+        //             <div className="p-1">{">"}</div>
+        //         </div>
+        //     </div>
+            
+        // </div>
+
+        
+        <Menu 
+            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuClassName="optionsMenu"
+            viewScroll="close"
+            transition>
+                                <MenuItem >Añadir a canciones favoritas</MenuItem>
+                                <SubMenu menuClassName="optionsMenu" label="Añadir a la lista">
+                                    <MenuItem>Lista 1</MenuItem>
+                                    <MenuItem>Lista 1</MenuItem>
+                                    <MenuItem>Lista 1</MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem>Nueva Lista</MenuItem>
+                                </SubMenu>
+                            </Menu>
     );
 }
 
-function ListsLabel({setListsVisible}){
+function ListsLabel({}){
     const mouseLeaveHandler = (e) => {
-        setListsVisible(false);
     }
 
     const listClickHandler = (e) => {
@@ -89,7 +99,7 @@ function ListsLabel({setListsVisible}){
 
     return(
         <>
-            <div className="listsLabel " onMouseLeave={mouseLeaveHandler}>
+            <div className="listsLabel " onTouchStart={mouseLeaveHandler}>
                 <div className="option p-1" onClick={listClickHandler}>Lista 1</div>
                 <div className="option p-1" onClick={listClickHandler}>Lista 2</div>
                 <div className="option p-1" onClick={listClickHandler}>Lista 3</div>

@@ -1,5 +1,26 @@
 .list{
     background-color: var(--color-backgroud);
-    min-height: 80%;
+    height: 85vh;
     width: 68%;
+    overflow-y:auto;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    
+    color: aliceblue;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-backgroud);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

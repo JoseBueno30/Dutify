@@ -71,56 +71,46 @@
   .time{
     font-size: 1rem;
   }
-  
-  .options{
+
+  .optionsButton{
+    background-color: rgba(0, 0, 0, 0);
     cursor:pointer;
     border-radius: 5px;
+    transition-duration: 0.25s;
+    border: none;
+    color: var(--color-text);
+    opacity: 1;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
-  .options:hover{
+  .optionsButton:hover {
     background-color: var(--color-3);
     transition: ease;
     transition-duration: 0.25s;
   }
 
-  .optionsLabel{
-    width: 200px;
+  .optionsMenu{
+    background-color: var(--color-2) !important;
+    border: black solid 1px !important;
+    color:var(--color-text) !important;
+  }
+
+  .szh-menu__item{
+    /* Esto sobreescribe el estylo de todo el componente*/
     background-color: var(--color-2);
-    z-index: 9998;
-    position:absolute;
-    inset: auto 0px auto auto;
-    margin-top: -20px;
-    margin-right: 5px;
-    border-radius: 5px;
-    border: black solid 1px;
     color:var(--color-text);
-    font-size: 0.75rem;
   }
 
-  .listsLabel{
-    width: 200px;
-    background-color: var(--color-2);
-    z-index: 9999;
-    position:absolute;
-    inset: auto 0px auto auto;
-    margin-top: 30px;
-    margin-right: 40px;
-    border-radius: 5px;
-    border: black solid 1px;
-    color:var(--color-text);
-    font-size: 0.75rem;
-  }
-
-  .option{
-    cursor:pointer;
-    border-radius: 5px;
-    transition-duration: 0.25s;
-  }
-
-  .option:hover {
+  .szh-menu__item:hover{
     background-color: var(--color-3);
-    transition: ease;
-    transition-duration: 0.25s;
+  }
+
+  .szh-menu__item--submenu:hover{
+    background-color: var(--color-3);
   }
 
 @media only screen and (max-width: 768px){

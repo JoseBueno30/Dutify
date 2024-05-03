@@ -17,7 +17,7 @@ function TopBar() {
           ? { backgroundColor: "white" }
           : { backgroundColor: "#4E4848" }
       }
-      className="position-relative topBar ps-2 pe-2"
+      className="position-relative topBar ps-2 pe-2 "
       id={contextTheme}
     >
       <div className="position-relative top-50 translate-middle-y mh-100 d-flex">
