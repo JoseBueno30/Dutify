@@ -1,0 +1,42 @@
+.navButton {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2.5px 15px 5px 15px;
+  margin-left: 15px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: 0.25s ease;
+  margin-top: 0px;
+  height: 70%;
+}
+
+.navButton:hover{
+  text-shadow: 0 0 2px;
+  background-color: #5383E8;
+  transform: scale(1.05);
+  transition: 0.25s ease;
+}
+
+
+
+#light .navButton{
+  color: rgb(0, 0, 0);
+}
+
+#dark .navButton{
+  color: white;
+}
+
+@media only screen and (max-width: 850px){
+  .navButton{
+    margin: 0px 0px 10px 0px;
+    transform: translateX(0%);
+  }
+
+  .navButton:hover{
+    transform: translateX(0%);
+  }
+}
+
