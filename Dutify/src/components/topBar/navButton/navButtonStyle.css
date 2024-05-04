@@ -1,6 +1,4 @@
 .navButton {
-  position: relative;
-  left: 9vw;
   display: inline-block;
   text-decoration: none;
   text-transform: uppercase;
@@ -10,13 +8,13 @@
   cursor: pointer;
   border-radius: 15px;
   transition: 0.25s ease;
-  margin-top: 8px;
+  margin-top: 0px;
   height: 70%;
 }
 
 .navButton:hover{
   text-shadow: 0 0 2px;
-  background-color: #655be6;
+  background-color: #5383E8;
   transform: scale(1.05);
   transition: 0.25s ease;
 }
@@ -31,9 +29,14 @@
   color: white;
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 850px){
   .navButton{
-    visibility: hidden;
+    margin: 0px 0px 10px 0px;
+    transform: translateX(0%);
+  }
+
+  .navButton:hover{
+    transform: translateX(0%);
   }
 }
 
