@@ -1,0 +1,85 @@
+.arrowCross, .arrowLoop{
+    color: var(--color-theme);
+    height: 50px;
+    width: 50px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.arrowCrossButton, .arrowLoopButton{
+    height: 100%;
+    width: 100%;
+}
+
+.arrowCross:hover, .arrowLoop:hover, .playListButton .play:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.playListButton .play{
+    height: 80px;
+    width: 80px;
+    margin-left: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.playListButton-animation .play{
+    height: 80px;
+    width: 80px;
+    transition: 0.5s;
+}
+
+.playListButton, .playListButton-animation{
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    border: black solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-1);
+    color:var(--color-theme);
+    transition: 0.5s;
+}
+
+@media only screen and (max-height: 768px){
+    .playListButton .play{
+        height: 4vh;
+        width: 4vh;
+        margin-left: 5px;
+    }
+
+    .playListButton, .playListButton-animation{
+        height: 10vh;
+        width: 10vh;
+    }
+}
+
+
+.playListButton-animation{
+    -webkit-animation: rotate-center 1.6s infinite both;
+    animation: rotate-center 1.6s infinite both;
+}
+
+@-webkit-keyframes playListButton-animation{
+    0%{
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100%{
+        -webkit-transform: rotate(360);
+        transform: rotate(360);
+    }
+}
+
+@keyframes playListButton-animation{
+    0%{
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100%{
+        -webkit-transform: rotate(360);
+        transform: rotate(360);
+    }
+}

@@ -10,9 +10,6 @@ import "./songButtonStyle.css";
 
 export default function SongButton(){
     const {contextTheme, setContextTheme} = useThemeContext()
-    
-
-    
 
     const songClickHandler = (e) => {
     }
@@ -45,67 +42,34 @@ export default function SongButton(){
 
 function Options({}){
 
-    const menuItemClassName = ({ hover }) => hover ? 'menuitem-hover' : 'menuitem';
-
-    const mouseLeaveHandler = (e) => {
+    const favoritesClickHandler = (e) => {
         
-    }
-
-    const listsClickHandler = (e) => {
-        
-    }
-
-    return(
-        // <div onMouseLeave={mouseLeaveHandler} onLostPointerCapture={mouseLeaveHandler}>
-        //     <div className="optionsLabel " >
-        //         <div className="option p-1">Añadir a canciones favoritas</div>
-        //         <div className="option d-flex justify-content-between" onClick={listsClickHandler}>
-        //             <div className="p-1">Añadir a la lista</div>
-        //             <div className="p-1">{">"}</div>
-        //         </div>
-        //     </div>
-            
-        // </div>
-
-        
-        <Menu 
-            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
-            menuClassName="optionsMenu"
-            viewScroll="close"
-            transition>
-                                <MenuItem >Añadir a canciones favoritas</MenuItem>
-                                <SubMenu menuClassName="optionsMenu" label="Añadir a la lista">
-                                    <MenuItem>Lista 1</MenuItem>
-                                    <MenuItem>Lista 1</MenuItem>
-                                    <MenuItem>Lista 1</MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem>Nueva Lista</MenuItem>
-                                </SubMenu>
-                            </Menu>
-    );
-}
-
-function ListsLabel({}){
-    const mouseLeaveHandler = (e) => {
     }
 
     const listClickHandler = (e) => {
-
+        
     }
 
     const newListClickHandler = (e) => {
         
     }
 
+
+
     return(
-        <>
-            <div className="listsLabel " onTouchStart={mouseLeaveHandler}>
-                <div className="option p-1" onClick={listClickHandler}>Lista 1</div>
-                <div className="option p-1" onClick={listClickHandler}>Lista 2</div>
-                <div className="option p-1" onClick={listClickHandler}>Lista 3</div>
-                <div className="option p-1" onClick={newListClickHandler}>Nueva Lista</div>
-            </div>
-            
-        </>
+        <Menu 
+            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuClassName="optionsMenu"
+            viewScroll="close"
+            transition>
+                                <MenuItem onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
+                                <SubMenu menuClassName="optionsMenu" label="Añadir a la lista">
+                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
+                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
+                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem onClick={newListClickHandler}>Nueva Lista</MenuItem>
+                                </SubMenu>
+                            </Menu>
     );
 }

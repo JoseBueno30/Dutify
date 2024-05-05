@@ -1,17 +1,20 @@
 .list{
     background-color: var(--color-backgroud);
     height: 85vh;
-    width: 68%;
+    width: 70%;
     overflow-y:auto;
 }
 
 ::-webkit-scrollbar {
+    
     width: 5px;
     
     color: aliceblue;
   }
 
   ::-webkit-scrollbar-track {
+    margin-top: 5px;
+    margin-bottom: 5px;
     background: var(--color-backgroud);
   }
 
@@ -23,4 +26,11 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+  @media only screen and (max-height: 768px){
+    .list{
+      height: 40vh;
+      width: 100%;
+  }
   }

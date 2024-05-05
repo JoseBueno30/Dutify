@@ -1,14 +1,15 @@
 import React from "react";
 import SongList from "../songList/songList";
 import PlayListInfo from "./playListInfo/playListInfo";
+import "./playListStyle.css"
 
 
 
 export default function PlayList(){
     return(
-        <div className="d-flex justify-content-evenly">
+        <div className="playList d-flex flex-column-reverse flex-md-row">
             
-                <SongList/>
+            <SongList/>
             <PlayListInfo/>
         </div>
     );

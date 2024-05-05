@@ -1,8 +1,51 @@
-.playListInfo{
-    width: 32%;
+.playListInfoContainer{
+    width: 30%;
     height: 85vh;;
-    background-color: var(--color-1);
-    position: sticky;
-    top: 6vh;
-    display: flex;
+    color: var(--color-text);
+    background-color: var(--color-backgroud);
+    pointer-events: fill;
+    user-select: none;
 }
+
+.playListName{
+    align-self: center;
+    font-size: 2rem;
+    margin-left: -10vh;
+    margin-top: 3vh;
+
+}
+
+.playListImage{
+    align-self: center;
+    width: 38vh;
+    height: 38vh;
+    border-radius: 5px;
+    background-color: var(--color-theme);
+}
+
+.playListInfo{
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+.playListPlayer{
+    align-self: center;
+}
+
+@media only screen and (max-height: 768px){
+    .playListInfoContainer{
+        width: 100%;
+        height: 45vh;
+    }
+
+    .playListImage{
+        width: 22.5vh;
+        height: 22.5vh;
+    }
+
+    .playListName{
+        font-size: 1.5rem;
+        margin-top: 0;
+        margin-bottom: 0.5vh;
+    }
+  }
