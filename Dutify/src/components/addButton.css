@@ -45,16 +45,6 @@ p {
   }
 }
 
-.genre-title {
-  user-select: none;
-  font-weight: 500;
-  letter-spacing: 1.05px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: white;
-}
-
 .circulo {
   height: 150px;
   width: 150px;

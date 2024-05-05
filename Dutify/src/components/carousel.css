@@ -24,6 +24,7 @@ div {
 }
 
 .carousel-item img {
+    object-fit: cover;
     width: 800px;
     height: 250px;
     border-radius: 5px;
