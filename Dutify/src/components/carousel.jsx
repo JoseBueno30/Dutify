@@ -8,24 +8,24 @@ function Carousel({children}) {
     <div id="customCarousel" className="carousel" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img className="d-block w-100" src="image.jpg" alt="First slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">
+          <img className="d-block img-fluid" src="image.jpg" alt="First slide" />
+          <div class="carousel-caption d-md-block fw-bolder">
             <div className='texto-centrado'>
               {children}
             </div>
           </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="image2.jpg" alt="Second slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">
+          <img className="d-block img-fluid" src="image2.jpg" alt="Second slide" />
+          <div class="carousel-caption d-md-block fw-bolder">
             <div className='texto-centrado'>
               {children}
             </div>
           </div>
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src="image3.jpg" alt="Third slide" />
-          <div class="carousel-caption d-none d-md-block fw-bolder">
+          <img className="d-block img-fluid" src="image3.jpg" alt="Third slide" />
+          <div class="carousel-caption d-md-block fw-bolder">
             <div className='texto-centrado'>
               {children}
             </div>

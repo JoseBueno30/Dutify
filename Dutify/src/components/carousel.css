@@ -23,24 +23,12 @@ div {
 
 }
 
-.div-texto {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 .carousel-item img {
     width: 800px;
     height: 250px;
     border-radius: 5px;
 }
-
-.special-div {
-    display: flex;
-    justify-content: center;
-}
-
+  
 .button-svg {
     width: 70px;
     height: 70px;
@@ -49,7 +37,6 @@ div {
 #customCarousel .carousel-button {
     opacity: 1;
 }
-
 
 #customCarousel {
     width: 800px;
