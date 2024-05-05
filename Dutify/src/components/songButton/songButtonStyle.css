@@ -1,5 +1,3 @@
-
-
 .songButton{
   background-color: var(--color-1);
   color:var(--color-text);
@@ -12,11 +10,13 @@
   margin-bottom: 10px;
   pointer-events:fill;
   user-select: none;
+  transition-duration: 0.4s;
 }
 
 .songButton:hover{
   background-color: var(--color-2);
-  transition-duration: 0.25s;
+  /* transform: scale(1.005); */
+  transition-duration: 0.4s;
 }
 .playContainer {
     width: 50px;
@@ -85,32 +85,38 @@
     justify-content: center;
     padding-top: 5px;
     padding-bottom: 5px;
+    z-index: 9999 !important;
   }
 
   .optionsButton:hover {
     background-color: var(--color-3);
     transition: ease;
     transition-duration: 0.25s;
+    z-index: 9999 !important;
   }
 
   .optionsMenu{
     background-color: var(--color-2) !important;
     border: black solid 1px !important;
     color:var(--color-text) !important;
+    z-index: 9999 !important;
   }
 
   .szh-menu__item{
     /* Esto sobreescribe el estylo de todo el componente*/
     background-color: var(--color-2);
     color:var(--color-text);
+    z-index: 9999 !important;
   }
 
   .szh-menu__item:hover{
     background-color: var(--color-3);
+    z-index: 9999 !important;
   }
 
   .szh-menu__item--submenu:hover{
     background-color: var(--color-3);
+    z-index: 9999 !important;
   }
 
 @media only screen and (max-width: 768px){

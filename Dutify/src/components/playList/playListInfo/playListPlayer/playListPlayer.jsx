@@ -21,7 +21,7 @@ export default function PlayListPlayer(){
             <div className="arrowCross"><TbArrowsCross className="arrowCrossButton" onClick={crossButtonClickHandler}/></div>
             {
                 isPlaying
-                ? <div className="playListButton-animation" onClick={playButtonClickHandler}> <FaPause className="play"/> </div>
+                ? <div className="playListButtonAnimated" onClick={playButtonClickHandler}> <FaPause className="play"/> </div>
                 : <div className="playListButton" onClick={playButtonClickHandler}> <FaPlay className="play"/> </div>
             }
             

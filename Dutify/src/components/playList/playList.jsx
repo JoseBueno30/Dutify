@@ -7,7 +7,7 @@ import "./playListStyle.css"
 
 export default function PlayList(){
     return(
-        <div className="playList d-flex flex-column-reverse flex-md-row">
+        <div className="playList d-flex flex-column-reverse flex-xl-row">
             
             <SongList/>
             <PlayListInfo/>
