@@ -13,7 +13,7 @@ function GenreCard({ genreName, background }) {
 
   return (
     <div
-      className={"card m-2 " + background}
+      className={"card " + background}
       id="genre_container"
       alt={genreName + "_Imagen"}
     >

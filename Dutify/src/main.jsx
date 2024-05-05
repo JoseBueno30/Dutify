@@ -7,6 +7,6 @@ import CardsGrid from "./components/cardsGrid/cardsGrid";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CardsGrid type={"recentLists"}></CardsGrid>
+    <CardsGrid type={"list"}></CardsGrid>
   </React.StrictMode>
 );

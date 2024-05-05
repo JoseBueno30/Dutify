@@ -1,6 +1,6 @@
 import React from "react";
 import { useReducer } from "react";
-import './addButton.css';
+import './addCardStyle.css';
 
 function PlaceHolder(state, action){
 
@@ -12,15 +12,15 @@ function handleClick(){
   });
 }
 
-function AddButton({children}){
+function AddCard({children}){
 
     const [state, dispatch] = useReducer(PlaceHolder , [])
 
     return (
-        <div className='card m-3 w-100 h-auto' id="main_container" 
+        <div className='card' id="main_container" 
             alt="Prueba">
-          <div className='overlay'>
-            <p>{children}</p>
+          <div className='overlay fs-3'>
+            <p className="addCard-title">{children}</p>
             <div className="circulo">
               <div className="cruz">
                 <div className="horizontal"></div>
@@ -32,4 +32,4 @@ function AddButton({children}){
       );
 }
 
-export default AddButton
+export default AddCard;

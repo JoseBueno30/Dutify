@@ -17,7 +17,7 @@ function ListCard({ listName, background }) {
 
   return (
     <div
-      className="card m-2"
+      className="card"
       id="listCard_container"
       alt={listName + "_Imagen"}
     >
