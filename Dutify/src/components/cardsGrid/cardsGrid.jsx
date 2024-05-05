@@ -1,21 +1,21 @@
 import React from "react";
 
+import listData from "../../data/listData.json";
+import genreData from "../../data/genreData.json";
+import recentListsData from "../../data/recentListsData.json";
+
 import GenreCard from "../genreCard/genreCard";
 import ListCard from "../listCard/listCard";
-
-import genreData from "../../data/genreData.json";
-import listData from "../../data/listData.json";
-import recentListsData from "../../data/recentListsData.json";
 
 import "./cardsGridStyle.css";
 
 function CardsGrid({ type }) {
-
   const gridElements = () => {
     let gridList = [];
-
+    const data = ListFromJSON(type);
+    
     if (type === "genre") {
-      gridList = genreData.map((genre) => (
+      gridList = data.map((genre) => (
         <div className="col col_content" key={genre.key}>
           <GenreCard
             genreName={genre.genreName}
@@ -23,18 +23,15 @@ function CardsGrid({ type }) {
           />
         </div>
       ));
-    } else if (type === "list") {
-      gridList = listData.map((list) => (
+    } else if (type === "list" || type === "recentLists") {
+      gridList = data.map((list) => (
         <div className="col col_content" key={list.key}>
           <ListCard listName={list.listName} background={list.background} />
         </div>
       ));
-    } else if (type === "recent") {
-      gridList = recentListsData.map((list) => (
-        <div className="col col_content" key={list.key}>
-          <ListCard listName={list.listName} background={list.background} />
-        </div>
-      ));
+      if(type === "list"){
+        //PUSH ADD BUTTON
+      }
     }
 
     return gridList;
@@ -50,8 +47,22 @@ function CardsGrid({ type }) {
 }
 
 function ListFromJSON(name) {
-  res = [];
-  import data from "../../data/" + name + "ListData.json";
+  let data;
+
+  switch (name) {
+    case "list": data = listData; break;
+    case "genre": data = genreData; break;
+    case "recentLists": data = recentListsData; break;
+  }
+
+  var contKey = 0;
+
+  const res = data.map((item) => ({
+    ...item,
+    key: contKey++,
+  }));
+
+  return res;
 }
 
 export default CardsGrid;

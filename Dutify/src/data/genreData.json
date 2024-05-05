@@ -1,76 +1,61 @@
 [
   {
-    "key": 1,
     "genreName": "Pop",
     "background": "pop"
   },
   {
-    "key": 2,
     "genreName": "Rock",
     "background": "rock"
   },
   {
-    "key": 3,
     "genreName": "Hip-Hop",
     "background": "hip-hop"
   },
   {
-    "key": 4,
     "genreName": "Jazz",
     "background": "jazz"
   },
   {
-    "key": 5,
     "genreName": "Reggaeton",
     "background": "reggaeton"
   },
   {
-    "key": 6,
     "genreName": "Flamenco",
     "background": "flamenco"
   },
   {
-    "key": 7,
     "genreName": "Techno",
     "background": "techno"
   },
   {
-    "key": 8,
     "genreName": "Metal",
     "background": "metal"
   },
   {
-    "key": 9,
     "genreName": "K-Pop",
     "background": "k-pop"
   },
   {
-    "key": 10,
     "genreName": "Soul",
     "background": "soul"
   },
   {
-    "key": 11,
     "genreName": "Clásica",
     "background": "clasica"
   },
   {
-    "key": 12,
     "genreName": "Videojuegos",
     "background": "videojuegos"
   },
   {
-    "key": 13,
     "genreName": "Anime",
     "background": "anime"
   },
   {
-    "key": 14,
     "genreName": "Trap",
     "background": "trap"
   },
   {
-    "key": 15,
     "genreName": "Latino",
     "background": "latino"
   }
