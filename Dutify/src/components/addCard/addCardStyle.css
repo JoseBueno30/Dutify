@@ -36,6 +36,7 @@
   top: 80%; 
   left: 50%; 
   transform: translate(-50%, -50%);
+  max-width: 90%;
 }
 
 .circulo {
@@ -64,6 +65,7 @@
 .cruz .vertical {
   position: absolute;
   background-color: #676565;
+  opacity: 0.67;
 }
 
 .cruz .horizontal {

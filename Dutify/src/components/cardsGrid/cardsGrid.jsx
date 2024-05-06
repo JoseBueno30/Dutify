@@ -33,7 +33,7 @@ function CardsGrid({ type }) {
       if (type === "list") {
         gridList.push(
           <div className="col col_content" key={100}>
-            <AddCard>Añadir nueva lista</AddCard>
+            <AddCard>Nueva lista</AddCard>
           </div>
         );
       }
