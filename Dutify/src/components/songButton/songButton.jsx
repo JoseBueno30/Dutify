@@ -8,8 +8,11 @@ import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
 
 
-export default function SongButton(){
+export default function SongButton({name, artistName, albumName, image, time_ms}){
     const {contextTheme, setContextTheme} = useThemeContext()
+
+    const timeMIN = Math.trunc(time_ms/60000);
+    const timeMS = Math.trunc((time_ms/1000)%60);
 
     const songClickHandler = (e) => {
     }
@@ -18,17 +21,16 @@ export default function SongButton(){
             <div id="" >
                 <div className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <image></image>
-                        <div className="playButton"><FaPlay/></div>
+                        <img src={image} height={50} width={50} className="playContainer" ></img>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='col ms-3 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
-                                <div className="name">Nombre</div>
-                                <div className="author">autor</div>
+                                <div className="name">{name}</div>
+                                <div className="author">{artistName}</div>
                             </div>
-                            <div className='album col'>album</div>
-                            <div className='time col-3 col-md-2'>mm:ss</div>
+                            <div className='album col'>{albumName}</div>
+                            <div className='time col-3 col-md-2'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options/>
                             </div>
