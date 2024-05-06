@@ -4,7 +4,7 @@ import SongButton from "../songButton/songButton";
 import "./songListStyle.css";
 import { MdOutlineBroadcastOnPersonal } from "react-icons/md";
 
-export default function SongList({}) {
+export default function SongList({token}) {
     const [topTracks, setTopTracks] = useState("");
 
     useEffect(()=>{
@@ -21,8 +21,7 @@ export default function SongList({}) {
     }, []);
 
     // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-    const token =
-        "BQBT5NpMgVCsYgrWoAK_3Ue_MUWaqEbpPiL-JhH6uWBlClFeS1631xlZ1VWVpDF73rr_nzLL7_n3xOxULAJKQ3TRGEUwgRkcNSnBNEUs4-L8c3sgSRRHX9Wit_yXXT7JiZaZkALwrGtyIAlEpIvoxwhuFhICw39iwbPTU-MFgYUon_U2oBjf5-EZWO3R_oJitBuu1kscHePswx70KdhMCloQW_QTN3lD4DxJrymhgTUrlS3m0EKiV78CoHS1yA";
+    
     async function fetchWebApi(endpoint, method, body) {
         const res = await fetch(`https://api.spotify.com/${endpoint}`, {
         headers: {
