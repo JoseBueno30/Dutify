@@ -1,0 +1,10 @@
+div.col_content, #cards_container{
+    display: flex;
+    justify-content: center;
+}
+
+
+#cards_table{
+    width: 900px;
+}
+

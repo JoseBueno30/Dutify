@@ -1,0 +1,9 @@
+.addCard-title {
+  max-width: 90%;
+}
+
+.addButton {
+  width: 45%;
+  height: 45%;
+  color: rgb(223, 223, 223);
+}

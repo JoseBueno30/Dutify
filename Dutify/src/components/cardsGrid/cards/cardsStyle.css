@@ -1,0 +1,42 @@
+#card_container {
+  cursor: pointer;
+  aspect-ratio: 16/9;
+  width: 300px;
+  min-width: 175px;
+  overflow: hidden;
+  transition: 0.25s ease;
+  border-radius: 1rem;
+  border-color: gray;
+  background-color: #676565;
+  user-select: none;
+}
+
+#card_container:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transform: scale(1.005);
+}
+
+#card_container:active {
+  transform: scale(0.98);
+}
+
+.cards-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.cards-title {
+  font-size: 2rem;
+  user-select: text;
+  font-weight: 500;
+  letter-spacing: 1.05px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
+}

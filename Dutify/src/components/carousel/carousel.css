@@ -1,0 +1,50 @@
+div {
+    background-color: rgb(82, 73, 73);
+}
+
+.carousel-item div {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    left: 38%;
+    font-size: 20px;
+    bottom: 0.1rem;
+}
+
+.carousel-item div .texto-centrado {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    color :rgba(255, 255, 255, 0.9);
+    background-color: transparent;
+
+}
+
+.carousel-item img {
+    object-fit: cover;
+    width: 800px;
+    height: 250px;
+    border-radius: 5px;
+}
+  
+.button-svg {
+    width: 70px;
+    height: 70px;
+}
+
+#customCarousel .carousel-button {
+    opacity: 1;
+}
+
+#customCarousel {
+    width: 800px;
+    height: 250px;
+    border-radius: 15px;
+}
+
+
+  
+  
