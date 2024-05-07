@@ -18,7 +18,7 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
     }
 
     return(
-            <div id="" >
+            <div>
                 <div className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
                         <img src={image} height={50} width={50} className="playContainer" ></img>

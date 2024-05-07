@@ -4,14 +4,12 @@ import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import "./App.css";
 import PlayList from "./components/playList/playList";
-import SpotifyWebApi from "spotify-web-api-js";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
 
   const [token, setToken] = useState("");
 
-  const spotify = new SpotifyWebApi();
 
   useEffect(() => {
     const spotifyToken = getTokenFromUrl().access_token;
