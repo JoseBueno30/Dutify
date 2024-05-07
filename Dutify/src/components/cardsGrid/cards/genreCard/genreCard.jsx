@@ -1,6 +1,7 @@
 import React from "react";
 import { useReducer } from "react";
-import "./genreCardStyle.css";
+import '../cardsStyle.css';
+import "./genreStyle.css";
 
 function PlaceHolder(state, action) {}
 
@@ -14,12 +15,12 @@ function GenreCard({ genreName, background }) {
   return (
     <div
       className={"card " + background}
-      id="genre_container"
+      id="card_container"
       alt={genreName + "_Imagen"}
     >
       <div className="card-body">
-        <div className={"genre-overlay fs-2 " + background + "-img genre-img"}>
-          <p className="genre-title">{genreName}</p>
+        <div className={"cards-overlay  " + background + "-img genre-img"}>
+          <p className="cards-title">{genreName}</p>
         </div>
       </div>
     </div>

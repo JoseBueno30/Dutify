@@ -1,4 +1,4 @@
-#listCard_container {
+#card_container {
   cursor: pointer;
   aspect-ratio: 16/9;
   width: 300px;
@@ -7,19 +7,20 @@
   transition: 0.25s ease;
   border-radius: 1rem;
   border-color: gray;
+  background-color: #676565;
+  user-select: none;
 }
 
-#listCard_container:hover {
+#card_container:hover {
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transform: scale(1.005);
 }
 
-.title-fade {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(0, 0, 0, 0));
-  background-size: contain;
+#card_container:active {
+  transform: scale(0.98);
 }
 
-.listCard-overlay {
+.cards-overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -29,8 +30,9 @@
   padding-right: 1rem;
 }
 
-.listCard-title {
-  user-select: none;  
+.cards-title {
+  font-size: 2rem;
+  user-select: text;
   font-weight: 500;
   letter-spacing: 1.05px;
   white-space: nowrap;

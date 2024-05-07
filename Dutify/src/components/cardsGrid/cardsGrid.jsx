@@ -4,9 +4,9 @@ import listData from "../../data/listData.json";
 import genreData from "../../data/genreData.json";
 import recentListsData from "../../data/recentListsData.json";
 
-import GenreCard from "../genreCard/genreCard";
-import ListCard from "../listCard/listCard";
-import AddCard from "../addCard/addCard";
+import GenreCard from "./cards/genreCard/genreCard";
+import ListCard from "./cards/listCard/listCard";
+import AddCard from "./cards/addCard/addCard";
 
 import "./cardsGridStyle.css";
 
@@ -43,9 +43,11 @@ function CardsGrid({ type }) {
   };
 
   return (
-    <div id="cards_container">
-      <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
-        {gridElements()}
+    <div className="container-fluid">
+      <div id="cards_container">
+        <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
+          {gridElements()}
+        </div>
       </div>
     </div>
   );
