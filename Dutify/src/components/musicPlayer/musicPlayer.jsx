@@ -52,7 +52,10 @@ function MusicPlayer() {
                     <img className="side-button" src="src\assets\musicPlayer\next-button.svg"></img>
                 </div> 
             </div>
-            <span className="timer">mm:ss</span>
+            {/* Temporizador */}
+            <div className="timer">
+                <span>mm:ss</span>
+            </div>
             {/* Barra de Soido */}
             <div className="sound-bar">
                 <img src="src\assets\musicPlayer\sound.svg"></img>

@@ -11,7 +11,6 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     @media screen and (max-width: 768px) {
       justify-content: start;
     }
@@ -50,9 +49,7 @@
     width: 50%;
     justify-content: center;
     position: relative;
-    @media screen and (max-width: 768px) {
-      flex-basis: 60%;
-    }
+    flex-basis: 60%;
 }
 
 .song-bar {
@@ -72,18 +69,14 @@
 }
 
 .sound-bar {
-    flex-basis: 20%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-right: 2.5%;
+    margin-left: 2%;
     @media screen and (max-width: 768px) {
         display: none;
     }
-}
-
-.sound-bar input {
-  width: 50% !important;
 }
 
 .side-button {
@@ -107,6 +100,7 @@
 
 .timer {
   margin-bottom: 45px;
+  margin-left: 1%;
   @media screen and (max-width: 768px) {
     margin-left: 5%;
   }
