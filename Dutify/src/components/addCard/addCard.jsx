@@ -1,6 +1,7 @@
 import React from "react";
 import { useReducer } from "react";
 import './addCardStyle.css';
+import { IoMdAddCircle } from "react-icons/io";
 
 function PlaceHolder(state, action){
 
@@ -19,14 +20,9 @@ function AddCard({children}){
     return (
         <div className='card' id="main_container" 
             alt="Prueba">
-          <div className='overlay fs-3'>
+          <div className='d-flex flex-column align-items-center justify-content-center overlay fs-3'>
+            <IoMdAddCircle className="addButton"/>
             <p className="addCard-title">{children}</p>
-            <div className="circulo">
-              <div className="cruz">
-                <div className="horizontal"></div>
-                <div className="vertical"></div>
-              </div>
-            </div>
           </div>
         </div>
       );
