@@ -28,6 +28,7 @@
 
 .simulate-image {
     width: 75px;
+    border-radius: 5px;
     aspect-ratio: 1/1;
     background-color: red;
     @media screen and (max-width: 768px) {
@@ -60,11 +61,11 @@
 .song-buttons {
     display: flex;
     justify-content: center;
+    gap: 10px;
     margin-top: 10px;
 }
 
 .song-buttons img {
-    margin-right: 1%;
     cursor: pointer;
 }
 
