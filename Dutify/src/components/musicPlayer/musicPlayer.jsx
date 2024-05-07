@@ -33,29 +33,29 @@ function MusicPlayer() {
     <>
       <div className="position-absolute bottom-0 start-0 music-bar">
         <div className="music-container">
+            {/* Información de la cancion */}
             <div className="song-container">
-              {/* TODO: reemplazar por información real de la canción */}
                 {/* Imagen de Cancion */}
                 <div className="simulate-image"></div>
                 {/* Texto de Artista */}
                 <div className="artist-container">
-                    <span>Nombre</span><br></br>
+                    <span>Nombre</span><br/>
                     {!isSmallScreen ?  <span>Artista</span> : "" }
                 </div>
             </div>
             {/* Barra de repreducción */}
             <div className="progresion-bar">
                 <input className="styled-slider slider-progress" type="range"></input>
-                <span className="timer">mm:ss</span>
                 <div className="song-buttons">
                     <img className="side-button" src="src\assets\musicPlayer\previous-button.svg"></img>
                     {playing ? <img className="play-button" src="src\assets\musicPlayer\play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="src\assets\musicPlayer\stop-button.svg" onClick={switchPlay}></img>}
                     <img className="side-button" src="src\assets\musicPlayer\next-button.svg"></img>
                 </div> 
             </div>
+            <span className="timer">mm:ss</span>
             {/* Barra de Soido */}
             <div className="sound-bar">
-              <img src="src\assets\musicPlayer\sound.svg"></img>
+                <img src="src\assets\musicPlayer\sound.svg"></img>
                 <input type="range" className="styled-slider slider-progress"></input>
             </div>
         </div>

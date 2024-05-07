@@ -106,7 +106,10 @@
 }
 
 .timer {
-  float: inline-end;
+  margin-bottom: 45px;
+  @media screen and (max-width: 768px) {
+    margin-left: 5%;
+  }
 }
 
 /* Estilo para el track (la barra) del input range */
