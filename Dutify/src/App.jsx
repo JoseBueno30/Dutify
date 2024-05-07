@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import TopBar from "./components/topBar/topBar";
+import "./index.css";
+import ListCard from "./components/listCard/listCard";
+import GenreCard from "./components/genreCard/genreCard";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <TopBar></TopBar>
+      <div className="d-flex">
+        <GenreCard genreName="Pop" background="pop" />
+        <GenreCard genreName="Rock" background="rock" />
+        <GenreCard genreName="Hip-Hop" background="hip-hop" />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="d-flex">
+        <GenreCard genreName="Jazz" background="jazz" />
+        <GenreCard genreName="Reggaeton" background="reggaeton" />
+        <GenreCard genreName="Flamenco" background="flamenco" />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="d-flex">
+        <GenreCard genreName="Techno" background="techno" />
+        <GenreCard genreName="Metal" background="metal" />
+        <GenreCard genreName="K-Pop" background="k-pop" />
+      </div>
+      <div className="d-flex">
+        <GenreCard genreName="Soul" background="soul" />
+        <GenreCard genreName="Clásica" background="clasica" />
+        <GenreCard genreName="Videojuegos" background="videojuegos" />
+      </div>
+      <div className="d-flex">
+        <GenreCard genreName="Anime" background="anime" />
+        <GenreCard genreName="Trap" background="trap" />
+        <GenreCard genreName="Latino" background="latino" />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
