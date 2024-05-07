@@ -46,6 +46,7 @@ function MusicPlayer() {
             {/* Barra de repreducción */}
             <div className="progresion-bar">
                 <input className="styled-slider slider-progress" type="range"></input>
+                <span className="timer">mm:ss</span>
                 <div className="song-buttons">
                     <img className="side-button" src="src\assets\musicPlayer\previous-button.svg"></img>
                     {playing ? <img className="play-button" src="src\assets\musicPlayer\play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="src\assets\musicPlayer\stop-button.svg" onClick={switchPlay}></img>}
