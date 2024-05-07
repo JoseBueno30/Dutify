@@ -1,12 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import MusicPlayer from './components/musicPlayer/musicPlayer.jsx'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.css";
+import { ThemeContextProvider } from "./context/ThemeContext";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <ThemeContextProvider>
+    <App></App>
+  </ThemeContextProvider>
+);
