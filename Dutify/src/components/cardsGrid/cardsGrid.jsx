@@ -10,13 +10,13 @@ import AddCard from "./cards/addCard/addCard";
 
 import "./cardsGridStyle.css";
 
-function CardsGrid({ type }) {
+function CardsGrid({type, data }) {
   const gridElements = () => {
     let gridList = [];
-    const data = ListFromJSON(type);
+    const cardData = data
 
     if (type === "genre") {
-      gridList = data.map((genre) => (
+      gridList = cardData.map((genre) => (
         <div className="col col_content" key={genre.key}>
           <GenreCard
             genreName={genre.genreName}
