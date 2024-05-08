@@ -1,14 +1,14 @@
 import TopBar from "./components/topBar/topBar";
 import { useState } from "react";
 import { useEffect } from "react";
-import {useLocationContext} from "./context/LocationContext"
+import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
-import Genres from "./genres";
+import Genres from "./components/locations/genres";
+import Lists from "./components/locations/lists";
 
 function App() {
   const [token, setToken] = useState("");
-  const {location, setLocation} = useLocationContext();
-  
+  const { location, setLocation } = useLocationContext();
 
   useEffect(() => {
     console.log("App hola");
@@ -49,15 +49,26 @@ function App() {
     "%20"
   )}&show_dialog=true`;
 
+  const renderLocation = () => {
+    if (location === 1) {
+      return <></>;
+    } else if (location === 2) {
+      return <Genres token={token}></Genres>;
+    } else {
+      return <Lists token={token}></Lists>;
+    }
+  };
+
   return (
     <>
       {!token ? (
-        <a className="btn tbtn-success" href={loginUrl}>Login</a>
+        <a className="btn tbtn-success" href={loginUrl}>
+          Login
+        </a>
       ) : (
         <>
           <TopBar></TopBar>
-          {location == 1 ? <></> : <Genres token={token}></Genres>}
-          
+          {renderLocation()}
         </>
       )}
     </>

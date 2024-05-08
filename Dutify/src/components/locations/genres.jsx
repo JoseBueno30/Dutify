@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import SpotifyWebApi from "spotify-web-api-js";
-import CardsGrid from "./components/cardsGrid/cardsGrid";
+import CardsGrid from "../cardsGrid/cardsGrid";
 
-import listData from "./data/listData.json";
-import genreData from "./data/genreData.json";
-import recentListsData from "./data/recentListsData.json";
-
-const spotifyApi = new SpotifyWebApi();
+import listData from "../../data/listData.json";
+import genreData from "../../data/genreData.json";
+import recentListsData from "../../data/recentListsData.json";
 
 function Genres({ token }) {
   const [genres, setGenres] = useState([]);

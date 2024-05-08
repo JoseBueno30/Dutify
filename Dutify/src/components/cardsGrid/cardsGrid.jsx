@@ -20,9 +20,9 @@ function CardsGrid({type, data}) {
         </div>
       ));
     } else if (type === "list" || type === "recentLists") {
-      gridList = data.map((list) => (
-        <div className="col col_content" key={list.key}>
-          <ListCard listName={list.listName} background={list.background} />
+      gridList = data.map((playlist) => (
+        <div className="col col_content" key={playlist.id}>
+          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
         </div>
       ));
       if (type === "list") {
