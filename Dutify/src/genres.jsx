@@ -2,25 +2,44 @@ import { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 import CardsGrid from "./components/cardsGrid/cardsGrid";
 
+import listData from "./data/listData.json";
+import genreData from "./data/genreData.json";
+import recentListsData from "./data/recentListsData.json";
+
 const spotifyApi = new SpotifyWebApi();
 
 function Genres({ token }) {
-  const [genres, setGenres] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    console.log("hola")
-    spotifyApi.setAccessToken(token);
-
-    spotifyApi
-      .getAvailableGenreSeeds()
-      .then((data) => {
-        console.log(data.genres)
-        setGenres(data.genres);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los generos: ", error);
-      });
+    const data = ListFromJSON("genre") 
+    setGenres(data);
   }, []);
+
+  function ListFromJSON(name) {
+  let data;
+
+  switch (name) {
+    case "list":
+      data = listData;
+      break;
+    case "genre":
+      data = genreData;
+      break;
+    case "recentLists":
+      data = recentListsData;
+      break;
+  }
+
+  var contKey = 0;
+
+  const res = data.map((item) => ({
+    ...item,
+    key: contKey++,
+  }));
+
+  return res;
+}
 
   return <CardsGrid type="genre" data={genres}></CardsGrid>;
 }

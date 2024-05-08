@@ -1,12 +1,13 @@
 import TopBar from "./components/topBar/topBar";
 import { useState } from "react";
 import { useEffect } from "react";
+import {useLocationContext} from "./context/LocationContext"
 import "./index.css";
 import Genres from "./genres";
-import CardsGrid from "./components/cardsGrid/cardsGrid";
 
 function App() {
   const [token, setToken] = useState("");
+  const {location, setLocation} = useLocationContext();
   
 
   useEffect(() => {
@@ -55,7 +56,8 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          <Genres token={token}></Genres>
+          {location == 1 ? <></> : <Genres token={token}></Genres>}
+          
         </>
       )}
     </>
