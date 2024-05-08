@@ -1,0 +1,6 @@
+.title-fade {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(0, 0, 0, 0));
+  background-size: contain;
+  height: 50%;
+}
+
