@@ -10,7 +10,7 @@ export default function PlayList({token}){
         <div className="playList d-flex flex-column-reverse flex-xl-row">
             
             <SongList token={token}/>
-            <PlayListInfo/>
+            <PlayListInfo />
         </div>
     );
 }
