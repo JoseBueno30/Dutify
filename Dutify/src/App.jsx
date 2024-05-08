@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import MusicPlayer from './components/musicPlayer/musicPlayer'
 import TopBar from "./components/topBar/topBar";
@@ -11,7 +9,6 @@ import GenreCard from "./components/genreCard/genreCard";
 function App() {
   return (
     <>
-      <MusicPlayer></MusicPlayer>
       <TopBar></TopBar>
       <div className="d-flex">
         <GenreCard genreName="Pop" background="pop" />
@@ -20,7 +17,7 @@ function App() {
       </div>
       <div className="d-flex">
         <GenreCard genreName="Jazz" background="jazz" />
-        <GenreCard genreName="Reggaeton" background="reggaeton" />
+        <GenreCard genreName="ReggaetonReggaetonReggaetonReggaetonReggaetonReggaetonReggaetonReggaeton" background="reggaeton" />
         <GenreCard genreName="Flamenco" background="flamenco" />
       </div>
       <div className="d-flex">
@@ -38,6 +35,7 @@ function App() {
         <GenreCard genreName="Trap" background="trap" />
         <GenreCard genreName="Latino" background="latino" />
       </div>
+      <MusicPlayer></MusicPlayer>
     </>
   );
 }

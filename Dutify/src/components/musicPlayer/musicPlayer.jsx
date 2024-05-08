@@ -43,6 +43,10 @@ function MusicPlayer() {
                     {!isSmallScreen ?  <span>Artista</span> : "" }
                 </div>
             </div>
+            {/* Temporizador */}
+            <div className="first-timer">
+                <span>mm:ss</span>
+            </div>
             {/* Barra de repreducción */}
             <div className="progresion-bar">
                 <input className="styled-slider slider-progress" type="range"></input>
@@ -53,7 +57,7 @@ function MusicPlayer() {
                 </div> 
             </div>
             {/* Temporizador */}
-            <div className="timer">
+            <div className="second-timer">
                 <span>mm:ss</span>
             </div>
             {/* Barra de Soido */}

@@ -18,11 +18,11 @@
 
 .song-container {
     display: flex;
-    flex-basis: 20%;
+    flex-basis: 15%;
     padding-left: 2.5%;
+    margin-right: 2%;
     @media screen and (max-width: 768px) {
       display: block;
-      flex-basis: 20%;
     }
 }
 
@@ -50,7 +50,7 @@
     width: 50%;
     justify-content: center;
     position: relative;
-    flex-basis: 60%;
+    flex-basis: 70%;
 }
 
 .song-bar {
@@ -99,11 +99,36 @@
   transform: scale(1.5);
 }
 
-.timer {
+.first-timer {
   margin-bottom: 45px;
-  margin-left: 1%;
+  margin-right: 0.5%;
+  flex-basis: 5%;
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 0px;
+    position: absolute;
+    left: 17%;
+    flex-basis: 0%;
+  }
   @media screen and (max-width: 768px) {
-    margin-left: 5%;
+    left: 15%;
+  }
+  span {
+    float:inline-end;
+  }
+}
+
+.second-timer {
+  margin-bottom: 45px;
+  margin-left: 0.5%;
+  flex-basis: 5%;
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 0px;
+    position: absolute;
+    right: 17%;
+    flex-basis: 0%;
+  }
+  @media screen and (max-width: 768px) {
+    right: 15%;
   }
 }
 
