@@ -52,6 +52,10 @@
   }
 }
 
+.artist-text {
+    font-size: small;
+}
+
 .progresion-bar {
   width: 50%;
   justify-content: center;
@@ -109,6 +113,16 @@
 .timer-buttons-wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.volume-button {
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.volume-button:hover {
+    transition-duration: 0.3s;
+    transform: scale(1.2);
 }
 
 

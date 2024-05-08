@@ -2,20 +2,38 @@ import "./musicPlayer.css"
 import { useEffect, useState } from "react";
 
 function MusicPlayer() {
-  const [playing, swtich] = useState(true);
+  const [playing, change] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [rangeValue, setRangeValue] = useState(50);
+  const [lastRangevalue, setLastRangeValue] = useState(0);
+
+  const handleChange = (event) => {
+    setRangeValue(parseInt(event.target.value));
+  }
 
   const switchPlay = () => {
-    swtich(!playing)
+    change(!playing)
   };
 
-  useEffect(() => {
-    for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
-      e.style.setProperty('--value', e.value);
-      e.style.setProperty('--min', e.min == '' ? '0' : e.min);
-      e.style.setProperty('--max', e.max == '' ? '100' : e.max);
-      e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+  const switchVolume = () => {
+    if(rangeValue != 0) {
+        setLastRangeValue(rangeValue)
+        setRangeValue(0);   
+    } else {
+        setRangeValue(lastRangevalue);
     }
+  }
+
+  const fillRangeInputs = () => {
+    for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+        e.style.setProperty('--value', e.value);
+        e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+        e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+        e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+      }
+  }
+
+  useEffect(() => {
 
     function handleResize() {
       setIsSmallScreen(window.innerWidth < 900);
@@ -29,6 +47,11 @@ function MusicPlayer() {
 
   }, []);
 
+  useEffect(() => {
+    fillRangeInputs();
+
+  }, [rangeValue]);
+
   return (
     <>
       <div className="position-absolute bottom-0 start-0 music-bar">
@@ -40,7 +63,7 @@ function MusicPlayer() {
                 {/* Texto de Artista */}
                 <div className="artist-container">
                     <span>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span><br/>
-                    {!isSmallScreen ?  <span>Artista</span> : "" }
+                    {!isSmallScreen ?  <span className="artist-text">Artista</span> : "" }
                 </div>
             </div>
             {/* Barra de reproducción */}
@@ -62,8 +85,8 @@ function MusicPlayer() {
             
             {/* Barra de Soido */}
             <div className="sound-bar">
-                <img src="src\assets\musicPlayer\sound.svg"></img>
-                <input type="range" className="styled-slider slider-progress"></input>
+                {rangeValue == 0 ? <img className="volume-button" onClick={switchVolume} src="src\assets\musicPlayer\mute.svg"></img> : <img className="volume-button" onClick={switchVolume} src="src\assets\musicPlayer\sound.svg"></img>}
+                <input type="range" className="styled-slider slider-progress" min={0} max={100} value={rangeValue} onChange={handleChange}></input>
             </div>
         </div>
       </div>
