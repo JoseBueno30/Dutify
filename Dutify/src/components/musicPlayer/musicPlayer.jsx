@@ -36,7 +36,7 @@ function MusicPlayer() {
   useEffect(() => {
 
     function handleResize() {
-      setIsSmallScreen(window.innerWidth < 900);
+      setIsSmallScreen(window.innerWidth < 901);
     }
 
     window.addEventListener('resize', handleResize);
