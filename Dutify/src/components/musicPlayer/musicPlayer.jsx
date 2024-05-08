@@ -18,7 +18,7 @@ function MusicPlayer() {
     }
 
     function handleResize() {
-      setIsSmallScreen(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 900);
     }
 
     window.addEventListener('resize', handleResize);
@@ -39,27 +39,27 @@ function MusicPlayer() {
                 <div className="simulate-image"></div>
                 {/* Texto de Artista */}
                 <div className="artist-container">
-                    <span>Nombre</span><br/>
+                    <span>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span><br/>
                     {!isSmallScreen ?  <span>Artista</span> : "" }
                 </div>
             </div>
-            {/* Temporizador */}
-            <div className="first-timer">
-                <span>mm:ss</span>
-            </div>
-            {/* Barra de repreducción */}
+            {/* Barra de reproducción */}
             <div className="progresion-bar">
                 <input className="styled-slider slider-progress" type="range"></input>
-                <div className="song-buttons">
-                    <img className="side-button" src="src\assets\musicPlayer\previous-button.svg"></img>
-                    {playing ? <img className="play-button" src="src\assets\musicPlayer\play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="src\assets\musicPlayer\stop-button.svg" onClick={switchPlay}></img>}
-                    <img className="side-button" src="src\assets\musicPlayer\next-button.svg"></img>
+                <div className="timer-buttons-wrapper">
+                    {/* Temporizador */}
+                    <span>mm:ss</span>
+                    {/* Bottones de reproducción */}
+                    <div className="song-buttons">
+                        <img className="side-button" src="src\assets\musicPlayer\previous-button.svg"></img>
+                        {playing ? <img className="play-button" src="src\assets\musicPlayer\play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="src\assets\musicPlayer\stop-button.svg" onClick={switchPlay}></img>}
+                        <img className="side-button" src="src\assets\musicPlayer\next-button.svg"></img>
+                    </div>
+                    {/* Temporizador */}
+                    <span>mm:ss</span>
                 </div> 
             </div>
-            {/* Temporizador */}
-            <div className="second-timer">
-                <span>mm:ss</span>
-            </div>
+            
             {/* Barra de Soido */}
             <div className="sound-bar">
                 <img src="src\assets\musicPlayer\sound.svg"></img>
