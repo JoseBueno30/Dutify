@@ -4,6 +4,7 @@
   color: var(--color-text);
   height: 10vh;
   position: sticky;
+  border-top: solid var(--color-background);
 }
 
 .music-container {
