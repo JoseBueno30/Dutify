@@ -2,33 +2,17 @@
   height: 5vh;
   width: 100%;
   position: sticky;
+  background-color: var(--color-1);
 }
 
-#dark .topBar{
-    background-color: #4E4848;
+.btn-back{
+    background-color: var(--color-3);
+    border-color: var(--color-3);
 }
 
-#light .topBar{
-    background-color: white;
-}
-
-#dark .btn-back{
-    background-color: #686262;
-    border-color: #686262;
-}
-#dark .btn-back:hover{
-    background-color: #635c5c;
-    border-color: #635c5c;
-}
-
-
-#light .btn-back{
-    background-color: #c3b9b9;
-    border-color: #c3b9b9;
-}
-#light .btn-back:hover{
-    background-color: #b9aeae;
-    border-color: #b9aeae;
+.btn-back:hover {
+    background-color: var(--color-2);
+    border-color: var(--color-2);
 }
 
 .mobile-btn{
@@ -40,8 +24,9 @@
     font-size: calc(1.3rem + 0.6vw);
     float: left;
     font-weight: bold;
-    color: #5383E8;
+    color: var(--color-theme);
 }
+
 .navMenuMobile{
     display: none;
 }
@@ -52,7 +37,7 @@
     }
 }
 
-@media only screen and (max-width: 850px){
+@media only screen and (max-width: 920px){
     .topBar{
         padding: 0px !important;
         height: auto;
@@ -60,7 +45,7 @@
 
     .mobile-btn{
         display: initial;
-        margin-left: 15px;
+
     }
 
     .mobile-btn:active{
@@ -68,7 +53,7 @@
     }
 
     .mobile-btn:active svg{
-        fill: #5383E8;
+        fill: var(--color-theme);
     }
     
     .navMenu{
@@ -119,7 +104,7 @@
     }
 }
 
-@media only screen and (max-width: 850px) and (max-height: 890px){
+@media only screen and (max-width: 920px) and (max-height: 890px){
     .topBar{
         min-height: 44.8px;
     }

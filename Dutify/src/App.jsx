@@ -1,9 +1,10 @@
 import SongList from "./components/songList/songList";
 import TopBar from "./components/topBar/topBar";
+import PlayList from "./components/playList/playList";
+import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import "./App.css";
-import PlayList from "./components/playList/playList";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -57,6 +58,7 @@ function App() {
           <PlayList token={token}/>
         </>
       )}
+      <HelpModal/>
     </div>
   );
 }
