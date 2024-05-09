@@ -41,6 +41,8 @@ function App() {
     "user-modify-playback-state",
     "app-remote-control",
     "playlist-modify-public",
+    "playlist-read-private",
+    "playlist-read-collaborative",
     "user-top-read",
     "user-library-read",
   ];

@@ -2,6 +2,19 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApiObject = new SpotifyWebApi();
 
+const mapPlaylistObject = (data) =>{
+  const playlists = data.items.map((playlist) => ({
+    id: playlist.id,
+    name: playlist.name,
+    description: playlist.description,
+    owner: playlist.owner,
+    public: playlist.public,
+    totalTracks: playlist.tracks.total,
+    imageUrl: playlist.images[0] ? playlist.images[0].url : null
+  }));
+
+return playlists;
+}
 
 const getUserPlaylists = async (token) => {
     
@@ -9,16 +22,8 @@ const getUserPlaylists = async (token) => {
 
     const data = await spotifyApiObject.getUserPlaylists();
     
-    const playlists = data.items.map((playlist) => ({
-        id: playlist.id,
-        name: playlist.name,
-        description: playlist.description,
-        owner: playlist.owner,
-        public: playlist.public,
-        totalTracks: playlist.tracks.total,
-        imageUrl: playlist.images[0] ? playlist.images[0].url : null
-      }));
-    console.log(data.items)
+    const playlists = mapPlaylistObject(data);
+
     return playlists;
   }
 
