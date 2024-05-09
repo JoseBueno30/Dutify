@@ -4,6 +4,7 @@ import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import "./App.css";
 import PlayList from "./components/playList/playList";
+import MusicPlayer from "./components/musicPlayer/musicPlayer"
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -55,6 +56,7 @@ function App() {
         <>
           <TopBar/>
           <PlayList token={token}/>
+          <MusicPlayer/>
         </>
       )}
     </div>

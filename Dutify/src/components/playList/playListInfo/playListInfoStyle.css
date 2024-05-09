@@ -1,6 +1,6 @@
 .playListInfoContainer{
     width: 30%;
-    height: 85vh;;
+    height: 100%;
     color: var(--color-text);
     background-color: var(--color-backgroud);
     pointer-events: fill;
@@ -17,8 +17,8 @@
 
 .playListImage{
     align-self: center;
-    width: 40vmin;
-    height: 40vmin;
+    aspect-ratio: 1/1;
+    width: 70%;
     min-width: 100px;
     min-height: 100px;
     border-radius: 8px;

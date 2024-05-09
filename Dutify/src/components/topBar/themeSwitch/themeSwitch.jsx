@@ -11,10 +11,10 @@ function ThemeSwitch({visible}) {
   };
 
   return (
-    <div style={{width: "35px", height:"35px"}} className={"div-toogle " +( visible ? "" : "d-none")}>
+    <div style={{aspectRatio:"1/1", height:"80%"}} className={"div-toogle " +( visible ? "" : "d-none")}>
       <button
         id="themeToggle"
-        className="theme-toggle position-absolute top-50 translate-middle-y pb-2"
+        className="theme-toggle"
         onClick={switchTheme}
       >
         {contextTheme === "dark" ? (

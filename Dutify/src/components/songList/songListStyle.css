@@ -1,6 +1,6 @@
 .list{
     background-color: var(--color-backgroud);
-    height: 85vh;
+    height: 100%;
     width: 70%;
     overflow-y:auto;
     overflow-x: hidden;

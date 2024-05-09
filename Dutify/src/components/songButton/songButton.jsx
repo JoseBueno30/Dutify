@@ -19,8 +19,9 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
 
     return(
             <div>
-                <div className='songButton' onDoubleClick={songClickHandler}>
+                <div tabindex="3" className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
+                        
                         <img src={image} height={50} width={50} className="playContainer" ></img>
                     </div>
                     <div className='container-fluid'>
@@ -56,21 +57,22 @@ function Options({}){
         
     }
 
-
+    const menuItemClassName = ({ hover }) =>
+        hover ? 'menuItemHover' : 'menuItem';
 
     return(
         <Menu 
-            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical tabindex="3" className="options"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
             transition>
-                                <MenuItem onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
-                                <SubMenu menuClassName="optionsMenu" label="Añadir a la lista">
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
+                                <MenuItem className={menuItemClassName} onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
+                                <SubMenu itemProps={{className:menuItemClassName}} menuClassName="optionsMenu" label="Añadir a la lista">    
+                                    <MenuItem className={menuItemClassName}  onClick={listClickHandler}>Lista 1</MenuItem>
+                                    <MenuItem className={menuItemClassName} onClick={listClickHandler}>Lista 1</MenuItem>
+                                    <MenuItem className={menuItemClassName} onClick={listClickHandler}>Lista 1</MenuItem>
                                     <MenuDivider />
-                                    <MenuItem onClick={newListClickHandler}>Nueva Lista</MenuItem>
+                                    <MenuItem className={menuItemClassName} onClick={newListClickHandler}>Nueva Lista</MenuItem>
                                 </SubMenu>
                             </Menu>
     );

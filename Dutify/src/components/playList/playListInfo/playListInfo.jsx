@@ -7,10 +7,10 @@ export default function PlayListInfo(){
     return(
         <div className="playListInfoContainer d-flex flex-column container-fluid">
             <p className="playListName">ListaDeReproduccion</p>
-            <div className="playListImage">
+            <div tabindex="1" className="playListImage">
                 <image> </image>
             </div>
-            <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
+            <div tabindex="2" className="playListInfo d-flex align-items-stretch justify-content-evenly">
                 <p>X canciones</p>
                 <p>mm:ss</p>
             </div>

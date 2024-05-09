@@ -9,18 +9,21 @@
   margin-top: 10px;
   margin-bottom: 10px;
   pointer-events:fill;
-  user-select: none;
   transition-duration: 0.4s;
+  text-align: center;
+  width: 100%;
+  align-items: center;
 }
 
 .songButton:hover{
-  background-color: var(--color-2);
+  background-color: var(--color-2); 
   /* transform: scale(1.005); */
   transition-duration: 0.4s;
 }
 .playContainer {
-    width: 50px;
-    height: 50px;
+    height: 100%;
+    aspect-ratio: 1/1;
+    align-self: left;
     border-radius: 5px;
     text-align: center;
     display: flex;
@@ -101,21 +104,18 @@
     z-index: 9999 !important;
   }
 
-  .szh-menu__item{
-    /* Esto sobreescribe el estylo de todo el componente*/
+  .menuItem{
     background-color: var(--color-2);
     color:var(--color-text);
-    z-index: 9999 !important;
   }
 
-  .szh-menu__item:hover{
+  .menuItemHover{
     background-color: var(--color-3);
-    z-index: 9999 !important;
+    color:var(--color-text);
   }
 
-  .szh-menu__item--submenu:hover{
+  .subMenu:hover{
     background-color: var(--color-3);
-    z-index: 9999 !important;
   }
 
 @media only screen and (max-width: 768px){
