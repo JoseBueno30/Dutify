@@ -1,7 +1,7 @@
 .music-bar {
   width: 100%;
-  background-color: #504848;
-  color: white;
+  background-color: var(--color-1);
+  color: var(--color-text);
   height: 10vh;
   position: sticky;
 }
@@ -29,7 +29,7 @@
   width: 75px;
   border-radius: 5px;
   aspect-ratio: 1/1;
-  background-color: red;
+  background-color: var(--color-theme);
   @media screen and (max-width: 900px) {
     width: 30%;
     min-width: 55px;
@@ -65,7 +65,7 @@
 
 .song-bar {
   width: 100%;
-  color: #4976e8;
+  color: var(--color-theme);
 }
 
 .song-buttons {
@@ -131,7 +131,7 @@ input[type="range"] {
   -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
   width: 100%; /* Ancho del input */
   height: 5px; /* Altura del input */
-  background-color: #4976e8;
+  background-color: var(--color-theme);
   border-radius: 5px; /* Borde redondeado */
 }
 
