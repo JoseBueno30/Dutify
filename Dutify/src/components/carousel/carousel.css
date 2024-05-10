@@ -1,6 +1,25 @@
-div {
-    background-color: rgb(82, 73, 73);
+.carrusel-container {
+    background-color: #443D3D;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    gap: 20px;
+    margin-bottom: 30px;
 }
+
+.carrusel-box {
+    display: flex;
+    align-items: flex-start;
+    flex-direction:column;
+    gap:20px;
+}
+
+.carrusel-h5 {
+    color: white;
+    text-decoration: underline;
+}
+
 
 .carousel-item div {
     background-color: rgba(0, 0, 0, 0.4);
@@ -35,14 +54,18 @@ div {
     height: 70px;
 }
 
-#customCarousel .carousel-button {
+.carousel .carousel-button {
     opacity: 1;
 }
 
-#customCarousel {
+.carousel {
     width: 800px;
     height: 250px;
     border-radius: 15px;
+}
+
+.carousel button:hover {
+    opacity: 0.75;
 }
 
 

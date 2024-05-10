@@ -6,7 +6,10 @@ import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
+import Inicio from "./components/locations/inicio";
+import MusicPlayer from './components/musicPlayer/musicPlayer';
 import { setAccessToken } from "./spotifyApi/SpotifyApiCalls";
+
 
 function App() {
   const [token, setToken] = useState("");
@@ -56,7 +59,7 @@ function App() {
 
   const renderLocation = () => {
     if (location === 1) {
-      return <></>;
+      return <Inicio token={token}></Inicio>;
     } else if (location === 2) {
       return <Genres token={token}></Genres>;
     } else {
@@ -74,6 +77,7 @@ function App() {
         <>
           <TopBar></TopBar>
           {renderLocation()}
+          
         </>
       )}
     </>
