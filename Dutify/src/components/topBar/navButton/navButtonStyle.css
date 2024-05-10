@@ -19,6 +19,9 @@
   transition: 0.25s ease;
 }
 
+.currentLocation{
+  background-color: #5382e86b;
+}
 
 
 #light .navButton{

@@ -1,22 +1,17 @@
 import React from "react";
-
-import listData from "../../data/listData.json";
-import genreData from "../../data/genreData.json";
-import recentListsData from "../../data/recentListsData.json";
-
 import GenreCard from "./cards/genreCard/genreCard";
 import ListCard from "./cards/listCard/listCard";
 import AddCard from "./cards/addCard/addCard";
 
 import "./cardsGridStyle.css";
 
-function CardsGrid({ type }) {
+function CardsGrid({type, data}) {
   const gridElements = () => {
     let gridList = [];
-    const data = ListFromJSON(type);
+    const cardData = data
 
     if (type === "genre") {
-      gridList = data.map((genre) => (
+      gridList = cardData.map((genre) => (
         <div className="col col_content" key={genre.key}>
           <GenreCard
             genreName={genre.genreName}
@@ -25,9 +20,9 @@ function CardsGrid({ type }) {
         </div>
       ));
     } else if (type === "list" || type === "recentLists") {
-      gridList = data.map((list) => (
-        <div className="col col_content" key={list.key}>
-          <ListCard listName={list.listName} background={list.background} />
+      gridList = data.map((playlist) => (
+        <div className="col col_content" key={playlist.id}>
+          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
         </div>
       ));
       if (type === "list") {
@@ -51,31 +46,6 @@ function CardsGrid({ type }) {
       </div>
     </div>
   );
-}
-
-function ListFromJSON(name) {
-  let data;
-
-  switch (name) {
-    case "list":
-      data = listData;
-      break;
-    case "genre":
-      data = genreData;
-      break;
-    case "recentLists":
-      data = recentListsData;
-      break;
-  }
-
-  var contKey = 0;
-
-  const res = data.map((item) => ({
-    ...item,
-    key: contKey++,
-  }));
-
-  return res;
 }
 
 export default CardsGrid;
