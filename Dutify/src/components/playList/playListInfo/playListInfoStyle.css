@@ -8,10 +8,8 @@
 }
 
 .playListName{
-    align-self: center;
     font-size: 2rem;
-    margin-left: 0vw;
-    margin-top: 3vh;
+    margin-top: 5%;
 
 }
 
@@ -33,6 +31,37 @@
 .playListPlayer{
     align-self: center;
 }
+
+.playListOptions{
+    height: 100%;
+}
+
+.playListOptionsButton{
+    background-color: rgba(0, 0, 0, 0);
+    cursor:pointer;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    border: none;
+    color: var(--color-text);
+    opacity: 1;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-top: 3%;
+    z-index: 9998 !important;
+    @media only screen and (max-width: 1199px){
+        margin-top: 0;
+    }
+}
+
+.playListOptionsButton:hover {
+    background-color: var(--color-3);
+    transform: scale(1.15);
+    transition: ease;
+    transition-duration: 0.3s;
+  }
 
 @media only screen and (max-width: 1199px){
     .playListInfoContainer{

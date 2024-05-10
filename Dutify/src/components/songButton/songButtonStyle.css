@@ -10,39 +10,47 @@
   margin-bottom: 10px;
   pointer-events:fill;
   transition-duration: 0.4s;
-  text-align: center;
+  height: 50px;
   width: 100%;
+  max-width: 100%;
   align-items: center;
 }
 
-.songButton:hover{
+.songButton:hover, .songButton:focus{
   background-color: var(--color-2); 
-  /* transform: scale(1.005); */
   transition-duration: 0.4s;
 }
+
+
 .playContainer {
     height: 100%;
     aspect-ratio: 1/1;
-    align-self: left;
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .songImage{
     border-radius: 5px;
-    text-align: center;
+    z-index: 199;
+  }
+  
+  .songPlayButton{
+    opacity: 0;
+    transition: .3s ease;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
-    vertical-align: middle;
-    cursor: pointer;
+    align-items: center;
+    z-index: 200;
   }
   
-  .playButton{
-    vertical-align: middle;
-    margin-left: 0.15rem;
-    margin-top: 0.6rem;
-    opacity: 0;
-    transition: .2s ease;
-  }
-  
-  
-  .songButton:hover .playButton{
+  .songButton:hover .songPlayButton,.songButton:focus .songPlayButton{
     opacity: 1;
+    transition: .4s ease;
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .songButton .row{
@@ -54,20 +62,41 @@
   .songButton .options{
     justify-content: center;
   }
+
+  .nameAuthorContainer{
+    width: 20%;
+  }
   
   .name{
+    width: 60%;
     font-size: 1rem;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    @media only screen and (max-width: 768px){
+      width: 80%;
+    }
   }
   
   .author{
+    width: 30%;
     font-size: 0.75rem;
+    @media only screen and (max-width: 768px){
+      width: 70%;
+    }
   }
 
   
   .album{
     font-size: 0.75rem;
-    display: flex;
-    justify-content: center;
+    width: 15%;
+    
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    @media only screen and (max-width: 768px){
+      display: none;
+    }
   }
   
   .time{
@@ -77,7 +106,7 @@
   .optionsButton{
     background-color: rgba(0, 0, 0, 0);
     cursor:pointer;
-    border-radius: 5px;
+    border-radius: 50%;
     transition-duration: 0.25s;
     border: none;
     color: var(--color-text);
@@ -94,7 +123,6 @@
     background-color: var(--color-3);
     transition: ease;
     transition-duration: 0.25s;
-    z-index: 9999 !important;
   }
 
   .optionsMenu{
@@ -118,8 +146,3 @@
     background-color: var(--color-3);
   }
 
-@media only screen and (max-width: 768px){
-  .album{
-    display: none;
-  }
-}

@@ -11,7 +11,7 @@ export default function SongList({token}) {
         async function obtenerDatos() {
             try{
                 const spotify = new SpotifyWebAPI(token);
-                const tracks = await spotify.getTopTracks(10);
+                const tracks = await spotify.getTopTracks(20);
                 setTopTracks(tracks);
                 console.log(tracks);
             }catch(error){
