@@ -9,7 +9,7 @@ function handleClick() {
   dispatch({});
 }
 
-function GenreCard({ genreName, background }) {
+function GenreCard({ genreName, background}) {
   const [state, dispatch] = useReducer(PlaceHolder, []);
 
   return (

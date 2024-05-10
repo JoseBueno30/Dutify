@@ -5,6 +5,7 @@ import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
+import { setAccessToken } from "./spotifyApi/SpotifyApiCalls";
 
 function App() {
   const [token, setToken] = useState("");
@@ -16,6 +17,7 @@ function App() {
 
     if (spotifyToken) {
       setToken(spotifyToken);
+      setAccessToken(spotifyToken);
     }
   }, []);
 

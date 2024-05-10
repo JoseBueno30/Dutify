@@ -70,7 +70,7 @@ function TopBar() {
           )}
         </button>
         <h1 className={"title mt-2 " + (searchBarOpen ? "d-none" : "")} id={contextTheme}>
-          DutyFy
+          DutiFy
         </h1>
         <nav className={"navMenu me-auto"} id={contextTheme}>
           <NavButton location={1} texto="Inicio" id={contextTheme}></NavButton>

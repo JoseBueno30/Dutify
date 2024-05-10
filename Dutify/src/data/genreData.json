@@ -1,62 +1,77 @@
 [
   {
     "genreName": "Pop",
-    "background": "pop"
+    "background": "pop",
+    "id": "0JQ5DAqbMKFEC4WFtoNRpw"
   },
   {
     "genreName": "Rock",
-    "background": "rock"
+    "background": "rock",
+    "id": "0JQ5DAqbMKFDXXwE9BDJAr"
   },
   {
     "genreName": "Hip-Hop",
-    "background": "hip-hop"
+    "background": "hip-hop",
+    "id": "0JQ5DAqbMKFQ00XGBls6ym"
   },
   {
     "genreName": "Jazz",
-    "background": "jazz"
+    "background": "jazz",
+    "id" : "0JQ5DAqbMKFAJ5xb0fwo9m"
   },
   {
-    "genreName": "Reggaeton",
-    "background": "reggaeton"
+    "genreName": "Indie",
+    "background": "reggaeton",
+    "id" : "0JQ5DAqbMKFCWjUTdzaG0e"
   },
   {
     "genreName": "Flamenco",
-    "background": "flamenco"
+    "background": "flamenco",
+    "id" : "0JQ5DAqbMKFQFQN0rnK48G"
   },
   {
-    "genreName": "Techno",
-    "background": "techno"
+    "genreName": "Electrónica",
+    "background": "techno",
+    "id" : "0JQ5DAqbMKFHOzuVTgTizF"
   },
   {
     "genreName": "Metal",
-    "background": "metal"
+    "background": "metal",
+    "id" : "0JQ5DAqbMKFDkd668ypn6O"
   },
   {
     "genreName": "K-Pop",
-    "background": "k-pop"
+    "background": "k-pop",
+    "id" : "0JQ5DAqbMKFGvOw3O4nLAf"
   },
   {
     "genreName": "Soul",
-    "background": "soul"
+    "background": "soul",
+    "id" : "0JQ5DAqbMKFIpEuaCnimBj"
   },
   {
     "genreName": "Clásica",
-    "background": "clasica"
+    "background": "clasica",
+    "id" : "0JQ5DAqbMKFPrEiAOxgac3"
   },
   {
     "genreName": "Videojuegos",
-    "background": "videojuegos"
+    "background": "videojuegos",
+    "id": "0JQ5DAqbMKFCfObibaOZbv"
   },
   {
     "genreName": "Anime",
-    "background": "anime"
+    "background": "anime",
+    "id" : "0JQ5DAqbMKFziKOShCi009"
   },
   {
-    "genreName": "Trap",
-    "background": "trap"
+    "genreName": "Alternativa",
+    "background": "trap",
+    "id" : "0JQ5DAqbMKFFtlLYUHv8bT"
   },
   {
     "genreName": "Latino",
-    "background": "latino"
+    "background": "latino",
+    "id": "0JQ5DAqbMKFxXaXKP7zcDp"
   }
 ]

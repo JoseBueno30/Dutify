@@ -2,7 +2,35 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApiObject = new SpotifyWebApi();
 
-const mapPlaylistObject = (data) =>{
+const setAccessToken = (token) =>{
+  spotifyApiObject.setAccessToken(token);
+}
+
+const getUserPlaylists = async (token) => {
+  //spotifyApiObject.setAccessToken(token);
+
+  const data = await spotifyApiObject.getUserPlaylists();
+
+  const playlists = mapPlaylistObject(data);
+
+  return playlists;
+};
+
+const getCategoriesID = () =>{
+  spotifyApiObject.getCategories({limit: 50}).then((data) => {
+    console.log(data.categories.items);
+  });
+}
+
+const getCategoriePlaylists = async (catergoryID) =>{
+  const data = await spotifyApiObject.getCategoryPlaylists(catergoryID);
+
+  const playlists = mapPlaylistObject(data.playlists);
+
+  return playlists;
+}
+
+const mapPlaylistObject = (data) => {
   const playlists = data.items.map((playlist) => ({
     id: playlist.id,
     name: playlist.name,
@@ -10,21 +38,10 @@ const mapPlaylistObject = (data) =>{
     owner: playlist.owner,
     public: playlist.public,
     totalTracks: playlist.tracks.total,
-    imageUrl: playlist.images[0] ? playlist.images[0].url : null
+    imageUrl: playlist.images[0] ? playlist.images[0].url : null,
   }));
 
-return playlists;
-}
+  return playlists;
+};
 
-const getUserPlaylists = async (token) => {
-    
-    spotifyApiObject.setAccessToken(token)
-
-    const data = await spotifyApiObject.getUserPlaylists();
-    
-    const playlists = mapPlaylistObject(data);
-
-    return playlists;
-  }
-
-export { getUserPlaylists };
+export {setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists };
