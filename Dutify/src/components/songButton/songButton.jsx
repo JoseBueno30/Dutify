@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
-import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
+import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
@@ -20,11 +20,10 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
     }
 
     return(
-            <div>
-                <div tabindex="3" className='songButton position-relative' onDoubleClick={songClickHandler}>
+                <div tabIndex={0} className='songButton position-relative' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <div className="songPlayButton"> <FaPlay/> </div>
                         <img src={image} height={50} width={50} className="songImage position-absolute" ></img>
+                        <div className="songPlayButton"> <FaPlay/> </div>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>
@@ -41,7 +40,6 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
                     </div>
                     
                 </div>
-            </div>
     );
 }
 
@@ -68,35 +66,21 @@ function Options({}){
 
     return(
         <Menu 
-            menuButton={<MenuButton tabindex="3" className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuButton={<MenuButton tabIndex={0} className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
             transition>
-                                <MenuItem className={menuItemClassName} onClick={favoritesClickHandler}><button>Añadir a canciones favoritas</button></MenuItem>
-                                <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar de la playlist</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
+                                    
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={eliminarClickHandler}>Eliminar de la playlist</MenuItem>
                                 
-                                {/* <SubMenu itemProps={{className:menuItemClassName}} menuClassName="optionsMenu" label="Añadir a la lista">     */}
-                                <Menu 
-                                menuButton={<MenuButton tabindex="3" className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
-                                menuClassName="optionsMenu"
-                                viewScroll="close"
-                                transition>
+                                <SubMenu tabIndex={"0"} itemProps={{className:menuItemClassName}} menuClassName="optionsMenu" label="Añadir a la lista">    
                                         <MenuItem className={menuItemClassName}  onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                        <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                        <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                        <MenuDivider />
-                                        <MenuItem className={menuItemClassName} onClick={newListClickHandler}><button>Nueva Lista</button></MenuItem>
-                                
-                                
-                                
-                                    </Menu>
-                                
-                                     {/* <MenuItem className={menuItemClassName}  onClick={listClickHandler}><button>Lista 1</button></MenuItem>
                                          <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
                                          <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
                                          <MenuDivider />
                                          <MenuItem className={menuItemClassName} onClick={newListClickHandler}><button>Nueva Lista</button></MenuItem>
-                                     </SubMenu> */}
+                                     </SubMenu>                                
                                 
                             </Menu>
     );

@@ -7,10 +7,10 @@ import "./playListStyle.css"
 
 export default function PlayList({token}){
     return(
-        <div className="playList d-flex flex-column-reverse flex-xl-row">
+        <div className="playList d-flex flex-column flex-xl-row-reverse">
             
-            <SongList token={token}/>
             <PlayListInfo />
+            <SongList token={token}/>
         </div>
     );
 }

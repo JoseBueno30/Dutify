@@ -18,14 +18,14 @@ export default function PlayListPlayer(){
 
     return(
         <div className="playListPlayerContainer d-flex justify-content-around align-items-center">
-            <div className="arrowCross" tabindex="2"><TbArrowsCross className="arrowCrossButton" onClick={crossButtonClickHandler}/></div>
+            <div className="arrowCross" tabIndex={0}><TbArrowsCross className="arrowCrossButton" onClick={crossButtonClickHandler}/></div>
             {
                 isPlaying
-                ? <div className="playListButtonAnimated" tabindex="1" onClick={playButtonClickHandler}> <FaPause className="play"/> </div>
-                : <div className="playListButton" tabindex="1" onClick={playButtonClickHandler}> <FaPlay className="play"/> </div>
+                ? <div className="playListButtonAnimated" tabIndex={0} onClick={playButtonClickHandler}> <FaPause className="play"/> </div>
+                : <div className="playListButton" tabIndex={0} onClick={playButtonClickHandler}> <FaPlay className="play"/> </div>
             }
             
-            <div className="arrowLoop" tabindex="2"><RiLoopLeftFill className="arrowLoopButton" onClick={loopButtonClickHandler}/></div>
+            <div className="arrowLoop" tabIndex={0}><RiLoopLeftFill className="arrowLoopButton" onClick={loopButtonClickHandler}/></div>
         </div>
     );
 }

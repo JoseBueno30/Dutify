@@ -12,7 +12,7 @@ export default function PlayListInfo(){
         <div className="playListInfoContainer d-flex flex-column container-fluid">
             <div className='d-flex justify-content-xl-evenly  justify-content-center align-items-center '>
                 <p className="playListName ">ListaDeReproduccion</p>
-                <Options className="border"/>
+                <Options/>
             </div>
             <div className="playListImage">
                 
@@ -41,10 +41,10 @@ function Options({}){
 
     return(
         <Menu 
-            menuButton={<MenuButton tabindex="1" className={"playListOptionsButton"}><FaGear className="playListOptions"/></MenuButton>} 
+            menuButton={<MenuButton tabIndex={0} className={"playListOptionsButton"}><FaGear className="playListOptions"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
-            gap="true"
+            gap={6}
             align="start"
             transition>
                                 <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}>Cambiar nombre</MenuItem>

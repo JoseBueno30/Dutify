@@ -1,4 +1,6 @@
 .playList{
     
     height : 78vh;
+    min-width: 300px;
+    min-height: 580px;
 }
