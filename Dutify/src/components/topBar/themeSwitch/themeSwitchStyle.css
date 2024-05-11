@@ -6,7 +6,7 @@
 }
 
 .theme-toggle:hover svg{
-  fill: #5383E8;
+  fill: var(--color-theme);
   transform: scale(1.05);
   transition: 0.3s;
 }

@@ -2,33 +2,17 @@
   height: 5vh;
   width: 100%;
   position: sticky;
+  background-color: var(--color-1) !important;
 }
 
-#dark .topBar{
-    background-color: #4E4848;
+.btn-back{
+    background-color: var(--color-2);
+    border-color: var(--color-3);
 }
 
-#light .topBar{
-    background-color: white;
-}
-
-#dark .btn-back{
-    background-color: #686262;
-    border-color: #686262;
-}
-#dark .btn-back:hover{
-    background-color: #635c5c;
-    border-color: #635c5c;
-}
-
-
-#light .btn-back{
-    background-color: #c3b9b9;
-    border-color: #c3b9b9;
-}
-#light .btn-back:hover{
-    background-color: #b9aeae;
-    border-color: #b9aeae;
+.btn-back:hover {
+    background-color: var(--color-3);
+    border-color: var(--color-4);
 }
 
 .mobile-btn{
@@ -68,7 +52,7 @@
     }
 
     .mobile-btn:active svg{
-        fill: #5383E8;
+        fill: var(--color-theme);
     }
     
     .navMenu{
@@ -93,13 +77,6 @@
         opacity: 1;
         top: 5.9vh;
         transition: 1s;
-    }
-
-    #dark .navMenu{
-        background-color: #4E4848;
-    }
-    #light .navMenu{
-        background-color: white;
     }
 
     .btn-back{

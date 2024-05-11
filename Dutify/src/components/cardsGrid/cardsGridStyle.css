@@ -8,3 +8,6 @@ div.col_content, #cards_container{
     width: 900px;
 }
 
+#cards_container {
+    background-color: var(--color-backgroud);
+}
