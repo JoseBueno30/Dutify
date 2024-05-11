@@ -1,7 +1,6 @@
 import TopBar from "./components/topBar/topBar";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
