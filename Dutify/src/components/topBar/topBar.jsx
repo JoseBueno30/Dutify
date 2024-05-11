@@ -60,8 +60,8 @@ function TopBar() {
           " d-flex position-relative h-100 align-items-center"
         }
       >
-        <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
-          <BiArrowBack size="20"/>
+        <button className="m-2 btn-back" type="button">
+          <BiArrowBack size="27"/>
         </button>
         <h1
           className={"title mt-2 pb-1 " + (searchBarOpen ? "d-none" : "")}
