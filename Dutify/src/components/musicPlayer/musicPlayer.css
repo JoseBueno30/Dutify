@@ -1,0 +1,217 @@
+.music-bar {
+  width: 100%;
+  background-color: var(--color-1);
+  color: var(--color-text);
+  height: 10vh;
+  position: sticky;
+  border-top: solid var(--color-background);
+}
+
+.music-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 900px) {
+    justify-content: start;
+  }
+}
+
+.song-container {
+  display: flex;
+  flex-basis: 20%;
+  padding-left: 2.5%;
+  @media screen and (max-width: 900px) {
+    display: block;
+  }
+}
+
+.simulate-image {
+  width: 75px;
+  border-radius: 5px;
+  aspect-ratio: 1/1;
+  background-color: var(--color-theme);
+  @media screen and (max-width: 900px) {
+    width: 30%;
+    min-width: 55px;
+  }
+}
+
+.artist-container {
+  margin-left: 10px;
+  align-content: center;
+  max-width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @media screen and (max-width: 1200px) {
+    max-width: 60px;
+  }
+  @media screen and (max-width: 900px) {
+    margin-left: 0px;
+    font-size: 90%;
+    max-width: 75px;
+  }
+}
+
+.artist-text {
+    font-size: small;
+}
+
+.progresion-bar {
+  width: 50%;
+  justify-content: center;
+  position: relative;
+  flex-basis: 60%;
+}
+
+.song-bar {
+  width: 100%;
+  color: var(--color-theme);
+}
+
+.song-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.song-buttons img {
+  cursor: pointer;
+}
+
+.sound-bar {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2.5%;
+  padding-left: 2%;
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
+.side-button {
+  transition-duration: 0.3s;
+}
+
+.side-button:hover {
+  transition-duration: 0.3s;
+  transform: scale(1.3);
+}
+
+.play-button {
+  transform: scale(1.3);
+  transition-duration: 0.3s;
+}
+
+.play-button:hover {
+  transition-duration: 0.3s;
+  transform: scale(1.5);
+}
+
+.timer-buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.volume-button {
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.volume-button:hover {
+    transition-duration: 0.3s;
+    transform: scale(1.2);
+}
+
+
+/* Estilo para el track (la barra) del input range */
+input[type="range"] {
+  -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
+  width: 100%; /* Ancho del input */
+  height: 5px; /* Altura del input */
+  background-color: var(--color-theme);
+  border-radius: 5px; /* Borde redondeado */
+}
+
+/* Estilo para el thumb (el deslizador) del input range */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
+  width: 10px; /* Ancho del thumb */
+  height: 10px; /* Altura del thumb */
+  background: black; /* Color del thumb */
+  border-radius: 50%; /* Borde redondeado */
+  left: calc(100% + 1px); /* Alineación a la derecha del thumb */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/*generated with Input range slider CSS style generator (version 20211225)
+https://toughengineer.github.io/demo/slider-styler*/
+input[type="range"].styled-slider {
+  height: 10px;
+  -webkit-appearance: none;
+}
+
+/*progress support*/
+input[type="range"].styled-slider.slider-progress {
+  --range: calc(var(--max) - var(--min));
+  --ratio: calc((var(--value) - var(--min)) / var(--range));
+  --sx: calc(0.5 * 16px + var(--ratio) * (100% - 16px));
+}
+
+input[type="range"].styled-slider:focus {
+  outline: none;
+}
+
+/*webkit*/
+input[type="range"].styled-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  background: #007cf8;
+  border: none;
+  box-shadow: 0 0 2px black;
+  margin-top: calc(max((8px - 1px - 1px) * 0.5, 0px) - 16px * 0.5);
+}
+
+input[type="range"].styled-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 8px;
+  background: #efefef;
+  box-shadow: none;
+}
+
+input[type="range"].styled-slider::-webkit-slider-thumb:hover {
+  background: #0061c3;
+}
+
+input[type="range"].styled-slider:hover::-webkit-slider-runnable-track {
+  background: #e5e5e5;
+}
+
+input[type="range"].styled-slider::-webkit-slider-thumb:active {
+  background: #2f98f9;
+}
+
+input[type="range"].styled-slider:active::-webkit-slider-runnable-track {
+  background: #f5f5f5;
+  border-color: #c1c1c1;
+}
+
+input[type="range"].styled-slider.slider-progress::-webkit-slider-runnable-track {
+  background: linear-gradient(#007cf8, #007cf8) 0 / var(--sx) 100% no-repeat,
+    #efefef;
+}
+
+input[type="range"].styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
+  background: linear-gradient(#0061c3, #0061c3) 0 / var(--sx) 100% no-repeat,
+    #e5e5e5;
+}
+
+input[type="range"].styled-slider.slider-progress:active::-webkit-slider-runnable-track {
+  background: linear-gradient(#2f98f9, #2f98f9) 0 / var(--sx) 100% no-repeat,
+    #f5f5f5;
+}

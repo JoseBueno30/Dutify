@@ -1,0 +1,125 @@
+.songButton{
+  background-color: var(--color-1);
+  color:var(--color-text);
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: black var(--border) 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  pointer-events:fill;
+  user-select: none;
+  transition-duration: 0.4s;
+}
+
+.songButton:hover{
+  background-color: var(--color-2);
+  /* transform: scale(1.005); */
+  transition-duration: 0.4s;
+}
+.playContainer {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  .playButton{
+    vertical-align: middle;
+    margin-left: 0.15rem;
+    margin-top: 0.6rem;
+    opacity: 0;
+    transition: .2s ease;
+  }
+  
+  
+  .songButton:hover .playButton{
+    opacity: 1;
+  }
+  
+  .songButton .row{
+    height: 100%;
+    align-items:center;
+    padding-bottom: 2px;
+  }
+  
+  .songButton .options{
+    justify-content: center;
+  }
+  
+  .name{
+    font-size: 1rem;
+  }
+  
+  .author{
+    font-size: 0.75rem;
+  }
+
+  
+  .album{
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .time{
+    font-size: 1rem;
+  }
+
+  .optionsButton{
+    background-color: rgba(0, 0, 0, 0);
+    cursor:pointer;
+    border-radius: 5px;
+    transition-duration: 0.25s;
+    border: none;
+    color: var(--color-text);
+    opacity: 1;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    z-index: 9998 !important;
+  }
+
+  .optionsButton:hover {
+    background-color: var(--color-3);
+    transition: ease;
+    transition-duration: 0.25s;
+    z-index: 9999 !important;
+  }
+
+  .optionsMenu{
+    background-color: var(--color-2) !important;
+    border: black solid 1px !important;
+    color:var(--color-text) !important;
+    z-index: 9999 !important;
+  }
+
+  .szh-menu__item{
+    /* Esto sobreescribe el estylo de todo el componente*/
+    background-color: var(--color-2);
+    color:var(--color-text);
+    z-index: 9999 !important;
+  }
+
+  .szh-menu__item:hover{
+    background-color: var(--color-3);
+    z-index: 9999 !important;
+  }
+
+  .szh-menu__item--submenu:hover{
+    background-color: var(--color-3);
+    z-index: 9999 !important;
+  }
+
+@media only screen and (max-width: 768px){
+  .album{
+    display: none;
+  }
+}

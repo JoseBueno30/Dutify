@@ -1,3 +1,4 @@
+import SongList from "./components/songList/songList";
 import TopBar from "./components/topBar/topBar";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
+  const { contextTheme, setContextTheme } = useThemeContext();
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -73,19 +75,20 @@ function App() {
     "%20"
   )}&show_dialog=true`;
 
+  const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${scopes.join("%20")}&show_dialog=true`;
+
   return (
-    <>
+    <div id={contextTheme}>
       {!token ? (
         <a className="btn btn-success" href={loginUrl}>
-          Login
-        </a>
       ) : (
         <>
           <TopBar></TopBar>
           <RouterProvider router={router}></RouterProvider>
+          <MusicPlayer/>
         </>
       )}
-    </>
+    </div>
   );
 }
 
