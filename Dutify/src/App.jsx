@@ -5,6 +5,7 @@ import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
+import Inicio from "./components/locations/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useThemeContext } from "./context/ThemeContext";
@@ -33,7 +34,7 @@ function App() {
       element: <></>
     },{
       path: "/inicio",
-      element: <></>
+      element: <Inicio token={token}></Inicio>
     },
     {
       path: "/generos",
