@@ -2,7 +2,7 @@
   height: 5vh;
   width: 100%;
   position: sticky;
-  background-color: var(--color-1);
+  background-color: var(--color-1) !important;
 }
 
 .btn-back{

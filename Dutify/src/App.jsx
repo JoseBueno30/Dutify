@@ -56,7 +56,7 @@ function App() {
       ) : (
         <>
           <TopBar/>
-            <PlayList token={token}/>
+            <CardsGrid type={"list"}/>
           <MusicPlayer/>
         </>
       )}
