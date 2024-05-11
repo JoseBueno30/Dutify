@@ -5,21 +5,42 @@ import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
-import { setAccessToken } from "./spotifyApi/SpotifyApiCalls";
+import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
   const [token, setToken] = useState("");
-  const { location, setLocation } = useLocationContext();
 
   useEffect(() => {
-    console.log("App hola");
-    const spotifyToken = getTokenFromUrl().access_token;
-
-    if (spotifyToken) {
-      setToken(spotifyToken);
-      setAccessToken(spotifyToken);
+    console.log(window.location.href);
+    let spotifyToken = window.sessionStorage.getItem("token");
+        
+    if (!spotifyToken || spotifyToken === "undefined"){
+       spotifyToken = getTokenFromUrl().access_token;
+       window.sessionStorage.setItem("token", spotifyToken);
+       console.log("guardado en sesion " + window.sessionStorage.getItem("token"))
     }
+    setToken(spotifyToken);
+    setAccessToken(spotifyToken);
   }, []);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <></>
+    },{
+      path: "/inicio",
+      element: <></>
+    },
+    {
+      path: "/generos",
+      element: <Genres token={token}></Genres>
+    },
+    {
+      path: "/listas",
+      element: <Lists token={token}></Lists>
+    }
+  ])
 
   const getTokenFromUrl = () => {
     return window.location.hash
@@ -53,26 +74,16 @@ function App() {
     "%20"
   )}&show_dialog=true`;
 
-  const renderLocation = () => {
-    if (location === 1) {
-      return <></>;
-    } else if (location === 2) {
-      return <Genres token={token}></Genres>;
-    } else {
-      return <Lists token={token}></Lists>;
-    }
-  };
-
   return (
     <>
       {!token ? (
-        <a className="btn tbtn-success" href={loginUrl}>
+        <a className="btn btn-success" href={loginUrl}>
           Login
         </a>
       ) : (
         <>
           <TopBar></TopBar>
-          {renderLocation()}
+          <RouterProvider router={router}></RouterProvider>
         </>
       )}
     </>

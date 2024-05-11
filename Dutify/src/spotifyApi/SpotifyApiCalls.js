@@ -6,9 +6,12 @@ const setAccessToken = (token) =>{
   spotifyApiObject.setAccessToken(token);
 }
 
+const getAccessToken = () =>{
+  return spotifyApiObject.getAccessToken();
+}
+
 const getUserPlaylists = async (token) => {
   //spotifyApiObject.setAccessToken(token);
-
   const data = await spotifyApiObject.getUserPlaylists();
 
   const playlists = mapPlaylistObject(data);
@@ -44,4 +47,4 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-export {setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists };
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists };

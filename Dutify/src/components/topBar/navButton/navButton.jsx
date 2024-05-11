@@ -4,11 +4,11 @@ import "./navButtonStyle.css"
 function NavButton(props) {
     const {location, setLocation} = useLocationContext();
 
-
     return (
         <a  onClick={() => setLocation(props.location)} 
             className={"navButton fs-5" + (props.location == location ? " currentLocation" : "")}
-            id={props.id}>
+            id={props.id}
+            href={"/" + props.texto}>
             {props.texto}
         </a>
     )
