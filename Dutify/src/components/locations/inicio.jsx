@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 import Carousel from '../carousel/carousel';
+import CardsGrid from "../cardsGrid/cardsGrid";
 
 function Inicio({token}){
     
@@ -18,10 +19,20 @@ function Inicio({token}){
     
     return (
         <>
-            <section style={{backgroundColor : '#443D3D' , height: '100%', widht : '100%'}}>
-                <Carousel id="1" lista={lists} name="Listas populares:"></Carousel>
-                <Carousel id="2" lista={lists} name="Artistas populares:"></Carousel>
-                <Carousel id="3" lista={lists} name="Recomendaciones:"></Carousel>
+            <section style={{backgroundColor : 'var(--color-backgroud)' 
+                            , height: '100%'
+                            , width : '100%'
+                            , display: 'flex'
+                            , flexDirection: 'column'
+                            , gap: '30px'
+                            }}>
+                <div>
+                    <h5 style={{textDecoration: 'underline',color: 'var(--color-text)'}}>Listas recientes</h5>
+                    <CardsGrid type="recentLists" data={lists}></CardsGrid>
+                </div>
+                <Carousel id="carrusel-1" lista={lists} name="Listas populares:"></Carousel>
+                <Carousel id="carrusel-2" lista={lists} name="Artistas populares:"></Carousel>
+                <Carousel id="carrusel-3" lista={lists} name="Recomendaciones:"></Carousel>
             </section>
         </>
     );
