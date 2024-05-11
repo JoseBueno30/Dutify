@@ -19,6 +19,7 @@ function Carousel({ name, id, lista }) {
                     {playlist.name}
                   </div>
                 </div>
+
               </div>
             ))}
           </div>
