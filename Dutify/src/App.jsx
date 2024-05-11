@@ -1,29 +1,49 @@
-import SongList from "./components/songList/songList";
 import TopBar from "./components/topBar/topBar";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocationContext } from "./context/LocationContext";
 import "./index.css";
+import "./App.css"
 import Genres from "./components/locations/genres";
 import Lists from "./components/locations/lists";
-import Inicio from "./components/locations/inicio";
-import MusicPlayer from './components/musicPlayer/musicPlayer';
-import { setAccessToken } from "./spotifyApi/SpotifyApiCalls";
-
+import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useThemeContext } from "./context/ThemeContext";
+import MusicPlayer from "./components/musicPlayer/musicPlayer";
 
 function App() {
+  const { contextTheme, setContextTheme } = useThemeContext();
   const [token, setToken] = useState("");
-  const { location, setLocation } = useLocationContext();
 
   useEffect(() => {
-    console.log("App hola");
-    const spotifyToken = getTokenFromUrl().access_token;
-
-    if (spotifyToken) {
-      setToken(spotifyToken);
-      setAccessToken(spotifyToken);
+    console.log(window.location.href);
+    let spotifyToken = window.sessionStorage.getItem("token");
+        
+    if (!spotifyToken || spotifyToken === "undefined"){
+       spotifyToken = getTokenFromUrl().access_token;
+       window.sessionStorage.setItem("token", spotifyToken);
+       console.log("guardado en sesion " + window.sessionStorage.getItem("token"))
     }
+    setToken(spotifyToken);
+    setAccessToken(spotifyToken);
   }, []);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <></>
+    },{
+      path: "/inicio",
+      element: <></>
+    },
+    {
+      path: "/generos",
+      element: <Genres token={token}></Genres>
+    },
+    {
+      path: "/listas",
+      element: <Lists token={token}></Lists>
+    }
+  ])
 
   const getTokenFromUrl = () => {
     return window.location.hash
@@ -57,30 +77,18 @@ function App() {
     "%20"
   )}&show_dialog=true`;
 
-  const renderLocation = () => {
-    if (location === 1) {
-      return <Inicio token={token}></Inicio>;
-    } else if (location === 2) {
-      return <Genres token={token}></Genres>;
-    } else {
-      return <Lists token={token}></Lists>;
-    }
-  };
-
   return (
-    <>
+    <div id={contextTheme}>
       {!token ? (
-        <a className="btn tbtn-success" href={loginUrl}>
-          Login
-        </a>
+        <a className="btn btn-success" href={loginUrl}>Login</a>
       ) : (
         <>
           <TopBar></TopBar>
-          {renderLocation()}
-          
+          <RouterProvider router={router}></RouterProvider>
+          <MusicPlayer></MusicPlayer>
         </>
       )}
-    </>
+    </div>
   );
 }
 

@@ -38,12 +38,10 @@ function CardsGrid({type, data}) {
   };
 
   return (
-    <div className="container-fluid">
-      <div id="cards_container">
+    <div className="container-fluid" id="cards_container">
         <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
-          {gridElements()}
+            {gridElements()}
         </div>
-      </div>
     </div>
   );
 }

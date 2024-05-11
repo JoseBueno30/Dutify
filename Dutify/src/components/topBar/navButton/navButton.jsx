@@ -1,14 +1,12 @@
-import { useLocationContext } from "../../../context/LocationContext"
 import "./navButtonStyle.css"
 
 function NavButton(props) {
-    const {location, setLocation} = useLocationContext();
-
 
     return (
         <a  onClick={() => setLocation(props.location)} 
-            className={"navButton fs-5" + (props.location == location ? " currentLocation" : "")}
-            id={props.id}>
+            className={"navButton fs-5" + (window.location.href.includes(props.texto) ? " currentLocation" : "")}
+            id={props.id}
+            href={"/" + props.texto}>
             {props.texto}
         </a>
     )
