@@ -1,5 +1,6 @@
 import SongList from "./components/songList/songList";
 import TopBar from "./components/topBar/topBar";
+import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -60,6 +61,7 @@ function App() {
           <MusicPlayer/>
         </>
       )}
+      <HelpModal/>
     </div>
   );
 }
