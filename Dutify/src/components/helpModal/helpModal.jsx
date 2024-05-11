@@ -1,4 +1,6 @@
 import React from "react";
+import "./helpModalStyle.css";
+import { IoClose } from "react-icons/io5";
 
 function HelpModal() {
   return (
@@ -17,10 +19,12 @@ function HelpModal() {
             </h1>
             <button
               type="button"
-              className="btn-close"
+              className="close-button"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            >
+              <IoClose size={35}/>
+            </button>
           </div>
           <div className="modal-body">
             <p>
@@ -31,19 +35,10 @@ function HelpModal() {
             <ul>
               <li>Buscar y reproducir canciones.</li>
               <li>Reproducir canciones en modo aleatorio o repetición.</li>
-              <li>Crear y editar nuevas listas de reproducción.</li>
+              <li>Crear, editar y eliminar listas de reproducción.</li>
               <li>Añadir o eliminar canciones de tus listas de reproducción.</li>
               <li>Reproducir listas filtradas por género o temas.</li>
             </ul>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
           </div>
         </div>
       </div>

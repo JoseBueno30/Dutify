@@ -15,6 +15,11 @@
   transition: 0.2s;
 }
 
+.icon-style:active {
+  scale: 0.93;
+  transition: 0.1s ease-in-out; 
+}
+
 .icon-style svg{
   /* Por la cara el de help solo funciona con el fill y el del sun solo con el color */
   fill: var(--color-text);
@@ -23,6 +28,8 @@
 
 .div-toogle{
   margin-right: 1rem !important;
+  aspect-ratio: 1/1;
+  height: 80%;
 }
 
 @media only screen and (max-width: 850px){

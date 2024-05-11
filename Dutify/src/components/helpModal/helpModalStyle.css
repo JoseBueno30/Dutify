@@ -1,0 +1,30 @@
+.modal-header, .modal-content{
+    background-color: var(--color-1);
+    border-bottom: 1px solid var(--color-3);
+    color: var(--color-text);
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-button{
+    color: var(--color-text);
+    fill: var(--color-text);
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+    border: none;
+    transition: 0.25s ease-in-out;
+}
+
+.close-button:hover{
+    color: var(--color-theme);
+    transition: 0.25 ease-in-out;
+}
+
+.close-button:active{
+    scale: 0.95;
+    transition: 0.1s ease-in-out;
+}

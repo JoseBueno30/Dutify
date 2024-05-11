@@ -11,7 +11,7 @@ function ThemeSwitch({visible}) {
   };
 
   return (
-    <div style={{aspectRatio: "1/1", height:"80%" }} className={"div-toogle " +( visible ? "" : "d-none")}>
+    <div className={"div-toogle " +( visible ? "" : "d-none")}>
       <button
         id="themeToggle"
         className="icon-style"

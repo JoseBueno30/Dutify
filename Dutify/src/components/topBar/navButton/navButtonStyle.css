@@ -3,6 +3,7 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1.1px;
+  font-weight: 600;
   padding: 2.5px 15px 5px 15px;
   margin-left: 15px;
   cursor: pointer;
@@ -13,18 +14,17 @@
 }
 
 .navButton:hover{
-  text-shadow: 0 0 2px;
   background-color: var(--color-theme);
-  scale: 1.05;
   transition: 0.25s ease;
 }
 
-#light .navButton{
-  color: rgb(0, 0, 0);
+.navButton:active{
+  scale: 0.95;
+  transition: 0.1s ease;
 }
 
-#dark .navButton{
-  color: white;
+.navButton{
+  color: var(--color-text);
 }
 
 @media only screen and (max-width: 920px){
