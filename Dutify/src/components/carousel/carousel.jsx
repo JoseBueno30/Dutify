@@ -14,12 +14,11 @@ function Carousel({ name, id, lista }) {
             {lista.map((playlist, index) => (
               <div key={playlist.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                 <img className="d-block img-fluid" src={playlist.imageUrl} alt="" />
-                <div className="carousel-caption d-md-block fw-bolder">
-                  <div className='texto-centrado'>
+                <div className="carousel-caption d-md-block fw-bolder carrusel-caja-texto">
+                  <p className='carrusel-texto fs-10'>
                     {playlist.name}
-                  </div>
+                  </p>
                 </div>
-
               </div>
             ))}
           </div>

@@ -21,26 +21,38 @@
 }
 
 
-.carousel-item div {
+.carrusel-caja-texto {
     background-color: rgba(0, 0, 0, 0.4);
-    width: 17.5vw;
-    height: calc(20vw * (100 / 800));
-    max-width: 200px;
+    width: 30vw;
+    max-height: 40px;
+    height: calc(20vw * (200 / 800));
+    max-width: 300px;
     text-align: center;
-    left: 38%;
+    left: 30%;
     bottom: 0.1rem;
+    padding: 0;
 }
 
-.carousel-item div .texto-centrado {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    color: rgba(255, 255, 255, 0.9);
-    background-color: transparent;
-    font-size: 20px;
+@media (min-width: 701px) {
+    .carrusel-caja-texto {
+        font-size: 1.2rem;
+    }
 }
+
+.carrusel-texto {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 .carousel-item img {
     object-fit: cover;
