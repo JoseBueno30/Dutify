@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { getUserPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 import CardsGrid from "../cardsGrid/cardsGrid";
 
-function Lists({token}) {
+function Lists({}) {
   const [lists, setLists] = useState([]);
 
   const cargarPlaylists = async () =>{
-    console.log( await getUserPlaylists(token))
-    setLists(await getUserPlaylists(token))
+    setLists(await getUserPlaylists())
   }
 
   useEffect(() => {

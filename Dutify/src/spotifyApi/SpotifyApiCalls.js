@@ -10,8 +10,8 @@ const getAccessToken = () =>{
   return spotifyApiObject.getAccessToken();
 }
 
-const getUserPlaylists = async (token) => {
-  //spotifyApiObject.setAccessToken(token);
+const getUserPlaylists = async () => {
+
   const data = await spotifyApiObject.getUserPlaylists();
 
   const playlists = mapPlaylistObject(data);

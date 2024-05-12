@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import CardsGrid from "../cardsGrid/cardsGrid";
+import CardsGrid from "../../cardsGrid/cardsGrid";
 
-import listData from "../../data/listData.json";
-import genreData from "../../data/genreData.json";
-import recentListsData from "../../data/recentListsData.json";
+import listData from "../../../data/listData.json";
+import genreData from "../../../data/genreData.json";
+import recentListsData from "../../../data/recentListsData.json";
+import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 
 function Genres({ token }) {
   const [genres, setGenres] = useState([]);
@@ -38,7 +39,13 @@ function Genres({ token }) {
   return res;
 }
 
-  return <CardsGrid type="genre" data={genres}></CardsGrid>;
+  const goToListasGenero = (event) => {
+    const card = event.target;
+    console.log(card.id);
+    window.location.href="/Generos/Listas?genero=" + card.id;
+  }
+
+  return <CardsGrid type="genre" data={genres} clickFunction={goToListasGenero}></CardsGrid>;
 }
 
 export default Genres;
