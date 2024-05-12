@@ -6,7 +6,7 @@
   --color-4:#6d6d6d;
   --color-text:white;
   --border: none;
-  --color-theme:#4976E8;
+  --color-theme:#0d6efd;
 }
 
 #light{
@@ -17,5 +17,5 @@
   --color-4:#c8c8c8;
   --color-text:black;
   --border: none;
-  --color-theme:#4976E8;
+  --color-theme:#0d6efd;
 }

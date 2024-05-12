@@ -1,0 +1,44 @@
+.icon-style{
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.icon-style:hover svg{
+  /* Por la cara el de help solo funciona con el fill y el del sun solo con el color */
+  fill: var(--color-theme);
+  color: var(--color-theme);
+  transition: 0.2s;
+}
+
+.icon-style:active {
+  scale: 0.93;
+  transition: 0.1s ease-in-out; 
+}
+
+.icon-style svg{
+  /* Por la cara el de help solo funciona con el fill y el del sun solo con el color */
+  fill: var(--color-text);
+  color: var(--color-text);
+}
+
+.div-toogle{
+  margin-right: 1rem !important;
+  aspect-ratio: 1/1;
+  height: 80%;
+}
+
+@media only screen and (max-width: 850px){
+  .theme-toggle{
+    margin-top: 4px;
+  }
+
+  .div-toogle{
+    margin: 0px;
+    margin-right: 7px !important;
+  }
+}

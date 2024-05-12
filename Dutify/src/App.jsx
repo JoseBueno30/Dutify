@@ -8,6 +8,7 @@ import Lists from "./components/locations/lists";
 import Inicio from "./components/locations/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import MusicPlayer from "./components/musicPlayer/musicPlayer";
 
@@ -89,6 +90,7 @@ function App() {
           <MusicPlayer></MusicPlayer>
         </>
       )}
+      <HelpModal/>
     </div>
   );
 }
