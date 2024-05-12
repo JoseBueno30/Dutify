@@ -33,6 +33,13 @@ const getCategoriePlaylists = async (catergoryID) =>{
   return playlists;
 }
 
+const getPopularPlaylists = async () => {
+  const data = await spotifyApiObject.getFeaturedPlaylists();
+  const playlists = mapPlaylistObject(data.playlists);
+  return playlists;
+};
+
+
 const mapPlaylistObject = (data) => {
   const playlists = data.items.map((playlist) => ({
     id: playlist.id,
@@ -47,4 +54,5 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists };
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists
+  , getPopularPlaylists };

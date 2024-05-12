@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { getUserPlaylists } from "../../spotifyApi/SpotifyApiCalls";
+import { getUserPlaylists, getPopularPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 import Carousel from '../carousel/carousel';
 import CardsGrid from "../cardsGrid/cardsGrid";
 
 function Inicio({token}){
     
-    // PRUEBA
-    const [lists, setLists] = useState([]);
+    const [recent_playlists, setRecentPlaylists] = useState([]);
+    const [popular_playlists, setPopularPlaylists] = useState([]);
+    const [popular_artists, setPopularArtists] = useState([]); // Falta por implementar
+    const [recommended_playlists, setRecommendedPlaylists] = useState([]) // Falta por implementar
 
     const cargarPlaylists = async () =>{
-        console.log( await getUserPlaylists(token))
-        setLists(await getUserPlaylists(token))
+        setRecentPlaylists(await getUserPlaylists(token))
+        setPopularPlaylists(await getPopularPlaylists(token))
     }
 
     useEffect(() => {
@@ -35,11 +37,11 @@ function Inicio({token}){
                             , maxWidth: '875px'
                             , marginTop: '20px' 
                             }}>Listas recientes:</h5>
-                <CardsGrid type="recentLists" data={lists} />
+                <CardsGrid type="recentLists" data={recent_playlists} />
             </div>
-            <Carousel id="carrusel-1" lista={lists} name="Listas populares:"></Carousel>
-            <Carousel id="carrusel-2" lista={lists} name="Artistas populares:"></Carousel>
-            <Carousel id="carrusel-3" lista={lists} name="Recomendaciones:"></Carousel>
+            <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>
+            <Carousel id="carrusel-2" lista={recent_playlists} name="Artistas populares:"></Carousel>
+            <Carousel id="carrusel-3" lista={recent_playlists} name="Recomendaciones:"></Carousel>
         </section>
     );
 }
