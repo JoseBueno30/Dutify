@@ -70,9 +70,9 @@ function TopBar() {
           DutiFy
         </h1>
         <nav className={"navMenu me-auto"} id={contextTheme}>
-          <NavButton texto="Inicio" id={contextTheme}></NavButton>
-          <NavButton texto="Generos" id={contextTheme}></NavButton>
-          <NavButton texto="Listas" id={contextTheme}></NavButton>
+          <NavButton location={1} texto="Inicio" id={contextTheme}></NavButton>
+          <NavButton location={2} texto="Generos" id={contextTheme}></NavButton>
+          <NavButton location={3} texto="Listas" id={contextTheme}></NavButton>
         </nav>
         <div className="d-flex justify-content-between align-items-center">
           <HelpButton visible={!searchBarOpen && !navMenuOpen} />
