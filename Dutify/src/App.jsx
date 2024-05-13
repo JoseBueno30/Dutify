@@ -1,6 +1,4 @@
 import TopBar from "./components/topBar/topBar";
-import { useState } from "react";
-import { useEffect } from "react";
 import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres";
@@ -9,7 +7,10 @@ import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
-import MusicPlayer from "./components/musicPlayer/musicPlayer";
+import { useEffect, useState } from "react";
+import "./App.css";
+import PlayList from "./components/playList/playList";
+import MusicPlayer from "./components/musicPlayer/musicPlayer"
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -85,7 +86,8 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          <RouterProvider router={router}></RouterProvider>
+          {/* <RouterProvider router={router}></RouterProvider> */}
+          <PlayList token={token}/>
           <MusicPlayer></MusicPlayer>
         </>
       )}
