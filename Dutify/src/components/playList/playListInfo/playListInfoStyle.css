@@ -52,7 +52,7 @@
     padding-top: 3px;
     padding-bottom: 3px;
     margin-top: 3%;
-    z-index: 9998 !important;
+    z-index: 200 !important;
     @media only screen and (max-width: 1199px){
         margin-top: 0;
     }
