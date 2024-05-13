@@ -83,6 +83,7 @@
     white-space:nowrap;
     text-overflow:clip;
     overflow:hidden;
+    pointer-events: none;
     @media only screen and (max-width: 768px){
       width: 80%;
     }
@@ -91,6 +92,7 @@
   .author{
     width: 30%;
     font-size: 0.75rem;
+    pointer-events: none;
     @media only screen and (max-width: 768px){
       width: 70%;
     }
@@ -104,6 +106,7 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow: hidden;
+    pointer-events: none;
     @media only screen and (max-width: 768px){
       display: none;
     }
@@ -111,6 +114,7 @@
   
   .time{
     font-size: 1rem;
+    
   }
 
   .optionsButton{
@@ -126,7 +130,7 @@
     justify-content: center;
     padding-top: 5px;
     padding-bottom: 5px;
-    z-index: 9998 !important;
+    z-index: 299 !important;
   }
 
   .optionsButton:hover {
@@ -139,7 +143,7 @@
     background-color: var(--color-2) !important;
     border: black solid 1px !important;
     color:var(--color-text) !important;
-    z-index: 9999 !important;
+    z-index: 300 !important;
   }
 
   .menuItem{

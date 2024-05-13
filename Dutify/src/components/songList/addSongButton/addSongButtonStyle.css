@@ -1,0 +1,31 @@
+.addSongButton{
+    background-color: var(--color-1);
+    color:var(--color-text);
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: black var(--border) 1px;
+    margin-bottom: 10px;
+    transition-duration: 0.4s;
+    height: 50px;
+    width: 20%;
+    max-width: 100%;
+    align-items: center;
+    justify-self: center;
+    cursor: pointer;
+    user-select: none;
+
+    font-size: 1.2rem;
+  }
+  
+  .addSongButton:hover, .addSongButton:focus{
+    background-color: var(--color-2); 
+    transition-duration: 0.4s;
+    transform: scale(1.008);
+  }
+
+  .addSongIcon{
+    height: 50px;
+    width: 80%;
+  }

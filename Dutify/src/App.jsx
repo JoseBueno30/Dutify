@@ -1,6 +1,4 @@
 import TopBar from "./components/topBar/topBar";
-import { useState } from "react";
-import { useEffect } from "react";
 import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres";
@@ -88,7 +86,8 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          <RouterProvider router={router}></RouterProvider>
+          {/* <RouterProvider router={router}></RouterProvider> */}
+          <PlayList token={token}/>
           <MusicPlayer></MusicPlayer>
         </>
       )}

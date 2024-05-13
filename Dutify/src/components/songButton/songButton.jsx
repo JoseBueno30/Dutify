@@ -27,11 +27,11 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
-                                <div className="name">{name}</div>
-                                <div className="author">{artistName}</div>
+                                <div title={name} className="name">{name}</div>
+                                <div title={artistName} className="author">{artistName}</div>
                             </div>
-                            <div className='album col-2 '>{albumName}</div>
-                            <div className='time col-3 col-md-2'>{timeMIN}:{timeMS}</div>
+                            <div title={albumName} className='album col-2 '>{albumName}</div>
+                            <div className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options/>
                             </div>

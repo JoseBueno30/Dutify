@@ -6,6 +6,13 @@
     z-index: 90;
 }
 
+.emptyList{
+  color:var(--color-text);
+  justify-content: center;
+  margin: 10px;
+  font-size: 2rem;
+}
+
 ::-webkit-scrollbar {
     
     width: 5px;
