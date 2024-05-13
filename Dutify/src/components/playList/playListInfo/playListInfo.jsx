@@ -5,6 +5,7 @@ import PlayListPlayer from "./playListPlayer/playListPlayer";
 import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
+import { FcButtingIn } from "react-icons/fc";
 
 
 export default function PlayListInfo(){
@@ -21,7 +22,7 @@ export default function PlayListInfo(){
                 <p>X canciones</p>
                 <p>mm:ss</p>
             </div>
-            <PlayListPlayer className="playListPlayer"/>
+            <PlayListPlayer className="playListPlayer" />
         </div>
     );
 }
@@ -47,8 +48,8 @@ function Options({}){
             gap={6}
             align="start"
             transition>
-                                <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}>Cambiar nombre</MenuItem>
-                                <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}>Eliminar playlist</MenuItem>
+                                <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}><button>Cambiar nombre</button></MenuItem>
+                                <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar playlist</button></MenuItem>
                                 
                             </Menu>
     );

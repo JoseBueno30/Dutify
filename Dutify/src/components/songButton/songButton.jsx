@@ -20,10 +20,9 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
     }
 
     return(
-                <div tabIndex={0} className='songButton position-relative' onDoubleClick={songClickHandler}>
+                <div title={"Reproducir " + name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <img src={image} height={50} width={50} className="songImage position-absolute" ></img>
-                        <div className="songPlayButton"> <FaPlay/> </div>
+                        <div className="songPlayButton" style={{ backgroundImage:"url("+image+")" }}> <FaPlay className="playButton"/> </div>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>
@@ -70,17 +69,15 @@ function Options({}){
             menuClassName="optionsMenu"
             viewScroll="close"
             transition>
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={favoritesClickHandler}><button>Añadir a canciones favoritas</button></MenuItem>
                                     
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={eliminarClickHandler}>Eliminar de la playlist</MenuItem>
-                                
-                                <SubMenu tabIndex={"0"} itemProps={{className:menuItemClassName}} menuClassName="optionsMenu" label="Añadir a la lista">    
-                                        <MenuItem className={menuItemClassName}  onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                         <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                         <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                         <MenuDivider />
-                                         <MenuItem className={menuItemClassName} onClick={newListClickHandler}><button>Nueva Lista</button></MenuItem>
-                                     </SubMenu>                                
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar de la playlist</button></MenuItem>
+                                <MenuDivider />
+                                <MenuItem className={menuItemClassName}  onClick={listClickHandler}><button>Lista 1</button></MenuItem>
+                                <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
+                                <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
+                                <MenuDivider />
+                                <MenuItem className={menuItemClassName} onClick={newListClickHandler}><button>Nueva Lista</button></MenuItem>                          
                                 
                             </Menu>
     );

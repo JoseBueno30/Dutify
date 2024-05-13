@@ -36,8 +36,8 @@
   }
   
   .songPlayButton{
-    opacity: 0;
-    transition: .3s ease;
+    background-size: contain;
+    transition: .4s ease;
     height: 100%;
     aspect-ratio: 1/1;
     border-radius: 5px;
@@ -46,11 +46,20 @@
     align-items: center;
     z-index: 200;
   }
+
+  .playButton{
+    transition: .4s ease;
+    opacity: 0;
+  }
   
   .songButton:hover .songPlayButton,.songButton:focus .songPlayButton{
-    opacity: 1;
     transition: .4s ease;
-    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+  }
+
+  .songButton:hover .playButton,.songButton:focus .playButton{
+    transition: .4s ease;
+    opacity: 1;
   }
   
   .songButton .row{
@@ -145,5 +154,11 @@
 
   .subMenu:hover{
     background-color: var(--color-3);
+  }
+
+  button{
+    background: none;
+	  color: inherit;
+	  border: none;
   }
 
