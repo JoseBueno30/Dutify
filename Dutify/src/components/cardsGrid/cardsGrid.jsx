@@ -12,7 +12,7 @@ function CardsGrid({type, data, clickFunction}) {
 
     if (type === "genre") {
       gridList = cardData.map((genre) => (
-        <div className="col col_content" key={genre.key} onClick={clickFunction}>
+        <div id={genre.id} className="col col_content" key={genre.key} onClick={clickFunction}>
           <GenreCard
             id={genre.id}
             genreName={genre.genreName}

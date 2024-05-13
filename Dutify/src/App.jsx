@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres/genres";
-import Lists from "./components/locations/lists";
+import Lists from "./components/locations/lists/lists";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUserPlaylists } from "../../spotifyApi/SpotifyApiCalls";
-import CardsGrid from "../cardsGrid/cardsGrid";
+import { getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import CardsGrid from "../../cardsGrid/cardsGrid";
 
 function Lists({}) {
   const [lists, setLists] = useState([]);

@@ -16,9 +16,9 @@
   --color-jazz-2: hsl(123, 50%, 50%);
   --img-jazz: url("assets/genreImages/jazz-img.png");
 
-  --color-reggaeton: hsl(120, 50%, 50%);
-  --color-reggaeton-2: hsl(180, 50%, 50%);
-  --img-reggaeton: url("assets/genreImages/reggaeton-img.png");
+  --color-indie: hsl(120, 50%, 50%);
+  --color-indie-2: hsl(180, 50%, 50%);
+  --img-indie: url("assets/genreImages/indie-img.png");
 
   --color-flamenco: hsl(336, 50%, 50%);
   --color-flamenco-2: hsl(36, 50%, 50%);
@@ -52,9 +52,9 @@
   --color-anime-2: hsl(270, 50%, 50%);
   --img-anime: url("assets/genreImages/anime-img.png");
 
-  --color-trap: hsl(192, 50%, 50%);
-  --color-trap-2: hsl(252, 50%, 50%);
-  --img-trap: url("assets/genreImages/trap-img.png");
+  --color-alternativa: hsl(192, 50%, 50%);
+  --color-alternativa-2: hsl(252, 50%, 50%);
+  --img-alternativa: url("assets/genreImages/alternativa-img.png");
 
   --color-latino: hsl(336, 50%, 50%);
   --color-latino-2: hsl(36, 50%, 50%);
@@ -116,16 +116,16 @@
   background-image: var(--img-jazz);
 }
 
-.reggaeton {
+.indie {
   background: linear-gradient(
     to bottom,
-    var(--color-reggaeton),
-    var(--color-reggaeton-2)
+    var(--color-indie),
+    var(--color-indie-2)
   );
 }
 
-.reggaeton-img {
-  background-image: var(--img-reggaeton);
+.indie-img {
+  background-image: var(--img-indie);
 }
 
 .flamenco {
@@ -224,16 +224,16 @@
   background-image: var(--img-anime);
 }
 
-.trap {
+.alternativa {
   background: linear-gradient(
     to bottom,
-    var(--color-trap),
-    var(--color-trap-2)
+    var(--color-alternativa),
+    var(--color-alternativa-2)
   );
 }
 
-.trap-img {
-  background-image: var(--img-trap);
+.alternativa-img {
+  background-image: var(--img-alternativa);
 }
 
 .latino {
