@@ -4,6 +4,7 @@ import { BsX } from "react-icons/bs";
 import NavButton from "./navButton/navButton";
 import SearchBar from "./searchBar/searchBar";
 import ThemeSwitch from "./themeSwitch/themeSwitch";
+import HelpButton from "./helpButton/helpButton";
 import { useThemeContext } from "../../context/ThemeContext";
 import { BsList } from "react-icons/bs";
 import "./topBarStyle.css";
@@ -52,52 +53,46 @@ function TopBar() {
   };
 
   return (
-    <header
-      style={
-        contextTheme === "light"
-          ? { backgroundColor: "white" }
-          : { backgroundColor: "#4E4848" }
-      }
-      className="fixed-top topBar ps-2 pe-2"
-      id={contextTheme}
-    >
-      <div className={(navMenuOpen ? "flex-wrap" : "") + " d-flex position-relative h-100 align-items-center"}>
-        <button className="pt-1 m-2 btn btn-back btn-secondary" type="button">
-          {contextTheme === "light" ? (
-            <BiArrowBack color="black"></BiArrowBack>
-          ) : (
-            <BiArrowBack color="white"></BiArrowBack>
-          )}
+    <header className="fixed-top topBar ps-2 pe-2 " id={contextTheme}>
+      <div
+        className={
+          (navMenuOpen ? "flex-wrap" : "") +
+          " d-flex position-relative h-100 align-items-center"
+        }
+      >
+        <button className="m-2 btn-back" type="button">
+          <BiArrowBack size="27"/>
         </button>
-        <h1 className={"title mt-2 " + (searchBarOpen ? "d-none" : "")} id={contextTheme}>
-          DutyFy
+        <h1
+          className={"title mt-2 pb-1 " + (searchBarOpen ? "d-none" : "")}
+          id={contextTheme}
+        >
+          DutiFy
         </h1>
         <nav className={"navMenu me-auto"} id={contextTheme}>
-          <NavButton texto="Inicio" id={contextTheme}></NavButton>
-          <NavButton texto="Generos" id={contextTheme}></NavButton>
-          <NavButton texto="Listas" id={contextTheme}></NavButton>
+          <NavButton location={1} texto="Inicio" id={contextTheme}></NavButton>
+          <NavButton location={2} texto="Generos" id={contextTheme}></NavButton>
+          <NavButton location={3} texto="Listas" id={contextTheme}></NavButton>
         </nav>
         <div className="d-flex justify-content-between align-items-center">
+          <HelpButton visible={!searchBarOpen && !navMenuOpen} />
           <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
           <SearchBar isOpen={searchBarOpen}></SearchBar>
 
           <button
             id="searchButton"
             className={
-              "mobile-btn list-group-item" +
+              "mobile-btn list-group-item icon-style div-toogle" +
               (navMenuOpen || searchBarOpen ? " d-none" : "")
             }
             onClick={toggleSearchBar}
           >
-            {contextTheme === "light" ? (
-              <BiSearch size={35} color="black"></BiSearch>
-            ) : (
-              <BiSearch size={35} color="white"></BiSearch>
-            )}
+            <BiSearch size={35} />
           </button>
           <button
             className={
-              "mobile-btn list-group-item " + (searchBarOpen ? "position-absolute start-0 ms-1" : "")
+              "mobile-btn list-group-item " +
+              (searchBarOpen ? "position-absolute start-0 ms-1" : "")
             }
             onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
           >

@@ -2,7 +2,8 @@
   display: inline-block;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.1px;
+  font-weight: 600;
   padding: 2.5px 15px 5px 15px;
   margin-left: 15px;
   cursor: pointer;
@@ -13,23 +14,24 @@
 }
 
 .navButton:hover{
-  text-shadow: 0 0 2px;
-  background-color: #5383E8;
-  transform: scale(1.05);
+  background-color: var(--color-theme);
   transition: 0.25s ease;
 }
 
-
-
-#light .navButton{
-  color: rgb(0, 0, 0);
+.currentLocation{
+  background-color: #5382e86b;
 }
 
-#dark .navButton{
-  color: white;
+.navButton:active{
+  scale: 0.95;
+  transition: 0.1s ease;
 }
 
-@media only screen and (max-width: 850px){
+.navButton{
+  color: var(--color-text);
+}
+
+@media only screen and (max-width: 920px){
   .navButton{
     margin: 0px 0px 10px 0px;
     transform: translateX(0%);
