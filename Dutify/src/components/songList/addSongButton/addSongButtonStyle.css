@@ -7,14 +7,18 @@
     border-radius: 5px;
     border: black var(--border) 1px;
     margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 10px;
     transition-duration: 0.4s;
     height: 50px;
-    width: 20%;
+    width:fit-content;
     max-width: 100%;
     align-items: center;
     justify-self: center;
     cursor: pointer;
     user-select: none;
+
+    white-space:nowrap;
 
     font-size: 1.2rem;
   }
