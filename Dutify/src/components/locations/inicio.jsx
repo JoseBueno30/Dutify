@@ -25,6 +25,7 @@ function Inicio({token}){
     return (
         <section style={{backgroundColor : 'var(--color-backgroud)' 
                 , width : '100%'
+                , height: '100%'
                 , display: 'flex'
                 , flexDirection: 'column'
                 , gap: '30px'

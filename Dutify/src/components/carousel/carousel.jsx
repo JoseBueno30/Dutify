@@ -5,6 +5,10 @@ import right_arrow from './right_arrow.svg';
 function Carousel({ name, id, lista }) {
   const button_target = `#${id}`;
 
+  const ClickHandler = (id) => {
+    window.location.href = "/listas/playlist?id=" + id;
+  }
+
   return (
     <section className='carrusel-container'>
       <div className='carrusel-box'>
@@ -13,7 +17,8 @@ function Carousel({ name, id, lista }) {
           <div className="carousel-inner">
             {lista.map((playlist, index) => (
               <div key={playlist.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                <img className="d-block img-fluid" src={playlist.imageUrl} alt={playlist.description} />
+                <img className="d-block img-fluid" src={playlist.imageUrl} alt={playlist.description} 
+                onClick={()=>{ClickHandler(playlist.id)}} />
                 <div className="carousel-caption d-md-block fw-bolder carrusel-caja-texto">
                   <p className='carrusel-texto fs-10'>
                     {playlist.name}
