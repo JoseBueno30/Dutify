@@ -43,7 +43,9 @@ const getPlayList = async (playlistId) => {
   let playlist;
   try{
     playlist = await spotifyApiObject.getPlaylist(playlistId);
-  }catch(error){}
+  }catch(error){
+    playlist=null;
+  }
  
   return playlist;
 };
@@ -60,7 +62,6 @@ const getTracksFromPlaylist = async (playlist) =>{
 
     tracks = tracks.concat(moreTracks);
   }
-  console.log(tracks);
   return tracks;
 }
 
@@ -107,7 +108,7 @@ const addTrackToPlayList = async (track, playList) => {
   console.log(playList.id);
   console.log([track.uri]);
   try{
-    await spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
+    spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
   }catch(error){
     console.error("ERROR: ", error);
   }  
