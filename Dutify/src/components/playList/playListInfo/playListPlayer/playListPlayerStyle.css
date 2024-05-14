@@ -1,6 +1,11 @@
+.playListPlayerContainer{
+    width: 100%;
+}
+
 .arrowCross, .arrowLoop{
     color: var(--color-theme);
-    height: 7vh;
+    height: 35%;
+    aspect-ratio: 1;
     transition: 0.3s;
     cursor: pointer;
 }
@@ -10,29 +15,29 @@
     width: 100%;
 }
 
-.arrowCross:hover, .arrowLoop:hover, .play:hover{
+.arrowCross:hover, .arrowLoop:hover{ 
     transform: scale(1.1);
     transition: 0.3s;
 }
 
 .playListButton .play{
-    height: 8vh;
-    width: 8vh;
-    margin-left: 1.25vh;
-    transition: 0.5s;
+    height: 60%;
+    width: 60%;
+    aspect-ratio: 1;
+    margin-left: 10%;
     cursor: pointer;
 }
 
 .playListButtonAnimated .play{
-    height: 8vh;
-    width: 8vh;
-    transition: 0.5s;
+    height: 60%;
+    width: 60%;
+    aspect-ratio: 1;
     cursor: pointer;
 }
 
 .playListButton{
-    width: 18vmin;
-    height: 18vmin;
+    width: 30%;
+    aspect-ratio: 1;
     border-radius: 50%;
     border: black solid 1px;
     display: flex;
@@ -40,12 +45,12 @@
     align-items: center;
     background-color: var(--color-1);
     color:var(--color-theme);
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .playListButtonAnimated{
-    width: 18vmin;
-    height: 18vmin;
+    width: 30%;
+    aspect-ratio: 1;
     border-radius: 50%;
     border: black solid 1px;
     display: flex;
@@ -53,8 +58,20 @@
     align-items: center;
     background-color: var(--color-1);
     color:var(--color-theme);
-    transition: 0.5s;
-    animation: playListButton-animation 1.6s infinite both;
+    transition: 0.3s;
+    animation: playListButton-animation 2s linear infinite;
+}
+
+.playListButton:hover{
+    background-color: var(--color-2);
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.playListButtonAnimated:hover{
+    background-color: var(--color-2);
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 
 @media only screen and (max-width: 1199px){

@@ -3,8 +3,10 @@
   background-color: var(--color-1);
   color: var(--color-text);
   height: 10vh;
+  min-height: 6.5rem;
   position: sticky;
   border-top: solid var(--color-background);
+  z-index: 300;
 }
 
 .music-container {
