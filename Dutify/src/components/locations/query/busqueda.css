@@ -1,0 +1,18 @@
+.busqueda-wrapper {
+    background-color: var(--color-background);
+    height: 80vh;
+}
+
+.busqueda {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 768px) {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+}
+
+.no-result {
+    color: var(--color-text)
+}

@@ -10,6 +10,7 @@ import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
+import SearchResults from "./components/locations/query/busquedas";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -50,7 +51,7 @@ function App() {
     },
     {
       path: "/busqueda",
-      element: <></>
+      element: <SearchResults/>
     }
   ])
 

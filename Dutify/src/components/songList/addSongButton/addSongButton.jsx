@@ -12,7 +12,7 @@ export default function AddSongButton({name, artistName, albumName, image, time_
 
     const addSongClickHandler = (e) => {
         console.log("Añadir cancion");
-        window.location.href = "/listas/busqueda";
+        window.location.href = "/busqueda?query=";
     }
 
     return(

@@ -11,10 +11,11 @@ export default function SongList({tracks, playlistId}) {
     const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
+      console.log(tracks);
         async function getUserPlayLists() {
             try{
-              console.log(tracks);
-                setUserPlayLists(await getUserOwnedPlaylists());
+                const playLists = await getUserOwnedPlaylists()
+                setUserPlayLists(playLists);
             }catch(error){
                 console.error("ERROR: ", error);
             }
@@ -30,7 +31,8 @@ export default function SongList({tracks, playlistId}) {
     <div className="list container-fluid ">
       {tracks.length>0 ? (<SongInfo/>) : (<></>)}
       
-      {tracks.length>0 ? (
+      {/* PARA PLAYLIST */}
+      {tracks.length>0 && playlistId ? (
           tracks.map((track) => (
             track.track !== null ? <SongButton
             key={track.track.id}
@@ -40,8 +42,22 @@ export default function SongList({tracks, playlistId}) {
           /> : <></>
           ))
       ) : (
-        <div className="emptyList d-flex justify-content-center">No hay canciones en esta PlayList</div>
+        <></>
       )}
+      {/* PARA BUSQUEDA */}
+      {tracks.length>0 && !playlistId ? (
+          tracks.map((track) => (
+            track !== null ? <SongButton
+            key={track.id}
+            track={track}
+            playLists={userPlayLists}
+          /> : <></>
+          ))
+      ) : ( <></>
+      )}
+      {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay canciones en esta PlayList</div> : <></>}
+      {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+
       {playlistId?
       <div className="d-flex justify-content-center"><AddSongButton/></div>
       :null}
