@@ -8,19 +8,23 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import { FcButtingIn } from "react-icons/fc";
 
 
-export default function PlayListInfo(){
+export default function PlayListInfo({playList}){
+
+    const timeMIN = Math.trunc(playList.duration_ms/60000);
+    const timeMS = Math.trunc((playList.duration_ms/1000)%60);
+
     return(
         <div className="playListInfoContainer d-flex flex-column container-fluid">
             <div className='d-flex justify-content-xl-evenly  justify-content-center align-items-center '>
-                <p className="playListName ">ListaDeReproduccion</p>
-                <Options/>
-            </div>
-            <div className="playListImage">
+                <p title={playList.name} className="playListName ">{playList.name}</p>
                 
             </div>
+            {playList.images?
+            <img className="playListImage" src={playList.images[0].url}></img>
+            :<div className="playListImage"></div>}
             <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-                <p>X canciones</p>
-                <p>mm:ss</p>
+                <p>{playList.tracks.total + " canciones"}</p>
+                <Options/>
             </div>
             <PlayListPlayer className="playListPlayer" />
         </div>

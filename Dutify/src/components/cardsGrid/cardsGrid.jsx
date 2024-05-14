@@ -6,6 +6,12 @@ import AddCard from "./cards/addCard/addCard";
 import "./cardsGridStyle.css";
 
 function CardsGrid({type, data}) {
+
+    const listButtonClickHandler = (e) => {
+      const key = e.currentTarget.getAttribute("id");
+      window.location.href = "listas/playlist?playlistId=" + key;
+    }
+
   const gridElements = () => {
     let gridList = [];
     const cardData = data
@@ -21,7 +27,7 @@ function CardsGrid({type, data}) {
       ));
     } else if (type === "list" || type === "recentLists") {
       gridList = data.map((playlist) => (
-        <div className="col col_content" key={playlist.id}>
+        <div className="col col_content" key={playlist.id} onClick={listButtonClickHandler} id={playlist.id}>
           <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
         </div>
       ));
