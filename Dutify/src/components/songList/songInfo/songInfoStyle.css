@@ -21,4 +21,5 @@
   .timeInfo{
     font-size: 0.75rem;
     margin-top: 3px;
+    cursor:default;
   }

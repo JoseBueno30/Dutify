@@ -16,13 +16,27 @@ const getUserId = async () => {
   return data.id;
 }
 
-const getUserPlaylists = async (token) => {
+const getUser = async() => {
+  const user = await spotifyApiObject.getMe();
+  return user;
+}
+
+const getUserPlaylists = async () => {
   //spotifyApiObject.setAccessToken(token);
   const data = await spotifyApiObject.getUserPlaylists();
-
   const playlists = mapPlaylistObject(data);
 
   return playlists;
+};
+
+const getUserOwnedPlaylists = async () => {
+  const data = await spotifyApiObject.getUserPlaylists();
+  const user = await getUser();
+  const playlists = mapPlaylistObject(data);
+
+  const ownedPlaylists = playlists.filter((playList) => playList.owner.id == user.id)
+
+  return ownedPlaylists;
 };
 
 const getCategoriesID = () =>{
@@ -64,4 +78,4 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, createPlaylist};
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists,  createPlaylist};
