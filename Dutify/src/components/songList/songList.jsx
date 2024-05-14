@@ -34,11 +34,7 @@ export default function SongList({token, tracks}) {
           tracks.map((track) => (
             <SongButton
               key={track.id}
-              name={track.name}
-              artistName={track.artists[0].name}
-              albumName={track.album.name}
-              image={track.album.images[2].url}
-              time_ms={track.duration_ms}
+              track={track}
               playLists={userPlayLists}
             />
           ))

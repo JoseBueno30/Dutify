@@ -6,34 +6,35 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
+import { addTrackToPlayList } from "../../spotifyApi/SpotifyApiCalls";
 
 
-export default function SongButton({name, artistName, albumName, image, time_ms, playLists}){
+export default function SongButton({track, playLists}){
     const {contextTheme, setContextTheme} = useThemeContext()
     const [isPlaying, setPlaying] = useState(false);
 
-    const timeMIN = Math.trunc(time_ms/60000);
-    const timeMS = Math.trunc((time_ms/1000)%60);
+    const timeMIN = Math.trunc(track.duration_ms/60000);
+    const timeMS = Math.trunc((track.duration_ms/1000)%60);
 
     const songClickHandler = (e) => {
         setPlaying(!isPlaying);
     }
 
     return(
-                <div title={"Reproducir " + name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
+                <div title={"Reproducir " + track.name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <div className="songPlayButton" style={{ backgroundImage:"url("+image+")" }}> <FaPlay className="playButton"/> </div>
+                        <div className="songPlayButton" style={{ backgroundImage:"url("+track.album.images[2].url+")" }}> <FaPlay className="playButton"/> </div>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
-                                <div title={name} className="name">{name}</div>
-                                <div title={artistName} className="author">{artistName}</div>
+                                <div title={track.name} className="name">{track.name}</div>
+                                <div title={track.artists[0].name} className="author">{track.artists[0].name}</div>
                             </div>
-                            <div title={albumName} className='album col-2 '>{albumName}</div>
+                            <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
-                                <Options playLists={playLists}/>
+                                <Options track={track} playLists={playLists}/>
                             </div>
                         </div>
                     </div>
@@ -42,7 +43,7 @@ export default function SongButton({name, artistName, albumName, image, time_ms,
     );
 }
 
-function Options({playLists}){
+function Options({track, playLists}){
 
     const favoritesClickHandler = (e) => {
         
@@ -53,6 +54,9 @@ function Options({playLists}){
     }
 
     const listClickHandler = (playList) => {
+        console.log(track);
+        console.log(playList);
+        addTrackToPlayList(track, playList);
     }
 
     const newListClickHandler = (e) => {
@@ -74,7 +78,7 @@ function Options({playLists}){
 
                                 {playLists ?
                                     playLists.map((playList) => (
-                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playList.name} onClick={listClickHandler(playList)} key={playList.id}><button>Añadir a {playList.name}</button></MenuItem>
+                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playList.name} onClick={() => listClickHandler(playList)} key={playList.id}><button>Añadir a {playList.name}</button></MenuItem>
                                     ))
                                 : <></>
                                 }

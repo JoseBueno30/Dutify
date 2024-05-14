@@ -61,4 +61,21 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists };
+const addTrackToPlayList = async (track, playList) => {
+  console.log(playList.id);
+  console.log([track.uri]);
+  try{
+
+    await spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
+  }catch(error){
+    console.error("ERROR: ", error);
+  }
+  
+}
+
+const addTrackCallBack = (errorObject, succedValue) =>{
+  console.log(errorObject);
+  console.log(succedValue);
+}
+
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList };
