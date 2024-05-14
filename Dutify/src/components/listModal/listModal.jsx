@@ -20,7 +20,7 @@ function ListModal({ ListName, apiCall}) {
   const clickHandler = () => {
     apiCall(listName, listPublic)
       .then((id) => {
-        window.location.href = "/listas/playlists?id=" + id;
+        window.location.href = "/listas/playlist?id=" + id;
       })
       .catch((error) => {
         console.error(error);

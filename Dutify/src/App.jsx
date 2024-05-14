@@ -45,8 +45,8 @@ function App() {
       element: <Lists token={token}></Lists>
     },
     {
-      path: "/listas/playlists",
-      element: <PlayList token={token} playlistId={new URLSearchParams(window.location.search).get("id")} />
+      path: "/listas/playlist",
+      element: <PlayList token={token}/>
     }
   ])
 
