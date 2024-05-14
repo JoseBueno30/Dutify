@@ -18,7 +18,13 @@ function ListModal({ ListName, apiCall}) {
   };
 
   const clickHandler = () => {
-    apiCall(listName, listPublic);
+    apiCall(listName, listPublic)
+      .then((id) => {
+        window.location.href = "/listas/playlists?id=" + id;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
     
   return (

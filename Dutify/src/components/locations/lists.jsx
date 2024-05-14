@@ -13,7 +13,8 @@ function Lists({token}) {
 
   const crearPlaylist = async (nameList,publicList) =>{
     const data = await createPlaylist(nameList,publicList);
-    console.log(data);
+    
+    return data.id;
   }
 
   useEffect(() => {
