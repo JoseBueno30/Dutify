@@ -1,3 +1,6 @@
 .playList{
-    transition-duration: 0.4s;
+    overflow-x: hidden;
+    height : 82.24vh;
+    min-width: 300px;
+    min-height: 580px;
 }

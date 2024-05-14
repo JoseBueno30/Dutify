@@ -1,6 +1,4 @@
 import TopBar from "./components/topBar/topBar";
-import { useState } from "react";
-import { useEffect } from "react";
 import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres";
@@ -9,9 +7,9 @@ import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
-import MusicPlayer from "./components/musicPlayer/musicPlayer";
-import SongList from "./components/songList/songList";
+import { useEffect, useState } from "react";
 import PlayList from "./components/playList/playList";
+import MusicPlayer from "./components/musicPlayer/musicPlayer"
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -47,11 +45,7 @@ function App() {
       element: <Lists token={token}></Lists>
     },
     {
-      path: "/listas/playlist",
-      element: <PlayList token={token}></PlayList>
-    },
-    {
-      path: "/listas/playlist",
+      path: "/listas/playlists",
       element: <PlayList token={token} playlistId={new URLSearchParams(window.location.search).get("id")} />
     }
   ])
@@ -96,7 +90,7 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          <RouterProvider router={router}></RouterProvider>
+          <RouterProvider router={router}></RouterProvider> 
           <MusicPlayer></MusicPlayer>
         </>
       )}
