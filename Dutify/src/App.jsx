@@ -8,7 +8,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
-import "./App.css";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
 
@@ -44,6 +43,10 @@ function App() {
     {
       path: "/listas",
       element: <Lists token={token}></Lists>
+    },
+    {
+      path: "/listas/playlist",
+      element: <PlayList token={token}/>
     }
   ])
 
@@ -69,6 +72,7 @@ function App() {
     "user-modify-playback-state",
     "app-remote-control",
     "playlist-modify-public",
+    "playlist-modify-private",
     "playlist-read-private",
     "playlist-read-collaborative",
     "user-top-read",
@@ -86,8 +90,7 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          {/* <RouterProvider router={router}></RouterProvider> */}
-          <PlayList token={token}/>
+          <RouterProvider router={router}></RouterProvider> 
           <MusicPlayer></MusicPlayer>
         </>
       )}
