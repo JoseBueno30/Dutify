@@ -8,7 +8,7 @@ import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
 
 
-export default function SongButton({name, artistName, albumName, image, time_ms}){
+export default function SongButton({name, artistName, albumName, image, time_ms, playLists}){
     const {contextTheme, setContextTheme} = useThemeContext()
     const [isPlaying, setPlaying] = useState(false);
 
@@ -31,9 +31,9 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
                                 <div title={artistName} className="author">{artistName}</div>
                             </div>
                             <div title={albumName} className='album col-2 '>{albumName}</div>
-                            <div className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
+                            <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
-                                <Options/>
+                                <Options playLists={playLists}/>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ export default function SongButton({name, artistName, albumName, image, time_ms}
     );
 }
 
-function Options({}){
+function Options({playLists}){
 
     const favoritesClickHandler = (e) => {
         
@@ -52,8 +52,7 @@ function Options({}){
         
     }
 
-    const listClickHandler = (e) => {
-        
+    const listClickHandler = (playList) => {
     }
 
     const newListClickHandler = (e) => {
@@ -65,19 +64,23 @@ function Options({}){
 
     return(
         <Menu 
-            menuButton={<MenuButton tabIndex={0} className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuButton={<MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
             transition>
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={favoritesClickHandler}><button>Añadir a canciones favoritas</button></MenuItem>
-                                    
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar de la playlist</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={favoritesClickHandler}><button>Añadir a canciones favoritas</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={eliminarClickHandler}><button>Eliminar de la playlist</button></MenuItem>
                                 <MenuDivider />
-                                <MenuItem className={menuItemClassName}  onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
-                                <MenuItem className={menuItemClassName} onClick={listClickHandler}><button>Lista 1</button></MenuItem>
+
+                                {playLists ?
+                                    playLists.map((playList) => (
+                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playList.name} onClick={listClickHandler(playList)} key={playList.id}><button>Añadir a {playList.name}</button></MenuItem>
+                                    ))
+                                : <></>
+                                }
+                                
                                 <MenuDivider />
-                                <MenuItem className={menuItemClassName} onClick={newListClickHandler}><button>Nueva Lista</button></MenuItem>                          
+                                <MenuItem className={menuItemClassName} title={"Añadir a nueva playlist"} onClick={newListClickHandler}><button>Añadir a nueva playlist</button></MenuItem>                          
                                 
                             </Menu>
     );

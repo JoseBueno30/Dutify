@@ -2,25 +2,24 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import SongButton from "../songButton/songButton";
 import "./songListStyle.css";
-import { SpotifyWebAPI } from "../../SpotifyWebAPI/SpotifyWebAPI";
+
 import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
+import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
-export default function SongList({token}) {
-    const [topTracks, setTopTracks] = useState("");
+export default function SongList({token, tracks}) {
+    const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
-        async function obtenerDatos() {
+        async function getUserPlayLists() {
             try{
-                const spotify = new SpotifyWebAPI(token);
-                const tracks = await spotify.getTopTracks(20);
-                setTopTracks();
-                console.log(tracks);
+                setUserPlayLists(await getUserOwnedPlaylists(token));
             }catch(error){
                 console.error("ERROR: ", error);
             }
         }
-        obtenerDatos();
+        // console.log(userPlayLists);
+        getUserPlayLists();
     }, []);
 
     
@@ -29,10 +28,10 @@ export default function SongList({token}) {
 
   return (
     <div className="list container-fluid ">
-      {topTracks ? (<SongInfo/>) : (<></>)}
+      {tracks ? (<SongInfo/>) : (<></>)}
       
-      {topTracks ? (
-          topTracks.map((track) => (
+      {tracks ? (
+          tracks.map((track) => (
             <SongButton
               key={track.id}
               name={track.name}
@@ -40,6 +39,7 @@ export default function SongList({token}) {
               albumName={track.album.name}
               image={track.album.images[2].url}
               time_ms={track.duration_ms}
+              playLists={userPlayLists}
             />
           ))
       ) : (
