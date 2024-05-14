@@ -41,7 +41,7 @@ const mapPlaylistObject = (data) => {
     owner: playlist.owner,
     public: playlist.public,
     totalTracks: playlist.tracks.total,
-    imageUrl: playlist.images[0] ? playlist.images[0].url : null,
+    imageUrl: (playlist.images && playlist.images.length > 0) ? playlist.images[0].url : null,
   }));
 
   return playlists;
