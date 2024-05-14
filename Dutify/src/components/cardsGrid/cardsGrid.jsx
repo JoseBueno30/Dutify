@@ -28,7 +28,7 @@ function CardsGrid({type, data}) {
       if (type === "list") {
         gridList.push(
           <div className="col col_content" key={100}>
-            <AddCard>Nueva lista</AddCard>
+            <AddCard type={'playlist'}/>
           </div>
         );
       }
@@ -38,7 +38,7 @@ function CardsGrid({type, data}) {
   };
 
   return (
-    <div className="container-fluid" id="cards_container">
+    <div className="container-fluid pt-3 pb-3" id="cards_container">
         <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
             {gridElements()}
         </div>

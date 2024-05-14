@@ -1,77 +1,92 @@
 import React from "react";
 import { useState } from "react";
-import { FaEllipsisVertical, FaPlay } from "react-icons/fa6";
-import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
+import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
+import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
+import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 
 
-export default function SongButton({name, artistName, albumName, image, time_ms}){
+export default function SongButton({track, playLists, playlistId}){
     const {contextTheme, setContextTheme} = useThemeContext()
+    const [isPlaying, setPlaying] = useState(false);
 
-    const timeMIN = Math.trunc(time_ms/60000);
-    const timeMS = Math.trunc((time_ms/1000)%60);
+    const timeMIN = Math.trunc(track.duration_ms/60000);
+    const timeMS = Math.trunc((track.duration_ms/1000)%60);
 
     const songClickHandler = (e) => {
+        setPlaying(!isPlaying);
     }
 
     return(
-            <div>
-                <div className='songButton' onDoubleClick={songClickHandler}>
+                <div title={"Reproducir " + track.name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <img src={image} height={50} width={50} className="playContainer" ></img>
+                        <div className="songPlayButton" style={{ backgroundImage:"url("+track.album.images[2].url+")" }}> <FaPlay className="playButton"/> </div>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>
-                            <div className='col ms-3 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
-                                <div className="name">{name}</div>
-                                <div className="author">{artistName}</div>
+                            <div className='nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center'>
+                                <div title={track.name} className="name">{track.name}</div>
+                                <div title={track.artists[0].name} className="author">{track.artists[0].name}</div>
                             </div>
-                            <div className='album col'>{albumName}</div>
-                            <div className='time col-3 col-md-2'>{timeMIN}:{timeMS}</div>
+                            <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
+                            <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
-                                <Options/>
+                                <Options track={track} playLists={playLists} playlistId={playlistId}/>
                             </div>
                         </div>
                     </div>
                     
                 </div>
-            </div>
     );
 }
 
-function Options({}){
+function Options({track, playLists, playlistId}){
 
     const favoritesClickHandler = (e) => {
-        
+        addTrackToFavorites(track);
     }
 
-    const listClickHandler = (e) => {
-        
+    const eliminarClickHandler = (playlistId) => {
+        removeTrackFromPlayList(track, playlistId);
+    }
+
+    const listClickHandler = (playList) => {
+        console.log(track);
+        console.log(playList);
+        addTrackToPlayList(track, playList);
     }
 
     const newListClickHandler = (e) => {
         
     }
 
-
+    const menuItemClassName = ({ hover }) =>
+        hover ? 'menuItemHover' : 'menuItem';
 
     return(
         <Menu 
-            menuButton={<MenuButton className={"optionsButton"}><FaEllipsisVertical className="options"/></MenuButton>} 
+            menuButton={<MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
+            position="auto"
             transition>
-                                <MenuItem onClick={favoritesClickHandler}>Añadir a canciones favoritas</MenuItem>
-                                <SubMenu menuClassName="optionsMenu" label="Añadir a la lista">
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
-                                    <MenuItem onClick={listClickHandler}>Lista 1</MenuItem>
-                                    <MenuDivider />
-                                    <MenuItem onClick={newListClickHandler}>Nueva Lista</MenuItem>
-                                </SubMenu>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={() => favoritesClickHandler()}><button>Añadir a canciones favoritas</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={() => eliminarClickHandler(playlistId)}><button>Eliminar de la playlist</button></MenuItem>
+                                <MenuDivider />
+
+                                {playLists ?
+                                    playLists.map((playList) => (
+                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playList.name} onClick={() => listClickHandler(playList)} key={playList.id}><button>Añadir a {playList.name}</button></MenuItem>
+                                    ))
+                                : <></>
+                                }
+                                
+                                <MenuDivider />
+                                <MenuItem className={menuItemClassName} title={"Añadir a nueva playlist"} onClick={newListClickHandler}><button>Añadir a nueva playlist</button></MenuItem>                          
+                                
                             </Menu>
     );
 }

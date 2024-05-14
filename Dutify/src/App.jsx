@@ -1,6 +1,4 @@
 import TopBar from "./components/topBar/topBar";
-import { useState } from "react";
-import { useEffect } from "react";
 import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres";
@@ -10,7 +8,9 @@ import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
-import MusicPlayer from "./components/musicPlayer/musicPlayer";
+import { useEffect, useState } from "react";
+import PlayList from "./components/playList/playList";
+import MusicPlayer from "./components/musicPlayer/musicPlayer"
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -44,6 +44,10 @@ function App() {
     {
       path: "/listas",
       element: <Lists token={token}></Lists>
+    },
+    {
+      path: "/listas/playlist",
+      element: <PlayList token={token}/>
     }
   ])
 
@@ -69,6 +73,7 @@ function App() {
     "user-modify-playback-state",
     "app-remote-control",
     "playlist-modify-public",
+    "playlist-modify-private",
     "playlist-read-private",
     "playlist-read-collaborative",
     "user-top-read",
@@ -86,7 +91,8 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          <RouterProvider router={router}></RouterProvider>
+          {/* <RouterProvider router={router}></RouterProvider> */}
+          <PlayList playListId={"0DlbfH4tUyObSa59Bb8L85"}/>
           <MusicPlayer></MusicPlayer>
         </>
       )}

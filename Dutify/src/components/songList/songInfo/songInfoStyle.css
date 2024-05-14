@@ -1,0 +1,25 @@
+.songInfo{
+    background-color: var(--color-3);
+    color:var(--color-text);
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    border: black var(--border) 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition-duration: 0.4s;
+    height: 35px;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    padding-left: 50px;
+    z-index: 420;
+  }
+
+  .timeInfo{
+    font-size: 0.75rem;
+    margin-top: 3px;
+    cursor:default;
+  }
