@@ -7,14 +7,18 @@ import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiC
 
 
 
-export default function PlayList({playListId}){
+export default function PlayList({}){
     const [playList, setPlayList] = useState();
     const [tracks, setTracks] = useState();
+    
+
 
     useEffect(()=>{
         async function loadPlayList() {
+            const searchParams = new URLSearchParams(location.search);
+            const playlistId = searchParams.get('playlistId');
             try{
-                const playList = await getPlayList(playListId);
+                const playList = await getPlayList(playlistId);
                 setPlayList(playList);
                 setTracks(await getTracksFromPlaylist(playList));
                 console.log(playList);

@@ -46,7 +46,7 @@ function App() {
     },
     {
       path: "/listas/playlist",
-      element: <PlayList token={token}/>
+      element: <PlayList/>
     },
     {
       path: "/busqueda",
@@ -94,8 +94,7 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          {/* <RouterProvider router={router}></RouterProvider> */}
-          <PlayList playListId={"0DlbfH4tUyObSa59Bb8L85"}/>
+          <RouterProvider router={router}></RouterProvider>
           <MusicPlayer></MusicPlayer>
         </>
       )}
