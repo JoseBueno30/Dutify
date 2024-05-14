@@ -3,30 +3,38 @@ import { useState } from "react";
 import SongList from "../songList/songList";
 import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
-import { SpotifyWebAPI } from "../../SpotifyWebAPI/SpotifyWebAPI";
+import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 
 
 
-export default function PlayList({token}){
-    const [topTracks, setTopTracks] = useState("");
+export default function PlayList({playListId}){
+    const [playList, setPlayList] = useState();
+    const [tracks, setTracks] = useState();
 
     useEffect(()=>{
-        async function obtenerDatos() {
+        async function loadPlayList() {
             try{
-                const spotify = new SpotifyWebAPI(token);
-                const tracks = await spotify.getTopTracks(20);
-                setTopTracks(tracks);
+                const playList = await getPlayList(playListId);
+                setPlayList(playList);
+                setTracks(await getTracksFromPlaylist(playList));
+                console.log(playList);
+                // console.log(tracks);
             }catch(error){
                 console.error("ERROR: ", error);
             }
         }
-        obtenerDatos();
+        loadPlayList();
     }, []);
 
     return(
         <div className="playList d-flex flex-column flex-xl-row-reverse">
-            <PlayListInfo />
-            <SongList token={token} tracks={topTracks}/>
+            {playList?(
+                <>
+                    <PlayListInfo playList={playList}/>
+                    <SongList tracks={tracks} playlistId={playList.id}/>
+                </>
+            ):
+            <></>}
         </div>
     );
 }

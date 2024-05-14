@@ -87,7 +87,7 @@ function App() {
         <>
           <TopBar></TopBar>
           {/* <RouterProvider router={router}></RouterProvider> */}
-          <PlayList token={token}/>
+          <PlayList playListId={"0DlbfH4tUyObSa59Bb8L85"}/>
           <MusicPlayer></MusicPlayer>
         </>
       )}

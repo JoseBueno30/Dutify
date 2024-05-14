@@ -6,10 +6,10 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
-import { addTrackToPlayList } from "../../spotifyApi/SpotifyApiCalls";
+import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 
 
-export default function SongButton({track, playLists}){
+export default function SongButton({track, playLists, playlistId}){
     const {contextTheme, setContextTheme} = useThemeContext()
     const [isPlaying, setPlaying] = useState(false);
 
@@ -34,7 +34,7 @@ export default function SongButton({track, playLists}){
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
-                                <Options track={track} playLists={playLists}/>
+                                <Options track={track} playLists={playLists} playlistId={playlistId}/>
                             </div>
                         </div>
                     </div>
@@ -43,14 +43,14 @@ export default function SongButton({track, playLists}){
     );
 }
 
-function Options({track, playLists}){
+function Options({track, playLists, playlistId}){
 
     const favoritesClickHandler = (e) => {
-        
+        addTrackToFavorites(track);
     }
 
-    const eliminarClickHandler = (e) => {
-        
+    const eliminarClickHandler = (playlistId) => {
+        removeTrackFromPlayList(track, playlistId);
     }
 
     const listClickHandler = (playList) => {
@@ -71,9 +71,10 @@ function Options({track, playLists}){
             menuButton={<MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
             menuClassName="optionsMenu"
             viewScroll="close"
+            position="auto"
             transition>
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={favoritesClickHandler}><button>Añadir a canciones favoritas</button></MenuItem>
-                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={eliminarClickHandler}><button>Eliminar de la playlist</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={() => favoritesClickHandler()}><button>Añadir a canciones favoritas</button></MenuItem>
+                                <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={() => eliminarClickHandler(playlistId)}><button>Eliminar de la playlist</button></MenuItem>
                                 <MenuDivider />
 
                                 {playLists ?

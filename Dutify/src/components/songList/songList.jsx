@@ -7,18 +7,17 @@ import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
 import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
-export default function SongList({token, tracks}) {
+export default function SongList({tracks, playlistId}) {
     const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
         async function getUserPlayLists() {
             try{
-                setUserPlayLists(await getUserOwnedPlaylists(token));
+                setUserPlayLists(await getUserOwnedPlaylists());
             }catch(error){
                 console.error("ERROR: ", error);
             }
         }
-        // console.log(userPlayLists);
         getUserPlayLists();
     }, []);
 
@@ -32,11 +31,12 @@ export default function SongList({token, tracks}) {
       
       {tracks ? (
           tracks.map((track) => (
-            <SongButton
-              key={track.id}
-              track={track}
-              playLists={userPlayLists}
-            />
+            track.track !== null ? <SongButton
+            key={track.track.id}
+            track={track.track}
+            playlistId = {playlistId}
+            playLists={userPlayLists}
+          /> : <></>
           ))
       ) : (
         <div className="emptyList d-flex justify-content-center">No hay canciones en esta PlayList</div>

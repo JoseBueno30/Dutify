@@ -33,6 +33,31 @@ const getUserOwnedPlaylists = async () => {
   return ownedPlaylists;
 };
 
+const getPlayList = async (playlistId) => {
+  let playlist;
+  try{
+    playlist = await spotifyApiObject.getPlaylist(playlistId);
+  }catch(error){}
+ 
+  return playlist;
+};
+
+const getTracksFromPlaylist = async (playlist) =>{
+  let next = playlist.tracks.next;
+  let tracks = playlist.tracks.items.map((item) => ({track: item.track}));
+
+  while(next !== null){
+    let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
+    next = moreTracks.next;
+    
+    moreTracks = moreTracks.items.map((item) => ({track: item.track}));
+
+    tracks = tracks.concat(moreTracks);
+  }
+  console.log(tracks);
+  return tracks;
+}
+
 const getCategoriesID = () =>{
   spotifyApiObject.getCategories({limit: 50}).then((data) => {
     console.log(data.categories.items);
@@ -65,12 +90,29 @@ const addTrackToPlayList = async (track, playList) => {
   console.log(playList.id);
   console.log([track.uri]);
   try{
-
     await spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
   }catch(error){
     console.error("ERROR: ", error);
+  }  
+}
+
+const removeTrackFromPlayList = async (track, playlistId) => {
+  console.log(playlistId);
+  console.log([track.uri]);
+  try{
+    await spotifyApiObject.removeTracksFromPlaylist(playlistId, [track.uri]);
+  }catch(error){
+    console.error("ERROR: ", error);
   }
-  
+}
+
+const addTrackToFavorites = async (track) => {
+  console.log([track.uri]);
+  try{
+    await spotifyApiObject.addToMySavedTracks([track.id]);
+  }catch(error){
+    console.error("ERROR: ", error);
+  }  
 }
 
 const addTrackCallBack = (errorObject, succedValue) =>{
@@ -78,4 +120,4 @@ const addTrackCallBack = (errorObject, succedValue) =>{
   console.log(succedValue);
 }
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList };
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList, getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites};
