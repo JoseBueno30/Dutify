@@ -10,6 +10,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import MusicPlayer from "./components/musicPlayer/musicPlayer";
+import SongList from "./components/songList/songList";
+import PlayList from "./components/playList/playList";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -43,6 +45,14 @@ function App() {
     {
       path: "/listas",
       element: <Lists token={token}></Lists>
+    },
+    {
+      path: "/listas/playlist",
+      element: <PlayList token={token}></PlayList>
+    },
+    {
+      path: "/listas/playlist",
+      element: <PlayList token={token} playlistId={new URLSearchParams(window.location.search).get("id")} />
     }
   ])
 
@@ -68,6 +78,7 @@ function App() {
     "user-modify-playback-state",
     "app-remote-control",
     "playlist-modify-public",
+    "playlist-modify-private",
     "playlist-read-private",
     "playlist-read-collaborative",
     "user-top-read",

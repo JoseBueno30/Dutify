@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getUserPlaylists } from "../../spotifyApi/SpotifyApiCalls";
+import { getUserPlaylists,createPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 import CardsGrid from "../cardsGrid/cardsGrid";
+import ListModal from "../listModal/listModal";
 
 function Lists({token}) {
   const [lists, setLists] = useState([]);
@@ -10,12 +11,21 @@ function Lists({token}) {
     setLists(await getUserPlaylists(token))
   }
 
+  const crearPlaylist = async (nameList,publicList) =>{
+    const data = await createPlaylist(nameList,publicList);
+    console.log(data);
+  }
+
   useEffect(() => {
     cargarPlaylists();
   }, []);
 
+
   return (
-    <CardsGrid type="list" data={lists}></CardsGrid>
+    <>
+      <CardsGrid type="list" data={lists}></CardsGrid>
+      <ListModal apiCall={crearPlaylist}/>
+    </>
   );
 }
 
