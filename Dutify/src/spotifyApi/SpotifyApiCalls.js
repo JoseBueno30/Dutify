@@ -25,8 +25,8 @@ const getCategoriesID = () =>{
   });
 }
 
-const getCategoriePlaylists = async (catergoryID) =>{
-  const data = await spotifyApiObject.getCategoryPlaylists(catergoryID);
+const getCategoriePlaylists = async (catergoryID, limit) =>{
+  const data = await spotifyApiObject.getCategoryPlaylists(catergoryID, {limit});
 
   const playlists = mapPlaylistObject(data.playlists);
 
@@ -34,8 +34,32 @@ const getCategoriePlaylists = async (catergoryID) =>{
 }
 
 const getPopularPlaylists = async () => {
-  const data = await spotifyApiObject.getFeaturedPlaylists();
+  const data = await spotifyApiObject.getFeaturedPlaylists({limit: 8});
   const playlists = mapPlaylistObject(data.playlists);
+ 
+  return playlists;
+};
+
+
+const getPopularArtistsPlaylists = async () => {
+  const playlists = []
+  const my_top_artists = await spotifyApiObject.getMyTopArtists({limit: 8});
+  const artists_names = my_top_artists.items.map(artist => artist.name);
+  
+  for (const artist_name of artists_names) {
+    const playlistsResponse = await spotifyApiObject.searchPlaylists(`description:${artist_name}`, {limit: 1});
+    playlists.push(...mapPlaylistObject(playlistsResponse.playlists));
+  }
+
+  return playlists;
+};
+
+
+const getRecommendedPlaylists = async () => {
+  const catergory = "0JQ5DAt0tbjZptfcdMSKl3"; // Categoria: Especialmente para ti
+  const limite = 8;
+  const playlists = getCategoriePlaylists(catergory,limite);
+  
   return playlists;
 };
 
@@ -55,4 +79,4 @@ const mapPlaylistObject = (data) => {
 };
 
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists
-  , getPopularPlaylists };
+  , getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists };
