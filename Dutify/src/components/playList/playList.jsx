@@ -20,9 +20,8 @@ export default function PlayList({}){
             try{
                 const playList = await getPlayList(playlistId);
                 setPlayList(playList);
-                setTracks(await getTracksFromPlaylist(playList));
-                console.log(playList);
-                // console.log(tracks);
+                const tracks = await getTracksFromPlaylist(playList)
+                setTracks(tracks);
             }catch(error){
                 console.error("ERROR: ", error);
             }

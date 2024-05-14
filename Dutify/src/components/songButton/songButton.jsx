@@ -121,10 +121,7 @@ function Options({track, playLists, playlistId, setFeedback}){
                                         <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playList.name} onClick={() => listClickHandler(playList)} key={playList.id}><button>Añadir a {playList.name}</button></MenuItem>
                                     ))
                                 : <></>
-                                }
-                                
-                                <MenuDivider />
-                                <MenuItem className={menuItemClassName} title={"Añadir a nueva playlist"} onClick={newListClickHandler}><button>Añadir a nueva playlist</button></MenuItem>                          
+                                }                        
                                 
                             </Menu>
     );

@@ -10,6 +10,12 @@ const getAccessToken = () =>{
   return spotifyApiObject.getAccessToken();
 }
 
+const getUser = async () => {
+  const user = await spotifyApiObject.getMe();
+
+  return user;
+}
+
 const getUserId = async () => {
   const data = await spotifyApiObject.getMe();
 
@@ -49,14 +55,14 @@ const getTracksFromPlaylist = async (playlist) =>{
   let next = playlist.tracks.next;
   let tracks = playlist.tracks.items.map((item) => ({track: item.track}));
 
-  while(next !== null){
-    let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
-    next = moreTracks.next;
+  // while(next !== null){
+  //   let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
+  //   next = moreTracks.next;
     
-    moreTracks = moreTracks.items.map((item) => ({track: item.track}));
+  //   moreTracks = moreTracks.items.map((item) => ({track: item.track}));
 
-    tracks = tracks.concat(moreTracks);
-  }
+  //   tracks = tracks.concat(moreTracks);
+  // }
   return tracks;
 }
 
@@ -133,4 +139,13 @@ const addTrackCallBack = (errorObject, succedValue) =>{
   console.log(succedValue);
 }
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList, getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist};
+const searchTracks = async (query,num) => {
+  let data = await spotifyApiObject.searchTracks(query, { limit: num })
+
+  return data.tracks.items;
+}
+
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
+  getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
+  getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
+  searchTracks, getUser};
