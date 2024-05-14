@@ -47,6 +47,10 @@ function App() {
     {
       path: "/listas/playlist",
       element: <PlayList token={token}/>
+    },
+    {
+      path: "/busqueda",
+      element: <></>
     }
   ])
 
