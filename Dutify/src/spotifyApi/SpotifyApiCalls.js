@@ -10,11 +10,6 @@ const getAccessToken = () =>{
   return spotifyApiObject.getAccessToken();
 }
 
-const getUser = async() => {
-  const user = await spotifyApiObject.getMe();
-  return user;
-}
-
 const getUserId = async () => {
   const data = await spotifyApiObject.getMe();
 
