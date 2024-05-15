@@ -1,10 +1,6 @@
-import React, { useReducer} from "react";
 import "./listCardStyle.css";
 import "../cardsStyle.css";
 
-function PlaceHolder(state, action) {
-  
-}
 
 function handleClick() {
   dispatch({
@@ -13,8 +9,6 @@ function handleClick() {
 }
 
 function ListCard({ listName, background }) {
-
-  const [state, dispatch] = useReducer(PlaceHolder, []);
 
   return (
     <div

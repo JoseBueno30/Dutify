@@ -11,6 +11,7 @@ import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
+import SearchResults from "./components/locations/query/busquedas";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -47,7 +48,11 @@ function App() {
     },
     {
       path: "/listas/playlist",
-      element: <PlayList token={token}/>
+      element: <PlayList/>
+    },
+    {
+      path: "/busqueda",
+      element: <SearchResults/>
     }
   ])
 
@@ -91,8 +96,7 @@ function App() {
       ) : (
         <>
           <TopBar></TopBar>
-          {/* <RouterProvider router={router}></RouterProvider> */}
-          <PlayList playListId={"0DlbfH4tUyObSa59Bb8L85"}/>
+          <RouterProvider router={router}></RouterProvider>
           <MusicPlayer></MusicPlayer>
         </>
       )}

@@ -19,8 +19,9 @@ export default function PlayListInfo({playList}){
                 <p title={playList.name} className="playListName ">{playList.name}</p>
                 
             </div>
+            {playList.images?
             <img className="playListImage" src={playList.images[0].url}></img>
-
+            :<div className="playListImage"></div>}
             <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
                 <p>{playList.tracks.total + " canciones"}</p>
                 <Options/>
