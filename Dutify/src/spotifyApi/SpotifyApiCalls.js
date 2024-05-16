@@ -106,6 +106,7 @@ const getRecommendedPlaylists = async () => {
   const catergory = "0JQ5DAt0tbjZptfcdMSKl3"; // Categoria: Especialmente para ti
   const limite = 8;
   const playlists = getCategoriePlaylists(catergory,limite);
+
   
   return playlists;
 };
@@ -179,4 +180,4 @@ const searchTracks = async (query,num) => {
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
-  searchTracks, getUser};
+  searchTracks, getUser, getPopularArtistsPlaylists, getPopularPlaylists, getRecommendedPlaylists};

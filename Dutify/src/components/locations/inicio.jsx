@@ -1,3 +1,4 @@
+import './inicio.css';
 import { useEffect, useState } from "react";
 import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 import Carousel from '../carousel/carousel';
@@ -23,24 +24,9 @@ function Inicio({token}){
     }, []);
     
     return (
-        <section style={{backgroundColor : 'var(--color-backgroud)' 
-                , width : '100%'
-                , height: '100%'
-                , display: 'flex'
-                , flexDirection: 'column'
-                , gap: '30px'
-                }}>
-            <div style={{display: 'flex'
-                    , alignItems: 'center'
-                    , flexDirection: 'column'
-                    , gap: '20px'
-                    }}>
-                <h5 style={{ textDecoration: 'underline'
-                            , color: 'var(--color-text)'
-                            , width: '95vw'
-                            , maxWidth: '875px'
-                            , marginTop: '20px' 
-                            }}>Listas recientes:</h5>
+        <section className='inicio-section'>
+            <div className='div-recent-lists'>
+                <h5 className='h5-recent-lists'>Listas recientes:</h5>
                 <CardsGrid type="recentLists" data={recent_playlists} />
             </div>
             <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>

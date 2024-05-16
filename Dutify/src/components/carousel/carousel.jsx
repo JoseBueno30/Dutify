@@ -6,7 +6,7 @@ function Carousel({ name, id, lista }) {
   const button_target = `#${id}`;
 
   const ClickHandler = (id) => {
-    window.location.href = "/listas/playlist?id=" + id;
+    window.location.href = "/listas/playlist?playlistId=" + id;
   }
 
   return (
