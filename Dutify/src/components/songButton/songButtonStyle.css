@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.songButton:hover, .songButton:focus{
+.songButton:hover, .songButton:active{
   background-color: var(--color-2); 
   transition-duration: 0.4s;
 }
@@ -52,12 +52,12 @@
     opacity: 0;
   }
   
-  .songButton:hover .songPlayButton,.songButton:focus .songPlayButton{
+  .songButton:hover .songPlayButton,.songButton:active .songPlayButton{
     transition: .4s ease;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
   }
 
-  .songButton:hover .playButton,.songButton:focus .playButton{
+  .songButton:hover .playButton,.songButton:active .playButton{
     transition: .4s ease;
     opacity: 1;
   }
@@ -83,7 +83,7 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
-    pointer-events: none;
+    cursor:default;
     @media only screen and (max-width: 768px){
       width: 80%;
     }
@@ -92,7 +92,7 @@
   .author{
     width: 30%;
     font-size: 0.75rem;
-    pointer-events: none;
+    cursor:default;
     @media only screen and (max-width: 768px){
       width: 70%;
     }
@@ -106,7 +106,7 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow: hidden;
-    pointer-events: none;
+    cursor:default;
     @media only screen and (max-width: 768px){
       display: none;
     }
@@ -114,7 +114,7 @@
   
   .time{
     font-size: 1rem;
-    
+    cursor:default;
   }
 
   .optionsButton{
@@ -166,3 +166,38 @@
 	  border: none;
   }
 
+  @keyframes in-right {
+    from {
+      transform: translate(-35vw, 0);
+    }
+
+    to {
+      transform: translate(-35vw, 10vh);
+    }
+  }
+
+  .CustomSnackbar {
+    position:fixed;
+    top:0;
+    transform: translate(-35vw, 10vh);
+    height: fit-content;
+    width: fit-content;
+    z-index: 9500;
+    display: flex;
+    right: 16px;
+    bottom: 16px;
+    left: auto;
+    justify-content: center;
+    max-width: 560px;
+    min-width: 300px;
+    background-color: var(--color-1);
+    border-radius: 8px;
+    border: 1px solid var(--color-text);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.7);
+    padding: 0.75rem;
+    color: var(--color-text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    animation: in-right 200ms;
+    transition: transform 0.2s ease-out;
+    }

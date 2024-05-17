@@ -6,6 +6,7 @@ import AddCard from "./cards/addCard/addCard";
 import "./cardsGridStyle.css";
 
 function CardsGrid({type, data, clickFunction}) {
+
   const gridElements = () => {
     let gridList = [];
     const cardData = data
@@ -28,8 +29,8 @@ function CardsGrid({type, data, clickFunction}) {
       ));
       if (type === "list") {
         gridList.push(
-          <div className="col col_content" key={100} onClick={clickFunction}>
-            <AddCard>Nueva lista</AddCard>
+          <div className="col col_content" key={100}>
+            <AddCard type={'playlist'}/>
           </div>
         );
       }
@@ -39,7 +40,7 @@ function CardsGrid({type, data, clickFunction}) {
   };
 
   return (
-    <div className="container-fluid" id="cards_container">
+    <div className="container-fluid pt-3 pb-3" id="cards_container">
         <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
             {gridElements()}
         </div>
