@@ -20,11 +20,7 @@ function ListModal({ apiCall }) {
     setListPublic(e.target.checked);
   };
 
-  const clickHandler = (e) => {
-    //Evita que el form se cierre al hacer submit
-    e.preventDefault();
-
-    console.log("clickHandler");
+  const executeCall = () => {
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
       return;
@@ -37,6 +33,13 @@ function ListModal({ apiCall }) {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const clickHandler = (e) => {
+    //Evita que el modal se cierre al hacer submit
+    e.preventDefault();
+    console.log("clickHandler");
+    executeCall();
   };
 
   return (
@@ -84,9 +87,7 @@ function ListModal({ apiCall }) {
               </div>
               <div className="mb-4 w-75">
                 <div className="form-check form-switch ps-0">
-                  <label className="form-check-label mb-1">
-                    Privacidad
-                  </label>
+                  <label className="form-check-label mb-1">Privacidad</label>
                   <br />
                   <input
                     className="form-check-input ms-1"
@@ -102,10 +103,7 @@ function ListModal({ apiCall }) {
                 </div>
               </div>
               <div className="mb-2 d-flex justify-content-start">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                >
+                <button type="submit" className="btn btn-primary">
                   Crear lista
                 </button>
               </div>
