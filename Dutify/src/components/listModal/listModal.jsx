@@ -1,13 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import "./listModalStyle.css";
 
-function ListModal({ ListName, apiCall}) {
-  const [listName, setListName] = useState(ListName);
+function esSoloEspacios(texto) {
+  return /^\s*$/.test(texto);
+}
+
+function ListModal({apiCall }) {
+  const [listName, setListName] = useState("");
   const [listPublic, setListPublic] = useState(false);
-
-  const headerTitle =
-    ListName === undefined ? "Crear nueva lista" : "Editar nombre de la lista";
+  const [errorVisibility, setErrorVisibility] = useState(false);
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -18,6 +21,11 @@ function ListModal({ ListName, apiCall}) {
   };
 
   const clickHandler = () => {
+    if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
+      setErrorVisibility(true);
+      return;
+    }
+    setErrorVisibility(false);
     apiCall(listName, listPublic)
       .then((id) => {
         window.location.href = "/listas/playlist?playlistId=" + id;
@@ -25,8 +33,8 @@ function ListModal({ ListName, apiCall}) {
       .catch((error) => {
         console.error(error);
       });
-  }
-    
+  };
+
   return (
     <div
       className="modal fade"
@@ -39,7 +47,7 @@ function ListModal({ ListName, apiCall}) {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
-              {headerTitle}
+              Crear nueva lista
             </h1>
             <button
               type="button"
@@ -52,16 +60,23 @@ function ListModal({ ListName, apiCall}) {
           </div>
           <div className="modal-body">
             <form>
-              <div className="mb-3 w-75">
-                <label htmlFor="inputName" className="form-label">
-                  Nombre de la lista
+              <div className={"mb-3 w-75" }>
+                <label htmlFor="inputName" className={"form-label"}>
+                  Nombre de la lista *
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={"form-control " + (errorVisibility ? "is-invalid" : "")}
                   id="inputName"
                   onChange={listNameChangeHandler}
                 />
+                <p
+                    className={
+                      "error-text " + (!errorVisibility ? "d-none" : "")
+                    }
+                  >
+                    El nombre de la lista no puede ser vacío.
+                  </p>
               </div>
               <div className="mb-4 w-75">
                 <div className="form-check form-switch">
@@ -73,12 +88,16 @@ function ListModal({ ListName, apiCall}) {
                     onChange={listPublicChangeHandler}
                   />
                   <label className="form-check-label" htmlFor="listPublic">
-                    Pública
+                    {listPublic ? "Pública *" : "Privada *"}
                   </label>
                 </div>
               </div>
               <div className="mb-2 d-flex justify-content-start">
-                <button type="button" className="btn btn-primary" onClick={clickHandler}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={clickHandler}
+                >
                   Crear lista
                 </button>
               </div>
