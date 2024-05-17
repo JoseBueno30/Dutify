@@ -22,8 +22,13 @@ function GenreLists() {
     cargarPlaylists();
   }, []);
 
+  const listButtonClickHandler = (e) => {
+    const key = e.currentTarget.id;
+    window.location.href = "playlist?playlistId=" + key;
+  };
+
   return (
-    <CardsGrid type="list" data={lists}></CardsGrid>
+    <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
   );
 }
 

@@ -51,6 +51,10 @@ function App() {
       element: <GenreLists></GenreLists>
     },
     {
+      path: "Generos/playlist",
+      element: <PlayList/>
+    },
+    {
       path: "/listas/playlist",
       element: <PlayList/>
     },

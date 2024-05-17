@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  getUserPlaylists,
-  createPlaylist,
-} from "../../spotifyApi/SpotifyApiCalls";
-import CardsGrid from "../cardsGrid/cardsGrid";
-import ListModal from "../listModal/listModal";
+import CardsGrid from "../../cardsGrid/cardsGrid";
+import ListModal from "../../listModal/listModal";
+import { createPlaylist, getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 
 function Lists({}) {
   const [lists, setLists] = useState([]);
@@ -24,7 +21,7 @@ function Lists({}) {
   }, []);
 
   const listButtonClickHandler = (e) => {
-    const key = e.currentTarget.getAttribute("id");
+    const key = e.currentTarget.id;
     window.location.href = "listas/playlist?playlistId=" + key;
   };
 
