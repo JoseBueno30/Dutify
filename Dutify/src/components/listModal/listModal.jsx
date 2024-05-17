@@ -7,7 +7,7 @@ function esSoloEspacios(texto) {
   return /^\s*$/.test(texto);
 }
 
-function ListModal({apiCall }) {
+function ListModal({ apiCall }) {
   const [listName, setListName] = useState("");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
@@ -20,7 +20,11 @@ function ListModal({apiCall }) {
     setListPublic(e.target.checked);
   };
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    //Evita que el form se cierre al hacer submit
+    e.preventDefault();
+
+    console.log("clickHandler");
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
       return;
@@ -47,7 +51,7 @@ function ListModal({apiCall }) {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
-              Crear nueva lista
+              Crear nueva lista de reproducción
             </h1>
             <button
               type="button"
@@ -59,44 +63,48 @@ function ListModal({apiCall }) {
             </button>
           </div>
           <div className="modal-body">
-            <form>
-              <div className={"mb-3 w-75" }>
+            <form onSubmit={clickHandler}>
+              <div className={"mb-3 w-75"}>
                 <label htmlFor="inputName" className={"form-label"}>
-                  Nombre de la lista *
+                  Nombre de la lista <span className="mandatory-field">*</span>
                 </label>
                 <input
                   type="text"
-                  className={"form-control " + (errorVisibility ? "is-invalid" : "")}
+                  className={
+                    "form-control " + (errorVisibility ? "is-invalid" : "")
+                  }
                   id="inputName"
                   onChange={listNameChangeHandler}
                 />
                 <p
-                    className={
-                      "error-text " + (!errorVisibility ? "d-none" : "")
-                    }
-                  >
-                    El nombre de la lista no puede ser vacío.
-                  </p>
+                  className={"error-text " + (!errorVisibility ? "d-none" : "")}
+                >
+                  El nombre de la lista no puede estar vacío.
+                </p>
               </div>
               <div className="mb-4 w-75">
-                <div className="form-check form-switch">
+                <div className="form-check form-switch ps-0">
+                  <label className="form-check-label mb-1">
+                    Privacidad
+                  </label>
+                  <br />
                   <input
-                    className="form-check-input"
+                    className="form-check-input ms-1"
                     type="checkbox"
                     role="switch"
                     id="listPublic"
                     onChange={listPublicChangeHandler}
                   />
-                  <label className="form-check-label" htmlFor="listPublic">
-                    {listPublic ? "Pública *" : "Privada *"}
+                  <label className="form-check-label ps-3" htmlFor="listPublic">
+                    {listPublic ? "Pública" : "Privada"}
                   </label>
+                  <br />
                 </div>
               </div>
               <div className="mb-2 d-flex justify-content-start">
                 <button
-                  type="button"
+                  type="submit"
                   className="btn btn-primary"
-                  onClick={clickHandler}
                 >
                   Crear lista
                 </button>
