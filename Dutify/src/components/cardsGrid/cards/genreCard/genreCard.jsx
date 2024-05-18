@@ -9,7 +9,7 @@ function handleClick() {
   dispatch({});
 }
 
-function GenreCard({ genreName, background, id}) {
+function GenreCard({ genreName, background}) {
   const [state, dispatch] = useReducer(PlaceHolder, []);
 
   return (
@@ -19,7 +19,7 @@ function GenreCard({ genreName, background, id}) {
       alt={genreName + "_Imagen"}
     >
       <div className="card-body">
-        <div id={id} className={"cards-overlay  " + background + "-img genre-img"}>
+        <div className={"cards-overlay  " + background + "-img genre-img"}>
           <p className="cards-title">{genreName}</p>
         </div>
       </div>

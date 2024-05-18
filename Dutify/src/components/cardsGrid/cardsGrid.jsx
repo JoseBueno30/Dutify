@@ -15,13 +15,12 @@ function CardsGrid({type, data, clickFunction}) {
       gridList = cardData.map((genre) => (
         <div id={genre.id} className="col col_content" key={genre.key} onClick={clickFunction}>
           <GenreCard
-            id={genre.id}
             genreName={genre.genreName}
             background={genre.background}
           />
         </div>
       ));
-    } else if (type === "list" || type === "recentLists") {
+    } else if (type === "list" || type === "genrelists") {
       gridList = data.map((playlist) => (
         <div id={playlist.id} className="col col_content" key={playlist.id} onClick={clickFunction}>
           <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />

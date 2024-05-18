@@ -28,7 +28,7 @@ function GenreLists() {
   };
 
   return (
-    <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
+    <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
   );
 }
 

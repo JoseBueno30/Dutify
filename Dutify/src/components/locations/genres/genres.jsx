@@ -39,10 +39,10 @@ function Genres({ token }) {
   return res;
 }
 
-  const goToListasGenero = (event) => {
-    const card = event.target;
-    console.log(card.id);
-    window.location.href="/Generos/Listas?genero=" + card.id;
+  const goToListasGenero = (e) => {
+    const id = e.currentTarget.id;
+    console.log(id);
+    window.location.href="/Generos/Listas?genero=" + id;
   }
 
   return <CardsGrid type="genre" data={genres} clickFunction={goToListasGenero}></CardsGrid>;
