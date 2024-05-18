@@ -107,7 +107,6 @@ const getRecommendedPlaylists = async () => {
   const limite = 8;
   const playlists = getCategoriePlaylists(catergory,limite);
 
-  
   return playlists;
 };
 

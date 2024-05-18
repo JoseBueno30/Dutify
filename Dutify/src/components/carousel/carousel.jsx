@@ -1,6 +1,6 @@
 import './carousel.css';
-import left_arrow from './left_arrow.svg';
-import right_arrow from './right_arrow.svg';
+import left_arrow from './left_arrow_test.svg';
+import right_arrow from './right_arrow_test.svg';
 
 function Carousel({ name, id, lista }) {
   const button_target = `#${id}`;

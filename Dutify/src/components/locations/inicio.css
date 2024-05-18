@@ -10,11 +10,11 @@
 }
 
 .h5-recent-lists {
-    text-decoration: underline;
     color: var(--color-text);
     width: 95vw;
     max-width: 875px;
     margin-top: 20px;
+    font-size: 25px;
 }
 
 .div-recent-lists {
