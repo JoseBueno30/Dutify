@@ -4,7 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
 import { useThemeContext } from "../../../context/ThemeContext";
 import { searchTracks } from "../../../spotifyApi/SpotifyApiCalls";
-import SongList from "../../songList/songList";
+import TrackList from "../../trackList/trackList";
 import NavButton from "../navButton/navButton";
 
 function SearchBar({ isOpen }) {
@@ -39,7 +39,7 @@ function SearchBar({ isOpen }) {
       </button>
       {(text !== "" ) ? (
         <div className="position-absolute d-flex flex-wrap search-results align-items-center">
-          <SongList tracks={tracks}></SongList>
+          <TrackList tracks={tracks}></TrackList>
           <button onClick={() => window.location.href="/busqueda?query="+text} className="btn btn-showMore mt-auto mb-2">Mostrar más</button>
         </div>
       ) : (

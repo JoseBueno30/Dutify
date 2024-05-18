@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import SongList from "../songList/songList";
+import TrackList from "../trackList/trackList";
 import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
@@ -34,7 +34,7 @@ export default function PlayList({}){
             {playList?(
                 <>
                     <PlayListInfo playList={playList}/>
-                    <SongList tracks={tracks} playlistId={playList.id}/>
+                    <TrackList tracks={tracks} setTracks={setTracks} playlistId={playList.id}/>
                 </>
             ):
             <></>}

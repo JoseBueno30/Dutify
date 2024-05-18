@@ -37,6 +37,8 @@ const getUserOwnedPlaylists = async () => {
 
   const ownedPlaylists = playlists.filter((playList) => playList.owner.id == user.id)
 
+  console.log(ownedPlaylists);
+
   return ownedPlaylists;
 };
 
@@ -53,16 +55,17 @@ const getPlayList = async (playlistId) => {
 
 const getTracksFromPlaylist = async (playlist) =>{
   let next = playlist.tracks.next;
-  let tracks = playlist.tracks.items.map((item) => ({track: item.track}));
-
+  let tracks = playlist.tracks.items.map(item => item.track);
+  
   // while(next !== null){
   //   let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
   //   next = moreTracks.next;
     
-  //   moreTracks = moreTracks.items.map((item) => ({track: item.track}));
-
+  //   moreTracks = moreTracks.items.map(item => item.track);
+    
   //   tracks = tracks.concat(moreTracks);
   // }
+  console.log(tracks);
   return tracks;
 }
 
@@ -105,33 +108,46 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-const addTrackToPlayList = async (track, playList) => {
-  console.log(playList.id);
-  console.log([track.uri]);
+const addTrackToPlayList = async (track, playlist) => {
+  let status;
   try{
-    spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
+    const playlistTracks = await getTracksFromPlaylist(await getPlayList(playlist.id));
+    if(playlistTracks.some(playlistTrack => playlistTrack.uri === track.uri)){
+      status = "Esta canción ya está en "+ playlist.name;
+    }else{
+      spotifyApiObject.addTracksToPlaylist(playlist.id, [track.uri]);
+      status = "Canción añadida a " + playlist.name;
+    }
   }catch(error){
     console.error("ERROR: ", error);
+    status = "Error añadiendo canción";
   }  
+  return status;
 }
 
 const removeTrackFromPlayList = async (track, playlistId) => {
-  console.log(playlistId);
-  console.log([track.uri]);
+  let status;
   try{
     await spotifyApiObject.removeTracksFromPlaylist(playlistId, [track.uri]);
+    status = "Canción eliminada de la playlist";
   }catch(error){
     console.error("ERROR: ", error);
+    status = "Error eliminando canción";
   }
+  return status;
 }
 
 const addTrackToFavorites = async (track) => {
   console.log([track.uri]);
+  let status;
   try{
     await spotifyApiObject.addToMySavedTracks([track.id]);
+    status = "Canción añadida a favoritas";
   }catch(error){
     console.error("ERROR: ", error);
+    status = "Error añadiendo canción";
   }  
+  return status;
 }
 
 const addTrackCallBack = (errorObject, succedValue) =>{
@@ -141,7 +157,7 @@ const addTrackCallBack = (errorObject, succedValue) =>{
 
 const searchTracks = async (query,num) => {
   let data = await spotifyApiObject.searchTracks(query, { limit: num })
-
+  console.log(data.tracks.items)
   return data.tracks.items;
 }
 
