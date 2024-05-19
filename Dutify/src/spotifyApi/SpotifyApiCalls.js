@@ -150,9 +150,8 @@ const addTrackToFavorites = async (track) => {
   return status;
 }
 
-const addTrackCallBack = (errorObject, succedValue) =>{
-  console.log(errorObject);
-  console.log(succedValue);
+const unfollowPlaylist = async (playlistId) =>{
+  await spotifyApiObject.unfollowPlaylist(playlistId);
 }
 
 const searchTracks = async (query,num) => {
@@ -164,4 +163,4 @@ const searchTracks = async (query,num) => {
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
-  searchTracks, getUser};
+  searchTracks, getUser, unfollowPlaylist};

@@ -8,7 +8,7 @@ import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiC
 
 
 export default function PlayList({}){
-    const [playList, setPlayList] = useState();
+    const [playlist, setPlayList] = useState();
     const [tracks, setTracks] = useState();
     
 
@@ -18,9 +18,9 @@ export default function PlayList({}){
             const searchParams = new URLSearchParams(location.search);
             const playlistId = searchParams.get('playlistId');
             try{
-                const playList = await getPlayList(playlistId);
-                setPlayList(playList);
-                const tracks = await getTracksFromPlaylist(playList)
+                const playlist = await getPlayList(playlistId);
+                setPlayList(playlist);
+                const tracks = await getTracksFromPlaylist(playlist)
                 setTracks(tracks);
             }catch(error){
                 console.error("ERROR: ", error);
@@ -31,10 +31,10 @@ export default function PlayList({}){
 
     return(
         <div className="playList d-flex flex-column flex-xl-row-reverse">
-            {playList?(
+            {playlist?(
                 <>
-                    <PlayListInfo playList={playList}/>
-                    <TrackList tracks={tracks} setTracks={setTracks} playlistId={playList.id}/>
+                    <PlayListInfo playlist={playlist}/>
+                    <TrackList tracks={tracks} setTracks={setTracks} playlistId={playlist.id}/>
                 </>
             ):
             <></>}
