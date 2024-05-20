@@ -94,7 +94,7 @@ const getPopularArtistsPlaylists = async () => {
   const artists_names = my_top_artists.items.map(artist => artist.name);
   
   for (const artist_name of artists_names) {
-    const playlistsResponse = await spotifyApiObject.searchPlaylists(`description:${artist_name}`, {limit: 1});
+    const playlistsResponse = await spotifyApiObject.searchPlaylists(`This Is ${artist_name}`, {limit: 1});
     playlists.push(...mapPlaylistObject(playlistsResponse.playlists));
   }
 
