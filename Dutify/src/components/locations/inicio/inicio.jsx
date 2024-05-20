@@ -1,8 +1,8 @@
 import './inicio.css';
 import { useEffect, useState } from "react";
-import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
-import Carousel from '../carousel/carousel';
-import CardsGrid from "../cardsGrid/cardsGrid";
+import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import Carousel from '../../carousel/carousel';
+import CardsGrid from "../../cardsGrid/cardsGrid";
 
 function Inicio({token}){
     
@@ -23,12 +23,17 @@ function Inicio({token}){
     useEffect(() => {
         cargarPlaylists();
     }, []);
+
+    const listButtonClickHandler = (e) => {
+        const key = e.currentTarget.id;
+        window.location.href = "listas/playlist?playlistId=" + key;
+    };
     
     return (
         <section className='inicio-section'>
             <div className='div-recent-lists'>
                 <h5 className='h5-recent-lists'>Listas recientes:</h5>
-                <CardsGrid type="recentLists" data={recent_playlists} />
+                <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
             <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>
             <Carousel id="carrusel-2" lista={popular_artists_playlists} name="Tus artistas favoritos:"></Carousel>

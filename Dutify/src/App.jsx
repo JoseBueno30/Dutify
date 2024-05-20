@@ -3,7 +3,7 @@ import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres/genres";
 import Lists from "./components/locations/lists/lists";
-import Inicio from "./components/locations/inicio";
+import Inicio from "./components/locations/inicio/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
