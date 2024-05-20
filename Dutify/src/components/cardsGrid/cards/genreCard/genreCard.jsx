@@ -15,6 +15,7 @@ function GenreCard({ genreName, background }) {
   return (
     <button
       className={"card " + background}
+      title={"Ir a género '" + genreName + "'"}
       id="card_container"
       alt={genreName + "_Imagen"}
     >

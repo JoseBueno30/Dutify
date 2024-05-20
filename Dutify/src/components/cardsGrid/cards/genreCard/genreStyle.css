@@ -62,7 +62,7 @@
 }
 
 .genre-img {
-  background-size: contain;
+  background-size: 320px 175px;
   background-repeat: no-repeat;
   background-position: bottom;
 }
