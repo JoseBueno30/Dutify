@@ -16,7 +16,7 @@ function GenreLists() {
   const cargarPlaylists = async () =>{
     const id = getGenreID();
 
-    setLists(await getCategoriePlaylists(id))
+    setLists(await getCategoriePlaylists(id,30))
   }
 
   useEffect(() => {
