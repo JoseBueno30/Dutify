@@ -4,3 +4,7 @@
   height: 50%;
 }
 
+div.title-fade p.cards-title {
+  font-size: 1.3rem;
+}
+

@@ -11,7 +11,7 @@ function handleClick() {
 function ListCard({ listName, background }) {
 
   return (
-    <div
+    <button
       className="card "
       id="card_container"
       alt={listName + "_Imagen"}
@@ -20,7 +20,7 @@ function ListCard({ listName, background }) {
       <div className="cards-overlay title-fade">
         <p className="cards-title">{listName}</p>
       </div>
-    </div>
+    </button>
   );
 }
 
