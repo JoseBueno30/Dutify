@@ -1,8 +1,8 @@
 import TopBar from "./components/topBar/topBar";
 import "./index.css";
 import "./App.css"
-import Genres from "./components/locations/genres";
-import Lists from "./components/locations/lists";
+import Genres from "./components/locations/genres/genres";
+import Lists from "./components/locations/lists/lists";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
@@ -10,6 +10,7 @@ import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
+import GenreLists from "./components/locations/genres/genreLists";
 import SearchResults from "./components/locations/query/busquedas";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    console.log(window.location.href);
+    console.log(window.location.href.split("/"));
     let spotifyToken = window.sessionStorage.getItem("token");
         
     if (!spotifyToken || spotifyToken === "undefined"){
@@ -44,6 +45,14 @@ function App() {
     {
       path: "/listas",
       element: <Lists token={token}></Lists>
+    },
+    {
+      path: "/Generos/Listas",
+      element: <GenreLists></GenreLists>
+    },
+    {
+      path: "Generos/playlist",
+      element: <PlayList/>
     },
     {
       path: "/listas/playlist",

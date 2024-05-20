@@ -23,7 +23,7 @@ const getUserId = async () => {
 }
 
 const getUserPlaylists = async () => {
-  //spotifyApiObject.setAccessToken(token);
+
   const data = await spotifyApiObject.getUserPlaylists();
   const playlists = mapPlaylistObject(data);
 

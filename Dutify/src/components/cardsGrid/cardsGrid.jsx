@@ -5,12 +5,7 @@ import AddCard from "./cards/addCard/addCard";
 
 import "./cardsGridStyle.css";
 
-function CardsGrid({type, data}) {
-
-    const listButtonClickHandler = (e) => {
-      const key = e.currentTarget.getAttribute("id");
-      window.location.href = "listas/playlist?playlistId=" + key;
-    }
+function CardsGrid({type, data, clickFunction}) {
 
   const gridElements = () => {
     let gridList = [];
@@ -18,16 +13,16 @@ function CardsGrid({type, data}) {
 
     if (type === "genre") {
       gridList = cardData.map((genre) => (
-        <div className="col col_content" key={genre.key}>
+        <div id={genre.id} className="col col_content" key={genre.key} onClick={clickFunction}>
           <GenreCard
             genreName={genre.genreName}
             background={genre.background}
           />
         </div>
       ));
-    } else if (type === "list" || type === "recentLists") {
+    } else if (type === "list" || type === "genrelists") {
       gridList = data.map((playlist) => (
-        <div className="col col_content" key={playlist.id} onClick={listButtonClickHandler} id={playlist.id}>
+        <div id={playlist.id} className="col col_content" key={playlist.id} onClick={clickFunction}>
           <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
         </div>
       ));
