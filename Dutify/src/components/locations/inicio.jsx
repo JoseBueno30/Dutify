@@ -31,7 +31,7 @@ function Inicio({token}){
                 <CardsGrid type="recentLists" data={recent_playlists} />
             </div>
             <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>
-            <Carousel id="carrusel-2" lista={popular_artists_playlists} name="Artistas populares:"></Carousel>
+            <Carousel id="carrusel-2" lista={popular_artists_playlists} name="Tus artistas favoritos:"></Carousel>
             <Carousel id="carrusel-3" lista={recommended_playlists} name="Recomendaciones:"></Carousel>
         </section>
     );
