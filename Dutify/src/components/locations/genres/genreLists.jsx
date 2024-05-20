@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import './genres.css';
 
 const getGenreID = () =>{
   const url = new URL(window.location.href);
@@ -28,7 +29,9 @@ function GenreLists() {
   };
 
   return (
-    <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
+    <section className="genres-section">
+      <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
+    </section>
   );
 }
 

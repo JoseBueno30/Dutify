@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import ListModal from "../../listModal/listModal";
 import { createPlaylist, getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import './lists.css';
 
 function Lists({}) {
   const [lists, setLists] = useState([]);
@@ -26,10 +27,10 @@ function Lists({}) {
   };
 
   return (
-    <>
+    <section className="lists-section">
       <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
       <ListModal apiCall={crearPlaylist} />
-    </>
+    </section>
   );
 }
 

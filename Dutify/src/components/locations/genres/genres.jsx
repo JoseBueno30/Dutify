@@ -5,6 +5,7 @@ import listData from "../../../data/listData.json";
 import genreData from "../../../data/genreData.json";
 import recentListsData from "../../../data/recentListsData.json";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import './genres.css';
 
 function Genres({ token }) {
   const [genres, setGenres] = useState([]);
@@ -45,7 +46,9 @@ function Genres({ token }) {
     window.location.href="/Generos/Listas?genero=" + id;
   }
 
-  return <CardsGrid type="genre" data={genres} clickFunction={goToListasGenero}></CardsGrid>;
+  return  <section className="genres-section">
+            <CardsGrid type="genre" data={genres} clickFunction={goToListasGenero}></CardsGrid>
+          </section>;
 }
 
 export default Genres;
