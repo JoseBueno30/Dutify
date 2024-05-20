@@ -1,0 +1,26 @@
+.inicio-section {
+    background-color: var(--color-backgroud);
+    width: 100%;
+    height: 80vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-bottom: 20px;
+}
+
+.h5-recent-lists {
+    color: var(--color-text);
+    width: 95vw;
+    max-width: 875px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-size: 25px;
+}
+
+.div-recent-lists {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0px;
+}

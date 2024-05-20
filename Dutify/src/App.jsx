@@ -3,8 +3,9 @@ import "./index.css";
 import "./App.css"
 import Genres from "./components/locations/genres/genres";
 import Lists from "./components/locations/lists/lists";
+import Inicio from "./components/locations/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
 import { useEffect, useState } from "react";
@@ -33,10 +34,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <></>
-    },{
+      element: <Navigate to="/inicio"/>
+    },
+    {
       path: "/inicio",
-      element: <></>
+      element: <Inicio token={token}></Inicio>
     },
     {
       path: "/generos",

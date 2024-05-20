@@ -1,48 +1,88 @@
-div {
-    background-color: rgb(82, 73, 73);
+.carrusel-container {
+    background-color: var(--color-backgroud);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    gap: 20px;
 }
 
-.carousel-item div {
+.carrusel-box {
+    display: flex;
+    align-items: flex-start;
+    flex-direction:column;
+    gap:10px;
+}
+
+.carrusel-h5 {
+    color: var(--color-text);
+    font-size: 25px;
+}
+
+.carrusel-caja-texto {
     background-color: rgba(0, 0, 0, 0.4);
-    width: 200px;
-    height: 30px;
+    width: 30vw;
+    max-height: 40px;
+    height: calc(20vw * (200 / 800));
+    max-width: 300px;
     text-align: center;
-    left: 38%;
-    font-size: 20px;
-    bottom: 0.1rem;
+    left: 32%;
+    bottom: 0rem;
+    padding: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-.carousel-item div .texto-centrado {
+@media (min-width: 701px) {
+    .carrusel-caja-texto {
+        font-size: 1.2rem;
+    }
+}
+
+.carrusel-texto {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
     position: absolute;
-    top: 50%; 
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 1;
-    color :rgba(255, 255, 255, 0.9);
-    background-color: transparent;
-
 }
+
 
 .carousel-item img {
     object-fit: cover;
-    width: 800px;
-    height: 250px;
+    width: 95vw;
+    height: calc(95vw * (250 / 875));
+    max-width: 875px;
+    max-height: 250px;
     border-radius: 5px;
+    cursor: pointer;
 }
   
 .button-svg {
-    width: 70px;
-    height: 70px;
+    width: 70%;
+    height: 70%;
 }
 
-#customCarousel .carousel-button {
+.carousel .carousel-button {
     opacity: 1;
 }
 
-#customCarousel {
-    width: 800px;
-    height: 250px;
+.carousel {
+    width: 95vw;
+    height: calc(95vw * (250 / 875));
+    max-width: 875px;
+    max-height: 250px;
     border-radius: 15px;
+}
+
+.carousel button:hover {
+    opacity: 0.6;
 }
 
 

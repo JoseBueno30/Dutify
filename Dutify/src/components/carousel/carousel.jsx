@@ -1,47 +1,45 @@
 import './carousel.css';
-import left_arrow from '../assets/left_arrow.svg';
-import right_arrow from '../assets/right_arrow.svg';
+import left_arrow from './left_arrow_test.svg';
+import right_arrow from './right_arrow_test.svg';
 
-function Carousel({children}) {
-  
+function Carousel({ name, id, lista }) {
+  const button_target = `#${id}`;
+
+  const ClickHandler = (id) => {
+    window.location.href = "/listas/playlist?playlistId=" + id;
+  }
+
   return (
-    <div id="customCarousel" className="carousel" data-bs-ride="carousel">
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img className="d-block img-fluid" src="image.jpg" alt="First slide" />
-          <div class="carousel-caption d-md-block fw-bolder">
-            <div className='texto-centrado'>
-              {children}
-            </div>
+    <section className='carrusel-container'>
+      <div className='carrusel-box'>
+        <h5 className='carrusel-h5'>{name}</h5>
+        <div id={id} className="carousel" data-bs-ride="carousel">
+          <div className="carousel-inner">
+            {lista.map((playlist, index) => (
+              <div key={playlist.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                <img className="d-block img-fluid" src={playlist.imageUrl} alt={playlist.description} 
+                onClick={()=>{ClickHandler(playlist.id)}} />
+                <div className="carousel-caption d-md-block fw-bolder carrusel-caja-texto">
+                  <p className='carrusel-texto fs-10'>
+                    {playlist.name}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="carousel-item">
-          <img className="d-block img-fluid" src="image2.jpg" alt="Second slide" />
-          <div class="carousel-caption d-md-block fw-bolder">
-            <div className='texto-centrado'>
-              {children}
-            </div>
-          </div>
-        </div>
-        <div className="carousel-item">
-          <img className="d-block img-fluid" src="image3.jpg" alt="Third slide" />
-          <div class="carousel-caption d-md-block fw-bolder">
-            <div className='texto-centrado'>
-              {children}
-            </div>
-          </div>
+          <button className="carousel-control-prev carousel-button" type="button" data-bs-target={button_target} data-bs-slide="prev">
+            <img src={left_arrow} alt="Previous" className='button-svg' />
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next carousel-button" type="button" data-bs-target={button_target} data-bs-slide="next">
+            <img src={right_arrow} alt="Next" className='button-svg' />
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
-      <button className="carousel-control-prev carousel-button" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
-        <img src={left_arrow} alt="Previous" className='button-svg' />
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button className="carousel-control-next carousel-button" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
-        <img src={right_arrow} alt="Previous" className='button-svg' />
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
+    </section>
   );
 }
+
 
 export default Carousel;
