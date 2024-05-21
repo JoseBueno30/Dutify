@@ -6,11 +6,17 @@ import { useThemeContext } from "../../../context/ThemeContext";
 import { searchTracks } from "../../../spotifyApi/SpotifyApiCalls";
 import SongList from "../../songList/songList";
 import NavButton from "../navButton/navButton";
+import ClickOutside from "./clickOutside";
 
 function SearchBar({ isOpen }) {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [text, setText] = useState("");
   const [tracks, setTracks] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const changeVisibility = () => {
+    setVisible(!visible);
+  }
 
   const onChangeText = async () => {
     const query = document.getElementById("search-bar").value;
@@ -18,8 +24,10 @@ function SearchBar({ isOpen }) {
     if (query != "") {
       const foundTracks = await searchTracks(query,6);
       setTracks(foundTracks);
+      setVisible(true);
     } else {
       setTracks([]);
+      setVisible(false);
     }
 
     setText(query);
@@ -37,10 +45,12 @@ function SearchBar({ isOpen }) {
       <button className="position-absolute search-btn">
         <BiSearch className="" style={{ color: "black" }} />
       </button>
-      {(text !== "" ) ? (
-        <div className="position-absolute d-flex flex-wrap search-results align-items-center">
-          <SongList tracks={tracks}></SongList>
-          <button onClick={() => window.location.href="/busqueda?query="+text} className="btn btn-showMore mt-auto mb-2">Mostrar más</button>
+      {visible ? (
+        <div className={"position-absolute search-results"}>
+          <ClickOutside onClick={changeVisibility} className={"d-flex flex-wrap  align-items-center justify-content-center"}>
+            <SongList tracks={tracks}></SongList>
+            <button onClick={() => window.location.href="/busqueda?query="+text} className="btn btn-showMore mt-auto mb-2">Mostrar más</button>
+          </ClickOutside>
         </div>
       ) : (
         <></>
