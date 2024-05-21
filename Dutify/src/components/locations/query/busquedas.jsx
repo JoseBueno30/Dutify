@@ -3,11 +3,14 @@ import { getUserPlaylists, searchTracks } from "../../../spotifyApi/SpotifyApiCa
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import SongList from "../../songList/songList";
 import "./busqueda.css";
+import Spinner from "../../spinner/spinner";
 
 function SearchResults() {
   const [tracks, setLists] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const cargarlista = async () => {
+    setLoading(true);
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('query');
 
@@ -16,13 +19,13 @@ function SearchResults() {
   }
 
   useEffect(() => {
-    cargarlista();
+    cargarlista().finally(() => setLoading(false));
   }, []);
 
   return (
     <div className="busqueda-wrapper">
         <div className="busqueda">
-            <SongList tracks={tracks}></SongList>
+            {loading ? <Spinner></Spinner> : <SongList tracks={tracks}></SongList>}    
         </div>
     </div>
   );
