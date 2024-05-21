@@ -15,6 +15,7 @@ export default function SongButton({track, playLists, playlistId}){
     const [feedback, setFeedback] = useState("")
     const [isPlaying, setPlaying] = useState(false);
 
+
     const handleClose = () => {
         setFeedback("");
     };
@@ -37,7 +38,7 @@ export default function SongButton({track, playLists, playlistId}){
             <>
                 <div title={"Reproducir " + track.name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
                     <div className="playContainer" onClick={songClickHandler}>
-                        <div className="songPlayButton" style={{ backgroundImage:"url("+track.album.images[2].url+")" }}> <FaPlay className="playButton"/> </div>
+                        <div className="songPlayButton" style={ track.album.images[2] !== undefined ?{ backgroundImage:"url("+track.album.images[2].url+")" } : {}}> <FaPlay className="playButton"/> </div>
                     </div>
                     <div className='container-fluid'>
                         <div className='row'>

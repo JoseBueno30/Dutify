@@ -9,7 +9,7 @@ import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiC
 
 export default function PlayList({}){
     const [playList, setPlayList] = useState();
-    const [tracks, setTracks] = useState();
+    const [tracks, setTracks] = useState([]);
     
 
 
