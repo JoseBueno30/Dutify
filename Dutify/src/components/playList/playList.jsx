@@ -10,8 +10,8 @@ import Spinner from "../spinner/spinner";
 
 export default function PlayList({}){
     const [playList, setPlayList] = useState();
-    const [tracks, setTracks] = useState();
     const [loading, setLoading] = useState(false);
+    const [tracks, setTracks] = useState([]);
     
 
 

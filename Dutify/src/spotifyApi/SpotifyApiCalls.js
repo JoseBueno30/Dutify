@@ -52,17 +52,18 @@ const getPlayList = async (playlistId) => {
 };
 
 const getTracksFromPlaylist = async (playlist) =>{
-  let next = playlist.tracks.next;
-  let tracks = playlist.tracks.items.map((item) => ({track: item.track}));
+  let tracks = [];
+  let offset = 0;
 
-  // while(next !== null){
-  //   let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
-  //   next = moreTracks.next;
-    
-  //   moreTracks = moreTracks.items.map((item) => ({track: item.track}));
+  while(true){
+    const data = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset: offset, limit: 100})
+    tracks = tracks.concat(data.items)
+    if(data.items.length < 100){
+      break;
+    }
+    offset += 100;
+  }
 
-  //   tracks = tracks.concat(moreTracks);
-  // }
   return tracks;
 }
 
