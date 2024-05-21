@@ -9,9 +9,10 @@ function AddCard({ type }) {
 
   //Para que se abra el modal de crear lista se deben añadir propiedades
   return (
-    <div
+    <button
       className="card"
       id="card_container"
+      title="Crear lista"
       data-bs-toggle={type == "playlist" ? "modal" : ""}
       data-bs-target={type == "playlist" ? "#listModal" : ""}
     >
@@ -19,7 +20,7 @@ function AddCard({ type }) {
         <IoMdAddCircle className="addButton" />
         <p className="addCard-title cards-title">{cardText}</p>
       </div>
-    </div>
+    </button>
   );
 }
 

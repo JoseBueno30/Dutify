@@ -1,26 +1,20 @@
 import "./listCardStyle.css";
 import "../cardsStyle.css";
 
-
-function handleClick() {
-  dispatch({
-
-  });
-}
-
 function ListCard({ listName, background }) {
 
   return (
-    <div
+    <button
       className="card "
+      title={"Ir a lista '" + listName + "'"}
       id="card_container"
       alt={listName + "_Imagen"}
+      style={{ backgroundImage: `url(${background})` }}
     >
-      <img src={background} className="card-img"/>
       <div className="cards-overlay title-fade">
         <p className="cards-title">{listName}</p>
       </div>
-    </div>
+    </button>
   );
 }
 

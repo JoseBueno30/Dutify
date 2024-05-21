@@ -1,6 +1,6 @@
 import React from "react";
 import { useReducer } from "react";
-import '../cardsStyle.css';
+import "../cardsStyle.css";
 import "./genreStyle.css";
 
 function PlaceHolder(state, action) {}
@@ -9,12 +9,13 @@ function handleClick() {
   dispatch({});
 }
 
-function GenreCard({ genreName, background}) {
+function GenreCard({ genreName, background }) {
   const [state, dispatch] = useReducer(PlaceHolder, []);
 
   return (
-    <div
+    <button
       className={"card " + background}
+      title={"Ir a género '" + genreName + "'"}
       id="card_container"
       alt={genreName + "_Imagen"}
     >
@@ -23,7 +24,7 @@ function GenreCard({ genreName, background}) {
           <p className="cards-title">{genreName}</p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 
