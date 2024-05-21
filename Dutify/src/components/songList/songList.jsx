@@ -34,7 +34,7 @@ export default function SongList({tracks, playlistId}) {
       {tracks.length>0 && playlistId ? (
           tracks.map((track) => (
             track !== null ? <SongButton
-            key={track.track.id}
+            key={track.track.name + track.track.id}
             track={track.track}
             playlistId = {playlistId}
             playLists={userPlayLists}

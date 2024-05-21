@@ -6,41 +6,40 @@ import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 import Spinner from "../spinner/spinner";
 
+export default function PlayList({}) {
+  const [playList, setPlayList] = useState();
+  const [loading, setLoading] = useState(false);
+  const [tracks, setTracks] = useState([]);
 
+  async function loadPlayList() {
+    const searchParams = new URLSearchParams(location.search);
+    const playlistId = searchParams.get("playlistId");
+    const playList = await getPlayList(playlistId);
+    setPlayList(playList);
+  }
 
-export default function PlayList({}){
-    const [playList, setPlayList] = useState();
-    const [loading, setLoading] = useState(false);
-    const [tracks, setTracks] = useState([]);
-    
+  useEffect(() => {
+    loadPlayList();
+  }, []);
 
+  useEffect(() => {
+    async function loadTracks() {
+      const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+      let tracksAux = tracks.concat(tracksNew);
+      setTracks(tracksAux);
+    }
+    if (playList !== undefined && tracks.length < playList.tracks.total) loadTracks().finally(() => setLoading(false));
+  }, [playList, tracks]);
 
-    useEffect(()=>{
-        async function loadPlayList() {
-            setLoading(true);
-            const searchParams = new URLSearchParams(location.search);
-            const playlistId = searchParams.get('playlistId');
-            try{
-                const playList = await getPlayList(playlistId);
-                setPlayList(playList);
-                const tracks = await getTracksFromPlaylist(playList)
-                setTracks(tracks);
-            }catch(error){
-                console.error("ERROR: ", error);
-            }
-        }
-        loadPlayList().finally(() => setLoading(false));
-    }, []);
-
-    return(
-        <div className="playList d-flex flex-column flex-xl-row-reverse">
-            {playList && !loading?(
+  return (
+    <div className="playList d-flex flex-column flex-xl-row-reverse">
+      {playList && !loading?(
                 <>
                     <PlayListInfo playList={playList}/>
                     <SongList tracks={tracks} playlistId={playList.id}/>
                 </>
             ):
             <Spinner></Spinner>}
-        </div>
-    );
+    </div>
+  );
 }
