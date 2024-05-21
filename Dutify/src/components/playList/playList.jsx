@@ -10,6 +10,7 @@ import ListModal from "../listModal/listModal";
 
 export default function PlayList({}){
     const [playlist, setPlayList] = useState();
+    const [playlistName, setPlaylistName] = useState()
     const [tracks, setTracks] = useState();
     
 

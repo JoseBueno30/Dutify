@@ -21,7 +21,7 @@ function esSoloEspacios(texto) {
     setListPublic(e.target.checked);
   };
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
     e.preventDefault();
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
@@ -101,7 +101,7 @@ function esSoloEspacios(texto) {
                     <label className="form-check-label mb-1">Privacidad</label>
                     <br />
                     <input
-                      className="form-check-input"
+                      className="form-check-input ms-1"
                       type="checkbox"
                       role="switch"
                       id="listPublic"

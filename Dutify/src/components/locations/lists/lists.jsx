@@ -11,12 +11,6 @@ function Lists({}) {
     setLists(await getUserPlaylists());
   };
 
-  const crearPlaylist = async (nameList, publicList) => {
-    const data = await createPlaylist(nameList, publicList);
-
-    return data.id;
-  };
-
   useEffect(() => {
     cargarPlaylists();
   }, []);
@@ -29,7 +23,7 @@ function Lists({}) {
   return (
     <section className="lists-section">
       <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
-      <ListModal apiCall={crearPlaylist} />
+      <ListModal/>
     </section>
   );
 }

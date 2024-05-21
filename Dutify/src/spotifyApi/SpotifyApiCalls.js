@@ -198,5 +198,5 @@ const searchTracks = async (query,num) => {
 
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
-  getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
+  getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist, unfollowPlaylist,
   searchTracks, getUser, getPopularArtistsPlaylists, changePlaylistName, getPopularPlaylists, getRecommendedPlaylists};

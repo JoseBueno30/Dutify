@@ -11,7 +11,7 @@ function AddCard() {
       className="card"
       id="card_container"
       title="Crear lista"
-      data-bs-toggle="model"
+      data-bs-toggle="modal"
       data-bs-target="#listModal"
     >
       <div className="d-flex flex-column align-items-center justify-content-center cards-overlay fs-3">

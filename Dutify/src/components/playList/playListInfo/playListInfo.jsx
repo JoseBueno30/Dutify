@@ -25,8 +25,8 @@ export default function PlayListInfo({playlist}){
                 <p title={playlist.name} className="playListName ">{playlist.name}</p>
                 
             </div>
-            {playList.images ? (
-                <img className="playListImage" src={playList.images[0].url}></img>
+            {playlist.images ? (
+                <img className="playListImage" src={playlist.images[0].url}></img>
             ) : (
                 <img className="playListImage" src="/assets/placeholder-img.png"></img>
             )}
@@ -57,7 +57,7 @@ function Options({playlistId}){
             gap={6}
             align="start"
             transition>
-            <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}><button data-bs-toggle="modal" data-bs-target="#listModal">Cambiar nombre</button></MenuItem>
+            <MenuItem className={menuItemClassName} ><button data-bs-toggle="modal" data-bs-target="#listModal">Cambiar nombre</button></MenuItem>
             <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar playlist</button></MenuItem>
                                 
         </Menu>
