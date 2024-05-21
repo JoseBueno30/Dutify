@@ -1,6 +1,6 @@
 .spinner-wrapper {
     height: 80vh;
-    width: 100vw;
+    width: 100%;
     background-color: var(--color-backgroud);
     display: flex;
     justify-content: center;
