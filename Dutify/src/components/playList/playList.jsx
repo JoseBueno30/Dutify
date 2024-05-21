@@ -4,17 +4,20 @@ import SongList from "../songList/songList";
 import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
+import Spinner from "../spinner/spinner";
 
 
 
 export default function PlayList({}){
     const [playList, setPlayList] = useState();
+    const [loading, setLoading] = useState(false);
     const [tracks, setTracks] = useState([]);
     
 
 
     useEffect(()=>{
         async function loadPlayList() {
+            setLoading(true);
             const searchParams = new URLSearchParams(location.search);
             const playlistId = searchParams.get('playlistId');
             try{
@@ -26,18 +29,18 @@ export default function PlayList({}){
                 console.error("ERROR: ", error);
             }
         }
-        loadPlayList();
+        loadPlayList().finally(() => setLoading(false));
     }, []);
 
     return(
         <div className="playList d-flex flex-column flex-xl-row-reverse">
-            {playList?(
+            {playList && !loading?(
                 <>
                     <PlayListInfo playList={playList}/>
                     <SongList tracks={tracks} playlistId={playList.id}/>
                 </>
             ):
-            <></>}
+            <Spinner></Spinner>}
         </div>
     );
 }
