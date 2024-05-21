@@ -4,10 +4,14 @@ div.col_content, #cards_container{
 }
 
 
+
 #cards_table{
     width: 900px;
+    height: fit-content;
 }
 
 #cards_container {
     background-color: var(--color-backgroud);
+    height: 78.5vh;
+    overflow-y: scroll;
 }

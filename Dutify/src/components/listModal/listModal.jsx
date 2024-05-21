@@ -2,10 +2,16 @@ import React from "react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { createPlaylist, changePlaylistName } from "../../spotifyApi/SpotifyApiCalls";
+import "./listModalStyle.css";
 
 function ListModal({ playlist }) {
   const [listName, setListName] = useState(playlist? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
+  const [errorVisibility, setErrorVisibility] = useState(false);
+
+function esSoloEspacios(texto) {
+  return /^\s*$/.test(texto);
+}
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -16,23 +22,30 @@ function ListModal({ playlist }) {
   };
 
   const clickHandler = () => {
-    if (playlist){
-      console.log(playlist)
-      changePlaylistName(playlist.id, listName)
-        .then(() => {
-          window.location.href = "/listas/playlist?playlistId=" + playlist.id;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    e.preventDefault();
+
+    if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
+      setErrorVisibility(true);
     }else{
-      createPlaylist(listName, listPublic)
-        .then((playlist) => {
-          window.location.href = "/listas/playlist?playlistId=" + playlist.id;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      setErrorVisibility(false);
+      if (playlist){
+        console.log(playlist)
+        changePlaylistName(playlist.id, listName)
+          .then(() => {
+            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }else{
+        createPlaylist(listName, listPublic)
+          .then((playlist) => {
+            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   }
     
@@ -60,24 +73,33 @@ function ListModal({ playlist }) {
             </button>
           </div>
           <div className="modal-body">
-            <form>
-              <div className="mb-3 w-75">
-                <label htmlFor="inputName" className="form-label">
-                  Nombre de la lista
+            <form onSubmit={clickHandler}>
+              <div className={"mb-3 w-75"}>
+                <label htmlFor="inputName" className={"form-label"}>
+                  Nombre de la lista <span className="mandatory-field">*</span>
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={
+                    "form-control " + (errorVisibility ? "is-invalid" : "")
+                  }
                   id="inputName"
                   value={listName}
                   onChange={listNameChangeHandler}
                 />
+                <p
+                  className={"error-text " + (!errorVisibility ? "d-none" : "")}
+                >
+                  El nombre de la lista no puede estar vacío.
+                </p>
               </div>
               {playlist? <></>
               :
               <>
                 <div className="mb-4 w-75">
-                  <div className="form-check form-switch">
+                  <div className="form-check form-switch ps-0">
+                    <label className="form-check-label mb-1">Privacidad</label>
+                    <br />
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -85,8 +107,8 @@ function ListModal({ playlist }) {
                       id="listPublic"
                       onChange={listPublicChangeHandler}
                     />
-                    <label className="form-check-label" htmlFor="listPublic">
-                      Pública
+                    <label className="form-check-label ps-3" htmlFor="listPublic">
+                      {listPublic ? "Pública" : "Privada"}
                     </label>
                   </div>
               </div>

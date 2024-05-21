@@ -23,7 +23,7 @@ const getUserId = async () => {
 }
 
 const getUserPlaylists = async () => {
-  //spotifyApiObject.setAccessToken(token);
+
   const data = await spotifyApiObject.getUserPlaylists();
   const playlists = mapPlaylistObject(data);
 
@@ -75,13 +75,44 @@ const getCategoriesID = () =>{
   });
 }
 
-const getCategoriePlaylists = async (catergoryID) =>{
-  const data = await spotifyApiObject.getCategoryPlaylists(catergoryID);
+const getCategoriePlaylists = async (catergoryID, limit) =>{
+  const data = await spotifyApiObject.getCategoryPlaylists(catergoryID, {limit});
 
   const playlists = mapPlaylistObject(data.playlists);
 
   return playlists;
 }
+
+const getPopularPlaylists = async () => {
+  const data = await spotifyApiObject.getFeaturedPlaylists({limit: 8});
+  const playlists = mapPlaylistObject(data.playlists);
+ 
+  return playlists;
+};
+
+
+const getPopularArtistsPlaylists = async () => {
+  const playlists = []
+  const my_top_artists = await spotifyApiObject.getMyTopArtists({limit: 8});
+  const artists_names = my_top_artists.items.map(artist => artist.name);
+  
+  for (const artist_name of artists_names) {
+    const playlistsResponse = await spotifyApiObject.searchPlaylists(`This Is ${artist_name}`, {limit: 1});
+    playlists.push(...mapPlaylistObject(playlistsResponse.playlists));
+  }
+
+  return playlists;
+};
+
+
+const getRecommendedPlaylists = async () => {
+  const catergory = "0JQ5DAt0tbjZptfcdMSKl3"; // Categoria: Especialmente para ti
+  const limite = 8;
+  const playlists = getCategoriePlaylists(catergory,limite);
+
+  return playlists;
+};
+
 
 const createPlaylist = async (listName,listPrivacy) => {
   const playListDetails = {
@@ -168,4 +199,4 @@ const searchTracks = async (query,num) => {
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
-  searchTracks, getUser, unfollowPlaylist, changePlaylistName};
+  searchTracks, getUser, getPopularArtistsPlaylists, changePlaylistName, getPopularPlaylists, getRecommendedPlaylists};

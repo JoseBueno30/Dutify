@@ -7,9 +7,10 @@ function AddCard() {
 
   //Para que se abra el modal de crear lista se deben añadir propiedades
   return (
-    <div
+    <button
       className="card"
       id="card_container"
+      title="Crear lista"
       data-bs-toggle="model"
       data-bs-target="#listModal"
     >
@@ -17,7 +18,7 @@ function AddCard() {
         <IoMdAddCircle className="addButton" />
         <p className="addCard-title cards-title">Nueva lista</p>
       </div>
-    </div>
+    </button>
   );
 }
 

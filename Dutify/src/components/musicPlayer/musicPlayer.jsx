@@ -74,9 +74,9 @@ function MusicPlayer() {
                     <span>mm:ss</span>
                     {/* Bottones de reproducción */}
                     <div className="song-buttons">
-                        <img className="side-button" src="src\assets\musicPlayer\previous-button.svg"></img>
-                        {playing ? <img className="play-button" src="src\assets\musicPlayer\play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="src\assets\musicPlayer\stop-button.svg" onClick={switchPlay}></img>}
-                        <img className="side-button" src="src\assets\musicPlayer\next-button.svg"></img>
+                        <img className="side-button" src="/assets/musicPlayer/previous-button.svg"></img>
+                        {playing ? <img className="play-button" src="/assets/musicPlayer/play-button.svg" onClick={switchPlay}></img> : <img className="play-button" src="/assets/musicPlayer/stop-button.svg" onClick={switchPlay}></img>}
+                        <img className="side-button" src="/assets/musicPlayer/next-button.svg"></img>
                     </div>
                     {/* Temporizador */}
                     <span>mm:ss</span>
@@ -85,7 +85,7 @@ function MusicPlayer() {
             
             {/* Barra de Soido */}
             <div className="sound-bar">
-                {rangeValue == 0 ? <img className="volume-button" onClick={switchVolume} src="src\assets\musicPlayer\mute.svg"></img> : <img className="volume-button" onClick={switchVolume} src="src\assets\musicPlayer\sound.svg"></img>}
+                {rangeValue == 0 ? <img className="volume-button" onClick={switchVolume} src="/assets/musicPlayer/mute.svg"></img> : <img className="volume-button" onClick={switchVolume} src="/assets/musicPlayer/sound.svg"></img>}
                 <input type="range" className="styled-slider slider-progress" min={0} max={100} value={rangeValue} onChange={handleChange}></input>
             </div>
         </div>

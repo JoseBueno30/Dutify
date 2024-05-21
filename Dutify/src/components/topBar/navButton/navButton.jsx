@@ -4,7 +4,7 @@ function NavButton(props) {
 
     return (
         <a  onClick={() => setLocation(props.location)} 
-            className={"navButton fs-5" + (window.location.href.includes(props.texto) ? " currentLocation" : "")}
+            className={"navButton fs-5" + (window.location.href.split("/")[3].includes(props.texto) ? " currentLocation" : "")}
             id={props.id}
             href={"/" + props.texto}>
             {props.texto}

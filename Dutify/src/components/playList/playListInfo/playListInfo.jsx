@@ -1,13 +1,18 @@
 import React from "react";
-import "./playListInfoStyle.css"
+import "./playListInfoStyle.css";
 import { FaGear } from "react-icons/fa6";
 import PlayListPlayer from "./playListPlayer/playListPlayer";
-import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
-import '@szhsin/react-menu/dist/index.css';
-import '@szhsin/react-menu/dist/transitions/slide.css';
+import {
+  Menu,
+  MenuItem,
+  MenuButton,
+  SubMenu,
+  MenuDivider,
+} from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
 import { FcButtingIn } from "react-icons/fc";
 import { unfollowPlaylist } from "../../../spotifyApi/SpotifyApiCalls";
-
 
 export default function PlayListInfo({playlist}){
 
@@ -20,9 +25,11 @@ export default function PlayListInfo({playlist}){
                 <p title={playlist.name} className="playListName ">{playlist.name}</p>
                 
             </div>
-            {playlist.images?
-            <img className="playListImage" src={playlist.images[0].url}></img>
-            :<div className="playListImage"></div>}
+            {playList.images ? (
+                <img className="playListImage" src={playList.images[0].url}></img>
+            ) : (
+                <img className="playListImage" src="/assets/placeholder-img.png"></img>
+            )}
             <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
                 <p>{playlist.tracks.total + " canciones"}</p>
                 <Options playlistId={playlist.id}/>
@@ -33,10 +40,6 @@ export default function PlayListInfo({playlist}){
 }
 
 function Options({playlistId}){
-
-    const cambiarNombreClickHandler = (e) => {
-        
-    }
 
     const eliminarClickHandler = (e) => {
         console.log("AAA")
