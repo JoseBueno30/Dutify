@@ -7,7 +7,7 @@
   transition: 0.25s ease;
   border-radius: 1rem;
   border-color: gray;
-  background-color: #676565;
+  background-color: var(--color-2);
   user-select: none;
   margin-bottom: 1.5rem;
   background-size:cover;
