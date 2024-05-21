@@ -39,8 +39,8 @@ function CardsGrid({type, data, clickFunction}) {
   };
 
   return (
-    <div className="container-fluid pt-3 pb-3" id="cards_container">
-        <div className="row row-cols-md-3 row-cols-2 g-4" id="cards_table">
+    <div className="container-fluid pt-4" id="cards_container">
+        <div className="row row-cols-md-4 row-cols-sm-3 row-cols-2" id="cards_table">
             {gridElements()}
         </div>
     </div>
