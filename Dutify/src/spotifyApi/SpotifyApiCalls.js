@@ -176,7 +176,14 @@ const searchTracks = async (query,num) => {
   return data.tracks.items;
 }
 
+const searchTopTracks = async (num) => {
+  let data = await spotifyApiObject.getMyTopTracks({ limit: num })
+
+  return data.items;
+}
+
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
-  searchTracks, getUser, getPopularArtistsPlaylists, getPopularPlaylists, getRecommendedPlaylists};
+  searchTracks, getUser, getPopularArtistsPlaylists, getPopularPlaylists, getRecommendedPlaylists,
+  searchTopTracks};

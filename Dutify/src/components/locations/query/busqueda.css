@@ -1,6 +1,10 @@
 .busqueda-wrapper {
     background-color: var(--color-background);
     height: 80vh;
+    h4 {
+        color: var(--color-text);
+        padding: 10px ;
+    }
 }
 
 .busqueda {
