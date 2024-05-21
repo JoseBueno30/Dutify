@@ -26,7 +26,8 @@ export default function SongButton({track, playLists, playlistId}){
     });
 
     const timeMIN = Math.trunc(track.duration_ms/60000);
-    const timeMS = Math.trunc((track.duration_ms/1000)%60);
+    const seg = Math.trunc((track.duration_ms%60000)/1000);
+    const timeMS = seg < 10 ? "0"+seg : seg;
 
     const songClickHandler = (e) => {
         setPlaying(!isPlaying);
