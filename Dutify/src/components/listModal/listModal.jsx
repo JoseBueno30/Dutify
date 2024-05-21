@@ -1,13 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { createPlaylist, changePlaylistName } from "../../spotifyApi/SpotifyApiCalls";
 
-function ListModal({ ListName, apiCall}) {
-  const [listName, setListName] = useState(ListName);
+function ListModal({ playlist }) {
+  const [listName, setListName] = useState(playlist? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
-
-  const headerTitle =
-    ListName === undefined ? "Crear nueva lista" : "Editar nombre de la lista";
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -18,13 +16,24 @@ function ListModal({ ListName, apiCall}) {
   };
 
   const clickHandler = () => {
-    apiCall(listName, listPublic)
-      .then((id) => {
-        window.location.href = "/listas/playlist?playlistId=" + id;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (playlist){
+      console.log(playlist)
+      changePlaylistName(playlist.id, listName)
+        .then(() => {
+          window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }else{
+      createPlaylist(listName, listPublic)
+        .then((playlist) => {
+          window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }
     
   return (
@@ -39,7 +48,7 @@ function ListModal({ ListName, apiCall}) {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
-              {headerTitle}
+              {playlist ? "Editar nombre de la lista" : "Crear nueva lista"}
             </h1>
             <button
               type="button"
@@ -60,26 +69,32 @@ function ListModal({ ListName, apiCall}) {
                   type="text"
                   className="form-control"
                   id="inputName"
+                  value={listName}
                   onChange={listNameChangeHandler}
                 />
               </div>
-              <div className="mb-4 w-75">
-                <div className="form-check form-switch">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="listPublic"
-                    onChange={listPublicChangeHandler}
-                  />
-                  <label className="form-check-label" htmlFor="listPublic">
-                    Pública
-                  </label>
-                </div>
+              {playlist? <></>
+              :
+              <>
+                <div className="mb-4 w-75">
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="listPublic"
+                      onChange={listPublicChangeHandler}
+                    />
+                    <label className="form-check-label" htmlFor="listPublic">
+                      Pública
+                    </label>
+                  </div>
               </div>
+              </>
+              }
               <div className="mb-2 d-flex justify-content-start">
                 <button type="button" className="btn btn-primary" onClick={clickHandler}>
-                  Crear lista
+                  {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>
               </div>
             </form>

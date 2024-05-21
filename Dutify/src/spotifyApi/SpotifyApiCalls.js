@@ -83,16 +83,21 @@ const getCategoriePlaylists = async (catergoryID) =>{
   return playlists;
 }
 
-const createPlaylist = async (nameList,publicList) => {
+const createPlaylist = async (listName,listPrivacy) => {
   const playListDetails = {
-    name: nameList,
-    public: publicList,
+    name: listName,
+    public: listPrivacy,
   }
   const userId = await getUserId();
 
-  const data = await spotifyApiObject.createPlaylist(userId, playListDetails);
-  return data;
+  const playlist = await spotifyApiObject.createPlaylist(userId, playListDetails);
+  return playlist;
 };
+
+const changePlaylistName = async (playlistId, playlistName) => {
+  const playListDetails = {name: playlistName};
+  await spotifyApiObject.changePlaylistDetails(playlistId, playListDetails);
+}
 
 const mapPlaylistObject = (data) => {
   const playlists = data.items.map((playlist) => ({
@@ -163,4 +168,4 @@ const searchTracks = async (query,num) => {
 export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
-  searchTracks, getUser, unfollowPlaylist};
+  searchTracks, getUser, unfollowPlaylist, changePlaylistName};

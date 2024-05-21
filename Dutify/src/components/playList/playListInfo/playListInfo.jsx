@@ -54,9 +54,11 @@ function Options({playlistId}){
             gap={6}
             align="start"
             transition>
-                                <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}><button>Cambiar nombre</button></MenuItem>
-                                <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar playlist</button></MenuItem>
+            <MenuItem className={menuItemClassName} onClick={cambiarNombreClickHandler}><button data-bs-toggle="modal" data-bs-target="#listModal">Cambiar nombre</button></MenuItem>
+            <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar playlist</button></MenuItem>
                                 
-                            </Menu>
+        </Menu>
+                            
+                          
     );
 }

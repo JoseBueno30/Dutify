@@ -4,6 +4,7 @@ import TrackList from "../trackList/trackList";
 import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
+import ListModal from "../listModal/listModal";
 
 
 
@@ -33,6 +34,7 @@ export default function PlayList({}){
         <div className="playList d-flex flex-column flex-xl-row-reverse">
             {playlist?(
                 <>
+                    <ListModal playlist={playlist}/>
                     <PlayListInfo playlist={playlist}/>
                     <TrackList tracks={tracks} setTracks={setTracks} playlistId={playlist.id}/>
                 </>

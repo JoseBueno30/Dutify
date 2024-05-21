@@ -14,7 +14,7 @@ import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks,playlistId}) {
+export default function TrackList({tracks, setTracks, playlistId}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [feedback, setFeedback] = useState("");
 
@@ -40,7 +40,7 @@ export default function TrackList({tracks, setTracks,playlistId}) {
       getUserPlayLists();
   }, []);
 
-  async function handleAddTrackToPlayList(track, playlist){
+  async function handleAddTrackToPlayList(track, playlist) {
     addTrackToPlayList(track, playlist).then(status => setFeedback(status));
     //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
     //por lo q no tiene la id de la playlist aunque esta si la tenga 
