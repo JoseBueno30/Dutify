@@ -14,15 +14,29 @@ function SearchBar({ isOpen }) {
   const [tracks, setTracks] = useState([]);
   const [visible, setVisible] = useState(false);
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeydownListener);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeydownListener);
+    };
+  }, []);
+
+  const handleKeydownListener = (event) => {
+    if (event.key === "Enter" && document.activeElement === document.getElementById("search-bar")) {
+      search();
+    }
+  };
+
   const changeVisibility = () => {
     setVisible(!visible);
-  }
+  };
 
   const onChangeText = async () => {
     const query = document.getElementById("search-bar").value;
-    
+
     if (query != "") {
-      const foundTracks = await searchTracks(query,6);
+      const foundTracks = await searchTracks(query, 6);
       setTracks(foundTracks);
       setVisible(true);
     } else {
@@ -33,6 +47,12 @@ function SearchBar({ isOpen }) {
     setText(query);
   };
 
+  const search = () => {
+    if(document.getElementById("search-bar").value!==""){
+      window.location.href = "/busqueda?query=" + document.getElementById("search-bar").value;
+    }
+  }
+
   return (
     <div className={(isOpen ? "" : " occult ") + "d-flex"}>
       <input
@@ -42,14 +62,27 @@ function SearchBar({ isOpen }) {
         placeholder={"Buscar"}
         onChange={onChangeText}
       />
-      <button className="position-absolute search-btn">
+      <button
+        className="position-absolute search-btn"
+        onClick={search}
+      >
         <BiSearch className="" style={{ color: "black" }} />
       </button>
       {visible ? (
         <div className={"position-absolute search-results"}>
-          <ClickOutside onClick={changeVisibility} className={"d-flex flex-wrap  align-items-center justify-content-center"}>
+          <ClickOutside
+            onClick={changeVisibility}
+            className={
+              "d-flex flex-wrap  align-items-center justify-content-center"
+            }
+          >
             <SongList tracks={tracks}></SongList>
-            <button onClick={() => window.location.href="/busqueda?query="+text} className="btn btn-showMore mt-auto mb-2">Mostrar más</button>
+            <button
+              onClick={search}
+              className="btn btn-showMore mt-auto mb-2"
+            >
+              Mostrar más
+            </button>
           </ClickOutside>
         </div>
       ) : (
