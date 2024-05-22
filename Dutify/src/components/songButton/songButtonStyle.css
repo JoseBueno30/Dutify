@@ -200,4 +200,10 @@
     font-weight: 500;
     animation: in-right 200ms;
     transition: transform 0.2s ease-out;
-    }
+  }
+
+.btn-add {
+  background-color: var(--color-theme);
+  border-radius: 10px;
+  color: var(--color-text);
+}

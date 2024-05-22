@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
@@ -9,11 +9,24 @@ import "./songButtonStyle.css";
 import { addTrackToFavorites, addTrackToPlayList, addTrackToPlayListWithId, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { useSnackbar } from '@mui/base/useSnackbar';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import NavButton from "../topBar/navButton/navButton";
 
 
 export default function SongButton({track, playLists, playlistId, enableAddButton=false}){
     const [feedback, setFeedback] = useState("")
     const [isPlaying, setPlaying] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        function handleResize() {
+            setIsSmallScreen(window.innerWidth < 901);
+          }
+          window.addEventListener('resize', handleResize);
+
+          return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+    }, []);
 
 
     const handleClose = () => {
@@ -54,7 +67,7 @@ export default function SongButton({track, playLists, playlistId, enableAddButto
                             </div>
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
-                            {enableAddButton && playlistId ? <button className="col-1" onClick={listClickHandler}>Añadir</button> : <></>}
+                            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? "+" : "Añadir"}</button> : <></>}
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options track={track} playLists={playLists} playlistId={playlistId} setFeedback={setFeedback}/>
                             </div>
