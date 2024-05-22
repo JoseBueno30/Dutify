@@ -32,6 +32,10 @@ function SearchBar({ isOpen }) {
     setVisible(!visible);
   };
 
+  function esSoloEspacios(texto) {
+    return /^\s*$/.test(texto);
+  }
+
   const onChangeText = async () => {
     const query = document.getElementById("search-bar").value;
 
@@ -48,7 +52,7 @@ function SearchBar({ isOpen }) {
   };
 
   const search = () => {
-    if(document.getElementById("search-bar").value!==""){
+    if(!document.getElementById("search-bar").value==="" || !esSoloEspacios(document.getElementById("search-bar").value)){
       window.location.href = "/busqueda?query=" + document.getElementById("search-bar").value;
     }
   }
