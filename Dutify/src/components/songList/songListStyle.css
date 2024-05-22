@@ -1,3 +1,12 @@
+
+@media only screen and (max-width: 1199px){
+  .section-song-list{
+    height: 37.5vh;
+    width: 100%;
+    margin-bottom: 40px;
+}
+}
+
 .list{
     background-color: var(--color-backgroud);
     height: 100%;
@@ -34,11 +43,4 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-
-  @media only screen and (max-width: 1199px){
-    .list{
-      height: 40vh;
-      width: 100%;
-  }
   }

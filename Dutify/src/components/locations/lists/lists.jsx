@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import ListModal from "../../listModal/listModal";
 import { createPlaylist, getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './lists.css';
+import './listsStyle.css';
 import Spinner from "../../spinner/spinner";
 
 function Lists({}) {
