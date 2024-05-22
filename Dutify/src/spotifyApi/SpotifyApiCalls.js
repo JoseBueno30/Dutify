@@ -2,6 +2,10 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApiObject = new SpotifyWebApi();
 
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const setAccessToken = (token) =>{
   spotifyApiObject.setAccessToken(token);
 }
@@ -187,7 +191,7 @@ const addTrackToFavorites = async (track) => {
 }
 
 const unfollowPlaylist = async (playlistId) =>{
-  await spotifyApiObject.unfollowPlaylist(playlistId);
+  console.log(spotifyApiObject.unfollowPlaylist(playlistId))
 }
 
 const searchTracks = async (query,num) => {
@@ -196,7 +200,7 @@ const searchTracks = async (query,num) => {
   return data.tracks.items;
 }
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, sleep,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist, unfollowPlaylist,
   searchTracks, getUser, getPopularArtistsPlaylists, changePlaylistName, getPopularPlaylists, getRecommendedPlaylists};

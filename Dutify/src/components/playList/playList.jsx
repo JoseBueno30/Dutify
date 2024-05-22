@@ -5,6 +5,7 @@ import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 import ListModal from "../listModal/listModal";
+import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
 
 
 
@@ -36,6 +37,7 @@ export default function PlayList({}){
             {playlist?(
                 <>
                     <ListModal playlist={playlist}/>
+                    <DeleteListModal playlist={playlist}/>
                     <PlayListInfo playlist={playlist}/>
                     <TrackList tracks={tracks} setTracks={setTracks} playlistId={playlist.id}/>
                 </>

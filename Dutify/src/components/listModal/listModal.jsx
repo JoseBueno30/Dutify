@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { createPlaylist, changePlaylistName } from "../../spotifyApi/SpotifyApiCalls";
+import { createPlaylist, changePlaylistName, sleep } from "../../spotifyApi/SpotifyApiCalls";
 import "./listModalStyle.css";
 
 function ListModal({ playlist }) {
@@ -32,7 +32,7 @@ function esSoloEspacios(texto) {
         console.log(playlist)
         changePlaylistName(playlist.id, listName)
           .then(() => {
-            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+           sleep(10000).then(() => {window.location.href = "/listas/playlist?playlistId=" + playlist.id;})
           })
           .catch((error) => {
             console.error(error);

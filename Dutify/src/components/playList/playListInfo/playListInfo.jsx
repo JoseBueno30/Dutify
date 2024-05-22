@@ -21,20 +21,25 @@ export default function PlayListInfo({playlist}){
 
     return(
         <div className="playListInfoContainer d-flex flex-column container-fluid">
+
             <div className='d-flex justify-content-xl-evenly  justify-content-center align-items-center '>
                 <p title={playlist.name} className="playListName ">{playlist.name}</p>
                 
             </div>
+
             {playlist.images ? (
                 <img className="playListImage" src={playlist.images[0].url}></img>
             ) : (
                 <img className="playListImage" src="/assets/placeholder-img.png"></img>
             )}
+
             <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
                 <p>{playlist.tracks.total + " canciones"}</p>
                 <Options playlistId={playlist.id}/>
             </div>
+
             <PlayListPlayer className="playListPlayer" />
+            
         </div>
     );
 }
@@ -42,8 +47,6 @@ export default function PlayListInfo({playlist}){
 function Options({playlistId}){
 
     const eliminarClickHandler = (e) => {
-        console.log("AAA")
-        unfollowPlaylist(playlistId).then(window.location.href = "/Listas");
     }
 
     const menuItemClassName = ({ hover }) =>
@@ -58,7 +61,7 @@ function Options({playlistId}){
             align="start"
             transition>
             <MenuItem className={menuItemClassName} ><button data-bs-toggle="modal" data-bs-target="#listModal">Cambiar nombre</button></MenuItem>
-            <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button>Eliminar playlist</button></MenuItem>
+            <MenuItem className={menuItemClassName} onClick={eliminarClickHandler}><button data-bs-toggle="modal" data-bs-target="#deleteListModal">Eliminar playlist</button></MenuItem>
                                 
         </Menu>
                             
