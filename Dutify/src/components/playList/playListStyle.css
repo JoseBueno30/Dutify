@@ -1,7 +1,9 @@
 .playList{
     overflow-x: hidden;
     overflow-y: hidden;                         
-    height : 80vh;
+    height : 82.5vh;
     min-width: 300px;
+    padding-bottom: 10px;
+    background-color: var(--color-backgroud);
 
 }
