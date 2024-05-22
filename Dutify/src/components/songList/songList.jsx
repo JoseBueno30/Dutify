@@ -23,17 +23,14 @@ export default function SongList({tracks, playlistId, busqueda=false}) {
         getUserPlayLists();
     }, []);
 
-    
-
-    
-
   return (
-    <div className="list container-fluid ">
-      <SongInfo/>      
+    <div className="list container-fluid ">    
       {/* PARA PLAYLIST */}
+      <SongInfo showAddButton={busqueda && playlistId}/> 
       {!busqueda ? (
           tracks.map((track) => (
-            track !== null ? <SongButton
+            track !== null ?
+            <SongButton
             key={track.track.id}
             track={track.track}
             playlistId = {playlistId}
