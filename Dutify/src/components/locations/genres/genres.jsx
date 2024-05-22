@@ -5,7 +5,7 @@ import listData from "../../../data/listData.json";
 import genreData from "../../../data/genreData.json";
 import recentListsData from "../../../data/recentListsData.json";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './genres.css';
+import './genresStyle.css';
 
 function Genres({ token }) {
   const [genres, setGenres] = useState([]);
