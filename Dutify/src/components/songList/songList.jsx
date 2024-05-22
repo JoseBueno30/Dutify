@@ -7,7 +7,7 @@ import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
 import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
-export default function SongList({tracks, playlistId}) {
+export default function SongList({tracks, playlistId, busqueda=false}) {
     const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
@@ -31,7 +31,7 @@ export default function SongList({tracks, playlistId}) {
     <div className="list container-fluid ">
       <SongInfo/>      
       {/* PARA PLAYLIST */}
-      {tracks.length>0 && playlistId ? (
+      {!busqueda ? (
           tracks.map((track) => (
             track !== null ? <SongButton
             key={track.track.id}
@@ -44,12 +44,14 @@ export default function SongList({tracks, playlistId}) {
         <></>
       )}
       {/* PARA BUSQUEDA */}
-      {tracks.length>0 && !playlistId ? (
+      {busqueda ? (
           tracks.map((track) => (
             track.track !== null ? <SongButton
             key={track.id}
             track={track}
             playLists={userPlayLists}
+            playlistId = {playlistId}
+            enableAddButton={true}
           /> : <></>
           ))
       ) : ( <></>
@@ -58,7 +60,7 @@ export default function SongList({tracks, playlistId}) {
       {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
 
       {playlistId?
-      <div className="d-flex justify-content-center"><AddSongButton/></div>
+      <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>
       :null}
     </div>
   );

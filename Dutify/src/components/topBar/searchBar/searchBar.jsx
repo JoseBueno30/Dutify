@@ -39,7 +39,7 @@ function SearchBar({ isOpen }) {
       </button>
       {(text !== "" ) ? (
         <div className="position-absolute d-flex flex-wrap search-results align-items-center">
-          <SongList tracks={tracks}></SongList>
+          <SongList tracks={tracks} busqueda={true}></SongList>
           <button onClick={() => window.location.href="/busqueda?query="+text} className="btn btn-showMore mt-auto mb-2">Mostrar más</button>
         </div>
       ) : (

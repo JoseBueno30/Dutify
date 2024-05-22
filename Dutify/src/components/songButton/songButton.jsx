@@ -6,12 +6,12 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
-import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
+import { addTrackToFavorites, addTrackToPlayList, addTrackToPlayListWithId, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { useSnackbar } from '@mui/base/useSnackbar';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 
 
-export default function SongButton({track, playLists, playlistId}){
+export default function SongButton({track, playLists, playlistId, enableAddButton=false}){
     const [feedback, setFeedback] = useState("")
     const [isPlaying, setPlaying] = useState(false);
 
@@ -34,6 +34,12 @@ export default function SongButton({track, playLists, playlistId}){
         setPlaying(!isPlaying);
     }
 
+    const listClickHandler = () => {
+        addTrackToPlayListWithId(track, playlistId).then(
+            setFeedback("Canción añadida a la playlist.")
+        )
+    }
+
     return(
             <>
                 <div title={"Reproducir " + track.name} tabIndex={0} className='songButton' onDoubleClick={songClickHandler}>
@@ -48,6 +54,7 @@ export default function SongButton({track, playLists, playlistId}){
                             </div>
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
+                            {enableAddButton && playlistId ? <button className="col-1" onClick={listClickHandler}>Añadir</button> : <></>}
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options track={track} playLists={playLists} playlistId={playlistId} setFeedback={setFeedback}/>
                             </div>

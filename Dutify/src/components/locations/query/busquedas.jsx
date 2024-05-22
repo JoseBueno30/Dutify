@@ -13,11 +13,13 @@ function SearchResults() {
   const [tracks, setLists] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [playListId, setPlayListId] = useState("");
 
   const cargarlista = async () => {
     setLoading(true);
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get("query");
+    const playListId = searchParams.get("playListId");
     let lista = [];
     if (!query) {
       lista = await searchTopTracks(50);
@@ -26,6 +28,7 @@ function SearchResults() {
     }
     setQuery(query);
     setLists(lista);
+    setPlayListId(playListId);
   };
 
   useEffect(() => {
@@ -36,7 +39,7 @@ function SearchResults() {
     <div className="busqueda-wrapper">
         {query ? <h4>Resultados para: {query}</h4> : <h4>Tus top tracks:</h4> }
         <div className="busqueda">
-            {loading ? <Spinner></Spinner> : <SongList tracks={tracks}></SongList>}    
+            {loading ? <Spinner></Spinner> : <SongList tracks={tracks} playlistId={playListId} busqueda={true}></SongList>}    
         </div>
     </div>
   );

@@ -147,6 +147,14 @@ const addTrackToPlayList = async (track, playList) => {
   }  
 }
 
+const addTrackToPlayListWithId = async (track, playListId) => {
+  try{
+    spotifyApiObject.addTracksToPlaylist(playListId, [track.uri]);
+  }catch(error){
+    console.error("ERROR: ", error);
+  }  
+}
+
 const removeTrackFromPlayList = async (track, playlistId) => {
   console.log(playlistId);
   console.log([track.uri]);
@@ -187,4 +195,4 @@ export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist,
   searchTracks, getUser, getPopularArtistsPlaylists, getPopularPlaylists, getRecommendedPlaylists,
-  searchTopTracks};
+  searchTopTracks, addTrackToPlayListWithId};
