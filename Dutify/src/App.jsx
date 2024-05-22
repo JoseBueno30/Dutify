@@ -27,6 +27,7 @@ function App() {
        window.sessionStorage.setItem("token", spotifyToken);
        console.log("guardado en sesion " + window.sessionStorage.getItem("token"))
     }
+
     setToken(spotifyToken);
     setAccessToken(spotifyToken);
   }, []);
@@ -93,6 +94,11 @@ function App() {
     "playlist-read-collaborative",
     "user-top-read",
     "user-library-read",
+    "streaming",
+    "user-read-email",
+    "user-read-private",
+    "user-modify-playback-state",
+    "user-read-playback-state"
   ];
 
   const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${scopes.join(

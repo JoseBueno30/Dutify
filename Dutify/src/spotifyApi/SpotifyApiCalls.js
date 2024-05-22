@@ -178,19 +178,25 @@ const searchTracks = async (query, num) => {
 export {
   getAccessToken,
   setAccessToken,
-  getUserPlaylists,
+  getUser,
+
+  // GENRES FUNCTIONS
   getCategoriesID,
   getCategoriePlaylists,
-  getUserOwnedPlaylists,
-  addTrackToPlayList,
-  getPlayList,
+
+  // TRACKS FUNCTIONS
   getTracksFromPlaylist,
   removeTrackFromPlayList,
   addTrackToFavorites,
-  createPlaylist,
   searchTracks,
-  getUser,
+
+  // PLAYLISTS FUNCTIONS
+  getUserPlaylists,
+  createPlaylist,
   getPopularArtistsPlaylists,
   getPopularPlaylists,
   getRecommendedPlaylists,
+  getUserOwnedPlaylists,
+  addTrackToPlayList,
+  getPlayList,
 };

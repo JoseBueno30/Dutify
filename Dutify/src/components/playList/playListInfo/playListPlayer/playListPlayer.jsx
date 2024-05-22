@@ -3,12 +3,15 @@ import { RiLoopLeftFill } from "react-icons/ri";
 import { TbArrowsCross } from "react-icons/tb";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import "./playListPlayerStyle.css";
+import { pauseTrack } from "../../../../spotifyApi/SongController";
 
 
-export default function PlayListPlayer(){
+export default function PlayListPlayer({queueFunction}){
     const [isPlaying, setPlaying] = useState(false);
 
     const playButtonClickHandler = (e) => {
+        if(!isPlaying) queueFunction();
+        else pauseTrack();  
         setPlaying(!isPlaying);
     }
     const crossButtonClickHandler = (e) => {

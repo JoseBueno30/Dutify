@@ -11,7 +11,6 @@ export default function SongList({tracks, playlistId}) {
     const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
-      console.log(tracks);
         async function getUserPlayLists() {
             try{
                 const playLists = await getUserOwnedPlaylists()

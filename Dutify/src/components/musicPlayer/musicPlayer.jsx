@@ -45,6 +45,7 @@ function MusicPlayer() {
       window.removeEventListener('resize', handleResize);
     };
 
+  
   }, []);
 
   useEffect(() => {
