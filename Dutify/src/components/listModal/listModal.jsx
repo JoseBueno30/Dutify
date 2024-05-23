@@ -82,7 +82,7 @@ function ListModal({ apiCall }) {
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
                 >
-                  El nombre de la lista no puede estar vacío.
+                  ❌El nombre de la lista no puede estar vacío.❌
                 </p>
               </div>
               <div className="mb-4 w-75">
