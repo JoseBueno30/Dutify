@@ -11,7 +11,7 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import { TracksHandlersContext } from "../trackList/trackList";
 
 
-export default function SongButton({track, index, owned}){
+export default function SongButton({track, index}){
     const [isPlaying, setPlaying] = useState(false);
 
     const timeMIN = Math.trunc(track.duration_ms/60000);
@@ -37,7 +37,7 @@ export default function SongButton({track, index, owned}){
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
-                                <Options track={track} index = {index} owned = {owned}/>
+                                <Options track={track} index = {index}/>
                             </div>
                         </div>
                     </div>
@@ -47,13 +47,14 @@ export default function SongButton({track, index, owned}){
     );
 }
 
-function Options({track, index, owned}){
+function Options({track, index}){
     
     const addTrackToPlaylist = useContext(TracksHandlersContext).handleAddTrackToPlayList;
     const removeTrackFromPlaylist = useContext(TracksHandlersContext).handleRemoveTrackFromPlaylist;
     const addTrackToFavorites = useContext(TracksHandlersContext).handleAddTrackToFavorites;
     const userPlaylists = useContext(TracksHandlersContext).userPlaylists;
     const playlistId = useContext(TracksHandlersContext).playlistId;
+    const owned = useContext(TracksHandlersContext).owned;
 
     const listClickHandler = (playlist) => {
         addTrackToPlaylist(track, playlist);

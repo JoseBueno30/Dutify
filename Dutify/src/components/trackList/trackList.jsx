@@ -59,7 +59,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
     
 
   return (
-    <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, playlistId, userPlaylists}}>
+    <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
       <div className="list container-fluid ">
          
 
