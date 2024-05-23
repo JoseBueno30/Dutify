@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './genres.css';
+import './genresStyle.css';
+import Spinner from "../../spinner/spinner";
 
 const getGenreID = () =>{
   const url = new URL(window.location.href);
@@ -12,11 +13,12 @@ const getGenreID = () =>{
 
 function GenreLists() {
   const [lists, setLists] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const cargarPlaylists = async () =>{
     const id = getGenreID();
-
-    setLists(await getCategoriePlaylists(id,30))
+    setLoading(true);
+    setLists(await getCategoriePlaylists(id,30).finally(() => setLoading(false)));
   }
 
   useEffect(() => {
@@ -30,7 +32,7 @@ function GenreLists() {
 
   return (
     <section className="genres-section">
-      <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
+      {loading ? <Spinner></Spinner> : <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>}
     </section>
   );
 }
