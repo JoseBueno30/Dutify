@@ -11,6 +11,7 @@ function ListModal({ apiCall }) {
   const [listName, setListName] = useState("");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(true);
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -25,6 +26,7 @@ function ListModal({ apiCall }) {
       setErrorVisibility(true);
       return;
     }
+    setCanSubmit(false);
     setErrorVisibility(false);
     apiCall(listName, listPublic)
       .then((id) => {
@@ -32,6 +34,7 @@ function ListModal({ apiCall }) {
       })
       .catch((error) => {
         console.error(error);
+        setCanSubmit(true);
       });
   };
 
@@ -78,6 +81,8 @@ function ListModal({ apiCall }) {
                   }
                   id="inputName"
                   onChange={listNameChangeHandler}
+                  maxLength={20}
+                  disabled={!canSubmit}
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
@@ -103,7 +108,7 @@ function ListModal({ apiCall }) {
                 </div>
               </div>
               <div className="mb-2 d-flex justify-content-start">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" disabled={!canSubmit}>
                   Crear lista
                 </button>
               </div>
