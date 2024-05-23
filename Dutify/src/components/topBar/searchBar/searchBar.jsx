@@ -31,7 +31,8 @@ function SearchBar({ isOpen }) {
         id="search-bar"
         className="search-bar"
         type="text"
-        placeholder={"Buscar"}
+        placeholder={"Buscar canción"}
+        maxLength={50}
         onChange={onChangeText}
       />
       <button className="position-absolute search-btn">
