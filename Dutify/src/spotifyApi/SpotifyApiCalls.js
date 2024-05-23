@@ -34,6 +34,14 @@ const getUserPlaylists = async () => {
   return playlists;
 };
 
+const isPlaylistOwned = async(playlist) => {
+  const user = await getUser();
+  console.log(playlist)
+  console.log(user)
+  console.log(playlist.owner.id === user.id)
+  return playlist.owner.id === user.id;
+}
+
 const getUserOwnedPlaylists = async () => {
   const data = await spotifyApiObject.getUserPlaylists();
   const user = await getUser();
@@ -130,9 +138,16 @@ const createPlaylist = async (listName,listPrivacy) => {
 };
 
 const changePlaylistName = async (playlistId, playlistName) => {
+  let status;
   const playListDetails = {name: playlistName};
-  await spotifyApiObject.changePlaylistDetails(playlistId, playListDetails);
-  await sleep(500);
+  try{
+    await spotifyApiObject.changePlaylistDetails(playlistId, playListDetails);
+    status = "El nombre de la playlist tardará un poco en actualizarse";
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error cambiando el nombre de la playlist";
+  }
+  return status;
 }
 
 const mapPlaylistObject = (data) => {
@@ -202,7 +217,7 @@ const searchTracks = async (query,num) => {
   return data.tracks.items;
 }
 
-export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, sleep,
+export {getAccessToken, setAccessToken, getUserPlaylists, getCategoriesID, sleep, isPlaylistOwned,
   getCategoriePlaylists, getUserOwnedPlaylists, addTrackToPlayList, getPlayList,
   getTracksFromPlaylist, removeTrackFromPlayList, addTrackToFavorites, createPlaylist, unfollowPlaylist,
   searchTracks, getUser, getPopularArtistsPlaylists, changePlaylistName, getPopularPlaylists, getRecommendedPlaylists};

@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { useState, createContext, useReducer } from "react";
+import { useState, createContext, useContext } from "react";
 import SongButton from "../songButton/songButton";
 import "./trackListStyle.css";
 
 import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
 import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
-import { useSnackbar } from '@mui/base/useSnackbar';
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
+import { FeedbackHandlerContext } from "../../App";
+
 
 
 
@@ -16,17 +17,7 @@ export const TracksHandlersContext = createContext(null);
 
 export default function TrackList({tracks, setTracks, playlistId}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const [feedback, setFeedback] = useState("");
-
-  const handleClose = () => {
-    setFeedback("");
-  };
-
-  const { getRootProps, onClickAway } = useSnackbar({
-    onClose: handleClose,
-    feedback,
-    autoHideDuration: 5000,
-  });
+  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
 
   useEffect(()=>{
       async function getUserPlayLists() {
@@ -70,11 +61,7 @@ export default function TrackList({tracks, setTracks, playlistId}) {
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, playlistId, userPlaylists}}>
       <div className="list container-fluid ">
-        {feedback !== "" ? (
-          <ClickAwayListener onClickAway={onClickAway}>
-            <div className="CustomSnackbar" {...getRootProps()}>{feedback}</div>
-          </ClickAwayListener>) 
-        : null}  
+         
 
         {tracks.length>0 ? (<SongInfo/>) : (<></>)}
         

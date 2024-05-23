@@ -32,14 +32,14 @@ function DeleteListModal({ playlist }) {
             </button>
           </div>
           <div className="modal-body">
-            <div className={"mb-3 w-75"}>{playlist.name + " se eliminará de tu biblioteca?"}</div>
+            <div className={"mb-3 w-75"}>{playlist.name + " se eliminará de tu biblioteca"}</div>
 
             <div className="mb-2 d-flex justify-content-evenly">
               <button
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                aria-label="Close"
+                aria-label="Cancel"
               >
                 Cancelar
               </button>

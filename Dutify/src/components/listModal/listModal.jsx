@@ -1,17 +1,23 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { IoClose } from "react-icons/io5";
-import { createPlaylist, changePlaylistName, sleep } from "../../spotifyApi/SpotifyApiCalls";
+import {
+  createPlaylist,
+  changePlaylistName,
+  sleep,
+} from "../../spotifyApi/SpotifyApiCalls";
 import "./listModalStyle.css";
+import { FeedbackHandlerContext } from "../../App";
 
 function ListModal({ playlist }) {
-  const [listName, setListName] = useState(playlist? playlist.name : "");
+  const [listName, setListName] = useState(playlist ? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
+  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
 
-function esSoloEspacios(texto) {
-  return /^\s*$/.test(texto);
-}
+  function esSoloEspacios(texto) {
+    return /^\s*$/.test(texto);
+  }
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -26,18 +32,21 @@ function esSoloEspacios(texto) {
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
-    }else{
+    } else {
       setErrorVisibility(false);
-      if (playlist){
-        console.log(playlist)
+      if (playlist) {
+        console.log(playlist);
         changePlaylistName(playlist.id, listName)
-          .then(() => {
-           window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+        .then(status => {
+          setFeedback(status);
+          sleep(2500).then(() => {
+              window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+            })
           })
           .catch((error) => {
             console.error(error);
           });
-      }else{
+      } else {
         createPlaylist(listName, listPublic)
           .then((playlist) => {
             window.location.href = "/listas/playlist?playlistId=" + playlist.id;
@@ -47,8 +56,8 @@ function esSoloEspacios(texto) {
           });
       }
     }
-  }
-    
+  };
+
   return (
     <div
       className="modal fade"
@@ -93,29 +102,40 @@ function esSoloEspacios(texto) {
                   El nombre de la lista no puede estar vacío.
                 </p>
               </div>
-              {playlist? <></>
-              :
-              <>
-                <div className="mb-4 w-75">
-                  <div className="form-check form-switch ps-0">
-                    <label className="form-check-label mb-1">Privacidad</label>
-                    <br />
-                    <input
-                      className="form-check-input ms-1"
-                      type="checkbox"
-                      role="switch"
-                      id="listPublic"
-                      onChange={listPublicChangeHandler}
-                    />
-                    <label className="form-check-label ps-3" htmlFor="listPublic">
-                      {listPublic ? "Pública" : "Privada"}
-                    </label>
+              {playlist ? (
+                <></>
+              ) : (
+                <>
+                  <div className="mb-4 w-75">
+                    <div className="form-check form-switch ps-0">
+                      <label className="form-check-label mb-1">
+                        Privacidad
+                      </label>
+                      <br />
+                      <input
+                        className="form-check-input ms-1"
+                        type="checkbox"
+                        role="switch"
+                        id="listPublic"
+                        onChange={listPublicChangeHandler}
+                      />
+                      <label
+                        className="form-check-label ps-3"
+                        htmlFor="listPublic"
+                      >
+                        {listPublic ? "Pública" : "Privada"}
+                      </label>
+                    </div>
                   </div>
-              </div>
-              </>
-              }
+                </>
+              )}
               <div className="mb-2 d-flex justify-content-start">
-                <button type="button" className="btn btn-primary" onClick={clickHandler}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={clickHandler}
+                  data-bs-dismiss="modal"
+                >
                   {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>
               </div>
