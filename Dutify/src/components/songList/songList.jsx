@@ -29,7 +29,8 @@ export default function SongList({tracks, playlistId, busqueda=false}) {
       <SongInfo showAddButton={busqueda && playlistId}/> 
       {!busqueda ? (
           tracks.map((track) => (
-            track !== null ? <SongButton
+            console.log(track),
+            track !== null && track.track !== null ? <SongButton
             key={track.track.name + track.track.id}
             track={track.track}
             playlistId = {playlistId}

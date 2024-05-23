@@ -36,9 +36,7 @@ export default function PlayList({}) {
       {playList && !loading?(
                 <>
                     <PlayListInfo playList={playList}/>
-                    <section className="section-song-list">
                       <SongList tracks={tracks} playlistId={playList.id}/>
-                    </section>
                 </>
             ):
             <Spinner></Spinner>}
