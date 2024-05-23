@@ -56,7 +56,7 @@ export default function SongList({tracks, playlistId, busqueda=false}) {
       {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay canciones en esta PlayList</div> : <></>}
       {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
 
-      {playlistId?
+      {playlistId && !busqueda?
       <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>
       :null}
     </div>
