@@ -1,11 +1,11 @@
 .busqueda-wrapper {
     background-color: var(--color-background);
     height: 82.5vh;
-    display: flex;
+    display: flex; 
     justify-content: space-around;
     h4 {
         color: var(--color-text);
-        padding: 10px ;
+        padding-left: 10px;
     }
 }
 
@@ -14,8 +14,9 @@
 }
 
 .busqueda {
-    height: 100%;
+    height: 95%;
     display: flex;
+    justify-content: center;
     @media screen and (max-width: 768px) {
         margin-left: 0%;
         margin-right: 0%;
