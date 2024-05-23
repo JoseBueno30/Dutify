@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserPlaylists, searchTracks } from "../../../spotifyApi/SpotifyApiCalls";
 import CardsGrid from "../../cardsGrid/cardsGrid";
-import SongList from "../../songList/songList";
+import TrackList from "../../trackList/trackList";
 import "./busqueda.css";
 import Spinner from "../../spinner/spinner";
 
@@ -25,7 +25,7 @@ function SearchResults() {
   return (
     <div className="busqueda-wrapper">
         <div className="busqueda">
-            {loading ? <Spinner></Spinner> : <SongList tracks={tracks}></SongList>}    
+            {loading ? <Spinner></Spinner> : <TrackList tracks={tracks}></TrackList>}    
         </div>
     </div>
   );

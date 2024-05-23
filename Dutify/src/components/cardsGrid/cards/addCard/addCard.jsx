@@ -3,9 +3,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import "../cardsStyle.css";
 import "./addCardStyle.css";
 
-function AddCard({ type }) {
-
-  var cardText = type == "playlist" ? "Nueva lista" : "Añadir canción";
+function AddCard() {
 
   //Para que se abra el modal de crear lista se deben añadir propiedades
   return (
@@ -13,12 +11,12 @@ function AddCard({ type }) {
       className="card"
       id="card_container"
       title="Crear lista"
-      data-bs-toggle={type == "playlist" ? "modal" : ""}
-      data-bs-target={type == "playlist" ? "#listModal" : ""}
+      data-bs-toggle="modal"
+      data-bs-target="#listModal"
     >
       <div className="d-flex flex-column align-items-center justify-content-center cards-overlay fs-3">
         <IoMdAddCircle className="addButton" />
-        <p className="addCard-title cards-title">{cardText}</p>
+        <p className="addCard-title cards-title">Nueva lista</p>
       </div>
     </button>
   );

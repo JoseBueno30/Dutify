@@ -29,7 +29,7 @@ function CardsGrid({type, data, clickFunction}) {
       if (type === "list") {
         gridList.push(
           <div className="col col_content" key={100}>
-            <AddCard type={'playlist'}/>
+            <AddCard/>
           </div>
         );
       }
