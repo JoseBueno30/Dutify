@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import "./listModalStyle.css";
@@ -13,6 +13,15 @@ function ListModal({ apiCall }) {
   const [errorVisibility, setErrorVisibility] = useState(false);
   const [canSubmit, setCanSubmit] = useState(true);
 
+  useEffect(() => {
+    const modal = document.getElementById("listModal");
+    modal.addEventListener("hidden.bs.modal", hideHandler);
+
+    return () => {
+      modal.removeEventListener("hidden.bs.modal", hideHandler);
+    };
+  },[]);
+
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
   };
@@ -20,6 +29,13 @@ function ListModal({ apiCall }) {
   const listPublicChangeHandler = (e) => {
     setListPublic(e.target.checked);
   };
+
+  const hideHandler = () => {
+    setListName("");
+    setListPublic(false);
+    setErrorVisibility(false);
+    setCanSubmit(true);
+  }
 
   const executeCall = () => {
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
@@ -100,6 +116,7 @@ function ListModal({ apiCall }) {
                     role="switch"
                     id="listPublic"
                     onChange={listPublicChangeHandler}
+                    checked={listPublic}
                   />
                   <label className="form-check-label ps-3" htmlFor="listPublic">
                     {listPublic ? "Pública" : "Privada"}
