@@ -71,7 +71,26 @@ const getTracksFromPlaylist = async (playlist, offset) => {
     offset: offset,
     limit: 100,
   });
-  return data.items;
+  console.log("AAA: " + data);
+  let tracks = data.items.map(item => item.track);
+  console.log(tracks)
+  return tracks;
+};
+
+const getAllTracksFromPlaylist = async (playlist) => {
+  let next = playlist.tracks.next;
+  let tracks = playlist.tracks.items.map(item => item.track);
+  
+  while(next !== null){
+    let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
+    next = moreTracks.next;
+    
+    moreTracks = moreTracks.items.map(item => item.track);
+    
+    tracks = tracks.concat(moreTracks);
+  }
+  console.log(tracks);
+  return tracks;
 };
 
 const getCategoriesID = () => {
@@ -166,7 +185,7 @@ const mapPlaylistObject = (data) => {
 const addTrackToPlayList = async (track, playlist) => {
   let status;
   try{
-    const playlistTracks = await getTracksFromPlaylist(await getPlayList(playlist.id));
+    const playlistTracks = await getAllTracksFromPlaylist(await getPlayList(playlist.id));
     if(playlistTracks.some(playlistTrack => playlistTrack.uri === track.uri)){
       status = "Esta canción ya está en "+ playlist.name;
     }else{

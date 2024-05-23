@@ -22,6 +22,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
   useEffect(()=>{
       async function getUserPlayLists() {
           try{
+            console.log(tracks)
               const playlists = await getUserOwnedPlaylists().then()
               setUserPlaylists(playlists);
           }catch(error){

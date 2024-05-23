@@ -128,7 +128,6 @@ function App() {
         </a>
       ) : (
         <>
-          <FeedbackHandlerContext.Provider value={{ setFeedback }}>
             {feedback !== "" ? (
               <ClickAwayListener onClickAway={onClickAway}>
                 <div className="CustomSnackbar" {...getRootProps()}>
@@ -140,7 +139,6 @@ function App() {
             <TopBar></TopBar>
             <RouterProvider router={router}></RouterProvider>
             <MusicPlayer></MusicPlayer>
-          </FeedbackHandlerContext.Provider>
         </>
       )}
       <HelpModal />

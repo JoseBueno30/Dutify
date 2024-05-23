@@ -15,46 +15,50 @@ import Spinner from "../spinner/spinner";
 export default function PlayList({}) {
   const [playlist, setPlayList] = useState();
   const [playlistName, setPlaylistName] = useState();
-  const [tracks, setTracks] = useState();
+  const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(false);
   const[owned, setOwned] = useState(false);
 
+  async function loadPlayList() {
+    const searchParams = new URLSearchParams(location.search);
+    const playlistId = searchParams.get("playlistId");
+    const playList = await getPlayList(playlistId);
+    setPlayList(playList);
+    const isOwned = await isPlaylistOwned(playList);
+    setOwned(isOwned);
+  }
+
   useEffect(() => {
-    async function loadPlayList() {
-      const searchParams = new URLSearchParams(location.search);
-      const playlistId = searchParams.get("playlistId");
-      try {
-        const playlist = await getPlayList(playlistId);
-        setPlayList(playlist);
-        const tracks = await getTracksFromPlaylist(playlist);
-        setTracks(tracks);
-        const isOwned = await isPlaylistOwned(playlist);
-        setOwned(isOwned);
-      } catch (error) {
-        console.error("ERROR: ", error);
-      }
-    }
     loadPlayList();
   }, []);
 
+  useEffect(() => {
+    async function loadTracks() {
+      console.log("LOADING")
+      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
+      let tracksAux = tracks.concat(tracksNew);
+      setTracks(tracksAux);
+    }
+    if (playlist !== undefined && tracks.length < playlist.tracks.total) loadTracks().finally(() => setLoading(false));
+  }, [playlist, tracks]);
+
   return (
     <div className="playList d-flex flex-column flex-xl-row-reverse">
-      {playlist ? (
-        <>
-          <ListModal playlist={playlist} />
-
-          <DeleteListModal playlist={playlist} />
-          <PlayListInfo playlist={playlist} owned={owned} />
-          <TrackList
-            tracks={tracks}
-            owned={owned}
-            setTracks={setTracks}
-            playlistId={playlist.id}
-          />
-        </>
-      ) : (
-        <></>
-      )}
-    </div>
+    {playlist && !loading?(
+              <>
+              <ListModal playlist={playlist} />
+    
+              <DeleteListModal playlist={playlist} />
+              <PlayListInfo playlist={playlist} owned={owned} />
+              <TrackList
+                tracks={tracks}
+                owned={owned}
+                setTracks={setTracks}
+                playlistId={playlist.id}
+              />
+            </>
+          ):
+          <Spinner></Spinner>}
+  </div>
   );
 }
