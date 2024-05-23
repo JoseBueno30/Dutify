@@ -1,4 +1,4 @@
-import {EventEmitter} from "events"
+import { EventEmitter } from "events";
 
 let track = new Audio();
 let queue = JSON.parse(window.sessionStorage.getItem("queue"));
@@ -20,14 +20,22 @@ const setTrack = (link) => {
       nextQueueSong();
       console.log("Se ha terminado la reproducción");
     });
-    track.addEventListener("timeupdate", () =>{
+    track.addEventListener("timeupdate", () => {
       window.sessionStorage.setItem("trackTime", track.currentTime);
-    })
+    });
     playTrack();
   } else {
     console.error("No hay vista previa de esta cancion");
     nextQueueSong();
   }
+};
+
+const setSingleTrack = (track) => {
+  queueEmitter.emit("queueEnded")
+  i = 0;
+  queue = null;
+  window.sessionStorage.setItem("queue", JSON.stringify(queue));
+  setTrack(track);
 };
 
 const playTrack = () => {
@@ -60,15 +68,17 @@ const playQueue = () => {
 };
 
 const nextQueueSong = () => {
-  if (i + 1 < queue.length - 1) {
-    i += 1;
-  } else {
-    i = 0;
-    queue = [];
-    window.sessionStorage.setItem("playlistPlaying", null);
-    queueEmitter.emit("queueEnded");
+  if (queue !== null) {
+    if (i + 1 < queue.length - 1) {
+      i += 1;
+    } else {
+      i = 0;
+      queue = null;
+      window.sessionStorage.setItem("playlistPlaying", queue);
+      queueEmitter.emit("queueEnded");
+    }
+    saveAndPlay();
   }
-  saveAndPlay();
 };
 
 const previousQueueSong = () => {
@@ -95,6 +105,7 @@ const getQueueIndex = () => {
 
 export {
   setTrack,
+  setSingleTrack,
   playTrack,
   pauseTrack,
   getCurrentTime,
@@ -107,6 +118,7 @@ export {
   setQueueIndex,
   getQueueIndex,
 
+
   // EVENTO COLA
-  queueEmitter
+  queueEmitter,
 };

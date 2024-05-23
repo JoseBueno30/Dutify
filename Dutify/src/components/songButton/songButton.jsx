@@ -20,7 +20,7 @@ import {
 } from "../../spotifyApi/SpotifyApiCalls";
 import { useSnackbar } from "@mui/base/useSnackbar";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
-import { addTrackToQueue, setQueue, setQueueIndex, setTrack } from "../../spotifyApi/SongController";
+import { setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
 export default function SongButton({ track, index, playLists, playlistId, enPlaylist, loadQueue, setPlaying}) {
   const [feedback, setFeedback] = useState("");
@@ -53,7 +53,7 @@ export default function SongButton({ track, index, playLists, playlistId, enPlay
       setPlaying(true);
     }else{
       console.log(track.preview_url);
-      setTrack(track.preview_url);
+      setSingleTrack(track.preview_url);
     }
   };
 
