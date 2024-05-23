@@ -15,7 +15,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId}) {
+export default function TrackList({tracks, setTracks, playlistId, owned}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
 
@@ -71,6 +71,7 @@ export default function TrackList({tracks, setTracks, playlistId}) {
               key={index}
               track={track}
               index={index}
+              owned = {owned}
             /> : <></>
             ))
         ) : (

@@ -6,6 +6,7 @@ import "./playListStyle.css";
 import {
   getPlayList,
   getTracksFromPlaylist,
+  isPlaylistOwned,
 } from "../../spotifyApi/SpotifyApiCalls";
 import ListModal from "../listModal/listModal";
 import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
@@ -14,6 +15,7 @@ export default function PlayList({}) {
   const [playlist, setPlayList] = useState();
   const [playlistName, setPlaylistName] = useState();
   const [tracks, setTracks] = useState();
+  const[owned, setOwned] = useState(false);
 
   useEffect(() => {
     async function loadPlayList() {
@@ -24,6 +26,8 @@ export default function PlayList({}) {
         setPlayList(playlist);
         const tracks = await getTracksFromPlaylist(playlist);
         setTracks(tracks);
+        const isOwned = await isPlaylistOwned(playlist);
+        setOwned(isOwned);
       } catch (error) {
         console.error("ERROR: ", error);
       }
@@ -38,9 +42,10 @@ export default function PlayList({}) {
           <ListModal playlist={playlist} />
 
           <DeleteListModal playlist={playlist} />
-          <PlayListInfo playlist={playlist} />
+          <PlayListInfo playlist={playlist} owned={owned} />
           <TrackList
             tracks={tracks}
+            owned={owned}
             setTracks={setTracks}
             playlistId={playlist.id}
           />

@@ -17,23 +17,11 @@ import {
   unfollowPlaylist,
 } from "../../../spotifyApi/SpotifyApiCalls";
 
-export default function PlayListInfo({ playlist }) {
-    const[owned, setOwned] = useState(false);
+export default function PlayListInfo({ playlist, owned }) {
 
   const timeMIN = Math.trunc(playlist.duration_ms / 60000);
   const timeMS = Math.trunc((playlist.duration_ms / 1000) % 60);
 
-  useEffect(() => {
-    async function checkPlaylistOwner() {
-      try {
-        const isOwned = await isPlaylistOwned(playlist);
-        setOwned(isOwned);
-      } catch (error) {
-        console.error("ERROR: ", error);
-      }
-    }
-    checkPlaylistOwner();
-  }, []);
   return (
     <div className="playListInfoContainer d-flex flex-column container-fluid">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
@@ -50,7 +38,7 @@ export default function PlayListInfo({ playlist }) {
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
         <p>{playlist.tracks.total + " canciones"}</p>
-        {owned===true ? <Options /> : <></>}
+        {owned? <Options /> : <></>}
       </div>
 
       <PlayListPlayer className="playListPlayer" />
