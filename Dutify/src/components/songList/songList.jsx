@@ -32,7 +32,7 @@ export default function SongList({tracks, playlistId, loadQueue, setPlaying}) {
       {/* PARA PLAYLIST */}
       {tracks.length>0 && playlistId ? (
           tracks.map((track, index) => (
-            track !== null ? <SongButton
+            track !== null && track.track !== null ? <SongButton
             enPlaylist={true}
             key={index}
             index={index}
@@ -59,7 +59,7 @@ export default function SongList({tracks, playlistId, loadQueue, setPlaying}) {
       ) : ( <></>
       )}
       {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay canciones en esta PlayList</div> : <></>}
-      {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+      {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay resultados para esta busqueda</div> : <></>}
 
       {playlistId?
       <div className="d-flex justify-content-center"><AddSongButton/></div>

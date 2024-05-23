@@ -106,7 +106,7 @@ function App() {
   )}&show_dialog=true`;
 
   return (
-    <div id={contextTheme}>
+    <div id={contextTheme} style={{height: '100vh'}}>
       {!token ? (
         <a className="btn btn-success" href={loginUrl}>Login</a>
       ) : (
