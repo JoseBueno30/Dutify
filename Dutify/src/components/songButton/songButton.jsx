@@ -10,16 +10,17 @@ import { addTrackToFavorites, addTrackToPlayList, addTrackToPlayListWithId, remo
 import { useSnackbar } from '@mui/base/useSnackbar';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import NavButton from "../topBar/navButton/navButton";
+import { FaPlus } from "react-icons/fa";
 
 
 export default function SongButton({track, playLists, playlistId, enableAddButton=false}){
     const [feedback, setFeedback] = useState("")
     const [isPlaying, setPlaying] = useState(false);
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
 
     useEffect(() => {
         function handleResize() {
-            setIsSmallScreen(window.innerWidth < 901);
+            setIsSmallScreen(window.innerWidth < 750);
           }
           window.addEventListener('resize', handleResize);
 
@@ -67,7 +68,7 @@ export default function SongButton({track, playLists, playlistId, enableAddButto
                             </div>
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
-                            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? "+" : "Añadir"}</button> : <></>}
+                            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options track={track} playLists={playLists} playlistId={playlistId} setFeedback={setFeedback}/>
                             </div>

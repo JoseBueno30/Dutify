@@ -10,7 +10,11 @@
 }
 
 .busqueda-container {
-    flex-basis: 60%;
+    width: 900px;
+    @media screen and (max-width: 900px) {
+        flex-basis: 100%;
+        width: 100%;
+      }
 }
 
 .busqueda {
