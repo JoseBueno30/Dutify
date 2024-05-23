@@ -20,6 +20,9 @@ const setTrack = (link) => {
       nextQueueSong();
       console.log("Se ha terminado la reproducción");
     });
+    track.addEventListener("timeupdate", () =>{
+      window.sessionStorage.setItem("trackTime", track.currentTime);
+    })
     playTrack();
   } else {
     console.error("No hay vista previa de esta cancion");
@@ -46,7 +49,6 @@ const getCurrentTime = () => {
 const setQueue = (newQueue) => {
   i = 0;
   newQueue.push(track.src);
-  console.log(newQueue);
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
 };
@@ -58,12 +60,12 @@ const playQueue = () => {
 };
 
 const nextQueueSong = () => {
-  console.log(i, queue.length);
   if (i + 1 < queue.length - 1) {
     i += 1;
   } else {
     i = 0;
     queue = [];
+    window.sessionStorage.setItem("playlistPlaying", null);
     queueEmitter.emit("queueEnded");
   }
   saveAndPlay();

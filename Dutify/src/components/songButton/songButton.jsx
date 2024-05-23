@@ -44,8 +44,10 @@ export default function SongButton({ track, index, playLists, playlistId, enPlay
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     if(enPlaylist && playlistId === playlistPlaying){   
+      console.log("Reproduciendo misma playlist...");
       setQueueIndex(index);
     }else if(enPlaylist){
+      console.log("Reproduciendo playlist nueva...");
       loadQueue();
       setQueueIndex(index);
       setPlaying(true);
