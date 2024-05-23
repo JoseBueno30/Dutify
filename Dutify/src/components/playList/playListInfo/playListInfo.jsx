@@ -27,7 +27,7 @@ export default function PlayListInfo({ playList }) {
       {playList.images ? (
         <img className="playListImage" src={playList.images[0].url}></img>
       ) : (
-        <img className="playListImage" src="/assets/placeholder-img.png"></img>
+        <img className="playListImage" src={"/assets/placeholder-img-light.png"}></img>
       )}
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
         <p>{playList.tracks.total + " canciones"}</p>
