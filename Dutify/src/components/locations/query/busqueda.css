@@ -11,6 +11,7 @@
 
 .busqueda-container {
     flex-basis: 60%;
+    height: 82.5vh;
 }
 
 .busqueda {
