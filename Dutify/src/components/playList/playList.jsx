@@ -36,7 +36,7 @@ export default function PlayList({}) {
       {playList && !loading?(
                 <>
                     <PlayListInfo playList={playList}/>
-                      <SongList tracks={tracks} playlistId={playList.id}/>
+                    <SongList tracks={tracks} playlistId={playList.id}/>
                 </>
             ):
             <Spinner></Spinner>}

@@ -1,5 +1,5 @@
 #dark{
-  --color-backgroud:#3A3434;
+  --color-background:#3A3434;
   --color-1:#484848;
   --color-2:#555555;
   --color-3:#666666;
@@ -12,7 +12,7 @@
 }
 
 #light{
-  --color-backgroud:#dddddd;
+  --color-background:#dddddd;
   --color-1:#f5f5f5;
   --color-2:#e6e6e6;
   --color-3:#d5d5d5;
