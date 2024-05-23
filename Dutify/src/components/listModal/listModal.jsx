@@ -88,7 +88,7 @@ function ListModal({ apiCall }) {
             <form onSubmit={clickHandler}>
               <div className={"mb-3 w-75"}>
                 <label htmlFor="inputName" className={"form-label"}>
-                  Nombre de la lista <span className="mandatory-field">*</span>
+                  Nombre de la lista *
                 </label>
                 <input
                   type="text"
