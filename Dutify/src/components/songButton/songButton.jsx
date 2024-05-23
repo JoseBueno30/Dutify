@@ -31,6 +31,7 @@ export default function SongButton({track, playLists, playlistId}){
     const timeMS = seg < 10 ? "0"+seg : seg;
 
     const songClickHandler = (e) => {
+        console.log(track)
         setPlaying(!isPlaying);
     }
 
