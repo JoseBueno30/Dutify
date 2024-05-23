@@ -132,6 +132,7 @@ const createPlaylist = async (listName,listPrivacy) => {
 const changePlaylistName = async (playlistId, playlistName) => {
   const playListDetails = {name: playlistName};
   await spotifyApiObject.changePlaylistDetails(playlistId, playListDetails);
+  await sleep(500);
 }
 
 const mapPlaylistObject = (data) => {
@@ -191,7 +192,8 @@ const addTrackToFavorites = async (track) => {
 }
 
 const unfollowPlaylist = async (playlistId) =>{
-  console.log(spotifyApiObject.unfollowPlaylist(playlistId))
+  await spotifyApiObject.unfollowPlaylist(playlistId);
+  await sleep(500);
 }
 
 const searchTracks = async (query,num) => {

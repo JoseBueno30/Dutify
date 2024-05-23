@@ -32,7 +32,7 @@ function esSoloEspacios(texto) {
         console.log(playlist)
         changePlaylistName(playlist.id, listName)
           .then(() => {
-           sleep(10000).then(() => {window.location.href = "/listas/playlist?playlistId=" + playlist.id;})
+           window.location.href = "/listas/playlist?playlistId=" + playlist.id;
           })
           .catch((error) => {
             console.error(error);
