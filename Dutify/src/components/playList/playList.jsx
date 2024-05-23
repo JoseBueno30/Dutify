@@ -5,9 +5,10 @@ import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 import Spinner from "../spinner/spinner";
-import { playQueue, playTrack, setQueue} from "../../spotifyApi/SongController";
+import { getQueueIndex, playQueue, playTrack, setQueue} from "../../spotifyApi/SongController";
 
 export default function PlayList({}) {
+  const [isPlaying, setPlaying] = useState(false);
   const [playList, setPlayList] = useState();
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
@@ -38,7 +39,7 @@ export default function PlayList({}) {
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying")
     console.log(sessionQueue);
     queue = tracks.map((track) => (track.track.preview_url));
-    if(sessionQueue === null || playlistPlaying !== playList.id){
+    if(sessionQueue === null || playlistPlaying !== playList.id || getQueueIndex() === queue.length){
       setQueue(queue);
       window.sessionStorage.setItem("playlistPlaying", playList.id);
       playQueue(queue);
@@ -53,8 +54,8 @@ export default function PlayList({}) {
     <div className="playList d-flex flex-column flex-xl-row-reverse">
       {playList && !loading?(
                 <>
-                    <PlayListInfo queueFunction={setQueuePlaylist} playList={playList}/>
-                    <SongList tracks={tracks} playlistId={playList.id}/>
+                    <PlayListInfo queueFunction={setQueuePlaylist} playList={playList} isPlaying={isPlaying} setPlaying={setPlaying}/>
+                    <SongList tracks={tracks} playlistId={playList.id} setPlaying={setPlaying} loadQueue={setQueuePlaylist}/>
                 </>
             ):
             <Spinner></Spinner>}

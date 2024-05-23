@@ -13,7 +13,12 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { FcButtingIn } from "react-icons/fc";
 
-export default function PlayListInfo({ playList, queueFunction }) {
+export default function PlayListInfo({
+  playList,
+  queueFunction,
+  isPlaying,
+  setPlaying,
+}) {
   const timeMIN = Math.trunc(playList.duration_ms / 60000);
   const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
 
@@ -33,7 +38,13 @@ export default function PlayListInfo({ playList, queueFunction }) {
         <p>{playList.tracks.total + " canciones"}</p>
         <Options />
       </div>
-      <PlayListPlayer queueFunction={queueFunction} className="playListPlayer" />
+      <PlayListPlayer
+        queueFunction={queueFunction}
+        playListId={playList.id}
+        isPlaying={isPlaying}
+        setPlaying={setPlaying}
+        className="playListPlayer"
+      />
     </div>
   );
 }

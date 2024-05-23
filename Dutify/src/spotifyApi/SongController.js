@@ -64,6 +64,20 @@ const saveAndPlay = () =>{
   playQueue();
 }
 
+const addTrackToQueue = (track) =>{
+  setTrack(track);
+  playQueue();
+}
+
+const setQueueIndex = (newIndex) =>{
+  i = newIndex;
+  playQueue();
+}
+
+const getQueueIndex = () =>{
+  return i;
+}
+
 export {
   setTrack,
   playTrack,
@@ -73,5 +87,8 @@ export {
   setQueue,
   playQueue,
   nextQueueSong,
-  previousQueueSong
+  previousQueueSong,
+  addTrackToQueue,
+  setQueueIndex,
+  getQueueIndex
 };

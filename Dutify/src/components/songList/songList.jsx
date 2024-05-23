@@ -7,7 +7,7 @@ import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
 import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
-export default function SongList({tracks, playlistId}) {
+export default function SongList({tracks, playlistId, loadQueue, setPlaying}) {
     const [userPlayLists, setUserPlayLists] = useState("");
 
     useEffect(()=>{
@@ -31,12 +31,16 @@ export default function SongList({tracks, playlistId}) {
       <SongInfo/>      
       {/* PARA PLAYLIST */}
       {tracks.length>0 && playlistId ? (
-          tracks.map((track) => (
+          tracks.map((track, index) => (
             track !== null ? <SongButton
-            key={track.track.name + track.track.id}
+            enPlaylist={true}
+            key={index}
+            index={index}
             track={track.track}
+            loadQueue={loadQueue}
             playlistId = {playlistId}
             playLists={userPlayLists}
+            setPlaying={setPlaying}
           /> : <></>
           ))
       ) : (
@@ -46,6 +50,7 @@ export default function SongList({tracks, playlistId}) {
       {tracks.length>0 && !playlistId ? (
           tracks.map((track) => (
             track.track !== null ? <SongButton
+            enPlaylist={false}
             key={track.id}
             track={track}
             playLists={userPlayLists}
