@@ -5,7 +5,7 @@ import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css"
 import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
 import Spinner from "../spinner/spinner";
-import { getQueueIndex, playQueue, playTrack, setQueue} from "../../spotifyApi/SongController";
+import { getQueueIndex, playQueue, playTrack, queueEmitter, setQueue} from "../../spotifyApi/SongController";
 
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
@@ -20,8 +20,16 @@ export default function PlayList({}) {
     setPlayList(playList);
   }
 
+  const stopPlayerAnimation = () =>{setPlaying(false)}
+
   useEffect(() => {
     loadPlayList();
+
+    queueEmitter.on("queueEnded", stopPlayerAnimation);
+
+    return () =>{
+      queueEmitter.off("queueEnded", stopPlayerAnimation);
+    }
   }, []);
 
   useEffect(() => {

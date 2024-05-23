@@ -50,7 +50,8 @@ export default function SongButton({ track, index, playLists, playlistId, enPlay
       setQueueIndex(index);
       setPlaying(true);
     }else{
-      addTrackToQueue(track.preview_url);
+      console.log(track.preview_url);
+      setTrack(track.preview_url);
     }
   };
 
