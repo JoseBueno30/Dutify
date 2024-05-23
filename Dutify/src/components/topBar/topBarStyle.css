@@ -51,7 +51,7 @@
 @media only screen and (max-width: 920px) {
   .topBar {
     padding: 0px !important;
-    height: auto;
+    height: 5vh;
   }
 
   .mobile-btn {

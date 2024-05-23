@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './genres.css';
+import './genresStyle.css';
 import Spinner from "../../spinner/spinner";
 
 const getGenreID = () =>{

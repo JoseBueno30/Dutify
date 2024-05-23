@@ -1,4 +1,4 @@
-import './inicio.css';
+import './inicioStyle.css';
 import { useEffect, useState } from "react";
 import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import Carousel from '../../carousel/carousel';
