@@ -1,10 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState,useEffect } from "react";
 
 export const ThemeContext = createContext()
 
 export const ThemeContextProvider = ({children}) =>{
-    const [contextTheme, setContextTheme] = useState('dark')
+    const initTheme = window.sessionStorage.getItem("theme");
+    const [contextTheme, setContextTheme] = useState(initTheme || "dark")
     const values = {contextTheme, setContextTheme}
+
+    useEffect(() => {
+        window.sessionStorage.setItem("theme",contextTheme);
+    }, [contextTheme])
+
     return (
         <ThemeContext.Provider value={values}>
             {children}

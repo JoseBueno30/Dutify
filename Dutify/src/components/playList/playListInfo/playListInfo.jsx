@@ -33,7 +33,7 @@ export default function PlayListInfo({ playlist, owned }) {
       {playlist.images ? (
         <img className="playListImage" src={playlist.images[0].url}></img>
       ) : (
-        <img className="playListImage" src="/assets/placeholder-img.png"></img>
+        <img className="playListImage" src={"/assets/placeholder-img-light.png"}></img>
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">

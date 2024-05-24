@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import {
   createPlaylist,
@@ -13,7 +13,18 @@ function ListModal({ playlist }) {
   const [listName, setListName] = useState(playlist ? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(true);
+
   const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
+
+  useEffect(() => {
+    const modal = document.getElementById("listModal");
+    modal.addEventListener("hidden.bs.modal", hideHandler);
+
+    return () => {
+      modal.removeEventListener("hidden.bs.modal", hideHandler);
+    };
+  },[]);
 
   function esSoloEspacios(texto) {
     return /^\s*$/.test(texto);
@@ -27,12 +38,20 @@ function ListModal({ playlist }) {
     setListPublic(e.target.checked);
   };
 
+  const hideHandler = () => {
+    setListName("");
+    setListPublic(false);
+    setErrorVisibility(false);
+    setCanSubmit(true);
+  }
+  
   const clickHandler = (e) => {
     e.preventDefault();
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
     } else {
+      setCanSubmit(false);
       setErrorVisibility(false);
       if (playlist) {
         console.log(playlist);
@@ -85,7 +104,7 @@ function ListModal({ playlist }) {
             <form onSubmit={clickHandler}>
               <div className={"mb-3 w-75"}>
                 <label htmlFor="inputName" className={"form-label"}>
-                  Nombre de la lista <span className="mandatory-field">*</span>
+                  Nombre de la lista *
                 </label>
                 <input
                   type="text"
@@ -95,11 +114,13 @@ function ListModal({ playlist }) {
                   id="inputName"
                   value={listName}
                   onChange={listNameChangeHandler}
+                  maxLength={20}
+                  disabled={!canSubmit}
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
                 >
-                  El nombre de la lista no puede estar vacío.
+                  ❌El nombre de la lista no puede estar vacío.❌
                 </p>
               </div>
               {playlist ? (
@@ -118,6 +139,7 @@ function ListModal({ playlist }) {
                         role="switch"
                         id="listPublic"
                         onChange={listPublicChangeHandler}
+                        checked={listPublic}
                       />
                       <label
                         className="form-check-label ps-3"
@@ -134,7 +156,7 @@ function ListModal({ playlist }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={clickHandler}
-                  data-bs-dismiss="modal"
+                  data-bs-dismiss={playlist ? "modal" : ""}
                 >
                   {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>
