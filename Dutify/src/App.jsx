@@ -13,6 +13,7 @@ import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
 import GenreLists from "./components/locations/genres/genreLists";
 import SearchResults from "./components/locations/query/busquedas";
+import { setTrack } from "./spotifyApi/SongController";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -30,7 +31,13 @@ function App() {
 
     setToken(spotifyToken);
     setAccessToken(spotifyToken);
+
+    const currentTrack = window.sessionStorage.getItem("currentTrack");
+    const currentTime = window.sessionStorage.getItem("currentTrackTime")
+    setTrack(currentTrack, currentTime)
   }, []);
+
+
 
   const router = createBrowserRouter([
     {
