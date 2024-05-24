@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import {
+  createPlaylist,
+  changePlaylistName,
+  sleep,
+} from "../../spotifyApi/SpotifyApiCalls";
 import "./listModalStyle.css";
+import { FeedbackHandlerContext } from "../../App";
 
-function esSoloEspacios(texto) {
-  return /^\s*$/.test(texto);
-}
-
-function ListModal({ apiCall }) {
-  const [listName, setListName] = useState("");
+function ListModal({ playlist }) {
+  const [listName, setListName] = useState(playlist ? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
   const [canSubmit, setCanSubmit] = useState(true);
+
+  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
 
   useEffect(() => {
     const modal = document.getElementById("listModal");
@@ -21,6 +25,10 @@ function ListModal({ apiCall }) {
       modal.removeEventListener("hidden.bs.modal", hideHandler);
     };
   },[]);
+
+  function esSoloEspacios(texto) {
+    return /^\s*$/.test(texto);
+  }
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -36,29 +44,37 @@ function ListModal({ apiCall }) {
     setErrorVisibility(false);
     setCanSubmit(true);
   }
+  
+  const clickHandler = (e) => {
+    e.preventDefault();
 
-  const executeCall = () => {
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
-      return;
+    } else {
+      setCanSubmit(false);
+      setErrorVisibility(false);
+      if (playlist) {
+        console.log(playlist);
+        changePlaylistName(playlist.id, listName)
+        .then(status => {
+          setFeedback(status);
+          sleep(2500).then(() => {
+              window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+            })
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        createPlaylist(listName, listPublic)
+          .then((playlist) => {
+            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
-    setCanSubmit(false);
-    setErrorVisibility(false);
-    apiCall(listName, listPublic)
-      .then((id) => {
-        window.location.href = "/listas/playlist?playlistId=" + id;
-      })
-      .catch((error) => {
-        console.error(error);
-        setCanSubmit(true);
-      });
-  };
-
-  const clickHandler = (e) => {
-    //Evita que el modal se cierre al hacer submit
-    e.preventDefault();
-    console.log("clickHandler");
-    executeCall();
   };
 
   return (
@@ -73,7 +89,7 @@ function ListModal({ apiCall }) {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
-              Crear nueva lista de reproducción
+              {playlist ? "Editar nombre de la lista" : "Crear nueva lista"}
             </h1>
             <button
               type="button"
@@ -96,6 +112,7 @@ function ListModal({ apiCall }) {
                     "form-control " + (errorVisibility ? "is-invalid" : "")
                   }
                   id="inputName"
+                  value={listName}
                   onChange={listNameChangeHandler}
                   maxLength={20}
                   disabled={!canSubmit}
@@ -106,27 +123,42 @@ function ListModal({ apiCall }) {
                   ❌El nombre de la lista no puede estar vacío.❌
                 </p>
               </div>
-              <div className="mb-4 w-75">
-                <div className="form-check form-switch ps-0">
-                  <label className="form-check-label mb-1">Privacidad</label>
-                  <br />
-                  <input
-                    className="form-check-input ms-1"
-                    type="checkbox"
-                    role="switch"
-                    id="listPublic"
-                    onChange={listPublicChangeHandler}
-                    checked={listPublic}
-                  />
-                  <label className="form-check-label ps-3" htmlFor="listPublic">
-                    {listPublic ? "Pública" : "Privada"}
-                  </label>
-                  <br />
-                </div>
-              </div>
+              {playlist ? (
+                <></>
+              ) : (
+                <>
+                  <div className="mb-4 w-75">
+                    <div className="form-check form-switch ps-0">
+                      <label className="form-check-label mb-1">
+                        Privacidad
+                      </label>
+                      <br />
+                      <input
+                        className="form-check-input ms-1"
+                        type="checkbox"
+                        role="switch"
+                        id="listPublic"
+                        onChange={listPublicChangeHandler}
+                        checked={listPublic}
+                      />
+                      <label
+                        className="form-check-label ps-3"
+                        htmlFor="listPublic"
+                      >
+                        {listPublic ? "Pública" : "Privada"}
+                      </label>
+                    </div>
+                  </div>
+                </>
+              )}
               <div className="mb-2 d-flex justify-content-start">
-                <button type="submit" className="btn btn-primary" disabled={!canSubmit}>
-                  Crear lista
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={clickHandler}
+                  data-bs-dismiss={playlist ? "modal" : ""}
+                >
+                  {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>
               </div>
             </form>

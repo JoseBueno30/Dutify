@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import ListModal from "../../listModal/listModal";
-import { createPlaylist, getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import { getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import './listsStyle.css';
 import Spinner from "../../spinner/spinner";
 
@@ -12,12 +12,6 @@ function Lists({}) {
   const cargarPlaylists = async () => {
     setLoading(true);
     setLists(await getUserPlaylists().finally(() => setLoading(false)) );
-  };
-
-  const crearPlaylist = async (nameList, publicList) => {
-    const data = await createPlaylist(nameList, publicList);
-
-    return data.id;
   };
 
   useEffect(() => {
@@ -34,8 +28,8 @@ function Lists({}) {
       {loading ? 
       <Spinner></Spinner> : 
       (<>
-      <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}>
-      </CardsGrid><ListModal apiCall={crearPlaylist} />
+      <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
+      <ListModal/>
       </>)} 
     </section>
   );
