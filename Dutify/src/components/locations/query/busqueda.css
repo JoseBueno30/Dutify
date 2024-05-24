@@ -1,6 +1,9 @@
 .busqueda-wrapper {
     background-color: var(--color-background);
     height: 82.5vh;
+    @media screen and (max-height: 750px) {
+        height: calc(100vh - 53.4px - 90.75px);
+    }
 }
 
 .busqueda {

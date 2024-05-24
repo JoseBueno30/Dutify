@@ -1,0 +1,22 @@
+.login-section{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    background-color: var(--color-background);
+}
+
+.login-section .title{
+    font-size: 80px;
+}
+
+.login-section svg{
+    color: var(--color-theme);
+}
+
+.btn-login{
+    color: white;
+    background-color: var(--color-theme);
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
+}

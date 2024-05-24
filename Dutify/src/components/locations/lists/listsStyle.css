@@ -4,4 +4,7 @@
     height: 82.5vh;
     overflow-y: scroll;
     padding-bottom: 0px;
+    @media screen and (max-height: 750px) {
+        height: calc(100vh - 53.4px - 90.75px);
+    }
 }

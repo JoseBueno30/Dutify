@@ -7,6 +7,9 @@
     flex-direction: column;
     gap: 50px;
     padding-bottom: 40px;
+    @media screen and (max-height: 750px) {
+        height: calc(100vh - 53.4px - 90.75px);
+    }
 }
 
 .h5-recent-lists {

@@ -54,7 +54,7 @@ function MusicPlayer() {
 
   return (
     <>
-      <div className="fixed-bottom music-bar ">
+      <div className="sticky-bottom music-bar ">
         <div className="music-container">
             {/* Información de la cancion */}
             <div className="song-container">
