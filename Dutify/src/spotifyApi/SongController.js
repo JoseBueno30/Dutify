@@ -11,14 +11,15 @@ let i =
     : parseInt(window.sessionStorage.getItem("songIndex"));
 
 const setTrack = (track, time) => {
-  if (track !== null) {
+  if (track.preview_url !== null) {
     pauseTrack();
-
+    
     trackObject = track;
     trackAudio = new Audio(track.preview_url);
     trackAudio.volume = 0.2;
 
     window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
+    queueEmitter.emit("newTrack");
     if(time !== undefined) trackAudio.currentTime = time;
     
     __addEvents();
@@ -43,6 +44,7 @@ const __addEvents = () =>{
     console.log("Se ha terminado la reproducción");
   });
   trackAudio.addEventListener("timeupdate", () => {
+    queueEmitter.emit("timeUpdate");
     window.sessionStorage.setItem("currentTrackTime", trackAudio.currentTime);
   });
 }
