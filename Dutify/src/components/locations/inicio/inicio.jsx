@@ -36,13 +36,13 @@ function Inicio({token}){
         <section className='inicio-section'>
             {loading ? 
             <Spinner></Spinner> : 
-            <><div className='div-recent-lists'>
-                <h5 className='h5-recent-lists'>Listas recientes:</h5>
+            <><div className='div-recent-lists' id="Listas recientes">
+                <h5 className='h5-recent-lists' tabindex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            <CustomCarousel lista={popular_playlists} name="Listas populares:"></CustomCarousel>
-            <CustomCarousel lista={popular_artists_playlists} name="Tus artistas favoritos:"></CustomCarousel>
-            <CustomCarousel lista={recommended_playlists} name="Recomendaciones:"></CustomCarousel>
+            <CustomCarousel id="Listas populares" lista={popular_playlists} name="Listas populares:"></CustomCarousel>
+            <CustomCarousel id="Tus artistas favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CustomCarousel>
+            <CustomCarousel id="Recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CustomCarousel>
             </>
             }
         </section>

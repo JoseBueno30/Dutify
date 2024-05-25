@@ -21,6 +21,10 @@
     font-size: 25px;
 }
 
+.carousel .slide .img {
+    object-fit: cover;
+}
+
 
 .carousel .slide {
     padding: 5px;
@@ -73,6 +77,7 @@
 }
 
 /* ESTILOS DE PRUEBA */
+
 
 
   

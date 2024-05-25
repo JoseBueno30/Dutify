@@ -3,16 +3,16 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './carouselStyle.css';
 
-const CustomCarousel = ({ lista, name }) => {
+const CustomCarousel = ({ lista, name, id }) => {
 
     const ClickHandler = (id) => {
         window.location.href = "/listas/playlist?playlistId=" + id;
     }
 
   return (
-    <section className='carrusel-container'>
+    <section className='carrusel-container' aria-label={name} id={id}>
         <div className='carrusel-box'>
-            <h5 className='carrusel-h5'>{name}</h5>
+            <h5 className='carrusel-h5' tabindex="0" aria-labelledby={id}>{name}</h5>
             <Carousel
                 showThumbs={false}
                 showStatus={false}
