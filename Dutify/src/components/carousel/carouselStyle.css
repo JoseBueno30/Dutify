@@ -14,11 +14,18 @@
     align-items: flex-start;
     flex-direction:column;
     gap:10px;
+    position: relative;
 }
 
 .carrusel-h5 {
     color: var(--color-text);
     font-size: 25px;
+}
+
+.carrusel-dot-section {
+    /*background-color: green;*/
+    height: 40px;
+    width: 100%;
 }
 
 .carousel .slide .img {
@@ -63,20 +70,50 @@
     transform: rotateY(20deg) scale(0.9);
 }
 
+.carousel.carousel-slider {
+    position: inherit;
+}
 
-/* Estilo normal de las flechas */
-.carousel.carousel-slider .control-arrow {
-    background-color: transparent;
+/* ESTILOS DE LAS FLECHAS */
+
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; 
+    height: 40px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.custom-arrow:hover {
+    opacity: 0.7;
+}
+
+.custom-arrow-left {
+    left: 10px;
+}
+
+.custom-arrow-right {
+    right: 10px;
+}
+
+
+/* ESTILOS PARA LA SECCION DE PUNTOS */
+
+.carousel.carousel-slider .control-dots .dot {
+    background-color: #fff;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.carousel.carousel-slider .control-dots .dot.selected {
     opacity: 1;
 }
-
-/* Cambio de opacidad al hacer hover */
-.carousel.carousel-slider .control-arrow:hover {
-    opacity: 0.7; /* Opacidad reducida al hacer hover */
-    background-color: transparent;
-}
-
-/* ESTILOS DE PRUEBA */
 
 
 
