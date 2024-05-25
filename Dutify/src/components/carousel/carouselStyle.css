@@ -29,9 +29,11 @@
 }
 
 .carousel .slide .img {
+    width: 100%;
+    height: auto;
     object-fit: cover;
-}
 
+}
 
 .carousel .slide {
     padding: 5px;
@@ -114,9 +116,3 @@
 .carousel.carousel-slider .control-dots .dot.selected {
     opacity: 1;
 }
-
-
-
-  
-
-
