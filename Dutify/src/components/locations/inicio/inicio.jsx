@@ -1,9 +1,9 @@
 import './inicioStyle.css';
 import { useEffect, useState } from "react";
 import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import Carousel from '../../carousel/carousel';
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import Spinner from '../../spinner/spinner';
+import CustomCarousel from '../../carousel/carousel';
 
 function Inicio({token}){
     
@@ -40,9 +40,11 @@ function Inicio({token}){
                 <h5 className='h5-recent-lists'>Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>
-            <Carousel id="carrusel-2" lista={popular_artists_playlists} name="Tus artistas favoritos:"></Carousel>
-            <Carousel id="carrusel-3" lista={recommended_playlists} name="Recomendaciones:"></Carousel></>}
+            <CustomCarousel lista={popular_playlists} name="Listas populares:"></CustomCarousel>
+            <CustomCarousel lista={popular_artists_playlists} name="Tus artistas favoritos:"></CustomCarousel>
+            <CustomCarousel lista={recommended_playlists} name="Recomendaciones:"></CustomCarousel>
+            </>
+            }
         </section>
     );
 }
