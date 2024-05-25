@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
 
-let track = new Audio();
+let trackAudio = new Audio();
+let trackObject;
 let queue = JSON.parse(window.sessionStorage.getItem("queue"));
 let queueEmitter = new EventEmitter();
 
@@ -9,33 +10,42 @@ let i =
     ? 0
     : parseInt(window.sessionStorage.getItem("songIndex"));
 
-const setTrack = (link, time) => {
-  if (link !== null) {
+const setTrack = (track, time) => {
+  if (track !== null) {
     pauseTrack();
-    track = new Audio(link);
-    track.volume = 0.2;
-    window.sessionStorage.setItem("currentTrack", link);
-    if(time !== undefined) track.currentTime = time;
-    track.addEventListener("play", () => {
-      window.sessionStorage.setItem("trackStatus", true);
-      console.log("Se ha comenzado/reanudado la reproducción");
-    });
-    track.addEventListener("pause", () =>{
-      window.sessionStorage.setItem("trackStatus", false);
-    })
-    track.addEventListener("ended", () => {
-      nextQueueSong();
-      console.log("Se ha terminado la reproducción");
-    });
-    track.addEventListener("timeupdate", () => {
-      window.sessionStorage.setItem("currentTrackTime", track.currentTime);
-    });
+
+    trackObject = track;
+    trackAudio = new Audio(track.preview_url);
+    trackAudio.volume = 0.2;
+
+    window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
+    if(time !== undefined) trackAudio.currentTime = time;
+    
+    __addEvents();
+
     playTrack();
   } else {
     console.error("No hay vista previa de esta cancion");
     nextQueueSong();
   }
 };
+
+const __addEvents = () =>{
+  trackAudio.addEventListener("play", () => {
+    window.sessionStorage.setItem("trackStatus", true);
+    console.log("Se ha comenzado/reanudado la reproducción");
+  });
+  trackAudio.addEventListener("pause", () =>{
+    window.sessionStorage.setItem("trackStatus", false);
+  })
+  trackAudio.addEventListener("ended", () => {
+    nextQueueSong();
+    console.log("Se ha terminado la reproducción");
+  });
+  trackAudio.addEventListener("timeupdate", () => {
+    window.sessionStorage.setItem("currentTrackTime", trackAudio.currentTime);
+  });
+}
 
 const setSingleTrack = (track) => {
   queueEmitter.emit("queueEnded")
@@ -45,29 +55,29 @@ const setSingleTrack = (track) => {
   setTrack(track);
 };
 
-const getTrack = () =>{
-  return track;
+const getTrackAudio = () =>{
+  return trackAudio;
 }
 
 const playTrack = () => {
-  track.play();
+  trackAudio.play();
 };
 
 const pauseTrack = () => {
-  track.pause();
+  trackAudio.pause();
 };
 
 const getDuration = () => {
-  return track.duration;
+  return trackAudio.duration;
 };
 
 const getCurrentTime = () => {
-  return track.currentTime;
+  return trackAudio.currentTime;
 };
 
 const setQueue = (newQueue) => {
   i = 0;
-  newQueue.push(track.src);
+  newQueue.push(trackObject);
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
 };
@@ -89,15 +99,15 @@ const nextQueueSong = () => {
       window.sessionStorage.setItem("queue", queue);
       queueEmitter.emit("queueEnded");
     }
-    saveAndPlay();
+    _saveAndPlay();
   }
 };
 
 const previousQueueSong = () => {
   i -= 1;
-  saveAndPlay();
+  _saveAndPlay();
 };
-const saveAndPlay = () => {
+const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
   playQueue();
 };
@@ -115,11 +125,15 @@ const getQueueIndex = () => {
   return i;
 };
 
+const getTrackObject = ()  =>{
+  return trackObject;
+}
+
 export {
   // TRACK FUNCTIONS
   setTrack,
   setSingleTrack,
-  getTrack,
+  getTrackAudio,
   playTrack,
   pauseTrack,
 
@@ -136,6 +150,8 @@ export {
   setQueueIndex,
   getQueueIndex,
 
+  // TRACK OBJECT
+  getTrackObject,
 
   // EVENTO COLA
   queueEmitter,

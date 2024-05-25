@@ -53,7 +53,7 @@ export default function SongButton({ track, index, playLists, playlistId, enPlay
       setPlaying(true);
     }else{
       console.log(track.preview_url);
-      setSingleTrack(track.preview_url);
+      setSingleTrack(track);
     }
   };
 

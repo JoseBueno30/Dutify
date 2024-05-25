@@ -32,11 +32,12 @@ function App() {
     setToken(spotifyToken);
     setAccessToken(spotifyToken);
 
-    const currentTrack = window.sessionStorage.getItem("currentTrack");
+    const currentTrack = JSON.parse(window.sessionStorage.getItem("currentTrack"));
     const currentTime = window.sessionStorage.getItem("currentTrackTime")
     const trackStatus = window.sessionStorage.getItem("trackStatus");
-    console.log("Estaba reproduciendose?: " + trackStatus);
-    if(trackStatus === true) {
+    console.log(currentTrack)
+    console.log(currentTime);
+    if(trackStatus === "true") {
       console.log("no deberia entrar si es false")
       setTrack(currentTrack, currentTime)
     } 

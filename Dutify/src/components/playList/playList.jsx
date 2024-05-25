@@ -45,7 +45,7 @@ export default function PlayList({}) {
     let queue = []
     const sessionQueue = JSON.parse(window.sessionStorage.getItem("queue"));
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
-    queue = tracks.map((track) => (track.track.preview_url));
+    queue = tracks.map((track) => (track.track));
     if(sessionQueue === null || playlistPlaying !== playList.id || getQueueIndex() === queue.length){
       setQueue(queue);
       window.sessionStorage.setItem("playlistPlaying", playList.id);
