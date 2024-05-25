@@ -4,7 +4,7 @@ import { TbArrowsCross } from "react-icons/tb";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import "./playListPlayerStyle.css";
 import { pauseTrack } from "../../../../spotifyApi/SongController";
-
+import { queueEmitter } from "../../../../spotifyApi/SongController";
 
 export default function PlayListPlayer({queueFunction, playListId, isPlaying, setPlaying}){
     
@@ -13,6 +13,7 @@ export default function PlayListPlayer({queueFunction, playListId, isPlaying, se
         if(!isPlaying) queueFunction();
         else pauseTrack();  
         setPlaying(!isPlaying);
+        
     }
     const crossButtonClickHandler = (e) => {
     }

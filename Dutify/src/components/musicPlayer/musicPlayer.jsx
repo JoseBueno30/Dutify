@@ -1,9 +1,18 @@
-import { getDuration, queueEmitter } from "../../spotifyApi/SongController";
+import {
+  getDuration,
+  nextQueueSong,
+  pauseTrack,
+  playTrack,
+  previousQueueSong,
+  queueEmitter,
+} from "../../spotifyApi/SongController";
 import "./musicPlayer.css";
 import { useEffect, useState } from "react";
 
 function MusicPlayer() {
-  const [playing, change] = useState(true);
+  const [playing, change] = useState(
+    window.sessionStorage.getItem("trackStatus") === "true"
+  );
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
   const [progressionValue, setProgressionValue] = useState(0);
   const [volumeValue, setvolumeValue] = useState(50);
@@ -16,8 +25,29 @@ function MusicPlayer() {
   };
 
   const switchPlay = () => {
-    change(!playing);
+    if (playing) {
+      pauseTrack();
+    } else {
+      playTrack();
+    }
   };
+
+  const handlePlayToPause = () =>{
+    console.log("cambiando status... era " + playing)
+    change(false);
+  }
+
+  const handlePauseToPlay = () =>{
+    change(true);
+  }
+
+  const handleNextTrackClick = () =>{
+    nextQueueSong();
+  }
+
+  const handlePreviousTrackClick = () =>{
+    previousQueueSong();
+  }
 
   const switchVolume = () => {
     if (rangeValue != 0) {
@@ -65,14 +95,29 @@ function MusicPlayer() {
       window.sessionStorage.getItem("currentTrack")
     );
     setTrack(trackSession);
-    queueEmitter.on("newTrack", loadTrackInfo);
-    queueEmitter.on("timeUpdate", handleCurrentTime);
+    __addEvents();
     window.addEventListener("resize", handleResize);
 
     return () => {
+      __removeEvents();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const __addEvents = ()=>{
+    queueEmitter.on("newTrack", loadTrackInfo);
+    queueEmitter.on("timeUpdate", handleCurrentTime);
+    queueEmitter.on("trackStatusTrue", handlePauseToPlay);
+    queueEmitter.on("trackStatusFalse", handlePlayToPause)
+  }
+
+  const __removeEvents = () =>{
+    queueEmitter.off("newTrack", loadTrackInfo);
+    queueEmitter.off("timeUpdate", handleCurrentTime);
+    queueEmitter.off("trackStatusTrue", handlePauseToPlay);
+    queueEmitter.off("trackStatusFalse", handlePlayToPause)
+  
+  }
 
   useEffect(() => {
     fillRangeInputs();
@@ -112,6 +157,7 @@ function MusicPlayer() {
               id="track-progression"
               className="styled-slider slider-progress"
               type="range"
+              value={progressionValue}
             ></input>
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
@@ -127,23 +173,25 @@ function MusicPlayer() {
                 <img
                   className="side-button"
                   src="/assets/musicPlayer/previous-button.svg"
+                  onClick={handlePreviousTrackClick}
                 ></img>
                 {playing ? (
                   <img
                     className="play-button"
-                    src="/assets/musicPlayer/play-button.svg"
+                    src="/assets/musicPlayer/stop-button.svg"
                     onClick={switchPlay}
                   ></img>
                 ) : (
                   <img
                     className="play-button"
-                    src="/assets/musicPlayer/stop-button.svg"
+                    src="/assets/musicPlayer/play-button.svg"
                     onClick={switchPlay}
                   ></img>
                 )}
                 <img
                   className="side-button"
                   src="/assets/musicPlayer/next-button.svg"
+                  onClick={handleNextTrackClick}
                 ></img>
               </div>
               {/* Temporizador */}

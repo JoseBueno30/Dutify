@@ -11,7 +11,8 @@ let i =
     : parseInt(window.sessionStorage.getItem("songIndex"));
 
 const setTrack = (track, time) => {
-  if (track.preview_url !== null) {
+  if (track !== null && track.preview_url !== null) {
+    // console.log(track.preview_url);
     pauseTrack();
     
     trackObject = track;
@@ -35,9 +36,11 @@ const __addEvents = () =>{
   trackAudio.addEventListener("play", () => {
     window.sessionStorage.setItem("trackStatus", true);
     console.log("Se ha comenzado/reanudado la reproducción");
+    queueEmitter.emit("trackStatusTrue");
   });
   trackAudio.addEventListener("pause", () =>{
     window.sessionStorage.setItem("trackStatus", false);
+    queueEmitter.emit("trackStatusFalse");
   })
   trackAudio.addEventListener("ended", () => {
     nextQueueSong();
@@ -106,8 +109,19 @@ const nextQueueSong = () => {
 };
 
 const previousQueueSong = () => {
-  i -= 1;
-  _saveAndPlay();
+  if (queue !== null) {
+    if (i - 1 >= 0) {
+      i -= 1;
+    } else {
+      i = 0;
+      pauseTrack();
+      queue = null;
+      window.sessionStorage.setItem("playlistPlaying", queue);
+      window.sessionStorage.setItem("queue", queue);
+      queueEmitter.emit("queueEnded");
+    }
+    _saveAndPlay();
+  }
 };
 const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
