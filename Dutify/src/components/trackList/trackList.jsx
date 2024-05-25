@@ -17,7 +17,7 @@ export const TracksHandlersContext = createContext(null);
 
 export default function TrackList({tracks, setTracks, playlistId, owned}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   useEffect(()=>{
       async function getUserPlayLists() {
@@ -33,7 +33,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
   }, []);
 
   async function handleAddTrackToPlayList(track, playlist) {
-    addTrackToPlayList(track, playlist).then(status => setFeedback(status));
+    addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
     //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
     //por lo q no tiene la id de la playlist aunque esta si la tenga 
     console.log(playlistId)
@@ -47,14 +47,14 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
   }
 
   function handleRemoveTrackFromPlaylist(track, trackIndex){
-    removeTrackFromPlayList(track, playlistId).then(status => setFeedback(status));
+    removeTrackFromPlayList(track, playlistId).then(status => changeFeedback(status));
     let newTracks = [...tracks];
     newTracks.splice(trackIndex, 1);
     setTracks(newTracks)
   }
   
   function handleAddTrackToFavorites(track){
-    addTrackToFavorites(track).then(status => setFeedback(status));
+    addTrackToFavorites(track).then(status => changeFeedback(status));
   }
 
     
