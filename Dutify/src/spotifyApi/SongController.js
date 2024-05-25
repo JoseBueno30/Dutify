@@ -13,11 +13,16 @@ const setTrack = (link, time) => {
   if (link !== null) {
     pauseTrack();
     track = new Audio(link);
+    track.volume = 0.2;
     window.sessionStorage.setItem("currentTrack", link);
     if(time !== undefined) track.currentTime = time;
     track.addEventListener("play", () => {
+      window.sessionStorage.setItem("trackStatus", true);
       console.log("Se ha comenzado/reanudado la reproducción");
     });
+    track.addEventListener("pause", () =>{
+      window.sessionStorage.setItem("trackStatus", false);
+    })
     track.addEventListener("ended", () => {
       nextQueueSong();
       console.log("Se ha terminado la reproducción");
@@ -81,6 +86,7 @@ const nextQueueSong = () => {
       i = 0;
       queue = null;
       window.sessionStorage.setItem("playlistPlaying", queue);
+      window.sessionStorage.setItem("queue", queue);
       queueEmitter.emit("queueEnded");
     }
     saveAndPlay();
@@ -110,13 +116,18 @@ const getQueueIndex = () => {
 };
 
 export {
+  // TRACK FUNCTIONS
   setTrack,
   setSingleTrack,
   getTrack,
   playTrack,
   pauseTrack,
+
+  // TRACK INFO
   getCurrentTime,
   getDuration,
+
+  // QUEUE FUNCTIONS
   setQueue,
   playQueue,
   nextQueueSong,

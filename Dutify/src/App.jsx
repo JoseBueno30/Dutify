@@ -34,7 +34,13 @@ function App() {
 
     const currentTrack = window.sessionStorage.getItem("currentTrack");
     const currentTime = window.sessionStorage.getItem("currentTrackTime")
-    setTrack(currentTrack, currentTime)
+    const trackStatus = window.sessionStorage.getItem("trackStatus");
+    console.log("Estaba reproduciendose?: " + trackStatus);
+    if(trackStatus === true) {
+      console.log("no deberia entrar si es false")
+      setTrack(currentTrack, currentTime)
+    } 
+    
   }, []);
 
 
