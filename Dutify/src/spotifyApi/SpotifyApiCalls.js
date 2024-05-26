@@ -196,6 +196,18 @@ const addTrackToPlayList = async (track, playlist) => {
   return status;
 }
 
+const addTrackToPlayListWithId = async (track, playListId) => {
+  let status;
+  try{
+    await spotifyApiObject.addTracksToPlaylist(playListId, [track.uri]);
+    status = "Canción añadida a la playlist";
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error añadiendo canción";
+  } 
+  return status;
+}
+
 const removeTrackFromPlayList = async (track, playlistId) => {
   let status;
   try{
@@ -256,6 +268,11 @@ const isUserFollowingPlaylist = async (playlistId) => {
   const user = getUser();
   return (await spotifyApiObject.areFollowingPlaylist(playlistId,[user.id]))[0];
 }
+const searchTopTracks = async (num) => {
+  let data = await spotifyApiObject.getMyTopTracks({ limit: num })
+
+  return data.items;
+}
 
 export {getAccessToken, 
   setAccessToken, 
@@ -277,6 +294,8 @@ export {getAccessToken,
   getUser, 
   getPopularArtistsPlaylists, 
   changePlaylistName, 
-  getPopularPlaylists, 
+  getPopularPlaylists,
   getRecommendedPlaylists,
-  isUserFollowingPlaylist};
+  isUserFollowingPlaylist,
+  searchTopTracks,
+  addTrackToPlayListWithId};
