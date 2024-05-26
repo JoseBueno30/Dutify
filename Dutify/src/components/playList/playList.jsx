@@ -25,7 +25,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
-  const [playList, setPlayList] = useState();
+  const [playlist, setPlayList] = useState();
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [followed, setFollowed] = useState(false);
@@ -81,13 +81,13 @@ export default function PlayList({}) {
 
   useEffect(() => {
     async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
       let tracksAux = tracks.concat(tracksNew);
       setTracks(tracksAux);
     }
-    if (playList !== undefined && tracks.length < playList.tracks.total)
+    if (playlist !== undefined && tracks.length < playlist.tracks.total)
       loadTracks().finally(() => setLoading(false));
-  }, [playList, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
+  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
 
   const followPlaylistHandler = () => {
     setFollowed(true);
@@ -106,11 +106,11 @@ export default function PlayList({}) {
     queue = tracks.map((track) => track);
     if (
       sessionQueue === null ||
-      playlistPlaying !== playList.id ||
+      playlistPlaying !== playlist.id ||
       getQueueIndex() === queue.length
     ) {
       setQueue(queue);
-      window.sessionStorage.setItem("playlistPlaying", playList.id);
+      window.sessionStorage.setItem("playlistPlaying", playlist.id);
       playQueue(queue);
     } else {
       playTrack();
@@ -119,14 +119,14 @@ export default function PlayList({}) {
 
   return (
     <div className="playList d-flex flex-column flex-xl-row-reverse">
-      {playList && !loading ? (
+      {playlist && !loading ? (
         <>
-          <ListModal playlist={playList} />
+          <ListModal playlist={playlist} />
 
-          <DeleteListModal playlist={playList} />
+          <DeleteListModal playlist={playlist} />
           <PlayListInfo
             queueFunction={setQueuePlaylist}
-            playList={playList}
+            playList={playlist}
             isPlaying={isPlaying}
             setPlaying={setPlaying}
             owned={owned}
@@ -136,7 +136,7 @@ export default function PlayList({}) {
           />
           <TrackList
             tracks={tracks}
-            playlistId={playList.id}
+            playlistId={playlist.id}
             setPlaying={setPlaying}
             loadQueue={setQueuePlaylist}
             owned={owned}
