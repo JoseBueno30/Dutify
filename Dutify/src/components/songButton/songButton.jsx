@@ -25,15 +25,17 @@ import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
 import { queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
-export default function SongButton({ track, index, playLists, playlistId, enPlaylist, loadQueue, setPlaying, enableAddButton=false, index}) {
+export default function SongButton({enPlaylist, track, index, loadQueue, playlistId, setPlaying, enableAddButton=false}) {
   const [feedback, setFeedback] = useState("");
   // const [isPlaying, setPlaying] = useState(false);
 
+  // console.log(track);
   const handleClose = () => {
     setFeedback("");
   };
 
   useEffect(() => {
+
     function handleResize() {
         setIsSmallScreen(window.innerWidth < 750);
       }
@@ -201,7 +203,7 @@ function Options({track, index}){
 
   const newListClickHandler = (e) => {};
 
-  const menuItemClassName = ({ hover }) =>
+  const menuItemClassName = ({ hover }) =>{
     hover ? "menuItemHover" : "menuItem";
 
   return (
@@ -253,3 +255,4 @@ function Options({track, index}){
       )}
     </Menu>
   );
+}

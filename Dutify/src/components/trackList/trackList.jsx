@@ -15,7 +15,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId, owned, busqueda=false}) {
+export default function TrackList({tracks, setTracks, playlistId, loadQueue, setPlaying, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
@@ -70,9 +70,13 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
         {tracks.length > 0 ? (
           tracks.map((track, index) => (
             track !== null ? <SongButton
-            key={index}
+            enPlaylist={!busqueda}
             track={track}
+            key={index}
             index={index}
+            loadQueue={loadQueue}
+            playlistId = {playlistId}
+            setPlaying={setPlaying}
             enableAddButton={busqueda}
           /> : <></>
           ))

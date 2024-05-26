@@ -8,12 +8,9 @@ import {
   getTracksFromPlaylist,
   followPlaylist,
   unfollowPlaylist,
-  getPlayList,
-  getTracksFromPlaylist,
   isPlaylistOwned,
   isUserFollowingPlaylist,
 } from "../../spotifyApi/SpotifyApiCalls";
-import Spinner from "../spinner/spinner";
 import {
   getQueueIndex,
   playQueue,
@@ -84,13 +81,13 @@ export default function PlayList({}) {
 
   useEffect(() => {
     async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
+      const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
       let tracksAux = tracks.concat(tracksNew);
       setTracks(tracksAux);
     }
-    if (playlist !== undefined && tracks.length < playlist.tracks.total)
+    if (playList !== undefined && tracks.length < playList.tracks.total)
       loadTracks().finally(() => setLoading(false));
-  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
+  }, [playList, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
 
   const followPlaylistHandler = () => {
     setFollowed(true);
@@ -106,7 +103,7 @@ export default function PlayList({}) {
     let queue = [];
     const sessionQueue = JSON.parse(window.sessionStorage.getItem("queue"));
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
-    queue = tracks.map((track) => track.track);
+    queue = tracks.map((track) => track);
     if (
       sessionQueue === null ||
       playlistPlaying !== playList.id ||
@@ -124,9 +121,9 @@ export default function PlayList({}) {
     <div className="playList d-flex flex-column flex-xl-row-reverse">
       {playList && !loading ? (
         <>
-          <ListModal playlist={playlist} />
+          <ListModal playlist={playList} />
 
-          <DeleteListModal playlist={playlist} />
+          <DeleteListModal playlist={playList} />
           <PlayListInfo
             queueFunction={setQueuePlaylist}
             playList={playList}

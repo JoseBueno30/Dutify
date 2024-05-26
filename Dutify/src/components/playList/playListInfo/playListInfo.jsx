@@ -28,13 +28,13 @@ export default function PlayListInfo({
   return (
     <div className="playListInfoContainer d-flex flex-column container-fluid">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
-        <p title={playlist.name} className="playListName ">
-          {playlist.name}
+        <p title={playList.name} className="playListName ">
+          {playList.name}
         </p>
       </div>
 
-      {playlist.images ? (
-        <img className="playListImage" src={playlist.images[0].url}></img>
+      {playList.images ? (
+        <img className="playListImage" src={playList.images[0].url}></img>
       ) : (
         <img
           className="playListImage"
@@ -43,7 +43,7 @@ export default function PlayListInfo({
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-        <p>{playlist.tracks.total + " canciones"}</p>
+        <p>{playList.tracks.total + " canciones"}</p>
 
         {owned ? (
           <Options />
