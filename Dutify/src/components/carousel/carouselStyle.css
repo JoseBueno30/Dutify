@@ -28,13 +28,6 @@
     width: 100%;
 }
 
-.carousel .slide .img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-
-}
-
 .carousel .slide {
     padding: 5px;
 }
@@ -76,16 +69,30 @@
     position: inherit;
 }
 
+.carousel .slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+
+}
+
 /* ESTILOS DE LAS FLECHAS */
 
 .custom-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px; 
-    height: 40px;
+    width: 60px; 
+    height: 60px;
     z-index: 999;
     cursor: pointer;
+}
+
+@media (max-width: 500px) {
+    .custom-arrow {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .custom-arrow:hover {
@@ -104,8 +111,8 @@
 /* ESTILOS PARA LA SECCION DE PUNTOS */
 
 .carousel.carousel-slider .control-dots .dot {
-    background-color: #fff;
-    opacity: 0.5;
+    background-color: var(--color-5);
+    opacity: 1;
     width: 10px;
     height: 10px;
     margin: 0 8px;
@@ -114,5 +121,6 @@
 }
 
 .carousel.carousel-slider .control-dots .dot.selected {
+    background-color: var(--color-theme);
     opacity: 1;
 }
