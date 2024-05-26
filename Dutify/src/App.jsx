@@ -119,7 +119,7 @@ function App() {
   const { getRootProps, onClickAway } = useSnackbar({
     onClose: handleClose,
     open,
-    autoHideDuration: 250000,
+    autoHideDuration: 2500,
   });
 
   const changeFeedback = (text) => {
