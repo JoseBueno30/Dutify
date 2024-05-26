@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./playListInfoStyle.css";
-import { FaGear } from "react-icons/fa6";
+import { FaGear, FaHeart, FaRegHeart } from "react-icons/fa6";
 import PlayListPlayer from "./playListPlayer/playListPlayer";
 import {
   Menu,
@@ -11,14 +11,14 @@ import {
 } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import { FcButtingIn } from "react-icons/fc";
-import {
-  isPlaylistOwned,
-  unfollowPlaylist,
-} from "../../../spotifyApi/SpotifyApiCalls";
 
-export default function PlayListInfo({ playlist, owned }) {
-
+export default function PlayListInfo({
+  playlist,
+  owned,
+  followed,
+  followPlaylistHandler,
+  unfollowPlaylistHandler
+}) {
   const timeMIN = Math.trunc(playlist.duration_ms / 60000);
   const timeMS = Math.trunc((playlist.duration_ms / 1000) % 60);
 
@@ -33,12 +33,31 @@ export default function PlayListInfo({ playlist, owned }) {
       {playlist.images ? (
         <img className="playListImage" src={playlist.images[0].url}></img>
       ) : (
-        <img className="playListImage" src={"/assets/placeholder-img-light.png"}></img>
+        <img
+          className="playListImage"
+          src={"/assets/placeholder-img-light.png"}
+        ></img>
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
         <p>{playlist.tracks.total + " canciones"}</p>
-        {owned? <Options /> : <></>}
+
+        {owned ? (
+          <Options />
+        ) : (
+          <>
+            {/* ponner los onClick al boton no a los iconos */}
+            {followed ? (
+              <button className="playListFollowButton" onClick={() => unfollowPlaylistHandler()}>
+                <FaHeart />
+              </button>
+            ) : (
+              <button className="playListFollowButton" onClick={() => followPlaylistHandler()}>
+                <FaRegHeart />
+              </button>
+            )}
+          </>
+        )}
       </div>
 
       <PlayListPlayer className="playListPlayer" />
