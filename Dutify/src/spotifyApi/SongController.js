@@ -109,6 +109,7 @@ const setQueue = (newQueue) => {
   newQueue.push(trackObject);
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
+  isRandom = false;
   randomQueue = newQueue;
   window.sessionStorage.setItem("randomQueue", JSON.stringify(newQueue));
 };

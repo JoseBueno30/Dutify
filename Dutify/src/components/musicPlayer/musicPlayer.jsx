@@ -56,11 +56,13 @@ function MusicPlayer() {
   };
 
   const switchVolume = () => {
-    if (rangeValue != 0) {
-      setLastRangeValue(rangeValue);
-      setRangeValue(0);
+    if (volumeValue != 0) {
+      setLastVolumeValue(volumeValue);
+      setvolumeValue(0);
+      setVolume(0);
     } else {
-      setRangeValue(lastRangevalue);
+      setvolumeValue(lastVolumeValue);
+      setVolume(lastVolumeValue);
     }
   };
 
