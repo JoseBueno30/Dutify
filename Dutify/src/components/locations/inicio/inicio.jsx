@@ -37,7 +37,7 @@ function Inicio({token}){
             {loading ? 
             <Spinner></Spinner> : 
             <><div className='div-recent-lists' id="Listas recientes">
-                <h5 className='h5-recent-lists' tabindex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
+                <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
             <CustomCarousel id="Listas populares" lista={popular_playlists} name="Listas populares:"></CustomCarousel>
