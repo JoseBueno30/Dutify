@@ -5,6 +5,7 @@ import {
   playTrack,
   previousQueueSong,
   queueEmitter,
+  setTrackCurrentTime,
   setVolume,
 } from "../../spotifyApi/SongController";
 import "./musicPlayer.css";
@@ -95,6 +96,13 @@ function MusicPlayer() {
     setProgressionValue(range.value);
   };
 
+  const handleCurretTimeChange = (e) => {
+    const newCurrentTime = e.currentTarget.value;
+    setProgressionValue(newCurrentTime);
+    setCurrentTime(((newCurrentTime * 29.75) / 100).toString());
+    setTrackCurrentTime((newCurrentTime * 29.75) / 100);
+  };
+
   useEffect(() => {
     function handleResize() {
       setIsSmallScreen(window.innerWidth < 901);
@@ -172,6 +180,7 @@ function MusicPlayer() {
               className="styled-slider slider-progress"
               type="range"
               value={progressionValue}
+              onChange={handleCurretTimeChange}
             ></input>
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
