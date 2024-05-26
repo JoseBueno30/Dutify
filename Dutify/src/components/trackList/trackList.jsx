@@ -15,7 +15,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId, owned}) {
+export default function TrackList({tracks, setTracks, playlistId, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
@@ -64,9 +64,11 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
       <div className="list container-fluid ">
          
 
-        {tracks.length>0 ? (<SongInfo/>) : (<></>)}
+        {tracks.length > 0 && busqueda ? (<SongInfo showAddButton={true}/>) : (<></>)}
+        {tracks.length > 0 && !busqueda ? (<SongInfo/>) : (<></>)}
         
-        {tracks.length>0 ? (
+        {/* PARA PLAYLIST */}
+        {!busqueda ? (
             tracks.map((track, index) => (
               track !== null ? <SongButton
               key={index}
@@ -75,15 +77,24 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
               owned = {owned}
             /> : <></>
             ))
-        ) : (
-          <div className="emptyList d-flex justify-content-center">
-            {playlistId ? "No hay canciones en esta PlayList" : "Busca la canción en la barra de busqueda para añadir"} 
-          </div>
-        )}
+        ) : <></>}
 
-        {playlistId?
-        <div className="d-flex justify-content-center"><AddSongButton/></div>
-        :null}
+        {/* PARA Busquedas */}
+        {busqueda ? (
+          tracks.map((track) => (
+            track.track !== null ? <SongButton
+            key={track.id}
+            track={track}
+            playlistId = {playlistId}
+            enableAddButton={true}
+          /> : <></>
+          ))
+        ) : ( <></> )}
+
+         {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+
+          {!busqueda ? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
+
       </div>
     </TracksHandlersContext.Provider>
   );

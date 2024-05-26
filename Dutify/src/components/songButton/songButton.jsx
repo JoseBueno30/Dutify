@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
@@ -12,11 +12,13 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import NavButton from "../topBar/navButton/navButton";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
+import { FeedbackHandlerContext } from "../../App";
 
 
 export default function SongButton({track, playLists, playlistId, enableAddButton=false, index}){
     const [isPlaying, setPlaying] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+    const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
     useEffect(() => {
         function handleResize() {
@@ -39,8 +41,8 @@ export default function SongButton({track, playLists, playlistId, enableAddButto
     }
 
     const listClickHandler = () => {
-        addTrackToPlayListWithId(track, playlistId).then(
-            setFeedback("Canción añadida a la playlist.")
+        addTrackToPlayListWithId(track, playlistId).then( status =>
+            changeFeedback(status)
         )
     }
 

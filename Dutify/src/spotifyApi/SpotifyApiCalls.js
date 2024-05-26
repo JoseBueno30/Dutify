@@ -200,11 +200,15 @@ const addTrackToPlayList = async (track, playlist) => {
 }
 
 const addTrackToPlayListWithId = async (track, playListId) => {
+  let status;
   try{
-    spotifyApiObject.addTracksToPlaylist(playListId, [track.uri]);
+    await spotifyApiObject.addTracksToPlaylist(playListId, [track.uri]);
+    status = "Canción añadida a la playlist";
   }catch(error){
     console.error("ERROR: ", error);
-  }  
+    status = "Error añadiendo canción";
+  } 
+  return status;
 }
 
 const removeTrackFromPlayList = async (track, playlistId) => {
