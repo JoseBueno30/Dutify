@@ -49,8 +49,10 @@ export default function PlayList({}) {
     }
     if (playlist !== undefined && tracks.length < playlist.tracks.total)
       loadTracks().finally(() => setLoading(false));
-  }, [playlist, tracks]);
+  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
 
+
+  
   const followPlaylistHandler = () => {
     setFollowed(true);
     followPlaylist(playlist).then((status) => changeFeedback(status));
