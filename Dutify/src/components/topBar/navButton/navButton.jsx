@@ -2,13 +2,15 @@ import "./navButtonStyle.css"
 
 function NavButton(props) {
 
+    const setLocation = () => {
+        window.location.href = "/" + props.texto.toLowerCase();
+    }
     return (
-        <a  onClick={() => setLocation(props.location)} 
-            className={"navButton fs-5" + (window.location.href.split("/")[3].includes(props.texto) ? " currentLocation" : "")}
-            id={props.id}
-            href={"/" + props.texto}>
+        <button  onClick={setLocation} 
+            className={"navButton fs-5" + (window.location.href.split("/")[3].includes(props.texto.toLowerCase()) ? " currentLocation" : "")}
+            id={props.id}>
             {props.texto}
-        </a>
+        </button>
     )
 }
 

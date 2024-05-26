@@ -2,7 +2,11 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApiObject = new SpotifyWebApi();
 
-const setAccessToken = (token) => {
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const setAccessToken = (token) =>{
   spotifyApiObject.setAccessToken(token);
 };
 
@@ -29,6 +33,11 @@ const getUserPlaylists = async () => {
   return playlists;
 };
 
+const isPlaylistOwned = async(playlist) => {
+  const user = await getUser();
+  return playlist.owner.id === user.id;
+}
+
 const getUserOwnedPlaylists = async () => {
   const data = await spotifyApiObject.getUserPlaylists();
   const user = await getUser();
@@ -37,6 +46,8 @@ const getUserOwnedPlaylists = async () => {
   const ownedPlaylists = playlists.filter(
     (playList) => playList.owner.id == user.id
   );
+
+  console.log(ownedPlaylists);
 
   return ownedPlaylists;
 };
@@ -57,7 +68,26 @@ const getTracksFromPlaylist = async (playlist, offset) => {
     offset: offset,
     limit: 100,
   });
-  return data.items;
+  console.log("AAA: " + data);
+  let tracks = data.items.map(item => item.track);
+  console.log(tracks)
+  return tracks;
+};
+
+const getAllTracksFromPlaylist = async (playlist) => {
+  let next = playlist.tracks.next;
+  let tracks = playlist.tracks.items.map(item => item.track);
+  
+  while(next !== null){
+    let moreTracks = await spotifyApiObject.getPlaylistTracks(playlist.id, {offset:tracks.length})
+    next = moreTracks.next;
+    
+    moreTracks = moreTracks.items.map(item => item.track);
+    
+    tracks = tracks.concat(moreTracks);
+  }
+  console.log(tracks);
+  return tracks;
 };
 
 const getCategoriesID = () => {
@@ -107,16 +137,30 @@ const getRecommendedPlaylists = async () => {
   return playlists;
 };
 
-const createPlaylist = async (nameList, publicList) => {
+
+const createPlaylist = async (listName,listPrivacy) => {
   const playListDetails = {
-    name: nameList,
-    public: publicList,
-  };
+    name: listName,
+    public: listPrivacy,
+  }
   const userId = await getUserId();
 
-  const data = await spotifyApiObject.createPlaylist(userId, playListDetails);
-  return data;
+  const playlist = await spotifyApiObject.createPlaylist(userId, playListDetails);
+  return playlist;
 };
+
+const changePlaylistName = async (playlistId, playlistName) => {
+  let status;
+  const playListDetails = {name: playlistName};
+  try{
+    await spotifyApiObject.changePlaylistDetails(playlistId, playListDetails);
+    status = "El nombre de la playlist tardará un poco en actualizarse";
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error cambiando el nombre de la playlist";
+  }
+  return status;
+}
 
 const mapPlaylistObject = (data) => {
   const playlists = data.items.map((playlist) => ({
@@ -135,68 +179,111 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-const addTrackToPlayList = async (track, playList) => {
-  console.log(playList.id);
-  console.log([track.uri]);
-  try {
-    spotifyApiObject.addTracksToPlaylist(playList.id, [track.uri]);
-  } catch (error) {
+const addTrackToPlayList = async (track, playlistId) => {
+  let status;
+  try{
+    const playlist = await getPlayList(playlistId)
+    const playlistTracks = await getAllTracksFromPlaylist(playlist);
+    if(playlistTracks.some(playlistTrack => playlistTrack.uri === track.uri)){
+      status = "Esta canción ya está en "+ playlist.name;
+    }else{
+      spotifyApiObject.addTracksToPlaylist(playlist.id, [track.uri]);
+      status = "Canción añadida a " + playlist.name;
+    }
+  }catch(error){
     console.error("ERROR: ", error);
-  }
-};
+    status = "Error añadiendo canción";
+  }  
+  return status;
+}
 
 const removeTrackFromPlayList = async (track, playlistId) => {
-  console.log(playlistId);
-  console.log([track.uri]);
-  try {
+  let status;
+  try{
     await spotifyApiObject.removeTracksFromPlaylist(playlistId, [track.uri]);
-  } catch (error) {
+    status = "Canción eliminada de la playlist";
+  }catch(error){
     console.error("ERROR: ", error);
+    status = "Error eliminando canción";
   }
-};
+  return status;
+}
 
 const addTrackToFavorites = async (track) => {
   console.log([track.uri]);
-  try {
+  let status;
+  try{
     await spotifyApiObject.addToMySavedTracks([track.id]);
-  } catch (error) {
+    status = "Canción añadida a favoritas";
+  }catch(error){
     console.error("ERROR: ", error);
+    status = "Error añadiendo canción";
+  }  
+  return status;
+}
+
+const followPlaylist = async (playlist) =>{
+  let status = "";
+  try{
+    await spotifyApiObject.followPlaylist(playlist.id);
+    status = playlist.name + " añadida a tu biblioteca.";
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error añadiendo " + playlist.name + " a tu biblioteca.";
   }
-};
+  return status;
+}
 
-const addTrackCallBack = (errorObject, succedValue) => {
-  console.log(errorObject);
-  console.log(succedValue);
-};
+const unfollowPlaylist = async (playlist) =>{
+  let status = "";
+  try{
+    await spotifyApiObject.unfollowPlaylist(playlist.id);
+    status = playlist.name + " eliminada de tu biblioteca."
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error eliminando " + playlist.name + " de tu biblioteca.";
+  }
+  return status;
+}
 
-const searchTracks = async (query, num) => {
-  let data = await spotifyApiObject.searchTracks(query, { limit: num });
 
+const searchTracks = async (query,num) => {
+  let data = await spotifyApiObject.searchTracks(query, { limit: num })
+  console.log(data.tracks.items)
   return data.tracks.items;
 };
 
-export {
-  getAccessToken,
-  setAccessToken,
-  getUser,
+const isUserFollowingPlaylist = async (playlistId) => {
+  const user = getUser();
+  return (await spotifyApiObject.areFollowingPlaylist(playlistId,[user.id]))[0];
+}
+const searchTopTracks = async (num) => {
+  let data = await spotifyApiObject.getMyTopTracks({ limit: num })
 
-  // GENRES FUNCTIONS
-  getCategoriesID,
-  getCategoriePlaylists,
+  return data.items;
+}
 
-  // TRACKS FUNCTIONS
-  getTracksFromPlaylist,
-  removeTrackFromPlayList,
-  addTrackToFavorites,
-  searchTracks,
-
-  // PLAYLISTS FUNCTIONS
-  getUserPlaylists,
-  createPlaylist,
-  getPopularArtistsPlaylists,
+export {getAccessToken, 
+  setAccessToken, 
+  getUserPlaylists, 
+  getCategoriesID, 
+  sleep, 
+  isPlaylistOwned,
+  getCategoriePlaylists, 
+  getUserOwnedPlaylists, 
+  addTrackToPlayList, 
+  getPlayList,
+  getTracksFromPlaylist, 
+  removeTrackFromPlayList, 
+  addTrackToFavorites, 
+  createPlaylist, 
+  unfollowPlaylist,
+  followPlaylist,
+  searchTracks, 
+  getUser, 
+  getPopularArtistsPlaylists, 
+  changePlaylistName, 
   getPopularPlaylists,
   getRecommendedPlaylists,
-  getUserOwnedPlaylists,
-  addTrackToPlayList,
-  getPlayList,
-};
+  isUserFollowingPlaylist,
+  searchTopTracks};

@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
-import SongList from "../songList/songList";
+import TrackList from "../trackList/trackList";
 import PlayListInfo from "./playListInfo/playListInfo";
 import "./playListStyle.css";
 import {
   getPlayList,
   getTracksFromPlaylist,
+  followPlaylist,
+  unfollowPlaylist,
+  getPlayList,
+  getTracksFromPlaylist,
+  isPlaylistOwned,
+  isUserFollowingPlaylist,
 } from "../../spotifyApi/SpotifyApiCalls";
 import Spinner from "../spinner/spinner";
 import {
@@ -15,17 +21,29 @@ import {
   queueEmitter,
   setQueue,
 } from "../../spotifyApi/SongController";
+import ListModal from "../listModal/listModal";
+import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
+import Spinner from "../spinner/spinner";
+import { FeedbackHandlerContext } from "../../App";
 
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
   const [playList, setPlayList] = useState();
-  const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [followed, setFollowed] = useState(false);
+  const [owned, setOwned] = useState(false);
+
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   async function loadPlayList() {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
+    const isFollowed = await isUserFollowingPlaylist(playList.id);
+    setFollowed(isFollowed);
+    const isOwned = await isPlaylistOwned(playList);
+    setOwned(isOwned);
     setPlayList(playList);
   }
 
@@ -36,7 +54,7 @@ export default function PlayList({}) {
   const startPlayerAnimation = () => {
     //console.log("empieza la animacion playlist")
     const currentPlaylistPlaying =
-    window.sessionStorage.getItem("playlistPlaying");
+      window.sessionStorage.getItem("playlistPlaying");
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     //console.log(isPlaying)
@@ -66,13 +84,23 @@ export default function PlayList({}) {
 
   useEffect(() => {
     async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
       let tracksAux = tracks.concat(tracksNew);
       setTracks(tracksAux);
     }
-    if (playList !== undefined && tracks.length < playList.tracks.total)
+    if (playlist !== undefined && tracks.length < playlist.tracks.total)
       loadTracks().finally(() => setLoading(false));
-  }, [playList, tracks]);
+  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
+
+  const followPlaylistHandler = () => {
+    setFollowed(true);
+    followPlaylist(playlist).then((status) => changeFeedback(status));
+  };
+
+  const unfollowPlaylistHandler = () => {
+    setFollowed(false);
+    unfollowPlaylist(playlist).then((status) => changeFeedback(status));
+  };
 
   const setQueuePlaylist = () => {
     let queue = [];
@@ -96,17 +124,26 @@ export default function PlayList({}) {
     <div className="playList d-flex flex-column flex-xl-row-reverse">
       {playList && !loading ? (
         <>
+          <ListModal playlist={playlist} />
+
+          <DeleteListModal playlist={playlist} />
           <PlayListInfo
             queueFunction={setQueuePlaylist}
             playList={playList}
             isPlaying={isPlaying}
             setPlaying={setPlaying}
+            owned={owned}
+            followed={followed}
+            followPlaylistHandler={followPlaylistHandler}
+            unfollowPlaylistHandler={unfollowPlaylistHandler}
           />
-          <SongList
+          <TrackList
             tracks={tracks}
             playlistId={playList.id}
             setPlaying={setPlaying}
             loadQueue={setQueuePlaylist}
+            owned={owned}
+            setTracks={setTracks}
           />
         </>
       ) : (

@@ -1,16 +1,34 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import {
+  createPlaylist,
+  changePlaylistName,
+  sleep,
+} from "../../spotifyApi/SpotifyApiCalls";
 import "./listModalStyle.css";
+import { FeedbackHandlerContext } from "../../App";
 
-function esSoloEspacios(texto) {
-  return /^\s*$/.test(texto);
-}
-
-function ListModal({ apiCall }) {
-  const [listName, setListName] = useState("");
+function ListModal({ playlist }) {
+  const [listName, setListName] = useState(playlist ? playlist.name : "");
   const [listPublic, setListPublic] = useState(false);
   const [errorVisibility, setErrorVisibility] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(true);
+
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+
+  useEffect(() => {
+    const modal = document.getElementById("listModal");
+    modal.addEventListener("hidden.bs.modal", hideHandler);
+
+    return () => {
+      modal.removeEventListener("hidden.bs.modal", hideHandler);
+    };
+  },[]);
+
+  function esSoloEspacios(texto) {
+    return /^\s*$/.test(texto);
+  }
 
   const listNameChangeHandler = (e) => {
     setListName(e.target.value);
@@ -20,26 +38,43 @@ function ListModal({ apiCall }) {
     setListPublic(e.target.checked);
   };
 
-  const executeCall = () => {
+  const hideHandler = () => {
+    setListName("");
+    setListPublic(false);
+    setErrorVisibility(false);
+    setCanSubmit(true);
+  }
+  
+  const clickHandler = (e) => {
+    e.preventDefault();
+
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
-      return;
+    } else {
+      setCanSubmit(false);
+      setErrorVisibility(false);
+      if (playlist) {
+        console.log(playlist);
+        changePlaylistName(playlist.id, listName)
+        .then(status => {
+          changeFeedback(status),
+          sleep(2500).then(() => {
+              window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+            })
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        createPlaylist(listName, listPublic)
+          .then((playlist) => {
+            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
-    setErrorVisibility(false);
-    apiCall(listName, listPublic)
-      .then((id) => {
-        window.location.href = "/listas/playlist?playlistId=" + id;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const clickHandler = (e) => {
-    //Evita que el modal se cierre al hacer submit
-    e.preventDefault();
-    console.log("clickHandler");
-    executeCall();
   };
 
   return (
@@ -54,7 +89,7 @@ function ListModal({ apiCall }) {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
-              Crear nueva lista de reproducción
+              {playlist ? "Editar nombre de la lista" : "Crear nueva lista"}
             </h1>
             <button
               type="button"
@@ -69,7 +104,7 @@ function ListModal({ apiCall }) {
             <form onSubmit={clickHandler}>
               <div className={"mb-3 w-75"}>
                 <label htmlFor="inputName" className={"form-label"}>
-                  Nombre de la lista <span className="mandatory-field">*</span>
+                  Nombre de la lista *
                 </label>
                 <input
                   type="text"
@@ -77,34 +112,53 @@ function ListModal({ apiCall }) {
                     "form-control " + (errorVisibility ? "is-invalid" : "")
                   }
                   id="inputName"
+                  value={listName}
                   onChange={listNameChangeHandler}
+                  maxLength={20}
+                  disabled={!canSubmit}
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
                 >
-                  El nombre de la lista no puede estar vacío.
+                  ❌El nombre de la lista no puede estar vacío.❌
                 </p>
               </div>
-              <div className="mb-4 w-75">
-                <div className="form-check form-switch ps-0">
-                  <label className="form-check-label mb-1">Privacidad</label>
-                  <br />
-                  <input
-                    className="form-check-input ms-1"
-                    type="checkbox"
-                    role="switch"
-                    id="listPublic"
-                    onChange={listPublicChangeHandler}
-                  />
-                  <label className="form-check-label ps-3" htmlFor="listPublic">
-                    {listPublic ? "Pública" : "Privada"}
-                  </label>
-                  <br />
-                </div>
-              </div>
+              {playlist ? (
+                <></>
+              ) : (
+                <>
+                  <div className="mb-4 w-75">
+                    <div className="form-check form-switch ps-0">
+                      <label className="form-check-label mb-1">
+                        Privacidad
+                      </label>
+                      <br />
+                      <input
+                        className="form-check-input ms-1"
+                        type="checkbox"
+                        role="switch"
+                        id="listPublic"
+                        onChange={listPublicChangeHandler}
+                        checked={listPublic}
+                      />
+                      <label
+                        className="form-check-label ps-3"
+                        htmlFor="listPublic"
+                      >
+                        {listPublic ? "Pública" : "Privada"}
+                      </label>
+                    </div>
+                  </div>
+                </>
+              )}
               <div className="mb-2 d-flex justify-content-start">
-                <button type="submit" className="btn btn-primary">
-                  Crear lista
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={clickHandler}
+                  data-bs-dismiss={playlist ? "modal" : ""}
+                >
+                  {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>
               </div>
             </form>
