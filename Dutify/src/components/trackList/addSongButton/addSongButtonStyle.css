@@ -17,6 +17,7 @@
     justify-self: center;
     cursor: pointer;
     user-select: none;
+    margin-top: 10px;
 
     white-space:nowrap;
 
