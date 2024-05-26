@@ -49,7 +49,7 @@ export default function PlayListInfo({
             {/* ponner los onClick al boton no a los iconos */}
             {followed ? (
               <button className="playListFollowButton" onClick={() => unfollowPlaylistHandler()}>
-                <FaHeart />
+                <FaHeart className="followed"/>
               </button>
             ) : (
               <button className="playListFollowButton" onClick={() => followPlaylistHandler()}>
