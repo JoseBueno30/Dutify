@@ -27,13 +27,15 @@ function MusicPlayer() {
   const switchPlay = () => {
     if (playing) {
       pauseTrack();
+      console.log("pausa")
     } else {
+      console.log("play")
       playTrack();
     }
   };
 
   const handlePlayToPause = () =>{
-    console.log("cambiando status... era " + playing)
+    //console.log("cambiando status... era " + playing)
     change(false);
   }
 

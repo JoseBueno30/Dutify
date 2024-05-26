@@ -14,15 +14,15 @@ const setTrack = (track, time) => {
   if (track !== null && track.preview_url !== null) {
     // console.log(track.preview_url);
     pauseTrack();
-    
+
     trackObject = track;
     trackAudio = new Audio(track.preview_url);
     trackAudio.volume = 0.2;
 
     window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
     queueEmitter.emit("newTrack");
-    if(time !== undefined) trackAudio.currentTime = time;
-    
+    if (time !== undefined) trackAudio.currentTime = time;
+
     __addEvents();
 
     playTrack();
@@ -32,39 +32,52 @@ const setTrack = (track, time) => {
   }
 };
 
-const __addEvents = () =>{
+const setPausedTrack = (track, time) => {
+  trackObject = track;
+  trackAudio = new Audio(track.preview_url);
+  trackAudio.volume = 0.2;
+  window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
+  queueEmitter.emit("newTrack");
+  if (time !== undefined) trackAudio.currentTime = time;
+
+  __addEvents();
+};
+
+const __addEvents = () => {
   trackAudio.addEventListener("play", () => {
     window.sessionStorage.setItem("trackStatus", true);
-    console.log("Se ha comenzado/reanudado la reproducción");
+    //console.log("Se ha comenzado/reanudado la reproducción");
     queueEmitter.emit("trackStatusTrue");
   });
-  trackAudio.addEventListener("pause", () =>{
+  trackAudio.addEventListener("pause", () => {
     window.sessionStorage.setItem("trackStatus", false);
     queueEmitter.emit("trackStatusFalse");
-  })
+  });
   trackAudio.addEventListener("ended", () => {
     nextQueueSong();
-    console.log("Se ha terminado la reproducción");
+    //console.log("Se ha terminado la reproducción");
   });
   trackAudio.addEventListener("timeupdate", () => {
     queueEmitter.emit("timeUpdate");
     window.sessionStorage.setItem("currentTrackTime", trackAudio.currentTime);
   });
-}
+};
 
 const setSingleTrack = (track) => {
-  queueEmitter.emit("queueEnded")
+  queueEmitter.emit("queueEnded");
   i = 0;
-  queue = null; 
+  queue = null;
   window.sessionStorage.setItem("queue", JSON.stringify(queue));
   setTrack(track);
 };
 
-const getTrackAudio = () =>{
+const getTrackAudio = () => {
   return trackAudio;
-}
+};
 
 const playTrack = () => {
+  console.log("intenta reproducir");
+  console.log(trackAudio.src);
   trackAudio.play();
 };
 
@@ -141,13 +154,14 @@ const getQueueIndex = () => {
   return i;
 };
 
-const getTrackObject = ()  =>{
+const getTrackObject = () => {
   return trackObject;
-}
+};
 
 export {
   // TRACK FUNCTIONS
   setTrack,
+  setPausedTrack,
   setSingleTrack,
   getTrackAudio,
   playTrack,

@@ -21,8 +21,9 @@ export default function PlayListPlayer({queueFunction, playListId, isPlaying, se
     }
 
     useEffect(()=>{
-        const playlistPlaying = sessionStorage.getItem("playlistPlaying");
-        setPlaying(playlistPlaying === playListId);
+        const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
+        const trackStatus = window.sessionStorage.getItem("trackStatus");
+        setPlaying(playlistPlaying === playListId && trackStatus === "true");
     },[])
 
     return(

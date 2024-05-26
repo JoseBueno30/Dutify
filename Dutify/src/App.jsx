@@ -13,7 +13,7 @@ import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer"
 import GenreLists from "./components/locations/genres/genreLists";
 import SearchResults from "./components/locations/query/busquedas";
-import { setTrack } from "./spotifyApi/SongController";
+import { setPausedTrack, setTrack } from "./spotifyApi/SongController";
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
@@ -39,8 +39,9 @@ function App() {
     if(trackStatus === "true") {
       console.log("no deberia entrar si es false")
       setTrack(currentTrack, currentTime)
+    }else{
+      setPausedTrack(currentTrack, currentTime);
     } 
-    
   }, []);
 
 

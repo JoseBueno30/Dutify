@@ -30,13 +30,17 @@ export default function PlayList({}) {
   }
 
   const stopPlayerAnimation = () => {
+    console.log("termina la animacion playlist");
     setPlaying(false);
   };
   const startPlayerAnimation = () => {
+    console.log("empieza la animacion playlist")
     const currentPlaylistPlaying =
-      window.sessionStorage.getItem("playlistPlaying");
-    console.log(playList);
-    if (playList !== undefined && currentPlaylistPlaying === playList.id) {
+    window.sessionStorage.getItem("playlistPlaying");
+    const searchParams = new URLSearchParams(location.search);
+    const playlistId = searchParams.get("playlistId");
+    console.log(isPlaying)
+    if (!isPlaying && currentPlaylistPlaying === playlistId) {
       setPlaying(true);
     }
   };
@@ -55,9 +59,10 @@ export default function PlayList({}) {
     };
   }, []);
 
-  useEffect(() => {
-    startPlayerAnimation();
-  }, [playList]);
+  // useEffect(() => {
+  //   console.log("entra aqui?")
+  //   startPlayerAnimation();
+  // }, [playList]);
 
   useEffect(() => {
     async function loadTracks() {
