@@ -286,4 +286,5 @@ export {getAccessToken,
   getPopularPlaylists,
   getRecommendedPlaylists,
   isUserFollowingPlaylist,
-  searchTopTracks};
+  searchTopTracks,
+  getAllTracksFromPlaylist,};

@@ -10,6 +10,7 @@ import {
   getTracksFromPlaylist,
   isPlaylistOwned,
   isUserFollowingPlaylist,
+  getAllTracksFromPlaylist,
 } from "../../spotifyApi/SpotifyApiCalls";
 import ListModal from "../listModal/listModal";
 import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
@@ -30,29 +31,20 @@ export default function PlayList({}) {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
-    const isFollowed = await isUserFollowingPlaylist(playList.id);
+    const isFollowed = await isUserFollowingPlaylist(playlistId);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
     setOwned(isOwned);
     setPlayList(playList);
+    const tracksNew = await getAllTracksFromPlaylist(playList);
+    setTracks(tracksNew);
   }
 
   useEffect(() => {
-    loadPlayList();
+    setLoading(true);
+    loadPlayList().finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
-      let tracksAux = tracks.concat(tracksNew);
-      setTracks(tracksAux);
-    }
-    if (playlist !== undefined && tracks.length < playlist.tracks.total)
-      loadTracks().finally(() => setLoading(false));
-  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
-
-
-  
   const followPlaylistHandler = () => {
     setFollowed(true);
     followPlaylist(playlist).then((status) => changeFeedback(status));
