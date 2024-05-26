@@ -37,9 +37,8 @@ function App() {
     const trackStatus = window.sessionStorage.getItem("trackStatus");
 
     if(trackStatus === "true") {
-      console.log("no deberia entrar si es false")
       setTrack(currentTrack, currentTime)
-    }else{
+    }else if(currentTrack !== null){
       setPausedTrack(currentTrack, currentTime);
     } 
   }, []);

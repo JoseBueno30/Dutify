@@ -3,7 +3,7 @@ import { RiLoopLeftFill } from "react-icons/ri";
 import { TbArrowsCross } from "react-icons/tb";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import "./playListPlayerStyle.css";
-import { pauseTrack } from "../../../../spotifyApi/SongController";
+import { pauseTrack, setRandomQueue } from "../../../../spotifyApi/SongController";
 import { queueEmitter } from "../../../../spotifyApi/SongController";
 
 export default function PlayListPlayer({queueFunction, playListId, isPlaying, setPlaying}){
@@ -16,6 +16,7 @@ export default function PlayListPlayer({queueFunction, playListId, isPlaying, se
         
     }
     const crossButtonClickHandler = (e) => {
+        setRandomQueue();
     }
     const loopButtonClickHandler = (e) => {
     }

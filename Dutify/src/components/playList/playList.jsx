@@ -30,16 +30,16 @@ export default function PlayList({}) {
   }
 
   const stopPlayerAnimation = () => {
-    console.log("termina la animacion playlist");
+    //console.log("termina la animacion playlist");
     setPlaying(false);
   };
   const startPlayerAnimation = () => {
-    console.log("empieza la animacion playlist")
+    //console.log("empieza la animacion playlist")
     const currentPlaylistPlaying =
     window.sessionStorage.getItem("playlistPlaying");
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
-    console.log(isPlaying)
+    //console.log(isPlaying)
     if (!isPlaying && currentPlaylistPlaying === playlistId) {
       setPlaying(true);
     }

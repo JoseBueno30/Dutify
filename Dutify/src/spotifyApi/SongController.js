@@ -2,8 +2,12 @@ import { EventEmitter } from "events";
 
 let trackAudio = new Audio();
 let trackObject;
-let queue = JSON.parse(window.sessionStorage.getItem("queue"));
+var queue = JSON.parse(window.sessionStorage.getItem("queue"));
 let queueEmitter = new EventEmitter();
+
+let randomQueue = JSON.parse(window.sessionStorage.getItem("randomQueue"));
+
+let isRandom = window.sessionStorage.getItem("random") === "true";
 
 let i =
   window.sessionStorage.getItem("songIndex") === null
@@ -73,6 +77,7 @@ const setSingleTrack = (track) => {
   i = 0;
   queue = null;
   window.sessionStorage.setItem("queue", JSON.stringify(queue));
+  window.sessionStorage.setItem("randomQueue", JSON.stringify(queue));
   setTrack(track);
 };
 
@@ -100,14 +105,27 @@ const getCurrentTime = () => {
 
 const setQueue = (newQueue) => {
   i = 0;
+  __saveAuxQueue();
   newQueue.push(trackObject);
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
+  randomQueue = newQueue;
+  window.sessionStorage.setItem("randomQueue", JSON.stringify(newQueue));
 };
+const __saveAuxQueue = () =>{
+  let queueAux = [];
+  queue.forEach(element => {
+    queueAux.push(element.name);
+  });
+  console.log(queueAux);
+  window.sessionStorage.setItem("queueAux", JSON.stringify(queueAux));
+}
 
 const playQueue = () => {
   console.log("index: " + i);
-  const url = queue[i];
+  let url;
+  if(!isRandom) url = queue[i];
+  else url = randomQueue[i];
   setTrack(url);
 };
 
@@ -169,6 +187,23 @@ const setVolume = (volume) => {
   window.sessionStorage.setItem("volume", trackVolume);
 };
 
+const setRandomQueue = () =>{
+  isRandom= !isRandom;
+  console.log("random: " + isRandom)
+  window.sessionStorage.setItem("random", isRandom);
+  if(isRandom){
+    __shuffle(randomQueue);
+    window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
+  }else{
+    const queueAux = JSON.parse(window.sessionStorage.getItem("queueAux"));
+    i = queueAux.indexOf(trackObject.name);
+  }
+}
+
+const __shuffle = (array) =>{
+  array.sort(()=>Math.random()- 0.5)
+}
+
 export {
   // TRACK FUNCTIONS
   setTrack,
@@ -190,6 +225,7 @@ export {
   addTrackToQueue,
   setQueueIndex,
   getQueueIndex,
+  setRandomQueue,
 
   // TRACK OBJECT
   getTrackObject,
