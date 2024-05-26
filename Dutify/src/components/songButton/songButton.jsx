@@ -1,24 +1,21 @@
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
-import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
+import { Menu, MenuItem, MenuButton, MenuDivider } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
-import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
-import { addTrackToFavorites, addTrackToPlayList, addTrackToPlayListWithId, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
-import { useSnackbar } from '@mui/base/useSnackbar';
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
-import NavButton from "../topBar/navButton/navButton";
+import {addTrackToPlayList} from "../../spotifyApi/SpotifyApiCalls";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
 
 
-export default function SongButton({track, playLists, playlistId, enableAddButton=false, index}){
+export default function SongButton({track, enableAddButton=false, index}){
     const [isPlaying, setPlaying] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
     const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+    const playlistId = useContext(TracksHandlersContext).playlistId;
 
     useEffect(() => {
         function handleResize() {
@@ -41,7 +38,7 @@ export default function SongButton({track, playLists, playlistId, enableAddButto
     }
 
     const listClickHandler = () => {
-        addTrackToPlayListWithId(track, playlistId).then( status =>
+        addTrackToPlayList(track, playlistId).then( status =>
             changeFeedback(status)
         )
     }
@@ -60,7 +57,9 @@ export default function SongButton({track, playLists, playlistId, enableAddButto
                             </div>
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
+                            
                             {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
+                            
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options track={track} index = {index}/>
                             </div>
@@ -81,8 +80,8 @@ function Options({track, index}){
     const playlistId = useContext(TracksHandlersContext).playlistId;
     const owned = useContext(TracksHandlersContext).owned;
 
-    const listClickHandler = (playlist) => {
-        addTrackToPlaylist(track, playlist);
+    const listClickHandler = (playlistId) => {
+        addTrackToPlaylist(track, playlistId);
     }
     
     const eliminarClickHandler = () => {
@@ -111,7 +110,7 @@ function Options({track, index}){
 
                                 {userPlaylists ?
                                     userPlaylists.map((playlist) => (
-                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playlist.name} onClick={() => listClickHandler(playlist)} key={playlist.id}><button>Añadir a {playlist.name}</button></MenuItem>
+                                        <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playlist.name} onClick={() => listClickHandler(playlist.id)} key={playlist.id}><button>Añadir a {playlist.name}</button></MenuItem>
                                     ))
                                 : <></>
                                 }                        

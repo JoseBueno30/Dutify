@@ -67,33 +67,20 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
         {tracks.length > 0 && busqueda ? (<SongInfo showAddButton={true}/>) : (<></>)}
         {tracks.length > 0 && !busqueda ? (<SongInfo/>) : (<></>)}
         
-        {/* PARA PLAYLIST */}
-        {!busqueda ? (
-            tracks.map((track, index) => (
-              track !== null ? <SongButton
-              key={index}
-              track={track}
-              index={index}
-              owned = {owned}
-            /> : <></>
-            ))
-        ) : <></>}
-
-        {/* PARA Busquedas */}
-        {busqueda ? (
-          tracks.map((track) => (
-            track.track !== null ? <SongButton
-            key={track.id}
+        {tracks.length > 0 ? (
+          tracks.map((track, index) => (
+            track !== null ? <SongButton
+            key={index}
             track={track}
-            playlistId = {playlistId}
-            enableAddButton={true}
+            index={index}
+            enableAddButton={busqueda}
           /> : <></>
           ))
         ) : ( <></> )}
 
          {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
 
-          {!busqueda ? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
+          {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
 
       </div>
     </TracksHandlersContext.Provider>
