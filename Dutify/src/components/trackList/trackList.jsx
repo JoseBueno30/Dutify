@@ -15,7 +15,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId, owned}) {
+export default function TrackList({tracks, setTracks, playlistId, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
@@ -64,26 +64,24 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
       <div className="list container-fluid ">
          
 
-        {tracks.length>0 ? (<SongInfo/>) : (<></>)}
+        {tracks.length > 0 && busqueda ? (<SongInfo showAddButton={true}/>) : (<></>)}
+        {tracks.length > 0 && !busqueda ? (<SongInfo/>) : (<></>)}
         
-        {tracks.length>0 ? (
-            tracks.map((track, index) => (
-              track !== null ? <SongButton
-              key={index}
-              track={track}
-              index={index}
-              owned = {owned}
-            /> : <></>
-            ))
-        ) : (
-          <div className="emptyList d-flex justify-content-center">
-            {playlistId ? "No hay canciones en esta PlayList" : "Busca la canción en la barra de busqueda para añadir"} 
-          </div>
-        )}
+        {tracks.length > 0 ? (
+          tracks.map((track, index) => (
+            track !== null ? <SongButton
+            key={index}
+            track={track}
+            index={index}
+            enableAddButton={busqueda}
+          /> : <></>
+          ))
+        ) : ( <></> )}
 
-        {playlistId?
-        <div className="d-flex justify-content-center"><AddSongButton/></div>
-        :null}
+         {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+
+          {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
+
       </div>
     </TracksHandlersContext.Provider>
   );

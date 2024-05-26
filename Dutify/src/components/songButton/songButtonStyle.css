@@ -165,3 +165,11 @@
 	  color: inherit;
 	  border: none;
   }
+
+  .btn-add {
+    background-color: var(--color-theme);
+    border-radius: 10px;
+    color: var(--color-text);
+    min-width: 36px;
+  }
+
