@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import SongList from "../songList/songList";
+import TrackList from "../trackList/trackList";
 import PlayListInfo from "./playListInfo/playListInfo";
-import "./playListStyle.css"
-import { getPlayList, getTracksFromPlaylist } from "../../spotifyApi/SpotifyApiCalls";
+import "./playListStyle.css";
+import {
+  getPlayList,
+  getTracksFromPlaylist,
+  isPlaylistOwned,
+} from "../../spotifyApi/SpotifyApiCalls";
+import ListModal from "../listModal/listModal";
+import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
 import Spinner from "../spinner/spinner";
 
 export default function PlayList({}) {
-  const [playList, setPlayList] = useState();
-  const [loading, setLoading] = useState(false);
+  const [playlist, setPlayList] = useState();
+  const [playlistName, setPlaylistName] = useState();
   const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const[owned, setOwned] = useState(false);
 
   async function loadPlayList() {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
     setPlayList(playList);
+    const isOwned = await isPlaylistOwned(playList);
+    setOwned(isOwned);
   }
 
   useEffect(() => {
@@ -24,22 +34,31 @@ export default function PlayList({}) {
 
   useEffect(() => {
     async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+      console.log("LOADING")
+      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
       let tracksAux = tracks.concat(tracksNew);
       setTracks(tracksAux);
     }
-    if (playList !== undefined && tracks.length < playList.tracks.total) loadTracks().finally(() => setLoading(false));
-  }, [playList, tracks]);
+    if (playlist !== undefined && tracks.length < playlist.tracks.total) loadTracks().finally(() => setLoading(false));
+  }, [playlist, tracks]);
 
   return (
     <div className="playList d-flex flex-column flex-xl-row-reverse">
-      {playList && !loading?(
-                <>
-                    <PlayListInfo playList={playList}/>
-                      <SongList tracks={tracks} playlistId={playList.id}/>
-                </>
-            ):
-            <Spinner></Spinner>}
-    </div>
+    {playlist && !loading?(
+              <>
+              <ListModal playlist={playlist} />
+    
+              <DeleteListModal playlist={playlist} />
+              <PlayListInfo playlist={playlist} owned={owned} />
+              <TrackList
+                tracks={tracks}
+                owned={owned}
+                setTracks={setTracks}
+                playlistId={playlist.id}
+              />
+            </>
+          ):
+          <Spinner></Spinner>}
+  </div>
   );
 }

@@ -11,7 +11,7 @@ function ListCard({ listName, background }) {
       title={"Ir a lista '" + listName + "'"}
       id="card_container"
       alt={listName + "_Imagen"}
-      style={{ backgroundImage: `url(${backgroundSrc})` }}
+      style={{ backgroundImage: background ? `url(${backgroundSrc})` : 'var(--placeholder-img)' }}
     >
       <div className="cards-overlay title-fade">
         <p className="cards-title">{listName}</p>

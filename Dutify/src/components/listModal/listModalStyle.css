@@ -1,5 +1,5 @@
 p.error-text {
-  color: rgb(255, 118, 118)
+  color: var(--color-text);
 }
 
 span.mandatory-field {

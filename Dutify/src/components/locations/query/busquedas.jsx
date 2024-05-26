@@ -5,7 +5,7 @@ import {
   searchTracks,
 } from "../../../spotifyApi/SpotifyApiCalls";
 import CardsGrid from "../../cardsGrid/cardsGrid";
-import SongList from "../../songList/songList";
+import TrackList from "../../trackList/trackList";
 import "./busqueda.css";
 import Spinner from "../../spinner/spinner";
 
@@ -41,7 +41,7 @@ function SearchResults() {
       {loading ? <Spinner></Spinner> : (<>
         {query ? <h4>Resultados para: {query}</h4> : <h4>Tus top tracks:</h4> }
         <div className="busqueda">
-            <SongList tracks={tracks} playlistId={playListId} busqueda={true}></SongList>    
+            {loading ? <Spinner></Spinner> : <TrackList tracks={tracks} playlistId={playListId} busqueda={true}></TrackList>}    
         </div>
       </>)}
       </div>
