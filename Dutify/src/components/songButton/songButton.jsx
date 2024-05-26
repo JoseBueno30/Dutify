@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider, FocusableItem } from '@szhsin/react-menu';
@@ -6,13 +6,30 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
+import { addTrackToFavorites, addTrackToPlayList, addTrackToPlayListWithId, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { useSnackbar } from '@mui/base/useSnackbar';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import NavButton from "../topBar/navButton/navButton";
+import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
+import { FeedbackHandlerContext } from "../../App";
 
 
-export default function SongButton({track, index}){
+export default function SongButton({track, playLists, playlistId, enableAddButton=false, index}){
     const [isPlaying, setPlaying] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+    const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+
+    useEffect(() => {
+        function handleResize() {
+            setIsSmallScreen(window.innerWidth < 750);
+          }
+          window.addEventListener('resize', handleResize);
+
+          return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+    }, []);
 
     const timeMIN = Math.trunc(track.duration_ms/60000);
     const seg = Math.trunc((track.duration_ms%60000)/1000);
@@ -21,6 +38,12 @@ export default function SongButton({track, index}){
     const songClickHandler = (e) => {
         console.log(track)
         setPlaying(!isPlaying);
+    }
+
+    const listClickHandler = () => {
+        addTrackToPlayListWithId(track, playlistId).then( status =>
+            changeFeedback(status)
+        )
     }
 
     return(
@@ -37,6 +60,7 @@ export default function SongButton({track, index}){
                             </div>
                             <div title={track.album.name} className='album col-2 '>{track.album.name}</div>
                             <div title={"Duración"} className='time col-3 col-md-2 d-flex justify-content-center'>{timeMIN}:{timeMS}</div>
+                            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                                 <Options track={track} index = {index}/>
                             </div>
