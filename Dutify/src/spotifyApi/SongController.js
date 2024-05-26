@@ -10,6 +10,11 @@ let i =
     ? 0
     : parseInt(window.sessionStorage.getItem("songIndex"));
 
+let trackVolume =
+  window.sessionStorage.getItem("volume") === null
+    ? 0.5
+    : parseFloat(window.sessionStorage.getItem("volume"));
+
 const setTrack = (track, time) => {
   if (track !== null && track.preview_url !== null) {
     // console.log(track.preview_url);
@@ -17,7 +22,7 @@ const setTrack = (track, time) => {
 
     trackObject = track;
     trackAudio = new Audio(track.preview_url);
-    trackAudio.volume = 0.2;
+    trackAudio.volume = trackVolume;
 
     window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
     queueEmitter.emit("newTrack");
@@ -35,7 +40,7 @@ const setTrack = (track, time) => {
 const setPausedTrack = (track, time) => {
   trackObject = track;
   trackAudio = new Audio(track.preview_url);
-  trackAudio.volume = 0.2;
+  trackAudio.volume = trackVolume;
   window.sessionStorage.setItem("currentTrack", JSON.stringify(track));
   queueEmitter.emit("newTrack");
   if (time !== undefined) trackAudio.currentTime = time;
@@ -158,6 +163,12 @@ const getTrackObject = () => {
   return trackObject;
 };
 
+const setVolume = (volume) => {
+  trackVolume = volume / 100;
+  trackAudio.volume = trackVolume;
+  window.sessionStorage.setItem("volume", trackVolume);
+};
+
 export {
   // TRACK FUNCTIONS
   setTrack,
@@ -182,6 +193,9 @@ export {
 
   // TRACK OBJECT
   getTrackObject,
+
+  // AUDIO PROPERTIES
+  setVolume,
 
   // EVENTO COLA
   queueEmitter,

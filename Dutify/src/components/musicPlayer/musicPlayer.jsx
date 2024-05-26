@@ -5,6 +5,7 @@ import {
   playTrack,
   previousQueueSong,
   queueEmitter,
+  setVolume,
 } from "../../spotifyApi/SongController";
 import "./musicPlayer.css";
 import { useEffect, useState } from "react";
@@ -20,36 +21,39 @@ function MusicPlayer() {
   const [track, setTrack] = useState();
   const [currentTime, setCurrentTime] = useState();
 
-  const handleChange = (event) => {
-    setRangeValue(parseInt(event.target.value));
-  };
-
   const switchPlay = () => {
     if (playing) {
       pauseTrack();
-      console.log("pausa")
+      console.log("pausa");
     } else {
-      console.log("play")
+      console.log("play");
       playTrack();
     }
   };
 
-  const handlePlayToPause = () =>{
+  const handlePlayToPause = () => {
     //console.log("cambiando status... era " + playing)
     change(false);
-  }
+  };
 
-  const handlePauseToPlay = () =>{
+  const handlePauseToPlay = () => {
     change(true);
-  }
+  };
 
-  const handleNextTrackClick = () =>{
+  const handleNextTrackClick = () => {
     nextQueueSong();
-  }
+  };
 
-  const handlePreviousTrackClick = () =>{
+  const handlePreviousTrackClick = () => {
     previousQueueSong();
-  }
+  };
+
+  const handleTrackVolume = (e) => {
+    setLastVolumeValue(volumeValue);
+    const volume = e.currentTarget.value;
+    setvolumeValue(volume);
+    setVolume(volume);
+  };
 
   const switchVolume = () => {
     if (rangeValue != 0) {
@@ -100,26 +104,32 @@ function MusicPlayer() {
     __addEvents();
     window.addEventListener("resize", handleResize);
 
+    let trackVolume =
+      window.sessionStorage.getItem("volume") === null
+        ? 50
+        : parseFloat(window.sessionStorage.getItem("volume")) * 100;
+
+    setvolumeValue(trackVolume);
+
     return () => {
       __removeEvents();
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  const __addEvents = ()=>{
+  const __addEvents = () => {
     queueEmitter.on("newTrack", loadTrackInfo);
     queueEmitter.on("timeUpdate", handleCurrentTime);
     queueEmitter.on("trackStatusTrue", handlePauseToPlay);
-    queueEmitter.on("trackStatusFalse", handlePlayToPause)
-  }
+    queueEmitter.on("trackStatusFalse", handlePlayToPause);
+  };
 
-  const __removeEvents = () =>{
+  const __removeEvents = () => {
     queueEmitter.off("newTrack", loadTrackInfo);
     queueEmitter.off("timeUpdate", handleCurrentTime);
     queueEmitter.off("trackStatusTrue", handlePauseToPlay);
-    queueEmitter.off("trackStatusFalse", handlePlayToPause)
-  
-  }
+    queueEmitter.off("trackStatusFalse", handlePlayToPause);
+  };
 
   useEffect(() => {
     fillRangeInputs();
@@ -217,12 +227,13 @@ function MusicPlayer() {
               ></img>
             )}
             <input
+              id="volume-bar"
               type="range"
               className="styled-slider slider-progress"
               min={0}
               max={100}
               value={volumeValue}
-              onChange={handleChange}
+              onChange={handleTrackVolume}
             ></input>
           </div>
         </div>
