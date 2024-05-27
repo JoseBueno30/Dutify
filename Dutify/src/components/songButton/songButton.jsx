@@ -25,32 +25,28 @@ import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
 import { queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
-export default function SongButton({enPlaylist, track, index, loadQueue, playlistId, setPlaying, enableAddButton=false}) {
-  const [feedback, setFeedback] = useState("");
-  // const [isPlaying, setPlaying] = useState(false);
-
-  // console.log(track);
-  const handleClose = () => {
-    setFeedback("");
-  };
+export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false}) {
+  const [isSongPlaying, setSongPlaying] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+  const playlistId = useContext(TracksHandlersContext).playlistId;
 
   useEffect(() => {
+      function handleResize() {
+          setIsSmallScreen(window.innerWidth < 750);
+        }
+        window.addEventListener('resize', handleResize);
 
-    function handleResize() {
-        setIsSmallScreen(window.innerWidth < 750);
-      }
-      window.addEventListener('resize', handleResize);
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+  }, []);
 
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-}, []);
-
-  const { getRootProps, onClickAway } = useSnackbar({
-    onClose: handleClose,
-    feedback,
-    autoHideDuration: 5000,
-  });
+  const listClickHandler = () => {
+      addTrackToPlayList(track, playlistId).then( status =>
+          changeFeedback(status)
+      )
+  }
 
   const timeMIN = Math.trunc(track.duration_ms / 60000);
   const seg = Math.trunc((track.duration_ms % 60000) / 1000);
@@ -59,6 +55,7 @@ export default function SongButton({enPlaylist, track, index, loadQueue, playlis
   const songClickHandler = (e) => {
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
+    setSongPlaying(!isSongPlaying);
     if(enPlaylist && playlistId === playlistPlaying){   
       console.log("Reproduciendo misma playlist...");
       setQueueIndex(index);
@@ -128,13 +125,7 @@ export default function SongButton({enPlaylist, track, index, loadQueue, playlis
           </div>
         </div>
       </div>
-      {feedback !== "" ? (
-        <ClickAwayListener onClickAway={onClickAway}>
-          <div className="CustomSnackbar" {...getRootProps()}>
-            {feedback}
-          </div>
-        </ClickAwayListener>
-      ) : null}
+      
     </>
   );
 }
@@ -170,89 +161,20 @@ function Options({track, index}){
           viewScroll="close"
           position="auto"
           transition>
-                              <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={() => favoritesClickHandler()}><button>Añadir a canciones favoritas</button></MenuItem>
-                              {playlistId && owned?
-                              <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={() => eliminarClickHandler()}><button>Eliminar de la playlist</button></MenuItem>
-                              :null}
-                              <MenuDivider />
+            <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={() => favoritesClickHandler()}><button>Añadir a canciones favoritas</button></MenuItem>
+            {playlistId && owned?
+            <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={() => eliminarClickHandler()}><button>Eliminar de la playlist</button></MenuItem>
+            :null}
+            <MenuDivider />
 
-                              {userPlaylists ?
-                                  userPlaylists.map((playlist) => (
-                                      <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playlist.name} onClick={() => listClickHandler(playlist.id)} key={playlist.id}><button>Añadir a {playlist.name}</button></MenuItem>
-                                  ))
-                              : <></>
-                              }                        
-                              
-                          </Menu>
+            {userPlaylists ?
+                userPlaylists.map((playlist) => (
+                    <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playlist.name} onClick={() => listClickHandler(playlist.id)} key={playlist.id}><button>Añadir a {playlist.name}</button></MenuItem>
+                ))
+            : <></>
+            }                        
+            
+        </Menu>
     );
   };
 
-  const eliminarClickHandler = (playlistId) => {
-    removeTrackFromPlayList(track, playlistId).then(
-      setFeedback("Canción eliminada de la playlist.")
-    );
-  };
-
-  const listClickHandler = (playList) => {
-    console.log(track);
-    console.log(playList);
-    addTrackToPlayList(track, playList).then(
-      setFeedback("Canción añadida a la playlist.")
-    );
-  };
-
-  const newListClickHandler = (e) => {};
-
-  const menuItemClassName = ({ hover }) =>{
-    hover ? "menuItemHover" : "menuItem";
-
-  return (
-    <Menu
-      menuButton={
-        <MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}>
-          <FaEllipsisVertical className="options" />
-        </MenuButton>
-      }
-      menuClassName="optionsMenu"
-      viewScroll="close"
-      position="auto"
-      transition
-    >
-      <MenuItem
-        tabIndex={"0"}
-        className={menuItemClassName}
-        title={"Añadir a canciones favoritas"}
-        onClick={() => favoritesClickHandler()}
-      >
-        <button>Añadir a canciones favoritas</button>
-      </MenuItem>
-      {playlistId ? (
-        <MenuItem
-          tabIndex={"0"}
-          className={menuItemClassName}
-          title={"Eliminar de la playlist"}
-          onClick={() => eliminarClickHandler(playlistId)}
-        >
-          <button>Eliminar de la playlist</button>
-        </MenuItem>
-      ) : null}
-      <MenuDivider />
-
-      {playLists ? (
-        playLists.map((playList) => (
-          <MenuItem
-            className={menuItemClassName}
-            tabIndex={"0"}
-            title={"Añadir a " + playList.name}
-            onClick={() => listClickHandler(playList)}
-            key={playList.id}
-          >
-            <button>Añadir a {playList.name}</button>
-          </MenuItem>
-        ))
-      ) : (
-        <></>
-      )}
-    </Menu>
-  );
-}

@@ -75,7 +75,6 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
             key={index}
             index={index}
             loadQueue={loadQueue}
-            playlistId = {playlistId}
             setPlaying={setPlaying}
             enableAddButton={busqueda}
           /> : <></>
