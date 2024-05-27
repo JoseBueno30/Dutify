@@ -16,6 +16,10 @@ export default function PlayListPlayer({
   isPlaying,
   setPlaying,
 }) {
+
+  const [loopStatus, setLoopStatus] = useState(window.sessionStorage.getItem("loop") === "true");
+  const [randomStatus, setRandomStatus] = useState(window.sessionStorage.getItem("random") === "true");
+
   const playButtonClickHandler = (e) => {
     if (!isPlaying) queueFunction();
     else pauseTrack();
@@ -23,25 +27,45 @@ export default function PlayListPlayer({
   };
   const crossButtonClickHandler = (e) => {
     setRandomQueue();
+    setRandomStatus(!randomStatus);
   };
   const loopButtonClickHandler = (e) => {
     setLoopTrack();
+    setLoopStatus(!loopStatus);
   };
 
   useEffect(() => {
+    const random = window.sessionStorage.getItem("random") === "true";
+    const loop = window.sessionStorage.getItem("loop") === "true";
+    console.log("RANDOM: " + random);
+    setRandomStatus(random);
+    setLoopStatus(loop);
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     const trackStatus = window.sessionStorage.getItem("trackStatus");
+
+
     setPlaying(playlistPlaying === playListId && trackStatus === "true");
   }, []);
 
   return (
     <div className="playListPlayerContainer d-flex justify-content-around align-items-center">
-      <div className="arrowCross" tabIndex={0}>
+
+    {randomStatus?
+      <div className="arrowCrossActive" tabIndex={0}>
         <TbArrowsCross
           className="arrowCrossButton"
           onClick={crossButtonClickHandler}
         />
       </div>
+      :<div className="arrowCross" tabIndex={0}>
+        <TbArrowsCross
+          className="arrowCrossButton"
+          onClick={crossButtonClickHandler}
+        />
+      </div>
+    }
+
+      
       {isPlaying ? (
         <div
           className="playListButtonAnimated"
@@ -62,12 +86,22 @@ export default function PlayListPlayer({
         </div>
       )}
 
-      <div className="arrowLoop" tabIndex={0}>
+
+      {loopStatus?
+      <div className="arrowLoopActive" tabIndex={0}>
         <RiLoopLeftFill
           className="arrowLoopButton"
           onClick={loopButtonClickHandler}
         />
       </div>
+      :<div className="arrowLoop" tabIndex={0}>
+        <RiLoopLeftFill
+          className="arrowLoopButton"
+          onClick={loopButtonClickHandler}
+        />
+      </div>
+    }
+      
     </div>
   );
 }

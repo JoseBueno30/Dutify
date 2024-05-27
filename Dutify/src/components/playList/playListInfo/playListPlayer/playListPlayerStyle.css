@@ -4,6 +4,14 @@
 }
 
 .arrowCross, .arrowLoop{
+    color: var(--color-text);
+    height: 35%;
+    aspect-ratio: 1;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.arrowCrossActive, .arrowLoopActive{
     color: var(--color-theme);
     height: 35%;
     aspect-ratio: 1;

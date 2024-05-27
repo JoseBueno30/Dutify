@@ -217,6 +217,7 @@ const __shuffle = (array) => {
 
 const setLoopTrack = () => {
   inLoop = !inLoop;
+  window.sessionStorage.setItem("loop", inLoop);
 };
 
 export {
