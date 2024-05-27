@@ -22,14 +22,16 @@ import ListModal from "../listModal/listModal";
 import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
 import Spinner from "../spinner/spinner";
 import { FeedbackHandlerContext } from "../../App";
+import { SiTruenas } from "react-icons/si";
 
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
   const [playlist, setPlayList] = useState();
   const [tracks, setTracks] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [followed, setFollowed] = useState(false);
   const [owned, setOwned] = useState(false);
+  const [fullyLoaded, setFullyLoaded] = useState(false);
 
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
@@ -85,8 +87,11 @@ export default function PlayList({}) {
       let tracksAux = tracks.concat(tracksNew);
       setTracks(tracksAux);
     }
-    if (playlist !== undefined && tracks.length < playlist.tracks.total)
+    if (playlist !== undefined && !fullyLoaded){
+      // if(tracks.length === 0){setLoading(true)}
       loadTracks().finally(() => setLoading(false));
+      if(tracks.length === playlist.tracks.total){setFullyLoaded(true)}
+    }
   }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
 
   const followPlaylistHandler = () => {
