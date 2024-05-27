@@ -62,7 +62,7 @@ function MusicPlayer() {
                 <div className="simulate-image"></div>
                 {/* Texto de Artista */}
                 <div className="artist-container">
-                    <span>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span><br/>
+                    <span>Nombre</span><br/>
                     {!isSmallScreen ?  <span className="artist-text">Artista</span> : "" }
                 </div>
             </div>

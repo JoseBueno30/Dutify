@@ -4,7 +4,7 @@ import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import "./songInfoStyle.css";
 
 
-export default function SongInfo(){
+export default function SongInfo({showAddButton = false}){
     const [isPlaying, setPlaying] = useState(false);
 
     const songClickHandler = (e) => {
@@ -21,6 +21,7 @@ export default function SongInfo(){
                             </div>
                             <div className='album col-2 align-content-center'>Album</div>
                             <div className='timeInfo col-3 col-md-2 d-flex justify-content-center aling-content-center'>Duracion</div>
+                            {showAddButton ? <div className='col-1 d-flex justify-content-center'></div> : <></>}
                             <div className='col-md-1 col-2 d-flex justify-content-center'>
                             </div>
                         </div>

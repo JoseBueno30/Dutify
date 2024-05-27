@@ -7,12 +7,12 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import "./addSongButtonStyle.css";
 
 
-export default function AddSongButton({name, artistName, albumName, image, time_ms}){
+export default function AddSongButton({name, artistName, albumName, image, time_ms, playlistId}){
 
 
     const addSongClickHandler = (e) => {
         console.log("Añadir cancion");
-        window.location.href = "/busqueda?query=";
+        window.location.href = "/busqueda?playListId="+ playlistId +"&query=";
     }
 
     return(

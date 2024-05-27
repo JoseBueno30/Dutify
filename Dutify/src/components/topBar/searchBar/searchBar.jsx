@@ -63,7 +63,8 @@ function SearchBar({ isOpen }) {
         id="search-bar"
         className="search-bar"
         type="text"
-        placeholder={"Buscar"}
+        placeholder={"Buscar canción"}
+        maxLength={50}
         onChange={onChangeText}
       />
       <button
@@ -80,7 +81,7 @@ function SearchBar({ isOpen }) {
               "d-flex flex-wrap  align-items-center justify-content-center"
             }
           >
-            <TrackList tracks={tracks}></TrackList>
+            <TrackList tracks={tracks} busqueda={true}></TrackList>
             <button
               onClick={search}
               className="btn btn-showMore mt-auto mb-2"
