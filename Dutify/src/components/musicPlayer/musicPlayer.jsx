@@ -69,7 +69,7 @@ function MusicPlayer() {
             {/* Imagen de Cancion */}
             <div className="simulate-image"></div>
             {/* Texto de Artista */}
-            <div className="artist-container">
+            <div className="artist-container" tabIndex={0}>
               <span>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span>
               <br />
               {!isSmallScreen ? (
@@ -84,6 +84,7 @@ function MusicPlayer() {
             <input
               className="styled-slider slider-progress"
               type="range"
+              aria-label="Barra de reproducción"
             ></input>
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
@@ -108,7 +109,7 @@ function MusicPlayer() {
                   <IoPlaySkipForwardCircleOutline
                     size={35}
                     className="side-button"
-                    title="Siguiente canción"
+                    title="Canción siguiente"
                   />
                 </button>
               </div>
@@ -126,8 +127,8 @@ function MusicPlayer() {
                 <FaVolumeUp size={25} />
               )}
             </button>
-            <label htmlFor="volumeRange" className="oculto">Volúmen</label>
             <input
+              aria-label="Volume Range"
               type="range"
               className="styled-slider slider-progress"
               id="volumeRange"

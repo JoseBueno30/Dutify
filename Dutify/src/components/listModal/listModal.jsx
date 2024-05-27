@@ -135,6 +135,7 @@ function ListModal({ playlist }) {
                       <br />
                       <input
                         className="form-check-input ms-1"
+                        aria-label="Privacidad"
                         type="checkbox"
                         role="switch"
                         id="listPublic"
