@@ -63,12 +63,18 @@ export default function PlayList({}) {
   };
 
   useEffect(() => {
-    loadPlayList();
-
-    queueEmitter.on("queueEnded", stopPlayerAnimation);
-    queueEmitter.on("trackStatusTrue", startPlayerAnimation);
-    queueEmitter.on("trackStatusFalse", stopPlayerAnimation);
-
+    try{
+      loadPlayList();
+      
+      queueEmitter.on("queueEnded", stopPlayerAnimation);
+      queueEmitter.on("trackStatusTrue", startPlayerAnimation);
+      queueEmitter.on("trackStatusFalse", stopPlayerAnimation);
+    }catch(error){
+      setLoading(false);
+      changeFeedback("Se ha producido un error");
+      console.log(error);
+    }
+    
     return () => {
       queueEmitter.off("trackStatusTrue", startPlayerAnimation);
       queueEmitter.off("trackStatusFalse", stopPlayerAnimation);
