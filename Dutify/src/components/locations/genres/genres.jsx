@@ -11,6 +11,7 @@ function Genres({ token }) {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
+    document.title = "Géneros | Dutify";
     const data = ListFromJSON("genre") 
     setGenres(data);
   }, []);

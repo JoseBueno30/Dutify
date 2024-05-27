@@ -3,25 +3,32 @@ import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import './genresStyle.css';
 import Spinner from "../../spinner/spinner";
+import genreData from "../../../data/genreData.json";
 
 const getGenreID = () =>{
   const url = new URL(window.location.href);
-
   const id = url.searchParams.get("genero");
   return id;
+}
+
+const getGenreName = (id) => {
+  const genre = genreData.find(genre => genre.id === id);
+  return genre.genreName;
 }
 
 function GenreLists() {
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(false);
+  const genreID = getGenreID();
+  const genreName = getGenreName(genreID);
 
   const cargarPlaylists = async () =>{
-    const id = getGenreID();
     setLoading(true);
-    setLists(await getCategoriePlaylists(id,30).finally(() => setLoading(false)));
+    setLists(await getCategoriePlaylists(genreID,30).finally(() => setLoading(false)));
   }
 
   useEffect(() => {
+    document.title = "Listas " + genreName + " | Dutify";
     cargarPlaylists();
   }, []);
 

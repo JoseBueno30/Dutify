@@ -15,6 +15,7 @@ function Lists({}) {
   };
 
   useEffect(() => {
+    document.title = "Mis listas | Dutify";
     cargarPlaylists();
   }, []);
 

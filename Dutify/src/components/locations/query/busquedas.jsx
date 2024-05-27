@@ -19,6 +19,7 @@ function SearchResults() {
   }
 
   useEffect(() => {
+    document.title = "Busqueda | Dutify";
     cargarlista().finally(() => setLoading(false));
   }, []);
 
