@@ -25,7 +25,7 @@ function Lists({}) {
   };
 
   return (
-    <section className="lists-section">
+    <section className="lists-section" aria-label="Mis listas de reproduccion">
       {loading ? 
       <Spinner></Spinner> : 
       (<>

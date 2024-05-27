@@ -47,7 +47,7 @@ function Genres({ token }) {
     window.location.href="/Generos/Listas?genero=" + id;
   }
 
-  return  <section className="genres-section">
+  return  <section className="genres-section" aria-label="Lista de géneros">
             <CardsGrid type="genre" data={genres} clickFunction={goToListasGenero}></CardsGrid>
           </section>;
 }

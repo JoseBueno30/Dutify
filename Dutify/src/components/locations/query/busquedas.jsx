@@ -24,11 +24,11 @@ function SearchResults() {
   }, []);
 
   return (
-    <div className="busqueda-wrapper">
+    <section className="busqueda-wrapper" aria-label="Resultados de búsqueda">
         <div className="busqueda">
             {loading ? <Spinner></Spinner> : <TrackList tracks={tracks}></TrackList>}    
         </div>
-    </div>
+    </section>
   );
 }
 

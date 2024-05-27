@@ -110,7 +110,6 @@ function TopBar() {
           id={contextTheme + " NavMobileMenu"}
           aria-hidden={navMenuOpen ? "false" : "true"}
           aria-labelledby="botonNav"
-          role="menu"
         >
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>
