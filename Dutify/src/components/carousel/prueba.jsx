@@ -1,11 +1,11 @@
-import React, { useState } from 'react'; // Importa useState desde React
+import React, { useState } from 'react';
 import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './CarouselComponent.css';
 
 const CarouselComponent = ({ lista, name, id }) => {
-  const [activeIndex, setActiveIndex] = useState(0); // Define el estado activeIndex
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const settings = {
     dots: true,
@@ -16,15 +16,15 @@ const CarouselComponent = ({ lista, name, id }) => {
     autoplay: false,
     autoplaySpeed: 2000,
     cssEase: "linear",
-    centerMode: true, 
+    centerMode: true,
     centerPadding: '0',
-    beforeChange: (oldIndex, newIndex) => handleChange(newIndex) // Agrega un evento beforeChange para actualizar el activeIndex
+    beforeChange: (oldIndex, newIndex) => handleChange(newIndex),
   };
 
   const ClickHandler = (id) => {
     window.location.href = "/listas/playlist?playlistId=" + id;
-  }
-  
+  };
+
   const handleKeyDown = (event, id) => {
     if (event.key === 'Enter') {
       ClickHandler(id);
@@ -33,6 +33,14 @@ const CarouselComponent = ({ lista, name, id }) => {
 
   const handleChange = (index) => {
     setActiveIndex(index);
+    // Anunciar el nombre de la playlist cuando cambia
+    const activePlaylist = lista[index];
+    if (activePlaylist) {
+      const announcement = document.getElementById(`playlist-announce-${id}`);
+      if (announcement) {
+        announcement.textContent = `Playlist actual: ${activePlaylist.description}`;
+      }
+    }
   };
 
   return (
@@ -45,19 +53,21 @@ const CarouselComponent = ({ lista, name, id }) => {
               <div
                 key={playlist.id}
                 className="carousel__item"
-                tabIndex={index === activeIndex ? "0" : "-1"}
-                role={index === activeIndex ? "button" : undefined}
-                onClick={index === activeIndex ? () => ClickHandler(playlist.id) : undefined}
-                onKeyDown={index === activeIndex ? (event) => handleKeyDown(event, playlist.id) : undefined}
+                tabIndex="0"
+                role="button"
+                onClick={() => ClickHandler(playlist.id)}
+                onKeyDown={(event) => handleKeyDown(event, playlist.id)}
                 aria-label={playlist.description}
+                aria-live={index === activeIndex ? "assertive" : "off"}
               >
                 <img src={playlist.imageUrl} alt={playlist.description} />
               </div>
             ))}
           </Slider>
         </div>
+        <input type='hidden' id={`playlist-announce-${id}`} className="sr-only" aria-live="assertive"></input>
         <div className='carrusel-dot-section' />
-      </div>   
+      </div>
     </section>
   );
 };

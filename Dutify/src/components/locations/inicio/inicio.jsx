@@ -18,10 +18,10 @@ function Inicio({token}){
     const cargarPlaylists = async () =>{
         
         setLoading(true);
-        const user_playlists = await getUserPlaylists(token)
+        /*const user_playlists = await getUserPlaylists(token)
         setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO
         setPopularPlaylists(await getPopularPlaylists(token))
-        setRecommendedPlaylists(await getRecommendedPlaylists(token))
+        setRecommendedPlaylists(await getRecommendedPlaylists(token))*/
         setPopularArtistsPlaylists(await getPopularArtistsPlaylists(token))
     }
 
@@ -42,10 +42,12 @@ function Inicio({token}){
                 <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            <CarouselComponent id="Listas populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
+            {/*<CarouselComponent id="Listas populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
+            */}
             <CarouselComponent id="Tus artistas favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CarouselComponent>
+            {/*
             <CarouselComponent id="Recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CarouselComponent>
-
+            */}
             </>
             }
         </section>
