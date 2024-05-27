@@ -75,11 +75,11 @@ function TopBar() {
           DutiFy
         </h1>
         <nav className={"navMenu me-auto"} id={contextTheme}>
-          <NavButton location={1} texto="Inicio" id={contextTheme}></NavButton>
-          <NavButton location={2} texto="Generos" id={contextTheme}></NavButton>
-          <NavButton location={3} texto="Listas" id={contextTheme}></NavButton>
+          <NavButton location={1} texto="Inicio" id={contextTheme} ></NavButton>
+          <NavButton location={2} texto="Generos" id={contextTheme} ></NavButton>
+          <NavButton location={3} texto="Listas" id={contextTheme} ></NavButton>
         </nav>
-        <div className="d-flex justify-content-between align-items-center">
+        <aside className="d-flex justify-content-between align-items-center">
           <HelpButton visible={!searchBarOpen && !navMenuOpen} />
           <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
           <SearchBar isOpen={searchBarOpen} ></SearchBar>
@@ -103,13 +103,14 @@ function TopBar() {
           >
             {navMenuIcon()}
           </button>
-        </div>
+        </aside>
 
         <nav
           className={(navMenuOpen ? "open " : "closed ") + "navMenuMobile"}
           id={contextTheme + " NavMobileMenu"}
           aria-hidden={navMenuOpen ? "false" : "true"}
           aria-labelledby="botonNav"
+
         >
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>

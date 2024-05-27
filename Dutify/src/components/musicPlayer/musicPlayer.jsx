@@ -62,23 +62,23 @@ function MusicPlayer() {
 
   return (
     <>
-      <div className="fixed-bottom music-bar ">
+      <div className="fixed-bottom music-bar" >
         <div className="music-container">
           {/* Información de la cancion */}
-          <div className="song-container">
+          <article className="song-container">
             {/* Imagen de Cancion */}
             <div className="simulate-image"></div>
             {/* Texto de Artista */}
-            <div className="artist-container" tabIndex={0}>
-              <span>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span>
+            <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
+              <span tabIndex={0}>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span>
               <br />
               {!isSmallScreen ? (
-                <span className="artist-text">Artista</span>
+                <span tabIndex={0} className="artist-text">Artista</span>
               ) : (
                 ""
               )}
             </div>
-          </div>
+          </article>
           {/* Barra de reproducción */}
           <div className="progresion-bar">
             <input
@@ -128,7 +128,7 @@ function MusicPlayer() {
               )}
             </button>
             <input
-              aria-label="Volume Range"
+              aria-label="Barra de volumen"
               type="range"
               className="styled-slider slider-progress"
               id="volumeRange"
