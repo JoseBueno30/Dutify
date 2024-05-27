@@ -1,0 +1,117 @@
+.carrusel-container {
+  background-color: var(--color-background);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+  gap: 20px;
+}
+
+.carrusel-box {
+  width: 95vw;
+  max-width: 875px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction:column;
+  gap:10px;
+  position: relative;
+}
+
+.carrusel-h5 {
+  color: var(--color-text);
+  font-size: 25px;
+}
+
+.carrusel-dot-section {
+  /*background-color: green;*/
+  height: 40px;
+  width: 100%;
+}
+
+.carousel-container {
+  width: 100%;
+}
+
+.slick-slider {
+  perspective: 2000px;
+}
+
+.slick-track {
+  transform-style: preserve-3d;
+}
+
+.slick-slide {
+  padding: 5px;
+  transition: transform 0.5s, opacity 0.5s;
+  opacity: 0.9;
+  transform: rotateY(-20deg) scale(0.9);
+}
+
+.slick-center ~ .slick-slide {
+  transform: rotateY(20deg) scale(0.9);
+}
+
+.slick-current.slick-center {
+  opacity: 1;
+  transform: rotateY(0) scale(1.1);
+}
+
+.slick-prev, .slick-next {
+  opacity: 1;
+  transform: rotateY(-10deg) scale(0.95);
+}
+
+.slick-next {
+  opacity: 1;
+  transform: rotateY(10deg) scale(0.95);
+}
+
+.carousel__item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Pruebas  */
+.slick-prev,
+.slick-next {
+  opacity: 1;
+  transform: rotateY(0deg) scale(1); /* Restaurar la rotación y escala a su estado original */
+  width: 50px; /* Ancho de los botones */
+  height: 50px; /* Altura de los botones */
+  z-index: 1; /* Asegurarse de que estén por encima de los slides */
+  position: absolute; /* Posicionamiento absoluto */
+  top: 50%; /* Ajustar la posición verticalmente */
+  transform: translateY(-50%); /* Centrar verticalmente */
+}
+
+.slick-prev {
+  left: 20px; /* Situar el botón "Prev" en el borde izquierdo */
+}
+
+.slick-next {
+  right: 20px; /* Situar el botón "Next" en el borde derecho */
+}
+
+
+
+.slick-dots li button:before {
+  color: var(--color-5);
+  font-size: 12px;
+  opacity: 1;
+}
+
+.slick-dots li button:before:hover {
+  color: var(--color-5);
+  opacity: 0.25;
+}
+
+.slick-dots li.slick-active button:before {
+  color: var(--color-theme);
+  opacity: 1;
+}
+
+.slick-dots {
+  bottom: -40px;
+}
+
+

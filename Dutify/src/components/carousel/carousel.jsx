@@ -42,8 +42,8 @@ const CustomCarousel = ({ lista, name, id }) => {
                     transitionTime={500}
                     centerMode
                     centerSlidePercentage={35}
-                    selectedItem={activeIndex}
-                    onChange={handleChange}
+                    /*selectedItem={activeIndex}*/
+                    /*onChange={handleChange}*/
                     renderArrowPrev={(onClickHandler, hasPrev, label) =>
                         hasPrev && <CustomArrow onClick={onClickHandler} direction="left" />
                     }
@@ -51,7 +51,7 @@ const CustomCarousel = ({ lista, name, id }) => {
                         hasNext && <CustomArrow onClick={onClickHandler} direction="right" />
                     }
                 >
-                    {lista.map((playlist, index) => (
+                    {/* lista.map((playlist, index) => (
                         <div
                             key={playlist.id}
                             className="carousel__item"
@@ -63,7 +63,22 @@ const CustomCarousel = ({ lista, name, id }) => {
                         >
                             <img src={playlist.imageUrl} alt={playlist.description} />
                         </div>
-                    ))}
+                    )) */}
+                    <div className="carousel__item">
+                        <img src='image.jpg' alt='description' />
+                    </div>
+                    <div className="carousel__item">
+                        <img src='image.jpg' alt='description' />
+                    </div>
+                    <div className="carousel__item">
+                        <img src='image.jpg' alt='description' />
+                    </div>
+                    <div className="carousel__item">
+                        <img src='image.jpg' alt='description' />
+                    </div>
+                    <div className="carousel__item">
+                        <img src='image.jpg' alt='description' />
+                    </div>
                 </Carousel>
                 <div className='carrusel-dot-section' />
             </div>
