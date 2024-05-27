@@ -35,19 +35,27 @@ function TopBar() {
   };
 
   const navMenuIcon = () => {
+    
+    const propiedades= {
+      "id": "botonNav",
+      "title": "Menu de navegación",
+      "aria-expanded": navMenuOpen ? "true" : "false",
+      "aria-controls": "NavMobileMenu",
+    }
+
     if (navMenuOpen) {
       return contextTheme === "light" ? (
-        <BsX size={35} color="black"></BsX>
+        <BsX size={35} color="black" title="Cerrar dropdown" {...propiedades}></BsX>
       ) : (
-        <BsX size={35} color="white"></BsX>
+        <BsX size={35} color="white" title="Cerrar dropdown" {...propiedades}></BsX>
       );
     } else if (searchBarOpen) {
-      return <BsX size={35} color="black"></BsX>;
+      return <BsX size={35} color="black" title="Cerrar buscador" {...propiedades}></BsX>;
     } else {
       return contextTheme === "light" ? (
-        <BsList size={35} color="black"></BsList>
+        <BsList size={35} color="black" title="Cerrar buscador" {...propiedades}></BsList>
       ) : (
-        <BsList size={35} color="white"></BsList>
+        <BsList size={35} color="white" title="Cerrar buscador" {...propiedades}></BsList>
       );
     }
   };
@@ -60,9 +68,6 @@ function TopBar() {
           " d-flex position-relative h-100 align-items-center"
         }
       >
-        <button className="m-2 btn-back" type="button">
-          <BiArrowBack size="27"/>
-        </button>
         <h1
           className={"title mt-2 pb-1 " + (searchBarOpen ? "d-none" : "")}
           id={contextTheme}
@@ -77,7 +82,7 @@ function TopBar() {
         <div className="d-flex justify-content-between align-items-center">
           <HelpButton visible={!searchBarOpen && !navMenuOpen} />
           <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
-          <SearchBar isOpen={searchBarOpen}></SearchBar>
+          <SearchBar isOpen={searchBarOpen} ></SearchBar>
 
           <button
             id="searchButton"
@@ -87,7 +92,7 @@ function TopBar() {
             }
             onClick={toggleSearchBar}
           >
-            <BiSearch size={35} />
+            <BiSearch size={35} title="Buscar canción"/>
           </button>
           <button
             className={
@@ -102,7 +107,10 @@ function TopBar() {
 
         <nav
           className={(navMenuOpen ? "open " : "closed ") + "navMenuMobile"}
-          id={contextTheme}
+          id={contextTheme + " NavMobileMenu"}
+          aria-hidden={navMenuOpen ? "false" : "true"}
+          aria-labelledby="botonNav"
+          role="menu"
         >
           <NavButton texto="Inicio" id={contextTheme}></NavButton>
           <NavButton texto="Generos" id={contextTheme}></NavButton>

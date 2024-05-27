@@ -129,7 +129,7 @@ function ListModal({ playlist }) {
                 <>
                   <div className="mb-4 w-75">
                     <div className="form-check form-switch ps-0">
-                      <label className="form-check-label mb-1">
+                      <label className="form-check-label mb-1" tabIndex={0}>
                         Privacidad
                       </label>
                       <br />

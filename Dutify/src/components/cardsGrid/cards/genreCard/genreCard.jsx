@@ -21,7 +21,7 @@ function GenreCard({ genreName, background }) {
     >
       <div className="card-body">
         <div className={"cards-overlay  " + background + "-img genre-img"}>
-          <p className="cards-title">{genreName}</p>
+          <h2 className="cards-title">{genreName}</h2>
         </div>
       </div>
     </button>

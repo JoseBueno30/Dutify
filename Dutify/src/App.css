@@ -7,7 +7,7 @@
   --color-5: #e7e7e7;
   --color-text:white;
   --border: none;
-  --color-theme:#0d6efd;
+  --color-theme:#4cccf7;
   --placeholder-img: url('/assets/placeholder-img-light.png');
 }
 
@@ -20,6 +20,6 @@
   --color-5: #333333;
   --color-text:black;
   --border: none;
-  --color-theme:#0d6efd;
+  --color-theme:#3586f0;
   --placeholder-img: url('/assets/placeholder-img-dark.png');
 }

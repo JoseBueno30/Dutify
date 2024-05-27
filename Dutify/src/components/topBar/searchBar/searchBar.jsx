@@ -59,18 +59,19 @@ function SearchBar({ isOpen }) {
 
   return (
     <div className={(isOpen ? "" : " occult ") + "d-flex"}>
+      <label htmlFor="search-bar" className="oculto">Buscar canción</label>
       <input
         id="search-bar"
         className="search-bar"
         type="text"
-        placeholder={"Buscar"}
+        placeholder="Buscar canción"
         onChange={onChangeText}
       />
       <button
         className="position-absolute search-btn"
         onClick={search}
       >
-        <BiSearch className="" style={{ color: "black" }} />
+        <BiSearch className="" style={{ color: "black" }} title="Buscar canción" />
       </button>
       {visible ? (
         <div className={"position-absolute search-results"}>
