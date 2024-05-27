@@ -42,12 +42,10 @@ function Inicio({token}){
                 <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            {/*<CustomCarousel id="Listas populares" lista={popular_playlists} name="Listas populares:"></CustomCarousel>
-            <CustomCarousel id="Tus artistas favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CustomCarousel>
-            <CustomCarousel id="Recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CustomCarousel>
-            */}
-            
+            <CarouselComponent id="Listas populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
+            <CarouselComponent id="Tus artistas favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CarouselComponent>
             <CarouselComponent id="Recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CarouselComponent>
+
             </>
             }
         </section>
