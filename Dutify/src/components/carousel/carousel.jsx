@@ -1,75 +1,74 @@
 import React, { useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import './carouselStyle.css';
-import left_arrow from './left_arrow.svg';
-import right_arrow from './right_arrow.svg';
 
-const CustomCarousel = ({ lista, name, id }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+const CarouselComponent = ({ lista, name, id }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    const ClickHandler = (id) => {
-        window.location.href = "/listas/playlist?playlistId=" + id;
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    centerMode: true,
+    centerPadding: '0',
+    beforeChange: (oldIndex, newIndex) => handleChange(newIndex),
+  };
+
+  const ClickHandler = (id) => {
+    window.location.href = "/listas/playlist?playlistId=" + id;
+  };
+
+  const handleKeyDown = (event, id) => {
+    if (event.key === 'Enter') {
+      ClickHandler(id);
     }
+  };
 
-    // Flecha personalizada
-    const CustomArrow = ({ onClick, direction }) => (
-        <button className={`custom-arrow custom-arrow-${direction}`} onClick={onClick} aria-label={direction === 'left' ? 'Previous' : 'Next'}>
-            {direction === 'left' ? <img src={left_arrow} alt="Previous"/> : <img src={right_arrow} alt="Next"/>}
-        </button>
-    );
+  const handleChange = (index) => {
+    setActiveIndex(index);
+    // Anunciar el nombre de la playlist cuando cambia
+    const activePlaylist = lista[index];
+    if (activePlaylist) {
+      const announcement = document.getElementById(`playlist-announce-${id}`);
+      if (announcement) {
+        announcement.textContent = `Playlist actual: ${activePlaylist.description}`;
+      }
+    }
+  };
 
-    const handleKeyDown = (event, id) => {
-        if (event.key === 'Enter') {
-            ClickHandler(id);
-        }
-    };
-
-    const handleChange = (index) => {
-        setActiveIndex(index);
-    };
-
-    return (
-        <section className='carrusel-container' aria-label={name} id={id}>
-            <div className='carrusel-box'>
-                <h5 className='carrusel-h5' tabIndex="0" aria-labelledby={id}>{name}</h5>
-                <Carousel
-                    showThumbs={false}
-                    showStatus={false}
-                    infiniteLoop
-                    autoPlay
-                    interval={5000}
-                    transitionTime={500}
-                    centerMode
-                    centerSlidePercentage={35}
-                    selectedItem={activeIndex}
-                    onChange={handleChange}
-                    renderArrowPrev={(onClickHandler, hasPrev, label) =>
-                        hasPrev && <CustomArrow onClick={onClickHandler} direction="left" />
-                    }
-                    renderArrowNext={(onClickHandler, hasNext, label) =>
-                        hasNext && <CustomArrow onClick={onClickHandler} direction="right" />
-                    }
-                >
-                    { lista.map((playlist, index) => (
-                        <div
-                            key={playlist.id}
-                            className="carousel__item"
-                            tabIndex={index === activeIndex ? "0" : "-1"}
-                            role={index === activeIndex ? "button" : undefined}
-                            onClick={index === activeIndex ? () => { ClickHandler(playlist.id) } : undefined}
-                            onKeyDown={index === activeIndex ? (event) => handleKeyDown(event, playlist.id) : undefined}
-                            aria-label={playlist.description}
-                        >
-                            <img src={playlist.imageUrl} alt={playlist.description} />
-                        </div>
-                    )) }
-                    
-                </Carousel>
-                <div className='carrusel-dot-section' />
-            </div>
-        </section>
-    );
+  return (
+    <section className='carrusel-container' aria-label={name} id={id}>
+      <div className='carrusel-box'>
+        <h5 className='carrusel-h5' tabIndex="0" aria-labelledby={id}>{name}</h5>
+        <div className="carousel-container">
+          <Slider {...settings}>
+            {lista.map((playlist, index) => (
+              <div
+                key={playlist.id}
+                className="carousel__item"
+                onClick={() => ClickHandler(playlist.id)}
+                aria-label={playlist.description}
+                aria-live={index === activeIndex ? "assertive" : "off"}
+                tabIndex={index === activeIndex ? 0 : -1}
+                onKeyDown={(event) => index === activeIndex && handleKeyDown(event, playlist.id)}
+              >
+                <img src={playlist.imageUrl} alt={playlist.description} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <input type='hidden' id={`playlist-announce-${id}`} className="sr-only" aria-live="assertive" />
+        <div className='carrusel-dot-section' />
+      </div>
+    </section>
+  );
 };
 
-export default CustomCarousel;
+export default CarouselComponent;
