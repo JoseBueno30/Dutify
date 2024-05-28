@@ -75,7 +75,7 @@ function SearchBar({ isOpen }) {
         <BiSearch className="" style={{ color: "black" }} title="Buscar canción" />
       </button>
       {visible ? (
-        <div className={"position-absolute search-results"}>
+        <div className={"position-absolute search-results"} aria-description="Resultados de busqueda" tabIndex={0}>
           <ClickOutside
             onClick={changeVisibility}
             className={
