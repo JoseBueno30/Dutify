@@ -23,7 +23,7 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
-import { queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
+import { isTrackPlaying, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
 export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false}) {
   const [isSongPlaying, setSongPlaying] = useState(false);
@@ -89,8 +89,10 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
                 : {}
             }
           >
-            {" "}
-            <FaPlay className="playButton" />{" "}
+            {isTrackPlaying(track)?
+            <FaPause className="playButton"/>
+            :<FaPlay className="playButton" />
+          }
           </div>
         </div>
         <div className="container-fluid">

@@ -220,6 +220,13 @@ const setLoopTrack = () => {
   window.sessionStorage.setItem("loop", inLoop);
 };
 
+const isTrackPlaying = (track) => {
+  console.log(track);
+  console.log(trackObject);
+  console.log(track.uri === trackObject.uri)
+  return track.uri === trackObject.uri;
+}
+
 export {
   // TRACK FUNCTIONS
   setTrack,
@@ -248,6 +255,7 @@ export {
 
   // TRACK OBJECT
   getTrackObject,
+  isTrackPlaying,
 
   // EVENTO COLA
   queueEmitter,
