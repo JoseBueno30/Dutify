@@ -9,6 +9,7 @@ import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { FeedbackHandlerContext } from "../../App";
+import NavButton from "../topBar/navButton/navButton";
 
 
 
@@ -75,7 +76,9 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
 
           {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Esta lista esta vacía</div> : <></>}
 
-          {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay resultados para esta busqueda</div> : <></>}
+          {!playlistId && tracks.length == 0 ? (
+            <div className="emptyList d-flex justify-content-center"><p>No hay resultados para esta búsqueda<h4 className="mt-2">Explora nuevas canciones en <a className="inicio-link" href="/inicio">Inicio</a></h4></p></div>
+          ): <></>}
 
           {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
 
