@@ -56,10 +56,14 @@ const CarouselComponent = ({ lista, name, id }) => {
                 onClick={() => ClickHandler(playlist.id)}
                 aria-label={playlist.description}
                 aria-live={index === activeIndex ? "assertive" : "off"}
-                tabIndex={index === activeIndex ? 0 : -1}
-                onKeyDown={(event) => index === activeIndex && handleKeyDown(event, playlist.id)}
               >
+                {index === activeIndex ?
+                  <button onKeyDown={(event) => index === activeIndex && handleKeyDown(event, playlist.id)}>
+                    <img src={playlist.imageUrl} alt={playlist.description} />
+                  </button>
+                :
                 <img src={playlist.imageUrl} alt={playlist.description} />
+                }
               </div>
             ))}
           </Slider>
