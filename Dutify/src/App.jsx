@@ -17,8 +17,8 @@ import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer";
 import GenreLists from "./components/locations/genres/genreLists";
 import SearchResults from "./components/locations/query/busquedas";
-import { useSnackbar } from '@mui/base/useSnackbar';
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import { useSnackbar } from "@mui/base/useSnackbar";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
 export const FeedbackHandlerContext = createContext(1);
 
@@ -119,19 +119,19 @@ function App() {
   });
 
   const changeFeedback = (text) => {
-    setFeedback(text)
-    setOpen(true)
-  }
+    setFeedback(text);
+    setOpen(true);
+  };
 
   return (
-    <div id={contextTheme} style={{height: '100vh'}}>
+    <div id={contextTheme} style={{ height: "100vh" }}>
       {!token ? (
         <a className="btn btn-success" href={loginUrl}>
           Login
         </a>
       ) : (
         <>
-          <FeedbackHandlerContext.Provider value={{changeFeedback}}>
+          <FeedbackHandlerContext.Provider value={{ changeFeedback }}>
             {feedback !== "" ? (
               <ClickAwayListener onClickAway={onClickAway}>
                 <div className="CustomSnackbar" {...getRootProps()}>
@@ -141,12 +141,16 @@ function App() {
             ) : null}
 
             <TopBar></TopBar>
-            <RouterProvider router={router}></RouterProvider>
-            <MusicPlayer></MusicPlayer>
+            <main>
+              <RouterProvider router={router}></RouterProvider>
+              <HelpModal />
+            </main>
+            <footer>
+              <MusicPlayer></MusicPlayer>
+            </footer>
           </FeedbackHandlerContext.Provider>
         </>
       )}
-      <HelpModal />
     </div>
   );
 }

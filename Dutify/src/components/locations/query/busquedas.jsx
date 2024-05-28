@@ -32,11 +32,12 @@ function SearchResults() {
   };
 
   useEffect(() => {
+    document.title = "Busqueda | Dutify";
     cargarlista().finally(() => setLoading(false));
   }, []);
 
   return (
-    <div className="busqueda-wrapper">
+    <section className="busqueda-wrapper" aria-label="Resultados de búsqueda">
       <div className="busqueda-container">
       {loading ? <Spinner></Spinner> : (<>
         {query ? <h4>Resultados para: {query}</h4> : <h4>Recomendaciones para ti:</h4> }
@@ -45,7 +46,7 @@ function SearchResults() {
         </div>
       </>)}
       </div>
-    </div>
+    </section>
   );
 }
 
