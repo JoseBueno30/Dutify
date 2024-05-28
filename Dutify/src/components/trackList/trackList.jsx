@@ -15,9 +15,9 @@ import { FeedbackHandlerContext } from "../../App";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId, owned}) {
+export default function TrackList({tracks, setTracks, playlistId, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   useEffect(()=>{
       async function getUserPlayLists() {
@@ -33,7 +33,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
   }, []);
 
   async function handleAddTrackToPlayList(track, playlist) {
-    addTrackToPlayList(track, playlist).then(status => setFeedback(status));
+    addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
     //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
     //por lo q no tiene la id de la playlist aunque esta si la tenga 
     console.log(playlistId)
@@ -47,14 +47,14 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
   }
 
   function handleRemoveTrackFromPlaylist(track, trackIndex){
-    removeTrackFromPlayList(track, playlistId).then(status => setFeedback(status));
+    removeTrackFromPlayList(track, playlistId).then(status => changeFeedback(status));
     let newTracks = [...tracks];
     newTracks.splice(trackIndex, 1);
     setTracks(newTracks)
   }
   
   function handleAddTrackToFavorites(track){
-    addTrackToFavorites(track).then(status => setFeedback(status));
+    addTrackToFavorites(track).then(status => changeFeedback(status));
   }
 
     
@@ -64,26 +64,24 @@ export default function TrackList({tracks, setTracks, playlistId, owned}) {
       <div className="list container-fluid ">
          
 
-        {tracks.length>0 ? (<SongInfo/>) : (<></>)}
+        {tracks.length > 0 && busqueda ? (<SongInfo showAddButton={true}/>) : (<></>)}
+        {tracks.length > 0 && !busqueda ? (<SongInfo/>) : (<></>)}
         
-        {tracks.length>0 ? (
-            tracks.map((track, index) => (
-              track !== null ? <SongButton
-              key={index}
-              track={track}
-              index={index}
-              owned = {owned}
-            /> : <></>
-            ))
-        ) : (
-          <div className="emptyList d-flex justify-content-center">
-            {playlistId ? "No hay canciones en esta PlayList" : "Busca la canción en la barra de busqueda para añadir"} 
-          </div>
-        )}
+        {tracks.length > 0 ? (
+          tracks.map((track, index) => (
+            track !== null ? <SongButton
+            key={index}
+            track={track}
+            index={index}
+            enableAddButton={busqueda}
+          /> : <></>
+          ))
+        ) : ( <></> )}
 
-        {playlistId?
-        <div className="d-flex justify-content-center"><AddSongButton/></div>
-        :null}
+         {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+
+          {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
+
       </div>
     </TracksHandlersContext.Provider>
   );

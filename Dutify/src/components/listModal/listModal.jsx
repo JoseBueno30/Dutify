@@ -15,7 +15,7 @@ function ListModal({ playlist }) {
   const [errorVisibility, setErrorVisibility] = useState(false);
   const [canSubmit, setCanSubmit] = useState(true);
 
-  const setFeedback = useContext(FeedbackHandlerContext).setFeedback;
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   useEffect(() => {
     const modal = document.getElementById("listModal");
@@ -57,7 +57,7 @@ function ListModal({ playlist }) {
         console.log(playlist);
         changePlaylistName(playlist.id, listName)
         .then(status => {
-          setFeedback(status);
+          changeFeedback(status),
           sleep(2500).then(() => {
               window.location.href = "/listas/playlist?playlistId=" + playlist.id;
             })

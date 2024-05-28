@@ -37,6 +37,38 @@
     align-self: center;
 }
 
+.playListFollowButton{
+    background-color: rgba(0, 0, 0, 0);
+    cursor:pointer;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    border: none;
+    color: var(--color-text);
+    opacity: 1;
+
+    height: 80%;
+
+    aspect-ratio: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    margin-top: 3px;
+    z-index: 200 !important;
+}
+
+.followed{
+    color: var(--color-theme)
+}
+
+.playListFollowButton:hover{
+    background-color: var(--color-3);
+    transform: scale(1.15);
+    transition: ease;
+    transition-duration: 0.3s;
+}
+
 .playListOptions{
     height: 100%;
 }

@@ -70,8 +70,7 @@ function MusicPlayer() {
             <div className="simulate-image"></div>
             {/* Texto de Artista */}
             <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
-              <span tabIndex={0}>lkhkhkjhkhkhkjhkhgkdhfgkdgfjh</span>
-              <br />
+              <span tabIndex={0}>Nombre</span><br/>
               {!isSmallScreen ? (
                 <span tabIndex={0} className="artist-text">Artista</span>
               ) : (

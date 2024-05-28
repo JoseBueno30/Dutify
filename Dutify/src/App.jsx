@@ -26,6 +26,7 @@ function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [token, setToken] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     console.log(window.location.href.split("/"));
@@ -112,13 +113,19 @@ function App() {
 
   const handleClose = () => {
     setFeedback("");
+    setOpen(false);
   };
 
   const { getRootProps, onClickAway } = useSnackbar({
     onClose: handleClose,
-    feedback,
+    open,
     autoHideDuration: 2500,
   });
+
+  const changeFeedback = (text) => {
+    setFeedback(text);
+    setOpen(true);
+  };
 
   return (
     <div id={contextTheme} style={{ height: "100vh" }}>
@@ -128,22 +135,24 @@ function App() {
         </a>
       ) : (
         <>
-          {feedback !== "" ? (
-            <ClickAwayListener onClickAway={onClickAway}>
-              <div className="CustomSnackbar" {...getRootProps()}>
-                {feedback}
-              </div>
-            </ClickAwayListener>
-          ) : null}
+          <FeedbackHandlerContext.Provider value={{ changeFeedback }}>
+            {feedback !== "" ? (
+              <ClickAwayListener onClickAway={onClickAway}>
+                <div className="CustomSnackbar" {...getRootProps()}>
+                  {feedback}
+                </div>
+              </ClickAwayListener>
+            ) : null}
 
-          <TopBar></TopBar>
-          <main>
-            <RouterProvider router={router}></RouterProvider>
-            <HelpModal />
-          </main>
-          <footer>
-            <MusicPlayer></MusicPlayer>
-          </footer>
+            <TopBar></TopBar>
+            <main>
+              <RouterProvider router={router}></RouterProvider>
+              <HelpModal />
+            </main>
+            <footer>
+              <MusicPlayer></MusicPlayer>
+            </footer>
+          </FeedbackHandlerContext.Provider>
         </>
       )}
     </div>
