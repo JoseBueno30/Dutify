@@ -32,13 +32,9 @@ export default function PlayList({}) {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
-<<<<<<< HEAD
-    const isFollowed = await isUserFollowingPlaylist(playlistId);
-=======
     setPlayList(playList);
     setPlaylistName(playList.name);
-    const isFollowed = await isUserFollowingPlaylist(playList.id);
->>>>>>> main
+    const isFollowed = await isUserFollowingPlaylist(playlistId);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
     setOwned(isOwned);
@@ -68,7 +64,6 @@ export default function PlayList({}) {
   useEffect(() => {
     setLoading(true);
     loadPlayList().finally(() => setLoading(false));
-
   }, []);
 
   useEffect(() => {
