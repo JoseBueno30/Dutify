@@ -91,7 +91,6 @@ function ListModal({ playlist }) {
       className="modal fade"
       id="listModal"
       tabIndex="-1"
-      aria-description={"Dialogo para " + (playlist ? "editar" : "crear") + " una lista de reproducción"}
       aria-hidden="true"
       role="dialog"
     >
