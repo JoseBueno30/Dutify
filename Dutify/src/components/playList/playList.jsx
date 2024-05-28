@@ -18,7 +18,7 @@ import { FeedbackHandlerContext } from "../../App";
 
 export default function PlayList({}) {
   const [playlist, setPlayList] = useState();
-  const [playlistName, setPlaylistName] = useState();
+  const [playlistName, setPlaylistName] = useState("");
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [followed, setFollowed] = useState(false);
@@ -30,6 +30,8 @@ export default function PlayList({}) {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
+    setPlayList(playList);
+    setPlaylistName(playList.name);
     const isFollowed = await isUserFollowingPlaylist(playList.id);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
@@ -38,7 +40,17 @@ export default function PlayList({}) {
   }
 
   useEffect(() => {
+    if(playlistName === ""){
+      document.title = "Cargando PlayList | Dutify";
+    }
+    else{
+      document.title = playlistName + " | Dutify";
+    }
+  },[playlistName]);
+
+  useEffect(() => {
     loadPlayList();
+
   }, []);
 
   useEffect(() => {

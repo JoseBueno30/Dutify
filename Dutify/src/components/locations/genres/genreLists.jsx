@@ -1,27 +1,36 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './genresStyle.css';
+import "./genresStyle.css";
 import Spinner from "../../spinner/spinner";
+import genreData from "../../../data/genreData.json";
 
-const getGenreID = () =>{
+const getGenreID = () => {
   const url = new URL(window.location.href);
-
   const id = url.searchParams.get("genero");
   return id;
-}
+};
+
+const getGenreName = (id) => {
+  const genre = genreData.find((genre) => genre.id === id);
+  return genre.genreName;
+};
 
 function GenreLists() {
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(false);
+  const genreID = getGenreID();
+  const genreName = getGenreName(genreID);
 
-  const cargarPlaylists = async () =>{
-    const id = getGenreID();
+  const cargarPlaylists = async () => {
     setLoading(true);
-    setLists(await getCategoriePlaylists(id,30).finally(() => setLoading(false)));
-  }
+    setLists(
+      await getCategoriePlaylists(genreID, 30).finally(() => setLoading(false))
+    );
+  };
 
   useEffect(() => {
+    document.title = "Listas " + genreName + " | Dutify";
     cargarPlaylists();
   }, []);
 
@@ -31,10 +40,21 @@ function GenreLists() {
   };
 
   return (
-    <section className="genres-section">
-      {loading ? <Spinner></Spinner> : <CardsGrid type="genrelists" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>}
+    <section
+      className="genres-section"
+      aria-label={"Playlists de género " + genreName}
+    >
+      {loading ? (
+        <Spinner></Spinner>
+      ) : (
+        <CardsGrid
+          type="genrelists"
+          data={lists}
+          clickFunction={listButtonClickHandler}
+        ></CardsGrid>
+      )}
     </section>
   );
 }
 
-export default GenreLists
+export default GenreLists;

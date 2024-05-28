@@ -16,6 +16,7 @@
 .navButton:hover{
   background-color: var(--color-theme);
   transition: 0.25s ease;
+  color: var(--color-background);
 }
 
 .currentLocation{
