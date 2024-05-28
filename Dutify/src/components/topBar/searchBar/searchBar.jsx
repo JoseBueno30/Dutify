@@ -82,12 +82,14 @@ function SearchBar({ isOpen }) {
             }
           >
             <TrackList tracks={tracks} busqueda={true}></TrackList>
+            {tracks.length > 0 ? 
             <button
               onClick={search}
               className="btn btn-showMore mt-auto mb-2"
             >
-              Mostrar más
-            </button>
+            Mostrar más
+            </button> : <></>}
+
           </ClickOutside>
         </div>
       ) : (

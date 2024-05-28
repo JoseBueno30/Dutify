@@ -75,7 +75,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
 
           {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Esta lista esta vacía</div> : <></>}
 
-          {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay resultados</div> : <></>}
+          {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">No hay resultados para esta busqueda</div> : <></>}
 
           {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
 

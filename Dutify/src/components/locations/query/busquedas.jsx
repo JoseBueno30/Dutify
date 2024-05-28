@@ -39,7 +39,7 @@ function SearchResults() {
     <div className="busqueda-wrapper">
       <div className="busqueda-container">
       {loading ? <Spinner></Spinner> : (<>
-        {query ? <h4>Resultados para: {query}</h4> : <h4>Tus top tracks:</h4> }
+        {query ? <h4>Resultados para: {query}</h4> : <h4>Recomendaciones para ti:</h4> }
         <div className="busqueda">
             {loading ? <Spinner></Spinner> : <TrackList tracks={tracks} playlistId={playListId} busqueda={true}></TrackList>}    
         </div>
