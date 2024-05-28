@@ -54,7 +54,6 @@ function ListModal({ playlist }) {
       setCanSubmit(false);
       setErrorVisibility(false);
       if (playlist) {
-        console.log(playlist);
         changePlaylistName(playlist.id, listName)
         .then(status => {
           changeFeedback(status),

@@ -29,15 +29,11 @@ function App() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(window.location.href.split("/"));
     let spotifyToken = window.sessionStorage.getItem("token");
 
     if (!spotifyToken || spotifyToken === "undefined") {
       spotifyToken = getTokenFromUrl().access_token;
       window.sessionStorage.setItem("token", spotifyToken);
-      console.log(
-        "guardado en sesion " + window.sessionStorage.getItem("token")
-      );
     }
     setToken(spotifyToken);
     setAccessToken(spotifyToken);
@@ -91,7 +87,7 @@ function App() {
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const REDIRECT_URI = "http://localhost:5173/";
-  const CLIENT_ID = "d552724bc56f4c16a1851eec670e094f";
+  const CLIENT_ID = "212f24bfe4124f9d89ee2c341ae96f19";
   const RESPONSE_TYPE = "token";
 
   const scopes = [

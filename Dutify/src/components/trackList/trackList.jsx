@@ -22,7 +22,6 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
   useEffect(()=>{
       async function getUserPlayLists() {
           try{
-            console.log(tracks)
               const playlists = await getUserOwnedPlaylists().then()
               setUserPlaylists(playlists);
           }catch(error){
@@ -36,10 +35,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
     addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
     //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
     //por lo q no tiene la id de la playlist aunque esta si la tenga 
-    console.log(playlistId)
-    console.log(playlist.id)
     if(playlist.id === playlistId){
-      // console.log("AAA")
       // let newTracks = [];
       // tracks == [] ? newTracks=track : newTracks = [...tracks, track];
       // setTracks(newTracks);

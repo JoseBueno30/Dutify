@@ -24,6 +24,7 @@ export default function PlayList({}) {
   const [loading, setLoading] = useState(false);
   const [followed, setFollowed] = useState(false);
   const [owned, setOwned] = useState(false);
+  const [fullyLoaded, setFullyLoaded] = useState(false);
   
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   
@@ -36,14 +37,31 @@ export default function PlayList({}) {
     const isOwned = await isPlaylistOwned(playList);
     setOwned(isOwned);
     setPlayList(playList);
-    const tracksNew = await getAllTracksFromPlaylist(playList);
-    setTracks(tracksNew);
+    const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+    await setTracks(tracksNew);
+  }
+
+  async function loadTracks() {
+    const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
+    let tracksAux = tracks.concat(tracksNew);
+    await setTracks(tracksAux);
+    if (tracksAux.length === playlist.tracks.total) {
+      setFullyLoaded(true);
+    }
   }
 
   useEffect(() => {
     setLoading(true);
     loadPlayList().finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (playlist !== undefined && !fullyLoaded && tracks.length > 0) {
+      loadTracks();
+    }
+  }, [tracks, playlist]);
+
+
 
   const followPlaylistHandler = () => {
     setFollowed(true);

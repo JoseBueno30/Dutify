@@ -47,8 +47,6 @@ const getUserOwnedPlaylists = async () => {
     (playList) => playList.owner.id == user.id
   );
 
-  console.log(ownedPlaylists);
-
   return ownedPlaylists;
 };
 
@@ -68,9 +66,7 @@ const getTracksFromPlaylist = async (playlist, offset) => {
     offset: offset,
     limit: 100,
   });
-  console.log("AAA: " + data);
   let tracks = data.items.map(item => item.track);
-  console.log(tracks)
   return tracks;
 };
 
@@ -86,13 +82,11 @@ const getAllTracksFromPlaylist = async (playlist) => {
     
     tracks = tracks.concat(moreTracks);
   }
-  console.log(tracks);
   return tracks;
 };
 
 const getCategoriesID = () => {
   spotifyApiObject.getCategories({ limit: 50 }).then((data) => {
-    console.log(data.categories.items);
   });
 };
 
@@ -210,7 +204,6 @@ const removeTrackFromPlayList = async (track, playlistId) => {
 }
 
 const addTrackToFavorites = async (track) => {
-  console.log([track.uri]);
   let status;
   try{
     await spotifyApiObject.addToMySavedTracks([track.id]);
@@ -249,7 +242,6 @@ const unfollowPlaylist = async (playlist) =>{
 
 const searchTracks = async (query,num) => {
   let data = await spotifyApiObject.searchTracks(query, { limit: num })
-  console.log(data.tracks.items)
   return data.tracks.items;
 };
 
