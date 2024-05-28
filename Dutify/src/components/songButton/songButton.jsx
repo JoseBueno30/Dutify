@@ -23,9 +23,9 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
-import { isTrackPlaying, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
+import { getTrackObject, isTrackInPlayer, isTrackPlaying, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
-export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false}) {
+export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false, rerender, setRerender}) {
   const [isSongPlaying, setSongPlaying] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
@@ -53,6 +53,12 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
   const timeMS = seg < 10 ? "0" + seg : seg;
 
   const songClickHandler = (e) => {
+    let trackObj = getTrackObject();
+    console.log(track)
+    console.log(trackObj)
+    console.log(track.uri == trackObj.uri)
+    setRerender(track.uri);
+    
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     setSongPlaying(!isSongPlaying);
@@ -82,14 +88,14 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
       >
         <div className="playContainer" onClick={songClickHandler}>
           <div
-            className="songPlayButton"
+            className={isTrackInPlayer(track)?"songPlayButton playingSong":"songPlayButton "}
             style={
               track.album.images[2] !== undefined
                 ? { backgroundImage: "url(" + track.album.images[2].url + ")" }
                 : {}
             }
           >
-            {isTrackPlaying(track)?
+            {isTrackInPlayer(track) && isTrackPlaying()?
             <FaPause className="playButton"/>
             :<FaPlay className="playButton" />
           }

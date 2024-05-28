@@ -17,6 +17,7 @@ export const TracksHandlersContext = createContext(null);
 
 export default function TrackList({tracks, setTracks, playlistId, loadQueue, setPlaying, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
+  const [rerender, setRerender] = useState(false);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   useEffect(()=>{
@@ -31,6 +32,10 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
       }
       getUserPlayLists();
   }, []);
+
+  useEffect(() =>{
+    console.log("RENDER?")
+  }, [rerender])
 
   async function handleAddTrackToPlayList(track, playlist) {
     addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
@@ -77,6 +82,8 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
             loadQueue={loadQueue}
             setPlaying={setPlaying}
             enableAddButton={busqueda}
+            rerender={rerender}
+            setRerender={setRerender}
           /> : <></>
           ))
         ) : ( <></> )}

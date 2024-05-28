@@ -2,6 +2,7 @@ import { EventEmitter } from "events";
 
 let trackAudio = new Audio();
 let trackObject;
+let isPlaying;
 var queue = JSON.parse(window.sessionStorage.getItem("queue"));
 let queueEmitter = new EventEmitter();
 
@@ -89,10 +90,12 @@ const getTrackAudio = () => {
 const playTrack = () => {
   console.log(trackAudio.src);
   trackAudio.play();
+  isPlaying = true;
 };
 
 const pauseTrack = () => {
   trackAudio.pause();
+  isPlaying = false;
 };
 
 const getDuration = () => {
@@ -220,10 +223,11 @@ const setLoopTrack = () => {
   window.sessionStorage.setItem("loop", inLoop);
 };
 
-const isTrackPlaying = (track) => {
-  console.log(track);
-  console.log(trackObject);
-  console.log(track.uri === trackObject.uri)
+const isTrackPlaying = () => {
+  return isPlaying;
+}
+
+const isTrackInPlayer = (track) => {
   return track.uri === trackObject.uri;
 }
 
@@ -256,6 +260,7 @@ export {
   // TRACK OBJECT
   getTrackObject,
   isTrackPlaying,
+  isTrackInPlayer,
 
   // EVENTO COLA
   queueEmitter,
