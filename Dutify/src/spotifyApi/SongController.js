@@ -228,7 +228,7 @@ const isTrackPlaying = () => {
 }
 
 const isTrackInPlayer = (track) => {
-  return track.uri === trackObject.uri;
+  return trackObject!== undefinde && track.uri === trackObject.uri;
 }
 
 export {
