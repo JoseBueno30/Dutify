@@ -54,14 +54,11 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
 
   const songClickHandler = (e) => {
     let trackObj = getTrackObject();
-    console.log(track)
-    console.log(trackObj)
-    console.log(track.uri == trackObj.uri)
-    setRerender(track.uri);
     
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     setSongPlaying(!isSongPlaying);
+    setRerender(track.uri);
     if(enPlaylist && playlistId === playlistPlaying){   
       console.log("Reproduciendo misma playlist...");
       setQueueIndex(index);
