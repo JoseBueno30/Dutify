@@ -28,7 +28,7 @@ function HelpModal() {
               <IoClose size={35}/>
             </button>
           </div>
-          <article className="modal-body" tabIndex={0}>
+          <article className="modal-body" aria-label="Descripción de Dutify">
             <p>
               Dutify es una aplicación web que te permite buscar y reproducir
               tus canciones favoritas de Spotify. Las principales

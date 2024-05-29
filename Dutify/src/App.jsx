@@ -29,15 +29,11 @@ function App() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(window.location.href.split("/"));
     let spotifyToken = window.sessionStorage.getItem("token");
 
     if (!spotifyToken || spotifyToken === "undefined") {
       spotifyToken = getTokenFromUrl().access_token;
       window.sessionStorage.setItem("token", spotifyToken);
-      console.log(
-        "guardado en sesion " + window.sessionStorage.getItem("token")
-      );
     }
     setToken(spotifyToken);
     setAccessToken(spotifyToken);

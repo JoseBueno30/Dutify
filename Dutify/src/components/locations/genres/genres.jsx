@@ -43,7 +43,6 @@ function Genres({ token }) {
 
   const goToListasGenero = (e) => {
     const id = e.currentTarget.id;
-    console.log(id);
     window.location.href="/Generos/Listas?genero=" + id;
   }
 
