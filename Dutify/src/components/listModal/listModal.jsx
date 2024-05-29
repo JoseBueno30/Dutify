@@ -67,7 +67,7 @@ function ListModal({ playlist }) {
         changePlaylistName(playlist.id, listName)
         .then(status => {
           changeFeedback(status),
-          sleep(2500).then(() => {
+          sleep(5000).then(() => {
               window.location.href = "/listas/playlist?playlistId=" + playlist.id;
             })
           })
