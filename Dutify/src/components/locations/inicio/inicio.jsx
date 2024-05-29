@@ -17,11 +17,11 @@ function Inicio({token}){
     const cargarPlaylists = async () =>{
         
         setLoading(true);
-        /*const user_playlists = await getUserPlaylists(token)
+        const user_playlists = await getUserPlaylists(token)
         setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO*/
         setPopularPlaylists(await getPopularPlaylists(token))
-        /*setRecommendedPlaylists(await getRecommendedPlaylists(token))
-        setPopularArtistsPlaylists(await getPopularArtistsPlaylists(token))*/
+        setRecommendedPlaylists(await getRecommendedPlaylists(token))
+        setPopularArtistsPlaylists(await getPopularArtistsPlaylists(token))
     }
 
     useEffect(() => {

@@ -91,6 +91,11 @@
   right: 20px;
 }
 
+.slick-arrow:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 /* PUNTOS DE NAVEGACION */
 
 .slick-dots li button:before {
@@ -111,6 +116,11 @@
 
 .slick-dots {
   bottom: -40px;
+}
+
+.slick-dots li button:focus,
+.slick-dots li button:hover {
+  outline: 2px solid white;
 }
 
 
