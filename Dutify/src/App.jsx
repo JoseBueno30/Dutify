@@ -144,11 +144,10 @@ function App() {
   const changeFeedback = (text) => {
     setFeedback(text)
     setOpen(true)
-    document.getElementById("feedback").innerText = text;
   }
 
   return (
-    <div id={contextTheme} style={{height: '100vh'}}>
+    <div id={contextTheme} style={{height: '100vh'}} >
       {!token ? (
         <a className="btn btn-success" href={loginUrl}>
           Login
@@ -156,13 +155,15 @@ function App() {
       ) : (
         <>
           <FeedbackHandlerContext.Provider value={{changeFeedback}}>
-            {feedback !== "" ? (
-                <ClickAwayListener onClickAway={onClickAway}>
-                  <div id="feedback" tabIndex={0} className="CustomSnackbar" {...getRootProps()} aria-description={feedback} role="alertdialog">
-                    {feedback}
-                  </div>
-                </ClickAwayListener>
-            ) : null}
+            <div aria-description={feedback} aria-live="assertive">
+              {feedback !== "" ? (
+                  <ClickAwayListener onClickAway={onClickAway}>
+                    <div className="CustomSnackbar" {...getRootProps()}>
+                      {feedback}
+                    </div>
+                  </ClickAwayListener>
+              ) : null}
+            </div>
 
             <TopBar></TopBar>
             <RouterProvider router={router}></RouterProvider>
