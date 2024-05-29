@@ -54,7 +54,6 @@ function ListModal({ playlist }) {
       setCanSubmit(false);
       setErrorVisibility(false);
       if (playlist) {
-        console.log(playlist);
         changePlaylistName(playlist.id, listName)
         .then(status => {
           changeFeedback(status),
@@ -129,12 +128,13 @@ function ListModal({ playlist }) {
                 <>
                   <div className="mb-4 w-75">
                     <div className="form-check form-switch ps-0">
-                      <label className="form-check-label mb-1">
+                      <label className="form-check-label mb-1" tabIndex={0}>
                         Privacidad
                       </label>
                       <br />
                       <input
                         className="form-check-input ms-1"
+                        aria-label="Privacidad"
                         type="checkbox"
                         role="switch"
                         id="listPublic"

@@ -10,6 +10,7 @@ import {
   getTracksFromPlaylist,
   isPlaylistOwned,
   isUserFollowingPlaylist,
+  getAllTracksFromPlaylist,
 } from "../../spotifyApi/SpotifyApiCalls";
 import ListModal from "../listModal/listModal";
 import DeleteListModal from "../listModal/deleteListModal/deleteListModal";
@@ -18,11 +19,12 @@ import { FeedbackHandlerContext } from "../../App";
 
 export default function PlayList({}) {
   const [playlist, setPlayList] = useState();
-  const [playlistName, setPlaylistName] = useState();
+  const [playlistName, setPlaylistName] = useState("");
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [followed, setFollowed] = useState(false);
   const [owned, setOwned] = useState(false);
+  const [fullyLoaded, setFullyLoaded] = useState(false);
   
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   
@@ -30,29 +32,48 @@ export default function PlayList({}) {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
-    const isFollowed = await isUserFollowingPlaylist(playList.id);
+    setPlayList(playList);
+    setPlaylistName(playList.name);
+    const isFollowed = await isUserFollowingPlaylist(playlistId);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
     setOwned(isOwned);
     setPlayList(playList);
+    const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+    await setTracks(tracksNew);
+  }
+
+  async function loadTracks() {
+    const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
+    let tracksAux = tracks.concat(tracksNew);
+    await setTracks(tracksAux);
+    if (tracksAux.length === playlist.tracks.total) {
+      setFullyLoaded(true);
+    }
   }
 
   useEffect(() => {
-    loadPlayList();
+    if(playlistName === ""){
+      document.title = "Cargando PlayList | Dutify";
+    }
+    else{
+      document.title = playlistName + " | Dutify";
+    }
+  },[playlistName]);
+
+  useEffect(() => {
+    setLoading(true);
+    loadPlayList().finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
-      let tracksAux = tracks.concat(tracksNew);
-      setTracks(tracksAux);
+    if (playlist !== undefined && !fullyLoaded && tracks.length > 0) {
+      loadTracks();
     }
-    if (playlist !== undefined && tracks.length < playlist.tracks.total)
-      loadTracks().finally(() => setLoading(false));
-  }, [playlist, tracks]); // Que este useEffect dependa de las tracks hace que al eliminar recarge toda la playlist entera y se buguee
+  }, [tracks, playlist]);
 
 
-  
+
   const followPlaylistHandler = () => {
     setFollowed(true);
     followPlaylist(playlist).then((status) => changeFeedback(status));

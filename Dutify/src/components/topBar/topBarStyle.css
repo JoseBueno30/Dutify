@@ -16,6 +16,15 @@
   transition: 0.25s ease-in-out;
 }
 
+.oculto {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  color: var(--color-text);
+}
+
 .btn-back:hover {
   background-color: var(--color-theme);
   transition: 0.25 ease-in-out;

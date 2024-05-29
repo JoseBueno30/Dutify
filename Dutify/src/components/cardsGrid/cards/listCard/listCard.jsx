@@ -14,7 +14,7 @@ function ListCard({ listName, background }) {
       style={{ backgroundImage: background ? `url(${backgroundSrc})` : 'var(--placeholder-img)' }}
     >
       <div className="cards-overlay title-fade">
-        <p className="cards-title">{listName}</p>
+        <h2 className="cards-title">{listName}</h2>
       </div>
     </button>
   );

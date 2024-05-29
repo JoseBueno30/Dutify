@@ -9,6 +9,7 @@ import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { FeedbackHandlerContext } from "../../App";
+import NavButton from "../topBar/navButton/navButton";
 
 
 
@@ -22,7 +23,6 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
   useEffect(()=>{
       async function getUserPlayLists() {
           try{
-            console.log(tracks)
               const playlists = await getUserOwnedPlaylists().then()
               setUserPlaylists(playlists);
           }catch(error){
@@ -36,10 +36,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
     addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
     //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
     //por lo q no tiene la id de la playlist aunque esta si la tenga 
-    console.log(playlistId)
-    console.log(playlist.id)
     if(playlist.id === playlistId){
-      // console.log("AAA")
       // let newTracks = [];
       // tracks == [] ? newTracks=track : newTracks = [...tracks, track];
       // setTracks(newTracks);
@@ -64,8 +61,7 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
       <div className="list container-fluid ">
          
 
-        {tracks.length > 0 && busqueda ? (<SongInfo showAddButton={true}/>) : (<></>)}
-        {tracks.length > 0 && !busqueda ? (<SongInfo/>) : (<></>)}
+        {tracks.length > 0 ? <SongInfo showAddButton={busqueda && playlistId}/> : (<></>)}
         
         {tracks.length > 0 ? (
           tracks.map((track, index) => (
@@ -78,7 +74,11 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
           ))
         ) : ( <></> )}
 
-         {!playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Busca la canción en la barra de busqueda para añadir</div> : <></>}
+          {playlistId && tracks.length == 0 ? <div className="emptyList d-flex justify-content-center">Esta lista esta vacía</div> : <></>}
+
+          {!playlistId && tracks.length == 0 ? (
+            <div className="emptyList d-flex justify-content-center"><p>No hay resultados para esta búsqueda<h4 className="mt-2">Explora nuevas canciones en <a className="inicio-link" href="/inicio">Inicio</a></h4></p></div>
+          ): <></>}
 
           {!busqueda && owned? <div className="d-flex justify-content-center"><AddSongButton playlistId = {playlistId}/></div>:null}
 
