@@ -9,6 +9,7 @@ function HelpModal() {
       id="helpModal"
       tabIndex="-1"
       aria-labelledby="helpModalLabel"
+      aria-description="Dialogo de ayuda de la aplicación"
       aria-hidden="true"
       role="dialog"
     >
