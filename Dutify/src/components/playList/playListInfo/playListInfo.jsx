@@ -28,7 +28,7 @@ export default function PlayListInfo({
   return (
     <div className="playListInfoContainer d-flex flex-column container-fluid">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
-        <p title={playList.name} className="playListName ">
+        <p tabIndex={0} title={playList.name} className="playListName " aria-description="nombre playlist">
           {playList.name}
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function PlayListInfo({
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-        <p>{playList.tracks.total + " canciones"}</p>
+        <p tabIndex={0} >{playList.tracks.total + " canciones"}</p>
 
         {owned ? (
           <Options />

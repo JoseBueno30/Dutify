@@ -23,7 +23,7 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
-import { getTrackObject, isTrackInPlayer, isTrackPlaying, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
+import { getTrackObject, isTrackInPlayer, isTrackPlaying, pauseTrack, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
 export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false, rerender, setRerender}) {
   const [isSongPlaying, setSongPlaying] = useState(false);
@@ -42,6 +42,12 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
         };
   }, []);
 
+  const playButtonKeydownHandler = (event) => {
+    if (event.key === "Enter") {
+      songClickHandler(event);
+    }
+  };
+
   const listClickHandler = () => {
       addTrackToPlayList(track, playlistId).then( status =>
           changeFeedback(status)
@@ -53,23 +59,27 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
   const timeMS = seg < 10 ? "0" + seg : seg;
 
   const songClickHandler = (e) => {
-    let trackObj = getTrackObject();
     
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     setSongPlaying(!isSongPlaying);
     setRerender(track.uri);
-    if(enPlaylist && playlistId === playlistPlaying){   
-      console.log("Reproduciendo misma playlist...");
-      setQueueIndex(index);
-    }else if(enPlaylist){
-      console.log("Reproduciendo playlist nueva...");
-      loadQueue();
-      setQueueIndex(index);
-      setPlaying(true);
+
+    if(!isSongPlaying){
+      if(enPlaylist && playlistId === playlistPlaying){   
+        console.log("Reproduciendo misma playlist...");
+        setQueueIndex(index);
+      }else if(enPlaylist){
+        console.log("Reproduciendo playlist nueva...");
+        loadQueue();
+        setQueueIndex(index);
+        setPlaying(true);
+      }else{
+        console.log(track.preview_url);
+        setSingleTrack(track);
+      }
     }else{
-      console.log(track.preview_url);
-      setSingleTrack(track);
+      pauseTrack();
     }
     queueEmitter.emit("trackStatusPlayerChanged")
   };
@@ -82,6 +92,9 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
         id={track.id}
         className="songButton"
         onDoubleClick={songClickHandler}
+        onKeyDown={playButtonKeydownHandler}
+        aria-label="Canción"
+        aria-description="Reproducir canción"
       >
         <div className="playContainer" onClick={songClickHandler}>
           <div
@@ -101,19 +114,20 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
         <div className="container-fluid">
           <div className="row">
             <div className="nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
-              <div title={track.name} className="name">
+              <div title={track.name} className="name" aria-description="nombre">
                 {track.name}
               </div>
-              <div title={track.artists[0].name} className="author">
+              <div title={track.artists[0].name} className="author" aria-description="artista">
                 {track.artists[0].name}
               </div>
             </div>
-            <div title={track.album.name} className="album col-2 ">
+            <div title={track.album.name} className="album col-2 " aria-description="álbum">
               {track.album.name}
             </div>
             <div
               title={"Duración"}
               className="time col-3 col-md-2 d-flex justify-content-center"
+              aria-description="duración"
             >
               {timeMIN}:{timeMS}
             </div>

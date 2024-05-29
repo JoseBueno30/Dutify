@@ -144,6 +144,7 @@ function App() {
   const changeFeedback = (text) => {
     setFeedback(text)
     setOpen(true)
+    document.getElementById("feedback").innerText = text;
   }
 
   return (
@@ -156,11 +157,11 @@ function App() {
         <>
           <FeedbackHandlerContext.Provider value={{changeFeedback}}>
             {feedback !== "" ? (
-              <ClickAwayListener onClickAway={onClickAway}>
-                <div className="CustomSnackbar" {...getRootProps()}>
-                  {feedback}
-                </div>
-              </ClickAwayListener>
+                <ClickAwayListener onClickAway={onClickAway}>
+                  <div id="feedback" tabIndex={0} className="CustomSnackbar" {...getRootProps()} aria-description={feedback} role="alertdialog">
+                    {feedback}
+                  </div>
+                </ClickAwayListener>
             ) : null}
 
             <TopBar></TopBar>

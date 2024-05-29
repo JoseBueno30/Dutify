@@ -146,6 +146,12 @@ function MusicPlayer() {
     fillRangeInputs();
   }, [progressionValue, volumeValue]);
 
+  const playButtonKeydownHandler = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      switchPlay();
+    }
+  };
+
   return (
     <>
       <div className="fixed-bottom music-bar ">
@@ -204,12 +210,14 @@ function MusicPlayer() {
                     className="play-button"
                     src="/assets/musicPlayer/stop-button.svg"
                     onClick={switchPlay}
+                    onKeyDown={playButtonKeydownHandler}
                   ></img>
                 ) : (
                   <img
                     className="play-button"
                     src="/assets/musicPlayer/play-button.svg"
                     onClick={switchPlay}
+                    onKeyDown={playButtonKeydownHandler}
                   ></img>
                 )}
                 <img
