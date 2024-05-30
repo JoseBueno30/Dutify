@@ -185,7 +185,15 @@ const addTrackToQueue = (track) => {
 
 const setQueueIndex = (newIndex) => {
   i = newIndex;
-  playQueue();
+  if(isRandom){
+    console.log("deberia reproducir cola normal antes")
+    isRandom = false;
+    playQueue();
+    isRandom = true;
+  }else{
+    playQueue();
+  }
+  
 };
 
 const getQueueIndex = () => {

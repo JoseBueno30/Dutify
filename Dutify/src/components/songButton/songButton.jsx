@@ -78,7 +78,7 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
         console.log(track.preview_url);
         setSingleTrack(track);
       }
-    }else{
+    }else if(isTrackInPlayer(track)){
       pauseTrack();
     }
     queueEmitter.emit("trackStatusPlayerChanged")
