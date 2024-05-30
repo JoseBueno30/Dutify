@@ -79,6 +79,7 @@ const setSingleTrack = (track) => {
   i = 0;
   queue = null;
   window.sessionStorage.setItem("queue", JSON.stringify(queue));
+  window.sessionStorage.setItem("playlistPlaying", null);
   window.sessionStorage.setItem("randomQueue", JSON.stringify(queue));
   setTrack(track);
 };
@@ -186,7 +187,7 @@ const addTrackToQueue = (track) => {
 const setQueueIndex = (newIndex) => {
   i = newIndex;
   if(isRandom){
-    console.log("deberia reproducir cola normal antes")
+    //console.log("deberia reproducir cola normal antes")
     isRandom = false;
     playQueue();
     isRandom = true;
