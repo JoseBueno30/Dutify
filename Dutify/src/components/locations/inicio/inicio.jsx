@@ -24,6 +24,7 @@ function Inicio({token}){
     }
 
     useEffect(() => {
+        document.title = "Inicio | Dutify";
         cargarPlaylists().finally(() => setLoading(false));
     }, []);
 

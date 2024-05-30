@@ -10,6 +10,7 @@ import {
   unfollowPlaylist,
   isPlaylistOwned,
   isUserFollowingPlaylist,
+  getAllTracksFromPlaylist,
 } from "../../spotifyApi/SpotifyApiCalls";
 import {
   getQueueIndex,
@@ -27,23 +28,36 @@ import { SiTruenas } from "react-icons/si";
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
   const [playlist, setPlayList] = useState();
+  const [playlistName, setPlaylistName] = useState("");
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [followed, setFollowed] = useState(false);
   const [owned, setOwned] = useState(false);
   const [fullyLoaded, setFullyLoaded] = useState(false);
-
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   async function loadPlayList() {
     const searchParams = new URLSearchParams(location.search);
     const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
-    const isFollowed = await isUserFollowingPlaylist(playList.id);
+    setPlayList(playList);
+    setPlaylistName(playList.name);
+    const isFollowed = await isUserFollowingPlaylist(playlistId);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
     setOwned(isOwned);
     setPlayList(playList);
+    const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
+    await setTracks(tracksNew);
+  }
+
+  async function loadTracks() {
+    const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
+    let tracksAux = tracks.concat(tracksNew);
+    await setTracks(tracksAux);
+    if (tracksAux.length === playlist.tracks.total) {
+      setFullyLoaded(true);
+    }
   }
 
   const stopPlayerAnimation = () => {
@@ -63,17 +77,21 @@ export default function PlayList({}) {
   };
 
   useEffect(() => {
-    try{
-      loadPlayList();
-      
-      queueEmitter.on("queueEnded", stopPlayerAnimation);
-      queueEmitter.on("trackStatusTrue", startPlayerAnimation);
-      queueEmitter.on("trackStatusFalse", stopPlayerAnimation);
-    }catch(error){
-      setLoading(false);
-      changeFeedback("Se ha producido un error");
-      console.log(error);
+    if(playlistName === ""){
+      document.title = "Cargando PlayList | Dutify";
     }
+    else{
+      document.title = playlistName + " | Dutify";
+    }
+  },[playlistName]);
+
+  useEffect(() => {
+    setLoading(true);
+    loadPlayList().finally(() => setLoading(false));
+
+    queueEmitter.on("queueEnded", stopPlayerAnimation);
+    queueEmitter.on("trackStatusTrue", startPlayerAnimation);
+    queueEmitter.on("trackStatusFalse", stopPlayerAnimation);
     
     return () => {
       queueEmitter.off("trackStatusTrue", startPlayerAnimation);
@@ -88,16 +106,12 @@ export default function PlayList({}) {
   // }, [playList]);
 
   useEffect(() => {
-    async function loadTracks() {
-      const tracksNew = await getTracksFromPlaylist(playlist, tracks.length);
-      let tracksAux = tracks.concat(tracksNew);
-      setTracks(tracksAux);
+    if (playlist !== undefined && !fullyLoaded && tracks.length > 0) {
+      loadTracks();
     }
-    if (playlist !== undefined && !fullyLoaded){
-      loadTracks().finally(() => setLoading(false));
-      if(tracks.length === playlist.tracks.total){setFullyLoaded(true)}
-    }
-  }, [playlist, tracks]);
+  }, [tracks, playlist]);
+
+
 
   const followPlaylistHandler = () => {
     setFollowed(true);

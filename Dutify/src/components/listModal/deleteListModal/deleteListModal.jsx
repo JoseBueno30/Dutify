@@ -32,7 +32,7 @@ function DeleteListModal({ playlist }) {
             </button>
           </div>
           <div className="modal-body">
-            <div className={"mb-3 w-75"}>{playlist.name + " se eliminará de tu biblioteca"}</div>
+            <div className={"mb-3 w-75"} tabIndex={0}>{playlist.name + " se eliminará de tu biblioteca"}</div>
 
             <div className="mb-2 d-flex justify-content-evenly">
               <button

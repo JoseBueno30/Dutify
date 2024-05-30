@@ -43,7 +43,7 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
   }, []);
 
   const playButtonKeydownHandler = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && document.activeElement === document.getElementById(track.id)) {
       songClickHandler(event);
     }
   };

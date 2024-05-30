@@ -1,5 +1,6 @@
 import {
   getDuration,
+  isTrackPlaying,
   nextQueueSong,
   pauseTrack,
   playTrack,
@@ -10,6 +11,13 @@ import {
 } from "../../spotifyApi/SongController";
 import "./musicPlayer.css";
 import { useEffect, useState } from "react";
+import {
+  IoPlayCircleOutline,
+  IoPlaySkipBackCircleOutline,
+  IoPlaySkipForwardCircleOutline,
+  IoPauseCircleOutline,
+} from "react-icons/io5";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 function MusicPlayer() {
   const [playing, change] = useState(
@@ -154,7 +162,7 @@ function MusicPlayer() {
 
   return (
     <>
-      <div className="fixed-bottom music-bar ">
+      <div className="fixed-bottom music-bar" >
         <div className="music-container">
           {/* Información de la cancion */}
           <div className="song-container">
@@ -168,8 +176,8 @@ function MusicPlayer() {
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
-            <div className="artist-container">
-              <span>{track ? track.name : "..."}</span>
+            <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
+              <span tabIndex={0}>{track ? track.name : "..."}</span>
               <br />
               {!isSmallScreen ? (
                 <span className="artist-text">
@@ -188,6 +196,7 @@ function MusicPlayer() {
               type="range"
               value={progressionValue}
               onChange={handleCurretTimeChange}
+              aria-label="Barra de reproducción"
             ></input>
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
@@ -200,31 +209,30 @@ function MusicPlayer() {
               </span>
               {/* Bottones de reproducción */}
               <div className="song-buttons">
-                <img
-                  className="side-button"
-                  src="/assets/musicPlayer/previous-button.svg"
-                  onClick={handlePreviousTrackClick}
-                ></img>
-                {playing ? (
-                  <img
-                    className="play-button"
-                    src="/assets/musicPlayer/stop-button.svg"
-                    onClick={switchPlay}
-                    onKeyDown={playButtonKeydownHandler}
-                  ></img>
-                ) : (
-                  <img
-                    className="play-button"
-                    src="/assets/musicPlayer/play-button.svg"
-                    onClick={switchPlay}
-                    onKeyDown={playButtonKeydownHandler}
-                  ></img>
-                )}
-                <img
-                  className="side-button"
-                  src="/assets/musicPlayer/next-button.svg"
-                  onClick={handleNextTrackClick}
-                ></img>
+              <button>
+                  <IoPlaySkipBackCircleOutline
+                    size={35}
+                    className="side-button"
+                    title="Canción anterior"
+                    onClick={handlePreviousTrackClick}
+                  />
+                </button>
+
+                <button onClick={switchPlay} onKeyDown={playButtonKeydownHandler} className="play-button">
+                  {!isTrackPlaying() ? (
+                    <IoPlayCircleOutline size={35} title="Reproducir canción"/>
+                  ) : (
+                    <IoPauseCircleOutline size={35} title="Pausar canción"/>
+                  )}
+                </button>
+                <button>
+                  <IoPlaySkipForwardCircleOutline
+                    size={35}
+                    className="side-button"
+                    title="Canción siguiente"
+                    onClick={handleNextTrackClick}
+                  />
+                </button>
               </div>
               {/* Temporizador */}
               <span>{track ? "00:30" : "mm:ss"}</span>
@@ -233,21 +241,16 @@ function MusicPlayer() {
 
           {/* Barra de Soido */}
           <div className="sound-bar">
-            {volumeValue == 0 ? (
-              <img
-                className="volume-button"
-                onClick={switchVolume}
-                src="/assets/musicPlayer/mute.svg"
-              ></img>
-            ) : (
-              <img
-                className="volume-button"
-                onClick={switchVolume}
-                src="/assets/musicPlayer/sound.svg"
-              ></img>
-            )}
+            <button className="volume-button" onClick={switchVolume} id="volumeButton" title="Cambiar volúmen">
+              {volumeValue == 0 ? (
+                <FaVolumeMute size={25} />
+              ) : (
+                <FaVolumeUp size={25} />
+              )}
+            </button>
             <input
               id="volume-bar"
+              aria-label="Barra de volumen"
               type="range"
               className="styled-slider slider-progress"
               min={0}

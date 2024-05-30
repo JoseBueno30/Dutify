@@ -11,12 +11,17 @@ export default function AddSongButton({name, artistName, albumName, image, time_
 
 
     const addSongClickHandler = (e) => {
-        console.log("Añadir cancion");
         window.location.href = "/busqueda?playListId="+ playlistId +"&query=";
     }
 
+    const addButtonKeydownHandler = (event) => {
+        if (event.key === "Enter" || event.key === " " ) {
+            addSongClickHandler(event);
+        }
+      };
+
     return(
-                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler}>
+                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler} onKeyDown={addButtonKeydownHandler}>
                     <div>
                         <IoMdAddCircle className="addSongIcon"/>
                     </div>

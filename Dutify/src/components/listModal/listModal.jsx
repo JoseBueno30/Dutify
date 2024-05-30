@@ -20,6 +20,7 @@ function ListModal({ playlist }) {
   useEffect(() => {
     const modal = document.getElementById("listModal");
     modal.addEventListener("hidden.bs.modal", hideHandler);
+    modal.setAttribute("aria-hidden", "false");
 
     return () => {
       modal.removeEventListener("hidden.bs.modal", hideHandler);
@@ -50,11 +51,19 @@ function ListModal({ playlist }) {
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
+      document.getElementById("inputName").setAttribute("aria-describedby","errorText")
+      document.getElementById("inputName").focus();
     } else {
       setCanSubmit(false);
       setErrorVisibility(false);
+      document.getElementById("inputName").removeAttribute("aria-describedby");
       if (playlist) {
         console.log(playlist);
+
+        // Close modal
+        document.getElementById("listModal").setAttribute("style", "display: none");
+        document.getElementById("listModal").setAttribute("aria-hidden", "true");
+        
         changePlaylistName(playlist.id, listName)
         .then(status => {
           changeFeedback(status),
@@ -82,8 +91,8 @@ function ListModal({ playlist }) {
       className="modal fade"
       id="listModal"
       tabIndex="-1"
-      aria-labelledby="listModalLabel"
       aria-hidden="true"
+      role="dialog"
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -119,6 +128,7 @@ function ListModal({ playlist }) {
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
+                  id="errorText"
                 >
                   ❌El nombre de la lista no puede estar vacío.❌
                 </p>
@@ -129,12 +139,13 @@ function ListModal({ playlist }) {
                 <>
                   <div className="mb-4 w-75">
                     <div className="form-check form-switch ps-0">
-                      <label className="form-check-label mb-1">
+                      <label className="form-check-label mb-1" tabIndex={0}>
                         Privacidad
                       </label>
                       <br />
                       <input
                         className="form-check-input ms-1"
+                        aria-label="Privacidad"
                         type="checkbox"
                         role="switch"
                         id="listPublic"
@@ -156,7 +167,6 @@ function ListModal({ playlist }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={clickHandler}
-                  data-bs-dismiss={playlist ? "modal" : ""}
                 >
                   {playlist ? "Guardar cambios" : "Crear lista"}
                 </button>

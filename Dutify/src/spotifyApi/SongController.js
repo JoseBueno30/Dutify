@@ -129,7 +129,8 @@ const __saveAuxQueue = () => {
   let queueAux = [];
   queue.forEach((element) => {
     // console.log(element)
-    queueAux.push(element.name);
+    
+    if(element!==null)queueAux.push(element.name);
   });
   console.log(queueAux);
   window.sessionStorage.setItem("queueAux", JSON.stringify(queueAux));

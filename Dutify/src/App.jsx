@@ -30,15 +30,11 @@ function App() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(window.location.href.split("/"));
     let spotifyToken = window.sessionStorage.getItem("token");
 
     if (!spotifyToken || spotifyToken === "undefined") {
       spotifyToken = getTokenFromUrl().access_token;
       window.sessionStorage.setItem("token", spotifyToken);
-      console.log(
-        "guardado en sesion " + window.sessionStorage.getItem("token")
-      );
     }
 
     setToken(spotifyToken);
@@ -142,12 +138,12 @@ function App() {
   });
 
   const changeFeedback = (text) => {
-    setFeedback(text)
-    setOpen(true)
-  }
+    setFeedback(text);
+    setOpen(true);
+  };
 
   return (
-    <div id={contextTheme} style={{height: '100vh'}} >
+    <div id={contextTheme} style={{ height: "100vh" }}>
       {!token ? (
         <a className="btn btn-success" href={loginUrl}>
           Login
@@ -166,12 +162,16 @@ function App() {
             </div>
 
             <TopBar></TopBar>
-            <RouterProvider router={router}></RouterProvider>
-            <MusicPlayer></MusicPlayer>
+            <main>
+              <RouterProvider router={router}></RouterProvider>
+              <HelpModal />
+            </main>
+            <footer>
+              <MusicPlayer></MusicPlayer>
+            </footer>
           </FeedbackHandlerContext.Provider>
         </>
       )}
-      <HelpModal />
     </div>
   );
 }

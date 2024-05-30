@@ -11,7 +11,7 @@ export default function SongInfo({showAddButton = false}){
     }
 
     return(
-                <div className='songInfo' onDoubleClick={songClickHandler}>
+                <div tabIndex={0} className='songInfo' onDoubleClick={songClickHandler} aria-label="Leyenda canciones" aria-description="Leyenda canciones">
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='nameAuthorContainer col d-flex flex-row justify-content-md-between align-items-md-center'>
