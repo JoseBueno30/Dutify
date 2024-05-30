@@ -152,6 +152,7 @@ const nextQueueSong = () => {
     } else {
       i = 0;
       queue = null;
+      trackAudio.currentTime = 30;
       window.sessionStorage.setItem("playlistPlaying", queue);
       window.sessionStorage.setItem("queue", queue);
       queueEmitter.emit("queueEnded");
@@ -177,7 +178,7 @@ const previousQueueSong = () => {
 };
 const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
-  playQueue();
+ if (queue !== null)playQueue();
 };
 
 const addTrackToQueue = (track) => {
@@ -241,6 +242,18 @@ const isTrackInPlayer = (track) => {
   return trackObject!== undefined && track.uri === trackObject.uri;
 }
 
+const removeTrackFromQueue = (track) =>{
+  if(queue){
+    const index = queue.indexOf(track);
+    queue.splice(index, 1);
+    console.log(queue)
+    if(randomQueue){
+      index = randomQueue.indexOf(track);
+      randomQueue.splice(index, 1);
+    }
+  }
+}
+
 export {
   // TRACK FUNCTIONS
   setTrack,
@@ -266,6 +279,7 @@ export {
   setQueueIndex,
   getQueueIndex,
   setRandomQueue,
+  removeTrackFromQueue,
 
   // TRACK OBJECT
   getTrackObject,

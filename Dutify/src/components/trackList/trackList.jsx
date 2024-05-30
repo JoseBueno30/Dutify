@@ -10,6 +10,7 @@ import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { FeedbackHandlerContext } from "../../App";
 import NavButton from "../topBar/navButton/navButton";
+import { removeTrackFromQueue } from "../../spotifyApi/SongController";
 
 
 
@@ -53,6 +54,7 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
     let newTracks = [...tracks];
     newTracks.splice(trackIndex, 1);
     setTracks(newTracks)
+    removeTrackFromQueue(track);
   }
   
   function handleAddTrackToFavorites(track){
