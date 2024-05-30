@@ -138,7 +138,7 @@ const __saveAuxQueue = () => {
 };
 
 const playQueue = () => {
-  console.log("index: " + i);
+  console.log("index: " + i + " en random: " + isRandom);
   let url;
   if (!isRandom) url = queue[i];
   else url = randomQueue[i];
@@ -188,10 +188,10 @@ const addTrackToQueue = (track) => {
 const setQueueIndex = (newIndex) => {
   i = newIndex;
   if(isRandom){
-    //console.log("deberia reproducir cola normal antes")
+    console.log("deberia reproducir cola normal antes")
     isRandom = false;
     playQueue();
-    isRandom = true;
+    setRandomQueue();
   }else{
     playQueue();
   }
@@ -218,6 +218,7 @@ const setRandomQueue = () => {
   window.sessionStorage.setItem("random", isRandom);
   if (isRandom) {
     __shuffle(randomQueue);
+    i = -1;
     window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
   } else {
     const queueAux = JSON.parse(window.sessionStorage.getItem("queueAux"));
@@ -244,7 +245,7 @@ const isTrackInPlayer = (track) => {
 
 const removeTrackFromQueue = (track) =>{
   if(queue){
-    const index = queue.indexOf(track);
+    let index = queue.indexOf(track);
     queue.splice(index, 1);
     console.log(queue)
     if(randomQueue){
