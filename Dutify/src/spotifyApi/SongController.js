@@ -115,8 +115,8 @@ const setTrackCurrentTime = (newCurrentTime) => {
 
 const setQueue = (newQueue) => {
   i = 0;
-  if (trackObject !== undefined && trackObject !== null)
-    newQueue.push(trackObject);
+  // if (trackObject !== undefined && trackObject !== null)
+  //   newQueue.push(trackObject);
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
   // console.log(queue)
@@ -146,23 +146,27 @@ const playQueue = () => {
 };
 
 const nextQueueSong = () => {
-  if (queue !== null && !inLoop) {
+  if (queue !== null) {
     if (i + 1 < queue.length - 1) {
       i += 1;
     } else {
       i = 0;
-      queue = null;
-      trackAudio.currentTime = 30;
-      window.sessionStorage.setItem("playlistPlaying", queue);
-      window.sessionStorage.setItem("queue", queue);
-      queueEmitter.emit("queueEnded");
+      if(!inLoop){
+        queue = null;
+        trackAudio.currentTime = 30;
+        window.sessionStorage.setItem("playlistPlaying", queue);
+        window.sessionStorage.setItem("queue", queue);
+        queueEmitter.emit("queueEnded");
+      }else if(isRandom){
+        __shuffle(randomQueue);
+      }
     }
   }
   _saveAndPlay();
 };
 
 const previousQueueSong = () => {
-  if (queue !== null && !inLoop) {
+  if (queue !== null) {
     if (i - 1 >= 0) {
       i -= 1;
     } else {
