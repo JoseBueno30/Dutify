@@ -1,12 +1,12 @@
 .playList{
     overflow-x: hidden;
     overflow-y: hidden;                         
-    height : 82.5vh;
+    height : 85vh;
     min-width: 300px;
     background-color: var(--color-backgroud);
 
-    @media screen and (max-height: 750px) {
-        height: calc(100vh - 53.4px - 90.75px);
+    @media screen and (max-height: 890px) {
+        height: calc(100vh - 44.5px - 90.75px);
         min-height: 464.5px;
     }
 }

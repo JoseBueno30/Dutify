@@ -1,15 +1,16 @@
 .spinner-wrapper {
-    height: 80vh;
+    height: 100%;
     width: 100%;
     background-color: var(--color-background);
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .spinner {
-    margin-top: 10%;
     width: 75px;
     height: 75px;
+    margin-top: -5%;
     border: 5px solid var(--color-text);
     border-top: 5px solid var(--color-theme);
     border-radius: 50%;

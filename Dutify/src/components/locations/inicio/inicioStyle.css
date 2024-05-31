@@ -1,14 +1,13 @@
 .inicio-section {
     background-color: var(--color-background);
     width: 100%;
-    height: 82.5vh;
+    height: 85vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     gap: 50px;
-    padding-bottom: 40px;
-    @media screen and (max-height: 750px) {
-        height: calc(100vh - 53.4px - 90.75px);
+    @media screen and (max-height: 890px) {
+        height: calc(100vh - 44.5px - 90.75px);
     }
 }
 
