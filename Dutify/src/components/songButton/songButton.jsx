@@ -24,70 +24,90 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
-import { getTrackObject, isTrackInPlayer, isTrackPlaying, pauseTrack, playTrack, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
+import {
+  getTrackObject,
+  isTrackInPlayer,
+  isTrackPlaying,
+  pauseTrack,
+  playTrack,
+  queueEmitter,
+  setQueueIndex,
+  setSingleTrack,
+} from "../../spotifyApi/SongController";
 
-export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false, rerender, setRerender}) {
+export default function SongButton({
+  enPlaylist,
+  track,
+  index,
+  loadQueue,
+  setPlaying,
+  enableAddButton = false,
+  rerender,
+  setRerender,
+}) {
   const [isSongPlaying, setSongPlaying] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const playlistId = useContext(TracksHandlersContext).playlistId;
 
   useEffect(() => {
-      function handleResize() {
-          setIsSmallScreen(window.innerWidth < 750);
-        }
-        window.addEventListener('resize', handleResize);
+    function handleResize() {
+      setIsSmallScreen(window.innerWidth < 750);
+    }
+    window.addEventListener("resize", handleResize);
 
-        return () => {
-          window.removeEventListener('resize', handleResize);
-        };
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const playButtonKeydownHandler = (event) => {
-    if (event.key === "Enter" && document.activeElement === document.getElementById(track.id)) {
+    if (
+      event.key === "Enter" &&
+      document.activeElement === document.getElementById(track.id)
+    ) {
       songClickHandler(event);
     }
   };
 
   const listClickHandler = () => {
-      addTrackToPlayList(track, playlistId).then( status =>
-          changeFeedback(status)
-      )
-  }
-  
+    addTrackToPlayList(track, playlistId).then((status) =>
+      changeFeedback(status.message)
+    );
+  };
+
   const timeMIN = Math.trunc(track.duration_ms / 60000);
   const seg = Math.trunc((track.duration_ms % 60000) / 1000);
   const timeMS = seg < 10 ? "0" + seg : seg;
-  
+
   const songClickHandler = (e) => {
-    
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
-    
-    if(isTrackInPlayer(track)){
-      if(isTrackPlaying()){
+
+    if (isTrackInPlayer(track)) {
+      if (isTrackPlaying()) {
         pauseTrack();
-      }else{
+      } else {
         playTrack();
       }
-    }else{
-      if(enPlaylist && playlistId === playlistPlaying){   
+    } else {
+      if (enPlaylist && playlistId === playlistPlaying) {
         console.log("Reproduciendo misma playlist...");
         setQueueIndex(index);
-      }else if(enPlaylist){
+      } else if (enPlaylist) {
         console.log("Reproduciendo playlist nueva...");
         loadQueue();
         setQueueIndex(index);
         setPlaying(true);
-      }else{
+      } else {
         console.log(track.preview_url);
         setSingleTrack(track);
       }
     }
-    queueEmitter.emit("trackStatusPlayerChanged")
+    queueEmitter.emit("trackStatusPlayerChanged");
     setRerender(Math.random);
   };
-  
+
   return (
     <>
       <div
@@ -102,30 +122,47 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
       >
         <div className="playContainer" onClick={songClickHandler}>
           <div
-            className={isTrackInPlayer(track)?"songPlayButton playingSong":"songPlayButton "}
+            className={
+              isTrackInPlayer(track)
+                ? "songPlayButton playingSong"
+                : "songPlayButton "
+            }
             style={
               track.album.images[2] !== undefined
                 ? { backgroundImage: "url(" + track.album.images[2].url + ")" }
                 : {}
             }
           >
-            {isTrackInPlayer(track) && isTrackPlaying()?
-            <FaPause className="playButton"/>
-            :<FaPlay className="playButton" />
-          }
+            {isTrackInPlayer(track) && isTrackPlaying() ? (
+              <FaPause className="playButton" />
+            ) : (
+              <FaPlay className="playButton" />
+            )}
           </div>
         </div>
         <div className="container-fluid">
           <div className="row">
             <div className="nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
-              <div title={track.name} className="name" aria-description="nombre">
+              <div
+                title={track.name}
+                className="name"
+                aria-description="nombre"
+              >
                 {track.name}
               </div>
-              <div title={track.artists[0].name} className="author" aria-description="artista">
+              <div
+                title={track.artists[0].name}
+                className="author"
+                aria-description="artista"
+              >
                 {track.artists[0].name}
               </div>
             </div>
-            <div title={track.album.name} className="album col-2 " aria-description="álbum">
+            <div
+              title={track.album.name}
+              className="album col-2 "
+              aria-description="álbum"
+            >
               {track.album.name}
             </div>
             <div
@@ -136,81 +173,116 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
               {timeMIN}:{timeMS}
             </div>
 
-            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
-
+            {enableAddButton && playlistId ? (
+              <button
+                className="col-1 btn-add d-flex justify-content-center"
+                onClick={listClickHandler}
+              >
+                {isSmallScreen ? <FaPlus /> : "Añadir"}
+              </button>
+            ) : (
+              <></>
+            )}
 
             <div className="col-md-1 col-2 d-flex justify-content-center">
-              <Options
-                track={track}
-                index={index}
-              />
+              <Options track={track} index={index} />
             </div>
           </div>
         </div>
       </div>
-      
     </>
   );
 }
 
-function Options({track, index}){
-    
-  const removeTrackFromPlaylist = useContext(TracksHandlersContext).handleRemoveTrackFromPlaylist;
-  const addTrackToFavorites = useContext(TracksHandlersContext).handleAddTrackToFavorites;
+function Options({ track, index }) {
+  const removeTrackFromPlaylist = useContext(
+    TracksHandlersContext
+  ).handleRemoveTrackFromPlaylist;
+  const addTrackToFavorites = useContext(
+    TracksHandlersContext
+  ).handleAddTrackToFavorites;
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const userPlaylists = useContext(TracksHandlersContext).userPlaylists;
   const playlistId = useContext(TracksHandlersContext).playlistId;
   const owned = useContext(TracksHandlersContext).owned;
 
-  const reloadPlaylist = async (playlistId) => {
+  const reloadPlaylist = async (playlistId, code) => {
     const searchParams = new URLSearchParams(location.search);
     const currentPlaylistId = searchParams.get("playlistId");
-    if(playlistId===currentPlaylistId){
+    if (
+      playlistId === currentPlaylistId &&
+      code === 2
+    ) {
       await sleep(2500);
       window.location.href = "playlist?playlistId=" + playlistId;
     }
-  }
+  };
 
   const listClickHandler = (playlistId) => {
-    addTrackToPlayList(track, playlistId).then(status => changeFeedback(status),
-        reloadPlaylist(playlistId)
-      );
-
-      
-  }
-  
-  const eliminarClickHandler = () => {
-      removeTrackFromPlaylist(track, index);
-  }
-  
-  const favoritesClickHandler = () => {
-      addTrackToFavorites(track);
-  }
-
-  const menuItemClassName = ({ hover }) =>
-      hover ? 'menuItemHover' : 'menuItem';
-
-  return(
-      <Menu 
-          menuButton={<MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
-          menuClassName="optionsMenu"
-          viewScroll="close"
-          position="auto"
-          transition>
-            <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Añadir a canciones favoritas"} onClick={() => favoritesClickHandler()}><button>Añadir a canciones favoritas</button></MenuItem>
-            {playlistId && owned?
-            <MenuItem tabIndex={"0"} className={menuItemClassName} title={"Eliminar de la playlist"} onClick={() => eliminarClickHandler()}><button>Eliminar de la playlist</button></MenuItem>
-            :null}
-            <MenuDivider />
-
-            {userPlaylists ?
-                userPlaylists.map((playlist) => (
-                    <MenuItem className={menuItemClassName} tabIndex={"0"} title={"Añadir a "+ playlist.name} onClick={() => listClickHandler(playlist.id)} key={playlist.id}><button>Añadir a {playlist.name}</button></MenuItem>
-                ))
-            : <></>
-            }                        
-            
-        </Menu>
+    addTrackToPlayList(track, playlistId).then(
+      (status) => (changeFeedback(status.message),
+      reloadPlaylist(playlistId, status.code))
     );
   };
 
+  const eliminarClickHandler = () => {
+    removeTrackFromPlaylist(track, index);
+  };
+
+  const favoritesClickHandler = () => {
+    addTrackToFavorites(track);
+  };
+
+  const menuItemClassName = ({ hover }) =>
+    hover ? "menuItemHover" : "menuItem";
+
+  return (
+    <Menu
+      menuButton={
+        <MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}>
+          <FaEllipsisVertical className="options" />
+        </MenuButton>
+      }
+      menuClassName="optionsMenu"
+      viewScroll="close"
+      position="auto"
+      transition
+    >
+      <MenuItem
+        tabIndex={"0"}
+        className={menuItemClassName}
+        title={"Añadir a canciones favoritas"}
+        onClick={() => favoritesClickHandler()}
+      >
+        <button>Añadir a canciones favoritas</button>
+      </MenuItem>
+      {playlistId && owned ? (
+        <MenuItem
+          tabIndex={"0"}
+          className={menuItemClassName}
+          title={"Eliminar de la playlist"}
+          onClick={() => eliminarClickHandler()}
+        >
+          <button>Eliminar de la playlist</button>
+        </MenuItem>
+      ) : null}
+      <MenuDivider />
+
+      {userPlaylists ? (
+        userPlaylists.map((playlist) => (
+          <MenuItem
+            className={menuItemClassName}
+            tabIndex={"0"}
+            title={"Añadir a " + playlist.name}
+            onClick={() => listClickHandler(playlist.id)}
+            key={playlist.id}
+          >
+            <button>Añadir a {playlist.name}</button>
+          </MenuItem>
+        ))
+      ) : (
+        <></>
+      )}
+    </Menu>
+  );
+}
