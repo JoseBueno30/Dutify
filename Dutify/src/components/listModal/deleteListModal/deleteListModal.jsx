@@ -5,7 +5,7 @@ import { unfollowPlaylist, sleep } from "../../../spotifyApi/SpotifyApiCalls";
 
 function DeleteListModal({ playlist }) {
   const comfirmDeleteClickHandler = (e) => {
-    unfollowPlaylist(playlist.id).then(() => {window.location.href = "/Listas"});
+    unfollowPlaylist(playlist).then(sleep(500).then(() => {window.location.href = "/Listas"}));
   };
 
   return (
