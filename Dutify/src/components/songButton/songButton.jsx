@@ -23,7 +23,7 @@ import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
-import { getTrackObject, isTrackInPlayer, isTrackPlaying, pauseTrack, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
+import { getTrackObject, isTrackInPlayer, isTrackPlaying, pauseTrack, playTrack, queueEmitter, setQueueIndex, setSingleTrack } from "../../spotifyApi/SongController";
 
 export default function SongButton({enPlaylist, track, index, loadQueue, setPlaying, enableAddButton=false, rerender, setRerender}) {
   const [isSongPlaying, setSongPlaying] = useState(false);
@@ -62,10 +62,18 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
     
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
-    setSongPlaying(!isSongPlaying);
     setRerender(track.uri);
-
-    if(!isSongPlaying){
+    console.log(isSongPlaying)
+    setSongPlaying(!isSongPlaying);
+    console.log(isSongPlaying)
+    
+    if(isTrackInPlayer(track)){
+      if(isTrackPlaying()){
+        pauseTrack();
+      }else{
+        playTrack();
+      }
+    }else{
       if(enPlaylist && playlistId === playlistPlaying){   
         console.log("Reproduciendo misma playlist...");
         setQueueIndex(index);
@@ -78,12 +86,10 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
         console.log(track.preview_url);
         setSingleTrack(track);
       }
-    }else if(isTrackInPlayer(track)){
-      pauseTrack();
     }
     queueEmitter.emit("trackStatusPlayerChanged")
   };
-
+  
   return (
     <>
       <div
