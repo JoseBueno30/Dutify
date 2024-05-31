@@ -59,34 +59,38 @@ function SearchBar({ isOpen }) {
 
   return (
     <div className={(isOpen ? "" : " occult ") + "d-flex"}>
+      <label htmlFor="search-bar" className="oculto">Buscar canción</label>
       <input
         id="search-bar"
         className="search-bar"
         type="text"
-        placeholder={"Buscar"}
+        placeholder={"Buscar canción"}
+        maxLength={50}
         onChange={onChangeText}
       />
       <button
         className="position-absolute search-btn"
         onClick={search}
       >
-        <BiSearch className="" style={{ color: "black" }} />
+        <BiSearch className="" style={{ color: "black" }} title="Buscar canción" />
       </button>
       {visible ? (
-        <div className={"position-absolute search-results"}>
+        <div className={"position-absolute search-results"} aria-description="Resultados de busqueda" tabIndex={0}>
           <ClickOutside
             onClick={changeVisibility}
             className={
               "d-flex flex-wrap  align-items-center justify-content-center"
             }
           >
-            <TrackList tracks={tracks}></TrackList>
+            <TrackList tracks={tracks} busqueda={true}></TrackList>
+            {tracks.length > 0 ? 
             <button
               onClick={search}
               className="btn btn-showMore mt-auto mb-2"
             >
-              Mostrar más
-            </button>
+            Mostrar más
+            </button> : <></>}
+
           </ClickOutside>
         </div>
       ) : (

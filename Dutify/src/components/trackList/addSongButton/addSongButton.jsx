@@ -7,16 +7,21 @@ import '@szhsin/react-menu/dist/transitions/slide.css';
 import "./addSongButtonStyle.css";
 
 
-export default function AddSongButton({name, artistName, albumName, image, time_ms}){
+export default function AddSongButton({name, artistName, albumName, image, time_ms, playlistId}){
 
 
     const addSongClickHandler = (e) => {
-        console.log("Añadir cancion");
-        window.location.href = "/busqueda?query=";
+        window.location.href = "/busqueda?playListId="+ playlistId +"&query=";
     }
 
+    const addButtonKeydownHandler = (event) => {
+        if (event.key === "Enter" || event.key === " " ) {
+            addSongClickHandler(event);
+        }
+      };
+
     return(
-                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler}>
+                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler} onKeyDown={addButtonKeydownHandler}>
                     <div>
                         <IoMdAddCircle className="addSongIcon"/>
                     </div>

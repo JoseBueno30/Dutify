@@ -35,9 +35,6 @@ const getUserPlaylists = async () => {
 
 const isPlaylistOwned = async(playlist) => {
   const user = await getUser();
-  console.log(playlist)
-  console.log(user)
-  console.log(playlist.owner.id === user.id)
   return playlist.owner.id === user.id;
 }
 
@@ -49,8 +46,6 @@ const getUserOwnedPlaylists = async () => {
   const ownedPlaylists = playlists.filter(
     (playList) => playList.owner.id == user.id
   );
-
-  console.log(ownedPlaylists);
 
   return ownedPlaylists;
 };
@@ -71,9 +66,7 @@ const getTracksFromPlaylist = async (playlist, offset) => {
     offset: offset,
     limit: 100,
   });
-  console.log("AAA: " + data);
   let tracks = data.items.map(item => item.track);
-  console.log(tracks)
   return tracks;
 };
 
@@ -89,13 +82,11 @@ const getAllTracksFromPlaylist = async (playlist) => {
     
     tracks = tracks.concat(moreTracks);
   }
-  console.log(tracks);
   return tracks;
 };
 
 const getCategoriesID = () => {
   spotifyApiObject.getCategories({ limit: 50 }).then((data) => {
-    console.log(data.categories.items);
   });
 };
 
@@ -182,10 +173,11 @@ const mapPlaylistObject = (data) => {
   return playlists;
 };
 
-const addTrackToPlayList = async (track, playlist) => {
+const addTrackToPlayList = async (track, playlistId) => {
   let status;
   try{
-    const playlistTracks = await getAllTracksFromPlaylist(await getPlayList(playlist.id));
+    const playlist = await getPlayList(playlistId)
+    const playlistTracks = await getAllTracksFromPlaylist(playlist);
     if(playlistTracks.some(playlistTrack => playlistTrack.uri === track.uri)){
       status = "Esta canción ya está en "+ playlist.name;
     }else{
@@ -212,7 +204,6 @@ const removeTrackFromPlayList = async (track, playlistId) => {
 }
 
 const addTrackToFavorites = async (track) => {
-  console.log([track.uri]);
   let status;
   try{
     await spotifyApiObject.addToMySavedTracks([track.id]);
@@ -224,16 +215,45 @@ const addTrackToFavorites = async (track) => {
   return status;
 }
 
-const unfollowPlaylist = async (playlistId) =>{
-  await spotifyApiObject.unfollowPlaylist(playlistId);
-  await sleep(500);
+const followPlaylist = async (playlist) =>{
+  let status = "";
+  try{
+    await spotifyApiObject.followPlaylist(playlist.id);
+    status = playlist.name + " añadida a tu biblioteca.";
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error añadiendo " + playlist.name + " a tu biblioteca.";
+  }
+  return status;
 }
+
+const unfollowPlaylist = async (playlist) =>{
+  let status = "";
+  try{
+    await spotifyApiObject.unfollowPlaylist(playlist.id);
+    status = playlist.name + " eliminada de tu biblioteca."
+  }catch(error){
+    console.error("ERROR: ", error);
+    status = "Error eliminando " + playlist.name + " de tu biblioteca.";
+  }
+  return status;
+}
+
 
 const searchTracks = async (query,num) => {
   let data = await spotifyApiObject.searchTracks(query, { limit: num })
-  console.log(data.tracks.items)
   return data.tracks.items;
 };
+
+const isUserFollowingPlaylist = async (playlistId) => {
+  const user = getUser();
+  return (await spotifyApiObject.areFollowingPlaylist(playlistId,[user.id]))[0];
+}
+const searchTopTracks = async (num) => {
+  let data = await spotifyApiObject.getMyTopTracks({ limit: num })
+
+  return data.items;
+}
 
 export {getAccessToken, 
   setAccessToken, 
@@ -250,9 +270,13 @@ export {getAccessToken,
   addTrackToFavorites, 
   createPlaylist, 
   unfollowPlaylist,
+  followPlaylist,
   searchTracks, 
   getUser, 
   getPopularArtistsPlaylists, 
   changePlaylistName, 
-  getPopularPlaylists, 
-  getRecommendedPlaylists};
+  getPopularPlaylists,
+  getRecommendedPlaylists,
+  isUserFollowingPlaylist,
+  searchTopTracks,
+  getAllTracksFromPlaylist,};
