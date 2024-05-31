@@ -27,7 +27,7 @@ import { SiTruenas } from "react-icons/si";
 
 export default function PlayList({}) {
   const [isPlaying, setPlaying] = useState(false);
-  const [playlist, setPlayList] = useState();
+  const [playlist, setPlayList] = useState(null);
   const [playlistName, setPlaylistName] = useState("");
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -86,6 +86,7 @@ export default function PlayList({}) {
   },[playlistName]);
 
   useEffect(() => {
+    
     setLoading(true);
     loadPlayList().finally(() => setLoading(false));
 

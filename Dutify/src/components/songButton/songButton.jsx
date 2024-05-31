@@ -17,6 +17,7 @@ import {
   addTrackToFavorites,
   addTrackToPlayList,
   removeTrackFromPlayList,
+  sleep,
 } from "../../spotifyApi/SpotifyApiCalls";
 import { useSnackbar } from "@mui/base/useSnackbar";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
@@ -53,19 +54,15 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
           changeFeedback(status)
       )
   }
-
+  
   const timeMIN = Math.trunc(track.duration_ms / 60000);
   const seg = Math.trunc((track.duration_ms % 60000) / 1000);
   const timeMS = seg < 10 ? "0" + seg : seg;
-
+  
   const songClickHandler = (e) => {
     
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
-    setRerender(track.uri);
-    console.log(isSongPlaying)
-    setSongPlaying(!isSongPlaying);
-    console.log(isSongPlaying)
     
     if(isTrackInPlayer(track)){
       if(isTrackPlaying()){
@@ -88,6 +85,7 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
       }
     }
     queueEmitter.emit("trackStatusPlayerChanged")
+    setRerender(Math.random);
   };
   
   return (
@@ -157,15 +155,28 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
 
 function Options({track, index}){
     
-  const addTrackToPlaylist = useContext(TracksHandlersContext).handleAddTrackToPlayList;
   const removeTrackFromPlaylist = useContext(TracksHandlersContext).handleRemoveTrackFromPlaylist;
   const addTrackToFavorites = useContext(TracksHandlersContext).handleAddTrackToFavorites;
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const userPlaylists = useContext(TracksHandlersContext).userPlaylists;
   const playlistId = useContext(TracksHandlersContext).playlistId;
   const owned = useContext(TracksHandlersContext).owned;
 
+  const reloadPlaylist = async (playlistId) => {
+    const searchParams = new URLSearchParams(location.search);
+    const currentPlaylistId = searchParams.get("playlistId");
+    if(playlistId===currentPlaylistId){
+      await sleep(2500);
+      window.location.href = "playlist?playlistId=" + playlistId;
+    }
+  }
+
   const listClickHandler = (playlistId) => {
-      addTrackToPlaylist(track, playlistId);
+    addTrackToPlayList(track, playlistId).then(status => changeFeedback(status),
+        reloadPlaylist(playlistId)
+      );
+
+      
   }
   
   const eliminarClickHandler = () => {

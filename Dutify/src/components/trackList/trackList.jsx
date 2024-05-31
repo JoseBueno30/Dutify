@@ -5,7 +5,7 @@ import "./trackListStyle.css";
 
 import AddSongButton from "./addSongButton/addSongButton";
 import SongInfo from "./songInfo/songInfo";
-import { getUserOwnedPlaylists } from "../../spotifyApi/SpotifyApiCalls";
+import { getUserOwnedPlaylists, sleep } from "../../spotifyApi/SpotifyApiCalls";
 
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { FeedbackHandlerContext } from "../../App";
@@ -35,21 +35,13 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
   }, []);
 
   useEffect(() =>{
-    console.log("RENDER?")
   }, [rerender])
 
-  async function handleAddTrackToPlayList(track, playlist) {
-    addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
-    //Si se añade desde la pestaña de busqueda no se recarga porq se esta añadiendo desde la songlist de ese componente
-    //por lo q no tiene la id de la playlist aunque esta si la tenga 
-    if(playlist.id === playlistId){
-      // let newTracks = [];
-      // tracks == [] ? newTracks=track : newTracks = [...tracks, track];
-      // setTracks(newTracks);
-    }
+  async function handleAddTrackToPlayList(track, addedPlaylistId) {
+    
   }
 
-  function handleRemoveTrackFromPlaylist(track, trackIndex){
+  async function handleRemoveTrackFromPlaylist(track, trackIndex){
     removeTrackFromPlayList(track, playlistId).then(status => changeFeedback(status));
     let newTracks = [...tracks];
     newTracks.splice(trackIndex, 1);
@@ -66,8 +58,6 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
       <div className="list container-fluid ">
-         
-
         {tracks.length > 0 ? <SongInfo showAddButton={busqueda && playlistId}/> : (<></>)}
         
         {tracks.length > 0 ? (
