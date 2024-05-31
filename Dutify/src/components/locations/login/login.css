@@ -7,7 +7,7 @@
 }
 
 .login-section .title{
-    font-size: 80px;
+    font-size: 100px;
 }
 
 .login-section svg{
@@ -15,8 +15,9 @@
 }
 
 .btn-login{
-    color: white;
+    color: var(--color-background);
     background-color: var(--color-theme);
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
+    font-size:x-large;
 }

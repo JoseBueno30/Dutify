@@ -1,6 +1,6 @@
 import './inicioStyle.css';
 import { useEffect, useState } from "react";
-import { getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
+import { setAccessToken,getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists, getAccessToken } from "../../../spotifyApi/SpotifyApiCalls";
 import Carousel from '../../carousel/carousel';
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import Spinner from '../../spinner/spinner';
@@ -25,8 +25,30 @@ function Inicio({token}){
 
     useEffect(() => {
         document.title = "Inicio | Dutify";
+
+        let spotifyToken = window.sessionStorage.getItem("token");
+
+        if (!spotifyToken || spotifyToken === "undefined") {
+          spotifyToken = getTokenFromUrl().access_token;
+          window.sessionStorage.setItem("token", spotifyToken);
+        }
+
+        setAccessToken(spotifyToken);
+
         cargarPlaylists().finally(() => setLoading(false));
     }, []);
+
+    const getTokenFromUrl = () => {
+        let location = window.location; 
+        return location.hash
+          .substring(1)
+          .split("&")
+          .reduce((initial, item) => {
+            let parts = item.split("=");
+            initial[parts[0]] = decodeURIComponent(parts[1]);
+            return initial;
+          }, {});
+      };
 
     const listButtonClickHandler = (e) => {
         const key = e.currentTarget.id;
