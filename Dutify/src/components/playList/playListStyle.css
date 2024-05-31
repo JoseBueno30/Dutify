@@ -3,7 +3,10 @@
     overflow-y: hidden;                         
     height : 82.5vh;
     min-width: 300px;
-    padding-bottom: 10px;
     background-color: var(--color-backgroud);
 
+    @media screen and (max-height: 750px) {
+        height: calc(100vh - 53.4px - 90.75px);
+        min-height: 464.5px;
+    }
 }

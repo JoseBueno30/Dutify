@@ -7,7 +7,7 @@
   border-top: solid var(--color-background);
   z-index: 300;
 
-  @media screen and (max-height: 750px) {
+  @media screen and (max-height: 890px) {
     height: 90.75px;
   }
 }
