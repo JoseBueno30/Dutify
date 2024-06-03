@@ -25,7 +25,7 @@ function ListModal({ playlist }) {
     return () => {
       modal.removeEventListener("hidden.bs.modal", hideHandler);
     };
-  },[]);
+  }, []);
 
   function esSoloEspacios(texto) {
     return /^\s*$/.test(texto);
@@ -36,7 +36,7 @@ function ListModal({ playlist }) {
   };
 
   const listPublicChangeHandler = (e) => {
-    setListPublic(e.target.checked);
+    setListPublic(!listPublic);
   };
 
   const hideHandler = () => {
@@ -44,19 +44,25 @@ function ListModal({ playlist }) {
     setListPublic(false);
     setErrorVisibility(false);
     setCanSubmit(true);
-    if(!playlist){  
-      document.getElementsByName("addCard")[0].setAttribute("aria-expanded", "false");    
-    }else{
-      document.getElementsByName("cambiarNombre")[0].setAttribute("aria-expanded", "false");  
+    if (!playlist) {
+      document
+        .getElementsByName("addCard")[0]
+        .setAttribute("aria-expanded", "false");
+    } else {
+      document
+        .getElementsByName("cambiarNombre")[0]
+        .setAttribute("aria-expanded", "false");
     }
-  }
-  
+  };
+
   const clickHandler = (e) => {
     e.preventDefault();
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
-      document.getElementById("inputName").setAttribute("aria-describedby","errorText")
+      document
+        .getElementById("inputName")
+        .setAttribute("aria-describedby", "errorText");
       document.getElementById("inputName").focus();
     } else {
       setCanSubmit(false);
@@ -66,15 +72,20 @@ function ListModal({ playlist }) {
         console.log(playlist);
 
         // Close modal
-        document.getElementById("listModal").setAttribute("style", "display: none");
-        document.getElementById("listModal").setAttribute("aria-hidden", "true");
-        
+        document
+          .getElementById("listModal")
+          .setAttribute("style", "display: none");
+        document
+          .getElementById("listModal")
+          .setAttribute("aria-hidden", "true");
+
         changePlaylistName(playlist.id, listName)
-        .then(status => {
-          changeFeedback(status),
-          sleep(5000).then(() => {
-              window.location.href = "/listas/playlist?playlistId=" + playlist.id;
-            })
+          .then((status) => {
+            changeFeedback(status),
+              sleep(5000).then(() => {
+                window.location.href =
+                  "/listas/playlist?playlistId=" + playlist.id;
+              });
           })
           .catch((error) => {
             console.error(error);
@@ -144,28 +155,34 @@ function ListModal({ playlist }) {
                 <></>
               ) : (
                 <>
-                  <div className="mb-4 w-75">
-                    <div className="form-check form-switch ps-0">
-                      <label className="form-check-label mb-1" tabIndex={0}>
-                        Privacidad
-                      </label>
-                      <br />
-                      <input
-                        className="form-check-input ms-1"
-                        aria-label="Privacidad"
-                        type="checkbox"
-                        role="switch"
-                        id="listPublic"
-                        onChange={listPublicChangeHandler}
-                        checked={listPublic}
-                      />
-                      <label
-                        className="form-check-label ps-3"
-                        htmlFor="listPublic"
-                      >
-                        {listPublic ? "Pública" : "Privada"}
-                      </label>
-                    </div>
+                  <p className="mb-1" id="privacyLabel">Privacidad</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="listPrivate"
+                      id="privateRadio"
+                      checked={!listPublic}
+                      onChange={listPublicChangeHandler}
+                      aria-labelledby="privacyLabel privateRadio"
+                    />
+                    <label class="form-check-label" for="privateRadio">
+                      Privada
+                    </label>
+                  </div>
+                  <div class="form-check mb-4">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="listPublic"
+                      id="publicRadio"
+                      checked={listPublic}
+                      onChange={listPublicChangeHandler}
+                      aria-labelledby="privacyLabel publicRadio"
+                    />
+                    <label class="form-check-label" for="publicRadio">
+                      Pública
+                    </label>
                   </div>
                 </>
               )}
