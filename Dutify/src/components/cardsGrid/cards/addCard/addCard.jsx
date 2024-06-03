@@ -19,9 +19,9 @@ function AddCard() {
       aria-labelledby="addCardLabel"
       aria-controls="listModal"
       aria-haspopup="dialog"
-      aria-expanded={modalAbierto}
+      aria-expanded="false"
       onClick={() => {
-        setModalAbierto(true);
+        document.getElementsByName("addCard")[0].setAttribute("aria-expanded", "true");
       }}
     >
       <div className="d-flex flex-column align-items-center justify-content-center cards-overlay fs-3">

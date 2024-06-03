@@ -85,7 +85,6 @@ export default function PlayListInfo({
 }
 
 function Options({}) {
-  const [modalAbierto, setModalAbierto] = useState(false);
   const menuItemClassName = ({ hover }) =>
     hover ? "menuItemHover" : "menuItem";
 
@@ -110,9 +109,9 @@ function Options({}) {
           data-bs-target="#listModal"
           aria-controls="listModal"
           aria-haspopup="dialog"
-          aria-expanded={modalAbierto}
+          aria-expanded="false"
           onClick={() => {
-            setModalAbierto(true);
+            document.getElementsByName("cambiarNombre")[0].setAttribute("aria-expanded", "true");
           }}
         >
           Cambiar nombre
@@ -126,9 +125,9 @@ function Options({}) {
           data-bs-target="#deleteListModal"
           aria-controls="deleteListModal"
           aria-haspopup="dialog"
-          aria-expanded={modalAbierto}
+          aria-expanded="false"
           onClick={() => {
-            setModalAbierto(true);
+            document.getElementsByName("deleteList")[0].setAttribute("aria-expanded", "true");
           }}
         >
           Eliminar playlist
