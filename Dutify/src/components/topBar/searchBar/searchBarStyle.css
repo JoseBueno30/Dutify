@@ -102,9 +102,3 @@
     padding-bottom: 0;
   }
 } 
-
-@media only screen and (max-height: 890px){
-  .topBar{
-      min-height: 53.4px;
-  }
-}
