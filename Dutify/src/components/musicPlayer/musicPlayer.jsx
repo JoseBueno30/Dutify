@@ -176,7 +176,11 @@ function MusicPlayer() {
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
-            <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
+            <div
+              className="artist-container"
+              aria-label="Nombre y autor de la cancion actual"
+              tabIndex={0}
+            >
               <span tabIndex={0}>{track ? track.name : "..."}</span>
               <br />
               {!isSmallScreen ? (
@@ -209,7 +213,7 @@ function MusicPlayer() {
               </span>
               {/* Bottones de reproducción */}
               <div className="song-buttons">
-              <button>
+                <button>
                   <IoPlaySkipBackCircleOutline
                     size={35}
                     className="side-button"
@@ -218,11 +222,15 @@ function MusicPlayer() {
                   />
                 </button>
 
-                <button onClick={switchPlay} onKeyDown={playButtonKeydownHandler} className="play-button">
+                <button
+                  onClick={switchPlay}
+                  onKeyDown={playButtonKeydownHandler}
+                  className="play-button"
+                >
                   {!isTrackPlaying() ? (
-                    <IoPlayCircleOutline size={35} title="Reproducir canción"/>
+                    <IoPlayCircleOutline size={35} title="Reproducir canción" />
                   ) : (
-                    <IoPauseCircleOutline size={35} title="Pausar canción"/>
+                    <IoPauseCircleOutline size={35} title="Pausar canción" />
                   )}
                 </button>
                 <button>
@@ -241,7 +249,12 @@ function MusicPlayer() {
 
           {/* Barra de Soido */}
           <div className="sound-bar">
-            <button className="volume-button" onClick={switchVolume} id="volumeButton" title="Cambiar volúmen">
+            <button
+              className="volume-button"
+              onClick={switchVolume}
+              id="volumeButton"
+              title={volumeValue == 0 ? "Activar volúmen" : "Silenciar volúmen"}
+            >
               {volumeValue == 0 ? (
                 <FaVolumeMute size={25} />
               ) : (
