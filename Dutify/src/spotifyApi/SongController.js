@@ -119,9 +119,8 @@ const setQueue = (newQueue) => {
   window.sessionStorage.setItem("queue", JSON.stringify(newQueue));
   queue = newQueue;
   // console.log(queue)
-  isRandom = false;
-  inLoop = false;
   randomQueue = newQueue.slice();
+  if(isRandom) __shuffle(randomQueue);
   window.sessionStorage.setItem("randomQueue", JSON.stringify(newQueue));
   __saveAuxQueue();
 };
