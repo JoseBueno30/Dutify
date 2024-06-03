@@ -44,7 +44,11 @@ function ListModal({ playlist }) {
     setListPublic(false);
     setErrorVisibility(false);
     setCanSubmit(true);
-    document.getElementsByName("addCard")[0].setAttribute("aria-expanded", "false");    
+    if(playlist){
+      document.getElementsByName("addCard")[0].setAttribute("aria-expanded", "false");    
+    }else{
+      document.getElementsByName("cambiarNombre")[0].setAttribute("aria-expanded", "false");  
+    }
   }
   
   const clickHandler = (e) => {

@@ -20,7 +20,7 @@ export default function PlayListInfo({
   owned,
   followed,
   followPlaylistHandler,
-  unfollowPlaylistHandler
+  unfollowPlaylistHandler,
 }) {
   const timeMIN = Math.trunc(playList.duration_ms / 60000);
   const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
@@ -28,7 +28,12 @@ export default function PlayListInfo({
   return (
     <div className="playListInfoContainer d-flex flex-column container-fluid">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
-        <p tabIndex={0} title={playList.name} className="playListName " aria-description="nombre playlist">
+        <p
+          tabIndex={0}
+          title={playList.name}
+          className="playListName "
+          aria-description="nombre playlist"
+        >
           {playList.name}
         </p>
       </div>
@@ -43,7 +48,7 @@ export default function PlayListInfo({
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-        <p tabIndex={0} >{playList.tracks.total + " canciones"}</p>
+        <p tabIndex={0}>{playList.tracks.total + " canciones"}</p>
 
         {owned ? (
           <Options />
@@ -51,11 +56,17 @@ export default function PlayListInfo({
           <>
             {/* ponner los onClick al boton no a los iconos */}
             {followed ? (
-              <button className="playListFollowButton" onClick={() => unfollowPlaylistHandler()}>
-                <FaHeart className="followed"/>
+              <button
+                className="playListFollowButton"
+                onClick={() => unfollowPlaylistHandler()}
+              >
+                <FaHeart className="followed" />
               </button>
             ) : (
-              <button className="playListFollowButton" onClick={() => followPlaylistHandler()}>
+              <button
+                className="playListFollowButton"
+                onClick={() => followPlaylistHandler()}
+              >
                 <FaRegHeart />
               </button>
             )}
@@ -74,6 +85,7 @@ export default function PlayListInfo({
 }
 
 function Options({}) {
+  const [modalAbierto, setModalAbierto] = useState(false);
   const menuItemClassName = ({ hover }) =>
     hover ? "menuItemHover" : "menuItem";
 
@@ -91,12 +103,34 @@ function Options({}) {
       transition
     >
       <MenuItem className={menuItemClassName}>
-        <button data-bs-toggle="modal" data-bs-target="#listModal">
+        <button
+          name="cambiarNombre"
+          title="Cambiar nombre de la lista"
+          data-bs-toggle="modal"
+          data-bs-target="#listModal"
+          aria-controls="listModal"
+          aria-haspopup="dialog"
+          aria-expanded={modalAbierto}
+          onClick={() => {
+            setModalAbierto(true);
+          }}
+        >
           Cambiar nombre
         </button>
       </MenuItem>
       <MenuItem className={menuItemClassName}>
-        <button data-bs-toggle="modal" data-bs-target="#deleteListModal">
+        <button
+          data-bs-toggle="modal"
+          name="deleteList"
+          title="Eliminar playlist" 
+          data-bs-target="#deleteListModal"
+          aria-controls="deleteListModal"
+          aria-haspopup="dialog"
+          aria-expanded={modalAbierto}
+          onClick={() => {
+            setModalAbierto(true);
+          }}
+        >
           Eliminar playlist
         </button>
       </MenuItem>
