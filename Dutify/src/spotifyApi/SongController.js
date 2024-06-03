@@ -89,7 +89,6 @@ const getTrackAudio = () => {
 };
 
 const playTrack = () => {
-  console.log(trackAudio.src);
   trackAudio.play();
   isPlaying = true;
 };
@@ -122,7 +121,7 @@ const setQueue = (newQueue) => {
   // console.log(queue)
   isRandom = false;
   inLoop = false;
-  randomQueue = newQueue;
+  randomQueue = newQueue.slice();
   window.sessionStorage.setItem("randomQueue", JSON.stringify(newQueue));
   __saveAuxQueue();
 };
