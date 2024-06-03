@@ -44,6 +44,7 @@ function ListModal({ playlist }) {
     setListPublic(false);
     setErrorVisibility(false);
     setCanSubmit(true);
+    document.getElementsByName("addCard")[0].setAttribute("aria-expanded", "false");    
   }
   
   const clickHandler = (e) => {
@@ -93,18 +94,20 @@ function ListModal({ playlist }) {
       tabIndex="-1"
       aria-hidden="true"
       role="dialog"
+      aria-modal="true"
+      aria-labelledby="listModalLabel"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="helpModalLabel">
+            <h1 className="modal-title fs-5" id="listModalLabel">
               {playlist ? "Editar nombre de la lista" : "Crear nueva lista"}
             </h1>
             <button
               type="button"
               className="close-button"
               data-bs-dismiss="modal"
-              aria-label="Close"
+              aria-label="Cerrar dialogo"
             >
               <IoClose size={35} />
             </button>

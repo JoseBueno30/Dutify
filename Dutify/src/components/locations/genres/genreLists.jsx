@@ -42,16 +42,25 @@ function GenreLists() {
   return (
     <section
       className="genres-section"
-      aria-label={"Playlists de género " + genreName}
+      aria-labelledBy="section-header"
     >
       {loading ? (
         <Spinner></Spinner>
       ) : (
-        <CardsGrid
-          type="genrelists"
-          data={lists}
-          clickFunction={listButtonClickHandler}
-        ></CardsGrid>
+        <>
+          <h5
+            className="h5-recent-lists"
+            id="section-header"
+            aria-live="assertive"
+          >
+            Playlists de género {genreName}:
+          </h5>
+          <CardsGrid
+            type="genrelists"
+            data={lists}
+            clickFunction={listButtonClickHandler}
+          ></CardsGrid>
+        </>
       )}
     </section>
   );
