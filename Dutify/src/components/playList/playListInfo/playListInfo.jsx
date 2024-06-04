@@ -26,7 +26,7 @@ export default function PlayListInfo({
   const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
 
   return (
-    <div className="playListInfoContainer d-flex flex-column container-fluid">
+    <div className="playListInfoContainer d-flex flex-column container-fluid" aria-description="Información de la playlist">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
         <p
           tabIndex={0}
@@ -91,7 +91,7 @@ function Options({}) {
   return (
     <Menu
       menuButton={
-        <MenuButton tabIndex={0} className={"playListOptionsButton"}>
+        <MenuButton tabIndex={0} className={"playListOptionsButton"} title="Abrir menú configuración">
           <FaGear className="playListOptions" />
         </MenuButton>
       }
