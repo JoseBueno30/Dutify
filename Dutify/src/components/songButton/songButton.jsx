@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import {
   Menu,
@@ -42,24 +42,12 @@ export default function SongButton({
   loadQueue,
   setPlaying,
   enableAddButton = false,
-  rerender,
   setRerender,
+  isSmall
 }) {
   const [isSongPlaying, setSongPlaying] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1200);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const playlistId = useContext(TracksHandlersContext).playlistId;
-
-  useEffect(() => {
-    function handleResize() {
-      setIsSmallScreen(window.innerWidth < 750);
-    }
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const playButtonKeydownHandler = (event) => {
     if (
@@ -142,32 +130,32 @@ export default function SongButton({
         </div>
         <div className="container-fluid">
           <div className="row">
-            <div className="nameAuthorContainer col d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+            <div className={"nameAuthorContainer col d-flex " + (isSmall?"flex-column":"flex-row justify-content-between align-items-center")}>
               <div
                 title={track.name}
-                className="name"
+                className={isSmall?"nameSmallContainer":"name"}
                 aria-description="nombre"
               >
-                {track.name}
+                {isSmall? track.name.slice(0,20) : track.name}
               </div>
               <div
                 title={track.artists[0].name}
-                className="author"
+                className={isSmall?"authorSmallContainer":"author"}
                 aria-description="artista"
               >
-                {track.artists[0].name}
+                {isSmall? track.artists[0].name.slice(0,25) : track.artists[0].name}
               </div>
             </div>
             <div
               title={track.album.name}
-              className="album col-2 "
+              className={isSmall? "album col-2 d-none":"album col-2"}
               aria-description="álbum"
             >
               {track.album.name}
             </div>
             <div
               title={"Duración"}
-              className="time col-3 col-md-2 d-flex justify-content-center"
+              className={"time col-3 col-md-2 d-flex justify-content-center " + (isSmall?"d-none":"")}
               aria-description="duración"
             >
               {timeMIN}:{timeMS}
@@ -175,10 +163,10 @@ export default function SongButton({
 
             {enableAddButton && playlistId ? (
               <button
-                className="col-1 btn-add d-flex justify-content-center"
+                className={"col-1 d-flex justify-content-center " + (isSmall?"btnAddSmall":"btnAddBig")}
                 onClick={listClickHandler}
               >
-                {isSmallScreen ? <FaPlus /> : "Añadir"}
+                {isSmall ? <FaPlus /> : "Añadir"}
               </button>
             ) : (
               <></>

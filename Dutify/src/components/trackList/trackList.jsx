@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState, createContext, useContext } from "react";
 import SongButton from "../songButton/songButton";
 import "./trackListStyle.css";
@@ -34,6 +34,24 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
       getUserPlayLists();
   }, []);
 
+  
+  const refContainer = useRef();
+  const [isSmall, setIsSmallContainer] = useState(false);
+
+  useEffect(() => {
+      function handleResize() {
+        if(refContainer.current){
+          setIsSmallContainer(refContainer.current.offsetWidth < 500);
+        }          
+      }
+      setIsSmallContainer(refContainer.current.offsetWidth < 500);
+      window.addEventListener("resize", handleResize);
+  
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+  }, []);
+
   useEffect(() =>{
   }, [rerender])
 
@@ -57,8 +75,8 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
 
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
-      <div className="list container-fluid ">
-        {tracks.length > 0 ? <SongInfo showAddButton={busqueda && playlistId}/> : (<></>)}
+      <div className="list container-fluid " ref={refContainer}>
+        {tracks.length > 0 &&!isSmall? <SongInfo showAddButton={busqueda && playlistId} isSmall={isSmall}/> : (<></>)}
         
         {tracks.length > 0 ? (
           tracks.map((track, index) => (
@@ -72,6 +90,7 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
             enableAddButton={busqueda}
             rerender={rerender}
             setRerender={setRerender}
+            isSmall={isSmall}
           /> : <></>
           ))
         ) : ( <></> )}
