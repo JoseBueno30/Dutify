@@ -136,7 +136,7 @@ export default function SongButton({
                 className={isSmall?"nameSmallContainer":"name"}
                 aria-description="nombre"
               >
-                {isSmall? track.name.slice(0,20) : track.name}
+                {isSmall? track.name.slice(0,20) : track.name.slice(0,40)}
               </div>
               <div
                 title={track.artists[0].name}
