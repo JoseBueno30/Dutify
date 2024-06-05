@@ -177,15 +177,12 @@ function MusicPlayer() {
             )}
             {/* Texto de Artista */}
             <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
-              <span tabIndex={0}>{track ? track.name : "..."}</span>
+              <span className="name" tabIndex={0}>{track ? track.name : "..."}</span>
               <br />
-              {!isSmallScreen ? (
                 <span className="artist-text">
                   {track ? track.artists[0].name : "..."}
                 </span>
-              ) : (
-                ""
-              )}
+              
             </div>
           </div>
           {/* Barra de reproducción */}
