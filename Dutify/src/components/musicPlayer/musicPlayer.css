@@ -26,6 +26,7 @@
   display: flex;
   flex-basis: 30%;
   padding-left: 2.5%;
+  padding-right: 2.5%;
   @media screen and (max-width: 900px) {
     gap: 10px;
     flex-basis: 30%;
@@ -45,16 +46,19 @@
 .artist-container {
   margin-left: 10px;
   align-content: center;
-  max-width: 250px;
+  max-width: 300px;
   text-overflow: ellipsis;
   overflow: hidden;
   @media screen and (max-width: 1200px) {
-    max-width: 100px;
+    max-width: 150px;
   }
   @media screen and (max-width: 900px) {
     margin-left: 0px;
     font-size: 90%;
-    max-width: 100px;
+    max-width: 150px;
+  }
+  @media screen and (min-width: 1920px){
+      max-width: 500px;
   }
 }
 
