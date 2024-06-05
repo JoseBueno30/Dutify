@@ -46,20 +46,26 @@
   margin-left: 10px;
   align-content: center;
   max-width: 120px;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  /* animation: move 5s infinite linear; */
+  white-space: nowrap;
+  font-size: small;
   @media screen and (max-width: 1200px) {
-    max-width: 60px;
+    max-width: 80px;
   }
   @media screen and (max-width: 900px) {
     margin-left: 0px;
     font-size: 90%;
-    max-width: 75px;
+    max-width: 100px;
+  }
+  @media screen and (max-width: 520px) {
+    max-width: 60px;
   }
 }
 
 .artist-text {
-    font-size: small;
+  font-size: x-small;
 }
 
 .progresion-bar {
