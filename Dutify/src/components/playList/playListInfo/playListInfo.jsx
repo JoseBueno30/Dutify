@@ -58,6 +58,8 @@ export default function PlayListInfo({
             {followed ? (
               <button
                 className="playListFollowButton"
+                title="Dejar de seguir playlist"
+                aria-pressed = "true"
                 onClick={() => unfollowPlaylistHandler()}
               >
                 <FaHeart className="followed" />
@@ -65,6 +67,8 @@ export default function PlayListInfo({
             ) : (
               <button
                 className="playListFollowButton"
+                title="Seguir playlist"
+                aria-pressed = "false"
                 onClick={() => followPlaylistHandler()}
               >
                 <FaRegHeart />
