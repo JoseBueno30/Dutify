@@ -10,7 +10,7 @@ import { getUserOwnedPlaylists, sleep } from "../../spotifyApi/SpotifyApiCalls";
 import { addTrackToFavorites, addTrackToPlayList, removeTrackFromPlayList } from "../../spotifyApi/SpotifyApiCalls";
 import { FeedbackHandlerContext } from "../../App";
 import NavButton from "../topBar/navButton/navButton";
-import { removeTrackFromQueue } from "../../spotifyApi/SongController";
+import { addTrackToQueue, removeTrackFromQueue } from "../../spotifyApi/SongController";
 
 
 
@@ -55,8 +55,25 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
   useEffect(() =>{
   }, [rerender])
 
-  async function handleAddTrackToPlayList(track, addedPlaylistId) {
-    
+
+  const reloadPlaylist = async (addedPlaylistId, code) => {
+    const searchParams = new URLSearchParams(location.search);
+    const currentPlaylistId = searchParams.get("playlistId");
+    if (
+      addedPlaylistId === currentPlaylistId &&
+      code === 2
+    ) {
+      await sleep(2500);
+      window.location.href = "playlist?playlistId=" + addedPlaylistId;
+    }
+  };
+
+  async function handleAddTrackToPlaylist(track, addedPlaylistId) {
+    addTrackToPlayList(track, addedPlaylistId).then(
+      (status) => (changeFeedback(status.message),
+      addTrackToQueue(track),
+      reloadPlaylist(addedPlaylistId, status.code))
+    );
   }
 
   async function handleRemoveTrackFromPlaylist(track, trackIndex){
@@ -74,7 +91,7 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
     
 
   return (
-    <TracksHandlersContext.Provider value={{handleAddTrackToPlayList, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
+    <TracksHandlersContext.Provider value={{handleAddTrackToPlaylist, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
       <div className="list container-fluid " ref={refContainer}>
         {tracks.length > 0 &&!isSmall? <SongInfo showAddButton={busqueda && playlistId} isSmall={isSmall}/> : (<></>)}
         

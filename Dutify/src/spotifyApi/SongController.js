@@ -184,7 +184,16 @@ const _saveAndPlay = () => {
 };
 
 const addTrackToQueue = (track) => {
-  setTrack(track);
+  if(queue){
+    console.log(queue)
+    queue = [...queue, track];
+    window.sessionStorage.setItem("queue", JSON.stringify(queue));
+    if(randomQueue){
+      randomQueue = [...randomQueue, track];
+      window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
+    }
+    console.log(queue)
+  }
 };
 
 const setQueueIndex = (newIndex) => {
@@ -250,9 +259,11 @@ const removeTrackFromQueue = (track) =>{
     let index = queue.indexOf(track);
     queue.splice(index, 1);
     console.log(queue)
+    window.sessionStorage.setItem("queue", JSON.stringify(queue));
     if(randomQueue){
       index = randomQueue.indexOf(track);
       randomQueue.splice(index, 1);
+      window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
     }
   }
 }

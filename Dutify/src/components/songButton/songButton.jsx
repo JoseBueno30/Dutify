@@ -183,34 +183,16 @@ export default function SongButton({
 }
 
 function Options({ track, index }) {
-  const removeTrackFromPlaylist = useContext(
-    TracksHandlersContext
-  ).handleRemoveTrackFromPlaylist;
-  const addTrackToFavorites = useContext(
-    TracksHandlersContext
-  ).handleAddTrackToFavorites;
-  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+  const removeTrackFromPlaylist = useContext(TracksHandlersContext).handleRemoveTrackFromPlaylist;
+  const addTrackToPlaylist = useContext(TracksHandlersContext).handleAddTrackToPlaylist;
+  const addTrackToFavorites = useContext(TracksHandlersContext).handleAddTrackToFavorites;
   const userPlaylists = useContext(TracksHandlersContext).userPlaylists;
   const playlistId = useContext(TracksHandlersContext).playlistId;
   const owned = useContext(TracksHandlersContext).owned;
-
-  const reloadPlaylist = async (playlistId, code) => {
-    const searchParams = new URLSearchParams(location.search);
-    const currentPlaylistId = searchParams.get("playlistId");
-    if (
-      playlistId === currentPlaylistId &&
-      code === 2
-    ) {
-      await sleep(2500);
-      window.location.href = "playlist?playlistId=" + playlistId;
-    }
-  };
+  const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   const listClickHandler = (playlistId) => {
-    addTrackToPlayList(track, playlistId).then(
-      (status) => (changeFeedback(status.message),
-      reloadPlaylist(playlistId, status.code))
-    );
+    addTrackToPlaylist(track, playlistId);
   };
 
   const eliminarClickHandler = () => {
