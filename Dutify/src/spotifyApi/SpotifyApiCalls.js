@@ -2,6 +2,8 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotifyApiObject = new SpotifyWebApi();
 
+spotifyApiObject.setAccessToken(window.sessionStorage.getItem("token"));
+
 const sleep = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -27,6 +29,7 @@ const getUserId = async () => {
 };
 
 const getUserPlaylists = async () => {
+  console.log(getAccessToken());
   const data = await spotifyApiObject.getUserPlaylists();
   const playlists = mapPlaylistObject(data);
 
