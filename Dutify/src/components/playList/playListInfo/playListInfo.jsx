@@ -39,11 +39,12 @@ export default function PlayListInfo({
       </div>
 
       {playList.images ? (
-        <img className="playListImage" src={playList.images[0].url}></img>
+        <img className="playListImage" src={playList.images[0].url} alt="Imagen de la playlist"></img>
       ) : (
         <img
           className="playListImage"
           src={"/assets/placeholder-img-light.png"}
+          alt="Imagen de la playlist"
         ></img>
       )}
 
