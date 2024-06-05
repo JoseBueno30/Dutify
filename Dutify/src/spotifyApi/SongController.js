@@ -89,6 +89,7 @@ const getTrackAudio = () => {
 };
 
 const playTrack = () => {
+  // console.log(queue);
   trackAudio.play();
   isPlaying = true;
 };
@@ -131,12 +132,11 @@ const __saveAuxQueue = () => {
     
     if(element!==null)queueAux.push(element.name);
   });
-  console.log(queueAux);
   window.sessionStorage.setItem("queueAux", JSON.stringify(queueAux));
 };
 
 const playQueue = () => {
-  console.log("index: " + i + " en random: " + isRandom);
+  //console.log("index: " + i + " en random: " + isRandom);
   let url;
   if (!isRandom) url = queue[i];
   else url = randomQueue[i];
@@ -145,7 +145,7 @@ const playQueue = () => {
 
 const nextQueueSong = () => {
   if (queue !== null) {
-    if (i + 1 < queue.length - 1) {
+    if (i + 1 < queue.length) {
       i += 1;
     } else {
       i = 0;
