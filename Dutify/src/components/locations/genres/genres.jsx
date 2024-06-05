@@ -48,7 +48,7 @@ function Genres({ token }) {
 
   return (
     <section className="genres-section" aria-labelledby="section-header">
-      <h5 className="h5-recent-lists" id="section-header" aria-live="assertive">
+      <h5 className="h5-recent-lists" id="section-header">
         Lista de géneros:
       </h5>
       <CardsGrid

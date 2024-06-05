@@ -226,11 +226,12 @@ function MusicPlayer() {
                   onClick={switchPlay}
                   onKeyDown={playButtonKeydownHandler}
                   className="play-button"
+                  title={isTrackPlaying() ? "Pausar canción" : "Reproducir canción"}
                 >
                   {!isTrackPlaying() ? (
-                    <IoPlayCircleOutline size={35} title="Reproducir canción" />
+                    <IoPlayCircleOutline size={35}/>
                   ) : (
-                    <IoPauseCircleOutline size={35} title="Pausar canción" />
+                    <IoPauseCircleOutline size={35}/>
                   )}
                 </button>
                 <button>

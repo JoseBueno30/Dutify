@@ -83,7 +83,7 @@ export default function TrackList({
         userPlaylists,
       }}
     >
-      <div className="list container-fluid " aria-description="Lista de canciones de la playlist">
+      <div className="list container-fluid " aria-description="Lista de canciones">
         {tracks.length > 0 ? (
           <SongInfo showAddButton={busqueda && playlistId} />
         ) : (

@@ -143,12 +143,15 @@ function ListModal({ playlist }) {
                   onChange={listNameChangeHandler}
                   maxLength={20}
                   disabled={!canSubmit}
+                  aria-required="true"
+                  aria-invalid={errorVisibility}
+                  aria-errormessage="errorText"
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
                   id="errorText"
                 >
-                  ❌El nombre de la lista no puede estar vacío.❌
+                  ❌El nombre de la lista no puede estar vacío❌
                 </p>
               </div>
               {playlist ? (
