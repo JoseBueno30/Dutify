@@ -142,7 +142,7 @@ export default function PlayList({}) {
   };
 
   return (
-    <div className="playList d-flex flex-column flex-xl-row-reverse">
+    <div className="playList d-flex flex-column flex-xl-row-reverse" aria-busy={loading}>
       {playlist && !loading ? (
         <>
           <ListModal playlist={playlist} />

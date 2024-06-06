@@ -43,6 +43,7 @@ function GenreLists() {
     <section
       className="genres-section"
       aria-labelledBy="section-header"
+      aria-busy={loading}
     >
       {loading ? (
         <Spinner></Spinner>

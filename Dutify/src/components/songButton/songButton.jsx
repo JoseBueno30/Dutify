@@ -87,14 +87,12 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
   return (
     <>
       <div
-        title={"Reproducir " + track.name}
         tabIndex={0}
         id={track.id}
         className="songButton"
         onDoubleClick={songClickHandler}
         onKeyDown={playButtonKeydownHandler}
-        aria-label="Canción"
-        aria-description="Reproducir canción"
+        aria-description={"Reproducir canción: " + track.name}
       >
         <div className="playContainer" onClick={songClickHandler}>
           <div
@@ -125,14 +123,15 @@ export default function SongButton({enPlaylist, track, index, loadQueue, setPlay
               {track.album.name}
             </div>
             <div
-              title={"Duración"}
+              title={"Duración: " + timeMIN + " minutos y " + seg + " segundos"}
               className="time col-3 col-md-2 d-flex justify-content-center"
-              aria-description="duración"
             >
-              {timeMIN}:{timeMS}
+              <div aria-hidden="true">
+                {timeMIN}:{timeMS}
+              </div>
             </div>
 
-            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
+            {enableAddButton && playlistId ? <button className="col-1 btn-add d-flex justify-content-center" title="Añadir canción a lista" onClick={listClickHandler}>{isSmallScreen ? <FaPlus /> : "Añadir"}</button> : <></>}
 
 
             <div className="col-md-1 col-2 d-flex justify-content-center">
@@ -175,7 +174,7 @@ function Options({track, index}){
 
   return(
       <Menu 
-          menuButton={<MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
+          menuButton={<MenuButton tabIndex={0} title="Abrir menú opciones" className={"optionsButton"}><FaEllipsisVertical  className="options"/></MenuButton>} 
           menuClassName="optionsMenu"
           viewScroll="close"
           position="auto"

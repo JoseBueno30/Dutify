@@ -25,7 +25,7 @@ function Lists({}) {
   };
 
   return (
-    <section className="lists-section" aria-labelledBy="section-header">
+    <section className="lists-section" aria-labelledBy="section-header" aria-busy={loading}>
       {loading ? (
         <Spinner></Spinner>
       ) : (

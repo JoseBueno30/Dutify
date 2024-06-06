@@ -37,7 +37,7 @@ function SearchResults() {
   }, []);
 
   return (
-    <section className="busqueda-wrapper" aria-label={"Resultados de búsqueda para: " + query} aria-live="assertive">
+    <section className="busqueda-wrapper" aria-label={query ? "Resultados de búsqueda para: " + query : "Recomendaciones para ti"} aria-live="assertive">
       <div className="busqueda-container">
       {loading ? <Spinner></Spinner> : (<>
         {query ? <h4>Resultados para: <i>{query}</i></h4> : <h4>Recomendaciones para ti:</h4> }
