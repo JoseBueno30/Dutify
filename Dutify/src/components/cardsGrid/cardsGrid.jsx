@@ -23,7 +23,7 @@ function CardsGrid({type, data, clickFunction}) {
     } else if (type === "list" || type === "genrelists") {
       gridList = data.map((playlist) => (
         <div id={playlist.id} className="col col_content" key={playlist.id} onClick={clickFunction}>
-          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
+          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""}/>
         </div>
       ));
       if (type === "list") {
@@ -39,7 +39,7 @@ function CardsGrid({type, data, clickFunction}) {
   };
 
   return (
-    <div className="container-fluid pt-4" id="cards_container" role="grid">
+    <div className="container-fluid pt-4" id="cards_container">
         <div className="row row-cols-md-4 row-cols-sm-3 row-cols-2" id="cards_table">
             {gridElements()}
         </div>

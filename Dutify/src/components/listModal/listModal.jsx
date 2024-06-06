@@ -159,9 +159,9 @@ function ListModal({ playlist }) {
               ) : (
                 <>
                   <p className="mb-1" id="privacyLabel">Privacidad</p>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="listPrivate"
                       id="privateRadio"
@@ -169,13 +169,13 @@ function ListModal({ playlist }) {
                       onChange={listPublicChangeHandler}
                       aria-labelledby="privacyLabel privateRadio"
                     />
-                    <label class="form-check-label" for="privateRadio">
+                    <label className="form-check-label" htmlFor="privateRadio">
                       Privada
                     </label>
                   </div>
-                  <div class="form-check mb-4">
+                  <div className="form-check mb-4">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="listPublic"
                       id="publicRadio"
@@ -183,7 +183,7 @@ function ListModal({ playlist }) {
                       onChange={listPublicChangeHandler}
                       aria-labelledby="privacyLabel publicRadio"
                     />
-                    <label class="form-check-label" for="publicRadio">
+                    <label className="form-check-label" htmlFor="publicRadio">
                       Pública
                     </label>
                   </div>
