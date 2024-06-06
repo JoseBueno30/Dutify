@@ -38,7 +38,6 @@ export default function PlayListPlayer({
   };
 
   const crossButtonKeydownHandler = (event) => {
-    console.log("A");
     if (event.key === "Enter" || event.key === " ") {
       crossButtonClickHandler();
     }

@@ -21,6 +21,7 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [rerender, setRerender] = useState(false);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+  const [currentFocus, setCurrentFocus] = useState();
 
   useEffect(()=>{
       async function getUserPlayLists() {
@@ -55,6 +56,14 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
   useEffect(() =>{
   }, [rerender])
 
+  const handleSongFocus = (index, eventKey) => {
+    if(eventKey === "ArrowDown"){
+      setCurrentFocus(currentFocus === tracks.length- 1? 0 : currentFocus + 1)
+    }else if(eventKey === "ArrowUp"){
+      setCurrentFocus(currentFocus === 0 ? tracks.length - 1 : currentFocus - 1)
+    }
+  }
+
 
   const reloadPlaylist = async (addedPlaylistId, code) => {
     const searchParams = new URLSearchParams(location.search);
@@ -88,11 +97,26 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
     addTrackToFavorites(track).then(status => changeFeedback(status));
   }
 
-    
+  function keyDownHandler(event){
+    console.log(currentFocus)
+    if(event.key === "Enter" && refContainer.current === document.activeElement){
+      console.log(event.key)
+      console.log(refContainer.current)
+      console.log(document.activeElement)
+      if(currentFocus!== undefined){
+        if(currentFocus === tracks.length - 1){
+          setCurrentFocus(0);
+        }else{
+          setCurrentFocus(currentFocus + 1);
+        }
+      };
+      if(currentFocus===undefined)setCurrentFocus(0);
+    }
+  }    
 
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlaylist, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
-      <div className="list container-fluid " ref={refContainer}>
+      <div tabIndex={0} className="list container-fluid" onKeyDown={keyDownHandler} ref={refContainer} role="list">
         {tracks.length > 0 &&!isSmall? <SongInfo showAddButton={busqueda && playlistId} isSmall={isSmall}/> : (<></>)}
         
         {tracks.length > 0 ? (
@@ -108,6 +132,9 @@ export default function TrackList({tracks, setTracks, playlistId, loadQueue, set
             rerender={rerender}
             setRerender={setRerender}
             isSmall={isSmall}
+            focus={currentFocus === index}
+            handleSongFocus={handleSongFocus}
+            setCurrentFocus={setCurrentFocus}
           /> : <></>
           ))
         ) : ( <></> )}

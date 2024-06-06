@@ -43,18 +43,42 @@ export default function SongButton({
   setPlaying,
   enableAddButton = false,
   setRerender,
-  isSmall
+  isSmall,
+  focus,
+  handleSongFocus,
+  setCurrentFocus
 }) {
-  const [isSongPlaying, setSongPlaying] = useState(false);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const playlistId = useContext(TracksHandlersContext).playlistId;
+  
+  const [optionsFocus, setOptionsFocus] = useState(false);
+  const focusRef = useRef();
 
-  const playButtonKeydownHandler = (event) => {
+  useEffect(() => {
+    
+    if (focus && focusRef?.current) {
+      focusSong();
+    }
+  }, [focus]);
+
+  const focusSong = () => {
+    setOptionsFocus(false)
+    focusRef?.current.focus();
+    setCurrentFocus(index);
+  }
+
+  const songButtonKeydownHandler = (event) => {
+    console.log(event.key)
     if (
       event.key === "Enter" &&
-      document.activeElement === document.getElementById(track.id)
+      document.activeElement === focusRef.current
     ) {
       songClickHandler(event);
+    }else if(event.key === "ArrowRight"){
+      setOptionsFocus(true);
+    }else if(!optionsFocus &&
+      document.activeElement === focusRef.current){
+      handleSongFocus(index, event.key);
     }
   };
 
@@ -94,19 +118,21 @@ export default function SongButton({
     }
     queueEmitter.emit("trackStatusPlayerChanged");
     setRerender(Math.random);
+    setCurrentFocus(index);
   };
 
   return (
-    <>
       <div
         title={"Reproducir " + track.name}
-        tabIndex={0}
         id={track.id}
         className="songButton"
         onDoubleClick={songClickHandler}
-        onKeyDown={playButtonKeydownHandler}
+        onKeyDown={songButtonKeydownHandler}
+        role="listitem"
         aria-label="Canción"
         aria-description="Reproducir canción"
+        ref={focusRef}
+        tabIndex={-1}
       >
         <div className="playContainer" onClick={songClickHandler}>
           <div
@@ -173,16 +199,15 @@ export default function SongButton({
             )}
 
             <div className="col-md-1 col-2 d-flex justify-content-center">
-              <Options track={track} index={index} />
+              <Options track={track} index={index} optionsFocus={optionsFocus} focusSong={focusSong}/>
             </div>
           </div>
         </div>
       </div>
-    </>
   );
 }
 
-function Options({ track, index }) {
+function Options({ track, index, optionsFocus, focusSong }) {
   const removeTrackFromPlaylist = useContext(TracksHandlersContext).handleRemoveTrackFromPlaylist;
   const addTrackToPlaylist = useContext(TracksHandlersContext).handleAddTrackToPlaylist;
   const addTrackToFavorites = useContext(TracksHandlersContext).handleAddTrackToFavorites;
@@ -190,6 +215,17 @@ function Options({ track, index }) {
   const playlistId = useContext(TracksHandlersContext).playlistId;
   const owned = useContext(TracksHandlersContext).owned;
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+
+  const focusRef = useRef();
+
+  
+
+  useEffect(() => {
+    if (optionsFocus && focusRef?.current) {
+      console.log("BBBBB")
+      focusRef?.current.focus();
+    }
+  }, [optionsFocus]);
 
   const listClickHandler = (playlistId) => {
     addTrackToPlaylist(track, playlistId);
@@ -206,10 +242,25 @@ function Options({ track, index }) {
   const menuItemClassName = ({ hover }) =>
     hover ? "menuItemHover" : "menuItem";
 
+
+  const onKeyDown = (e) => {
+    e.preventDefault();
+    switch (e.key) {
+      case "ArrowLeft":
+        focusSong();
+        break;
+
+      default:
+        return;
+    }
+
+  };
+
   return (
-    <Menu
+      <Menu
       menuButton={
-        <MenuButton tabIndex={0} title="Opciones" className={"optionsButton"}>
+        <MenuButton tabIndex={-1}
+        ref={focusRef} title="Opciones" className={"optionsButton"} onKeyDown={onKeyDown}>
           <FaEllipsisVertical className="options" />
         </MenuButton>
       }
@@ -219,21 +270,21 @@ function Options({ track, index }) {
       transition
     >
       <MenuItem
-        tabIndex={"0"}
+        
         className={menuItemClassName}
         title={"Añadir a canciones favoritas"}
         onClick={() => favoritesClickHandler()}
       >
-        <button>Añadir a canciones favoritas</button>
+        Añadir a canciones favoritas
       </MenuItem>
       {playlistId && owned ? (
         <MenuItem
-          tabIndex={"0"}
+          
           className={menuItemClassName}
           title={"Eliminar de la playlist"}
           onClick={() => eliminarClickHandler()}
         >
-          <button>Eliminar de la playlist</button>
+          Eliminar de la playlist
         </MenuItem>
       ) : null}
       <MenuDivider />
@@ -242,12 +293,12 @@ function Options({ track, index }) {
         userPlaylists.map((playlist) => (
           <MenuItem
             className={menuItemClassName}
-            tabIndex={"0"}
+            
             title={"Añadir a " + playlist.name}
             onClick={() => listClickHandler(playlist.id)}
             key={playlist.id}
           >
-            <button>Añadir a {playlist.name}</button>
+            Añadir a {playlist.name}
           </MenuItem>
         ))
       ) : (
