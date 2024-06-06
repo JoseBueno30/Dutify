@@ -87,6 +87,7 @@ function SearchBar({ isOpen }) {
             <button
               onClick={search}
               className="btn btn-showMore mt-auto mb-2"
+              title="Mostrar más resultados"
             >
             Mostrar más
             </button> : <></>}
