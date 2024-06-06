@@ -178,7 +178,7 @@
   .btn-add {
     background-color: var(--color-theme);
     border-radius: 10px;
-    color: var(--color-text);
+    color: var(--color-background);
     min-width: 36px;
   }
 

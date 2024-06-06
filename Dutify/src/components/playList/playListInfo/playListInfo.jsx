@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./playListInfoStyle.css";
 import { FaGear, FaHeart, FaRegHeart } from "react-icons/fa6";
 import PlayListPlayer from "./playListPlayer/playListPlayer";
+import { useThemeContext } from "../../../context/ThemeContext";
 import {
   Menu,
   MenuItem,
@@ -22,6 +23,7 @@ export default function PlayListInfo({
   followPlaylistHandler,
   unfollowPlaylistHandler,
 }) {
+  const { contextTheme, setContextTheme } = useThemeContext();
   const timeMIN = Math.trunc(playList.duration_ms / 60000);
   const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
 
@@ -43,7 +45,7 @@ export default function PlayListInfo({
       ) : (
         <img
           className="playListImage"
-          src={"/assets/placeholder-img-light.png"}
+          src={"/assets/placeholder-img-" + contextTheme + ".png"}
           alt="Imagen de la playlist"
         ></img>
       )}
