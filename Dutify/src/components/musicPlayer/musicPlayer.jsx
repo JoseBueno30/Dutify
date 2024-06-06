@@ -171,6 +171,7 @@ function MusicPlayer() {
               <img
                 className="simulate-image"
                 src={track.album.images[2].url}
+                alt="Imagen de la canción actual"
               ></img>
             ) : (
               <div className="simulate-image"></div>
