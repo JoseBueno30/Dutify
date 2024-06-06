@@ -91,7 +91,7 @@
   right: 20px;
 }
 
-.slick-arrow:focus {
+.slick-arrow:focus-visible {
   outline: 2px solid var(--color-5);
   outline-offset: 2px;
 }
@@ -118,11 +118,7 @@
   bottom: -40px;
 }
 
-.slick-dots li button:focus,
-.slick-dots li button:hover {
+.slick-dots li button:focus-visible {
   outline: 2px solid var(--color-5);
 }
-
-
-
 
