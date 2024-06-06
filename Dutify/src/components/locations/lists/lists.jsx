@@ -30,13 +30,13 @@ function Lists({}) {
         <Spinner></Spinner>
       ) : (
         <>
-          <h5
+          <h2
             className="h5-recent-lists"
             id="section-header"
             aria-live="assertive"
           >
             Mis PlayLists:
-          </h5>
+          </h2>
           <CardsGrid
             type="list"
             data={lists}

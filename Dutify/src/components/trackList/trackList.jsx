@@ -122,13 +122,13 @@ export default function TrackList({
 
         {!playlistId && tracks.length == 0 ? (
           <div className="emptyList d-flex flex-column pb-3" tabIndex={0}>
-            <p>¡Oops, no hemos encontrado nada!</p>
-            <h4>
+            <h2 className="notFoundMessage">¡Oops, no hemos encontrado nada!</h2>
+            <h3>
               Explora nuevas canciones en{" "}
               <a className="inicio-link" href="/inicio">  
                  Inicio
               </a>
-            </h4>
+            </h3>
           </div>
         ) : (
           <></>

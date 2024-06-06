@@ -38,9 +38,6 @@ function TopBar() {
     
     const propiedades= {
       "id": "botonNav",
-      "title": "Menu de navegación",
-      "aria-expanded": navMenuOpen ? "true" : "false",
-      "aria-controls": "NavMobileMenu",
     }
 
     if (navMenuOpen) {
@@ -79,7 +76,7 @@ function TopBar() {
           <NavButton location={2} texto="Generos" id={contextTheme} ></NavButton>
           <NavButton location={3} texto="Listas" id={contextTheme} ></NavButton>
         </nav>
-        <aside className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between align-items-center" role="toolbar">
           <HelpButton visible={!searchBarOpen && !navMenuOpen} />
           <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
           <SearchBar isOpen={searchBarOpen} ></SearchBar>
@@ -99,11 +96,13 @@ function TopBar() {
               "mobile-btn list-group-item " +
               (searchBarOpen ? "position-absolute start-0 ms-1" : "")
             }
+            aria-expanded={navMenuOpen ? "true" : "false"}
+            aria-controls="NavMobileMenu"
             onClick={searchBarOpen ? toggleSearchBar : toggleNavMenu}
           >
             {navMenuIcon()}
           </button>
-        </aside>
+        </div>
 
         <nav
           className={(navMenuOpen ? "open " : "closed ") + "navMenuMobile"}
