@@ -1,9 +1,7 @@
 
-@media only screen and (max-width: 1199px){
-  .section-song-list{
-    height: 37.5vh;
-    width: 100%;
-    margin-bottom: 40px;
+@media only screen and (max-width: 1199.5px){
+  .list{
+    height: 80%;
 }
 }
 

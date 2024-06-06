@@ -5,6 +5,7 @@
     min-width: 300px;
     background-color: var(--color-backgroud);
 
+
     @media screen and (max-height: 890px) {
         height: calc(100vh - 44.5px - 90.75px);
         min-height: 464.5px;
