@@ -2,10 +2,14 @@
   width: 100%;
   background-color: var(--color-1);
   color: var(--color-text);
-  height: 12.5vh;
+  height: 10vh;
   /*min-height: 6rem;*/
   border-top: solid var(--color-background);
   z-index: 300;
+
+  @media screen and (max-height: 890px) {
+    height: 90.75px;
+  }
 }
 
 .music-container {
@@ -14,16 +18,18 @@
   display: flex;
   align-items: center;
   @media screen and (max-width: 900px) {
-    justify-content: start;
+    justify-content: space-evenly;
   }
 }
 
 .song-container {
   display: flex;
-  flex-basis: 20%;
+  flex-basis: 30%;
   padding-left: 2.5%;
+  padding-right: 2.5%;
   @media screen and (max-width: 900px) {
-    display: block;
+    gap: 10px;
+    flex-basis: 30%;
   }
 }
 
@@ -33,7 +39,6 @@
   aspect-ratio: 1/1;
   background-color: var(--color-theme);
   @media screen and (max-width: 900px) {
-    width: 30%;
     min-width: 55px;
   }
 }
@@ -41,16 +46,19 @@
 .artist-container {
   margin-left: 10px;
   align-content: center;
-  max-width: 120px;
+  max-width: 300px;
   text-overflow: ellipsis;
   overflow: hidden;
   @media screen and (max-width: 1200px) {
-    max-width: 60px;
+    max-width: 150px;
   }
   @media screen and (max-width: 900px) {
     margin-left: 0px;
     font-size: 90%;
-    max-width: 75px;
+    max-width: 150px;
+  }
+  @media screen and (min-width: 1920px){
+      max-width: 500px;
   }
 }
 
@@ -59,10 +67,13 @@
 }
 
 .progresion-bar {
-  width: 50%;
+  width: 100%;
   justify-content: center;
   position: relative;
-  flex-basis: 60%;
+  flex-basis: 40%;
+  @media screen and (max-width: 900px) {
+    flex-basis:60%;
+  }
 }
 
 .song-bar {
@@ -82,14 +93,19 @@
 }
 
 .sound-bar {
-  flex-basis: 20%;
+  width: 50%;
+  flex-basis: 30%;
   display: flex;
+  gap: 10px;
   justify-content: flex-end;
   align-items: center;
   padding-right: 2.5%;
-  padding-left: 2%;
+  padding-left: 15%;
   @media screen and (max-width: 900px) {
     display: none;
+  }
+  @media screen and (max-width: 1415px) {
+    padding-left: 13%;
   }
 }
 
@@ -116,7 +132,7 @@
 
 .timer-buttons-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
 }
 
 .volume-button {
@@ -132,6 +148,7 @@
 
 /* Estilo para el track (la barra) del input range */
 input[type="range"] {
+  position: inherit;
   -webkit-appearance: none; /* Quita el estilo predeterminado de WebKit */
   width: 100%; /* Ancho del input */
   height: 5px; /* Altura del input */

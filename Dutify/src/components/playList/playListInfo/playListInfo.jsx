@@ -13,25 +13,28 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
 export default function PlayListInfo({
-  playlist,
+  playList,
+  queueFunction,
+  isPlaying,
+  setPlaying,
   owned,
   followed,
   followPlaylistHandler,
   unfollowPlaylistHandler
 }) {
-  const timeMIN = Math.trunc(playlist.duration_ms / 60000);
-  const timeMS = Math.trunc((playlist.duration_ms / 1000) % 60);
+  const timeMIN = Math.trunc(playList.duration_ms / 60000);
+  const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
 
   return (
     <div className="playListInfoContainer d-flex flex-column container-fluid">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
-        <p title={playlist.name} className="playListName ">
-          {playlist.name}
+        <p tabIndex={0} title={playList.name} className="playListName " aria-description="nombre playlist">
+          {playList.name}
         </p>
       </div>
 
-      {playlist.images ? (
-        <img className="playListImage" src={playlist.images[0].url}></img>
+      {playList.images ? (
+        <img className="playListImage" src={playList.images[0].url}></img>
       ) : (
         <img
           className="playListImage"
@@ -40,7 +43,7 @@ export default function PlayListInfo({
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-        <p>{playlist.tracks.total + " canciones"}</p>
+        <p tabIndex={0} >{playList.tracks.total + " canciones"}</p>
 
         {owned ? (
           <Options />
@@ -59,8 +62,13 @@ export default function PlayListInfo({
           </>
         )}
       </div>
-
-      <PlayListPlayer className="playListPlayer" />
+      <PlayListPlayer
+        queueFunction={queueFunction}
+        playListId={playList.id}
+        isPlaying={isPlaying}
+        setPlaying={setPlaying}
+        className="playListPlayer"
+      />
     </div>
   );
 }

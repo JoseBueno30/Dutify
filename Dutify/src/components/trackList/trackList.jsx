@@ -16,8 +16,9 @@ import NavButton from "../topBar/navButton/navButton";
 
 export const TracksHandlersContext = createContext(null);
 
-export default function TrackList({tracks, setTracks, playlistId, owned, busqueda=false}) {
+export default function TrackList({tracks, setTracks, playlistId, loadQueue, setPlaying, owned, busqueda=false}) {
   const [userPlaylists, setUserPlaylists] = useState([]);
+  const [rerender, setRerender] = useState(false);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   useEffect(()=>{
@@ -31,6 +32,10 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
       }
       getUserPlayLists();
   }, []);
+
+  useEffect(() =>{
+    console.log("RENDER?")
+  }, [rerender])
 
   async function handleAddTrackToPlayList(track, playlist) {
     addTrackToPlayList(track, playlist).then(status => changeFeedback(status));
@@ -66,10 +71,15 @@ export default function TrackList({tracks, setTracks, playlistId, owned, busqued
         {tracks.length > 0 ? (
           tracks.map((track, index) => (
             track !== null ? <SongButton
-            key={index}
+            enPlaylist={!busqueda}
             track={track}
+            key={index}
             index={index}
+            loadQueue={loadQueue}
+            setPlaying={setPlaying}
             enableAddButton={busqueda}
+            rerender={rerender}
+            setRerender={setRerender}
           /> : <></>
           ))
         ) : ( <></> )}
