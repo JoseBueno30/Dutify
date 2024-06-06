@@ -18,6 +18,8 @@ const CarouselComponent = ({ lista, name, id }) => {
     cssEase: "linear",
     centerMode: true,
     centerPadding: '0',
+    swipeToSlide: true, // Permite que el carrusel avance varios elementos al deslizarlo según la fuerza que se emplee
+    touchThreshold: 20, // Sensibilidad al deslizar el carrusel
     beforeChange: (oldIndex, newIndex) => handleChange(newIndex),
   };
 
