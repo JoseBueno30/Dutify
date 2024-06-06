@@ -60,13 +60,13 @@ function Inicio({token}){
         <section className='inicio-section'>
             {loading ? 
             <Spinner></Spinner> : 
-            <><div className='div-recent-lists' id="Listas recientes">
-                <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="Listas recientes">Listas recientes:</h5>
+            <><div className='div-recent-lists' id="listas-recientes">
+                <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="listas-recientes">Listas recientes:</h5>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            <CarouselComponent id="Listas populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
-            <CarouselComponent id="Tus artistas favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CarouselComponent>
-            <CarouselComponent id="Recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CarouselComponent>
+            <CarouselComponent id="listas-populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
+            <CarouselComponent id="tus-artistas-favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CarouselComponent>
+            <CarouselComponent id="recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CarouselComponent>
             </>
             }
         </section>
