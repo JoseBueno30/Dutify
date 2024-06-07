@@ -56,7 +56,7 @@ function Inicio({token}){
     };
     
     return (
-        <section className='inicio-section'>
+        <section className='inicio-section' aria-busy={loading}>
             {loading ? 
             <Spinner></Spinner> : 
             <><div className='div-recent-lists'>

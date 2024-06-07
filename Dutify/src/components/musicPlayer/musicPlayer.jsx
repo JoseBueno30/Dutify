@@ -171,15 +171,16 @@ function MusicPlayer() {
               <img
                 className="simulate-image"
                 src={track.album.images[2].url}
+                alt="Imagen de la canción actual"
               ></img>
             ) : (
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
             <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
-              <span className="name" tabIndex={0}>{track ? track.name : "..."}</span>
+              <span className="name" aria-description="Canción actual: ">{track ? track.name : "..."}</span>
               <br />
-                <span className="artist-text">
+                <span className="artist-text" aria-description="Artista: ">
                   {track ? track.artists[0].name : "..."}
                 </span>
               
@@ -206,7 +207,7 @@ function MusicPlayer() {
               </span>
               {/* Bottones de reproducción */}
               <div className="song-buttons">
-              <button>
+                <button>
                   <IoPlaySkipBackCircleOutline
                     size={35}
                     className="side-button"
@@ -215,11 +216,16 @@ function MusicPlayer() {
                   />
                 </button>
 
-                <button onClick={switchPlay} onKeyDown={playButtonKeydownHandler} className="play-button">
+                <button
+                  onClick={switchPlay}
+                  onKeyDown={playButtonKeydownHandler}
+                  className="play-button"
+                  title={isTrackPlaying() ? "Pausar canción" : "Reproducir canción"}
+                >
                   {!isTrackPlaying() ? (
-                    <IoPlayCircleOutline size={35} title="Reproducir canción"/>
+                    <IoPlayCircleOutline size={35}/>
                   ) : (
-                    <IoPauseCircleOutline size={35} title="Pausar canción"/>
+                    <IoPauseCircleOutline size={35}/>
                   )}
                 </button>
                 <button>
@@ -238,7 +244,12 @@ function MusicPlayer() {
 
           {/* Barra de Soido */}
           <div className="sound-bar">
-            <button className="volume-button" onClick={switchVolume} id="volumeButton" title="Cambiar volúmen">
+            <button
+              className="volume-button"
+              onClick={switchVolume}
+              id="volumeButton"
+              title={volumeValue == 0 ? "Activar volúmen" : "Silenciar volúmen"}
+            >
               {volumeValue == 0 ? (
                 <FaVolumeMute size={25} />
               ) : (

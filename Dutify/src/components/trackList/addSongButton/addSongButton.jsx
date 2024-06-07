@@ -25,7 +25,7 @@ export default function AddSongButton({name, artistName, albumName, image, time_
                     <div>
                         <IoMdAddCircle className="addSongIcon"/>
                     </div>
-                    <div>
+                    <div aria-hidden="true">
                         Añadir nueva canción
                     </div>
                     

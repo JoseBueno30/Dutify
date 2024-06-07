@@ -4,6 +4,9 @@
     height: 85vh;
     overflow-y: scroll;
     padding-bottom: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     @media screen and (max-height: 750px) {
         height: calc(100vh - 44.5px - 90.75px);
     }
