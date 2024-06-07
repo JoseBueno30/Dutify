@@ -132,7 +132,7 @@ export default function SongButton({
         onKeyDown={songButtonKeydownHandler}
         role="listitem"
         aria-label="Canción"
-        aria-description="Reproducir canción"
+        aria-description={"Reproducir canción: " + track.name}
         ref={focusRef}
         tabIndex={-1}
       >
@@ -182,15 +182,18 @@ export default function SongButton({
               {track.album.name}
             </div>
             <div
-              title={"Duración"}
+              title={"Duración: " + timeMIN + " minutos y " + seg + " segundos"}
               className={"time col-3 col-md-2 d-flex justify-content-center " + (isSmall?"d-none":"")}
               aria-description="duración"
             >
-              {timeMIN}:{timeMS}
+              <div aria-hidden="true">
+                {timeMIN}:{timeMS}
+              </div>
             </div>
 
             {enableAddButton && playlistId ? (
               <button
+                title="Añadir canción a lista"
                 className={"col-1 d-flex justify-content-center " + (isSmall?"btnAddSmall":"btnAddBig")}
                 onClick={listClickHandler}
               >

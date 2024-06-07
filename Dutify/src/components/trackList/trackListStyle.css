@@ -15,6 +15,10 @@
     
 }
 
+h2.notFoundMessage{
+  font-weight: 400;
+}
+
 .emptyList{
   color:var(--color-text);
   justify-content: center;

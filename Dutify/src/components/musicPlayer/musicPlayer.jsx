@@ -170,21 +170,19 @@ function MusicPlayer() {
               <img
                 className="simulate-image"
                 src={track.album.images[2].url}
+                alt="Imagen de la canción actual"
               ></img>
             ) : (
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
             <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
-              <span tabIndex={0}>{track ? track.name : "..."}</span>
+              <span className="name" aria-description="Canción actual: ">{track ? track.name : "..."}</span>
               <br />
-              {!isSmallScreen ? (
-                <span className="artist-text">
+                <span className="artist-text" aria-description="Artista: ">
                   {track ? track.artists[0].name : "..."}
                 </span>
-              ) : (
-                ""
-              )}
+              
             </div>
           </div>
           {/* Barra de reproducción */}
@@ -199,16 +197,19 @@ function MusicPlayer() {
             ></input>
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
-              <span>
-                {track && currentTime
-                  ? currentTime > 9
-                    ? "00:" + currentTime.substring(0, 2)
-                    : "00:0" + currentTime.charAt(0)
-                  : "mm:ss"}
+
+              <span aria-description={"Marca de tiempo actual: " + (track ? currentTime.toString().charAt(0) + " segundos" : "indefinido")} tabIndex={0}>
+                <div aria-hidden="true">
+                  {track && currentTime
+                    ? currentTime > 9
+                      ? "00:" + currentTime.substring(0, 2)
+                      : "00:0" + currentTime.charAt(0)
+                    : "mm:ss"}
+                </div>
               </span>
               {/* Bottones de reproducción */}
               <div className="song-buttons">
-              <button>
+                <button>
                   <IoPlaySkipBackCircleOutline
                     size={35}
                     className="side-button"
@@ -217,11 +218,16 @@ function MusicPlayer() {
                   />
                 </button>
 
-                <button onClick={switchPlay} onKeyDown={playButtonKeydownHandler} className="play-button">
+                <button
+                  onClick={switchPlay}
+                  onKeyDown={playButtonKeydownHandler}
+                  className="play-button"
+                  title={isTrackPlaying() ? "Pausar canción" : "Reproducir canción"}
+                >
                   {!isTrackPlaying() ? (
-                    <IoPlayCircleOutline size={35} title="Reproducir canción"/>
+                    <IoPlayCircleOutline size={35}/>
                   ) : (
-                    <IoPauseCircleOutline size={35} title="Pausar canción"/>
+                    <IoPauseCircleOutline size={35}/>
                   )}
                 </button>
                 <button>
@@ -234,13 +240,22 @@ function MusicPlayer() {
                 </button>
               </div>
               {/* Temporizador */}
-              <span>{track ? "00:30" : "mm:ss"}</span>
+              <span tabIndex={0} aria-description={"Marca de tiempo total: " + (track ? "30 segundos" : "indefinido")}>
+               <div aria-hidden="true">
+                {track ? "00:30" : "mm:ss"}
+               </div>
+              </span>
             </div>
           </div>
 
           {/* Barra de Soido */}
           <div className="sound-bar">
-            <button className="volume-button" onClick={switchVolume} id="volumeButton" title="Cambiar volúmen">
+            <button
+              className="volume-button"
+              onClick={switchVolume}
+              id="volumeButton"
+              title={volumeValue == 0 ? "Activar volúmen" : "Silenciar volúmen"}
+            >
               {volumeValue == 0 ? (
                 <FaVolumeMute size={25} />
               ) : (

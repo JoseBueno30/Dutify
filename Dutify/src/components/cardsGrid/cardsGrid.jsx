@@ -23,7 +23,7 @@ function CardsGrid({type, data, clickFunction}) {
     } else if (type === "list" || type === "genrelists") {
       gridList = data.map((playlist) => (
         <div id={playlist.id} className="col col_content" key={playlist.id} onClick={clickFunction}>
-          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""} />
+          <ListCard listName={playlist.name} background={playlist.imageUrl ? playlist.imageUrl : ""}/>
         </div>
       ));
       if (type === "list") {

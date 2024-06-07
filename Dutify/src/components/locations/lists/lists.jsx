@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import ListModal from "../../listModal/listModal";
 import { getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
-import './listsStyle.css';
+import "./listsStyle.css";
 import Spinner from "../../spinner/spinner";
 
 function Lists({}) {
@@ -11,7 +11,7 @@ function Lists({}) {
 
   const cargarPlaylists = async () => {
     setLoading(true);
-    setLists(await getUserPlaylists().finally(() => setLoading(false)) );
+    setLists(await getUserPlaylists().finally(() => setLoading(false)));
   };
 
   useEffect(() => {
@@ -25,13 +25,26 @@ function Lists({}) {
   };
 
   return (
-    <section className="lists-section" aria-label="Mis listas de reproduccion">
-      {loading ? 
-      <Spinner></Spinner> : 
-      (<>
-      <CardsGrid type="list" data={lists} clickFunction={listButtonClickHandler}></CardsGrid>
-      <ListModal/>
-      </>)} 
+    <section className="lists-section" aria-labelledby="section-header" aria-busy={loading}>
+      {loading ? (
+        <Spinner></Spinner>
+      ) : (
+        <>
+          <h2
+            className="h5-recent-lists"
+            id="section-header"
+            aria-live="assertive"
+          >
+            Mis PlayLists:
+          </h2>
+          <CardsGrid
+            type="list"
+            data={lists}
+            clickFunction={listButtonClickHandler}
+          ></CardsGrid>
+          <ListModal />
+        </>
+      )}
     </section>
   );
 }

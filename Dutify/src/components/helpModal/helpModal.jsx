@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./helpModalStyle.css";
 import { IoClose } from "react-icons/io5";
 
+
 function HelpModal() {
+  useEffect(() => {
+    const modal = document.getElementById("helpModal");
+    modal.addEventListener("hidden.bs.modal", hideHandler);
+    modal.setAttribute("aria-hidden", "false");
+  
+    return () => {
+      modal.removeEventListener("hidden.bs.modal", hideHandler);
+    };
+  }, []);
+  
+  function hideHandler() {
+    document.getElementById("helpIcon").setAttribute("aria-expanded", "false");
+  }
+
   return (
     <div
       className="modal fade"
@@ -10,12 +25,13 @@ function HelpModal() {
       tabIndex="-1"
       aria-labelledby="helpModalLabel"
       aria-description="Dialogo de ayuda de la aplicación"
-      aria-hidden="true"
       role="dialog"
+      aria-modal="true"
+      aria-hidden="true" 
     >
       <div className="modal-dialog">
         <div className="modal-content">
-          <div className="modal-header">
+          <header className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
               ¿Qué es Dutify?
             </h1>
@@ -23,12 +39,13 @@ function HelpModal() {
               type="button"
               className="close-button"
               data-bs-dismiss="modal"
-              aria-label="Close"
+              aria-label="Cerrar dialogo"
             >
               <IoClose size={35}/>
             </button>
-          </div>
-          <article className="modal-body" aria-label="Descripción de Dutify">
+          </header>
+
+          <div className="modal-body" aria-description="Descripción de Dutify" tabIndex={0} role="article">
             <p>
               Dutify es una aplicación web que te permite buscar y reproducir
               tus canciones favoritas de Spotify. Las principales
@@ -41,7 +58,7 @@ function HelpModal() {
               <li>Añadir o eliminar canciones de tus listas de reproducción.</li>
               <li>Reproducir listas filtradas por género o temas.</li>
             </ul>
-          </article >
+          </div>
         </div>
       </div>
     </div>
