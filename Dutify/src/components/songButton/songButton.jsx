@@ -25,6 +25,7 @@ import { FaPlus } from "react-icons/fa";
 import { TracksHandlersContext } from "../trackList/trackList";
 import { FeedbackHandlerContext } from "../../App";
 import {
+  addTrackToQueue,
   getTrackObject,
   isTrackInPlayer,
   isTrackPlaying,
@@ -86,6 +87,7 @@ export default function SongButton({
     addTrackToPlayList(track, playlistId).then((status) =>
       changeFeedback(status.message)
     );
+    addTrackToQueue(track);
   };
 
   const timeMIN = Math.trunc(track.duration_ms / 60000);

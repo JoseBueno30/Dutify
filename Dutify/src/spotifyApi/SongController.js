@@ -15,6 +15,7 @@ let i =
   window.sessionStorage.getItem("songIndex") === null
     ? 0
     : parseInt(window.sessionStorage.getItem("songIndex"));
+    console.log(i);
 
 let trackVolume =
   window.sessionStorage.getItem("volume") === null
@@ -139,6 +140,10 @@ const __saveAuxQueue = () => {
 const playQueue = () => {
   //console.log("index: " + i + " en random: " + isRandom);
   let url;
+  if(i === queue.length){ 
+    i = 0;
+    __shuffle(randomQueue);
+  }
   if (!isRandom) url = queue[i];
   else url = randomQueue[i];
   setTrack(url);
@@ -146,14 +151,12 @@ const playQueue = () => {
 
 const nextQueueSong = () => {
   if (queue !== null) {
-    console.log("Cola: " + queue.length + " Index: " + i);
-    const length = isRandom ? randomQueue.length : queue.length;
-    if (i + 1 < queue.length) {
+    if (i < queue.length - 1) {
       i += 1;
     } else {
       if (!inLoop) {
+         if (i !== queue.length) i += 1;
         pauseTrack();
-        i = length;
         trackAudio.currentTime = getDuration();
         queueEmitter.emit("queueEnded");
       }else if(inLoop){
@@ -193,12 +196,12 @@ const __checkPreviewURL = () => {
 const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
   const length = isRandom ? randomQueue.length : queue.length;
-  console.log(length);
+ // console.log(length);
   if (queue !== null && i < length) playQueue();
 };
 
 const addTrackToQueue = (track) => {
-  if (queue) {
+  if (queue && !queue.includes(track)) {
     console.log(queue);
     queue = [...queue, track];
     window.sessionStorage.setItem("queue", JSON.stringify(queue));
