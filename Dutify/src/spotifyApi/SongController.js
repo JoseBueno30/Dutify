@@ -145,7 +145,9 @@ const playQueue = () => {
 
 const nextQueueSong = () => {
   if (queue !== null) {
-    if (i + 1 < queue.length) {
+    //console.log("Cola: " + queue.length + " Index: " + i);
+    const length = isRandom ? randomQueue.length : queue.length;
+    if (i + 1 < length) {
       i += 1;
     } else {
       i = 0;
@@ -237,6 +239,7 @@ const setRandomQueue = () => {
   window.sessionStorage.setItem("random", isRandom);
   if (isRandom) {
     __shuffle(randomQueue);
+    __removeCurrentTrackFromRandomQueue();
     i = -1;
     window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
   } else {
@@ -248,6 +251,11 @@ const setRandomQueue = () => {
 const __shuffle = (array) => {
   array.sort(() => Math.random() - 0.5);
 };
+
+const __removeCurrentTrackFromRandomQueue = () =>{
+  const i = randomQueue.indexOf(trackObject);
+  randomQueue.splice(i, 1);
+}
 
 const setLoopTrack = () => {
   inLoop = !inLoop;
@@ -266,7 +274,7 @@ const removeTrackFromQueue = (track) => {
   if (queue) {
     let index = queue.indexOf(track);
     queue.splice(index, 1);
-    console.log(queue);
+    //console.log(queue);
     window.sessionStorage.setItem("queue", JSON.stringify(queue));
     if (randomQueue) {
       index = randomQueue.indexOf(track);
