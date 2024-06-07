@@ -169,11 +169,7 @@ const previousQueueSong = () => {
       i -= 1;
     } else {
       i = 0;
-      pauseTrack();
-      queue = null;
-      window.sessionStorage.setItem("playlistPlaying", queue);
-      window.sessionStorage.setItem("queue", queue);
-      queueEmitter.emit("queueEnded");
+      playQueue();
     }
   }
   _saveAndPlay();
