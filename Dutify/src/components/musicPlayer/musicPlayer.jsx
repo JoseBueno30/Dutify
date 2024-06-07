@@ -199,7 +199,7 @@ function MusicPlayer() {
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
 
-              <span aria-description={"Marca de tiempo actual: " + (track ? currentTime.toString().charAt(0) + " segundos" : "indefinido")} tabIndex={0}>
+              <span aria-description={"Marca de tiempo actual: " + (track && currentTime ? currentTime.toString().charAt(0) + " segundos" : "indefinido")} tabIndex={0}>
                 <div aria-hidden="true">
                   {track && currentTime
                     ? currentTime > 9
