@@ -76,7 +76,7 @@ function TopBar() {
           <NavButton location={2} texto="Generos" id={contextTheme} ></NavButton>
           <NavButton location={3} texto="Listas" id={contextTheme} ></NavButton>
         </nav>
-        <div className="d-flex justify-content-between align-items-center" role="toolbar">
+        <div className="d-flex justify-content-between align-items-center">
           <HelpButton visible={!searchBarOpen && !navMenuOpen} />
           <ThemeSwitch visible={!searchBarOpen && !navMenuOpen}></ThemeSwitch>
           <SearchBar isOpen={searchBarOpen} ></SearchBar>
