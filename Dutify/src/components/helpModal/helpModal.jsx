@@ -31,7 +31,7 @@ function HelpModal() {
     >
       <div className="modal-dialog">
         <div className="modal-content">
-          <div className="modal-header">
+          <header className="modal-header">
             <h1 className="modal-title fs-5" id="helpModalLabel">
               ¿Qué es Dutify?
             </h1>
@@ -43,8 +43,9 @@ function HelpModal() {
             >
               <IoClose size={35}/>
             </button>
-          </div>
-          <article className="modal-body" aria-label="Descripción de Dutify" >
+          </header>
+
+          <div className="modal-body" aria-description="Descripción de Dutify" tabIndex={0} role="article">
             <p>
               Dutify es una aplicación web que te permite buscar y reproducir
               tus canciones favoritas de Spotify. Las principales
@@ -57,7 +58,7 @@ function HelpModal() {
               <li>Añadir o eliminar canciones de tus listas de reproducción.</li>
               <li>Reproducir listas filtradas por género o temas.</li>
             </ul>
-          </article>
+          </div>
         </div>
       </div>
     </div>
