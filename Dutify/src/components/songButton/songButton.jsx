@@ -81,7 +81,10 @@ export default function SongButton({
   const timeMS = seg < 10 ? "0" + seg : seg;
 
   const songClickHandler = (e) => {
-    if (!hasPreview) return;
+    if (!hasPreview) {
+      changeFeedback("La canción no esta disponible")
+      return
+    };
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     setSongPlaying(!isSongPlaying);
@@ -118,11 +121,11 @@ export default function SongButton({
       >
         <div className="playContainer" onClick={songClickHandler} >
           <div
-            className={
+            className={ hasPreview ? (
               isTrackInPlayer(track)
                 ? "songPlayButton playingSong"
                 : "songPlayButton "
-            }
+            ) : "songPlayButton disabled-song-button"}
             style={
               track.album.images[2] !== undefined
                 ? { backgroundImage: "url(" + track.album.images[2].url + ")" }

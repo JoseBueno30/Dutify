@@ -183,7 +183,7 @@
   }
 
 .noPrev {
-  color: var(--color-text);
+  color: white;
   scale: 2;
 }
 
