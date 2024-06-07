@@ -55,6 +55,7 @@ const setPausedTrack = (track, time) => {
 };
 
 const __addEvents = () => {
+  const length = isRandom ? randomQueue.length : queue.length;
   trackAudio.addEventListener("play", () => {
     window.sessionStorage.setItem("trackStatus", true);
     //console.log("Se ha comenzado/reanudado la reproducción");
@@ -65,7 +66,7 @@ const __addEvents = () => {
     queueEmitter.emit("trackStatusFalse");
   });
   trackAudio.addEventListener("ended", () => {
-    nextQueueSong();
+    if(i < length - 1)nextQueueSong();
     //console.log("Se ha terminado la reproducción");
   });
   trackAudio.addEventListener("timeupdate", () => {
@@ -145,18 +146,18 @@ const playQueue = () => {
 
 const nextQueueSong = () => {
   if (queue !== null) {
-    //console.log("Cola: " + queue.length + " Index: " + i);
+    console.log("Cola: " + queue.length + " Index: " + i);
     const length = isRandom ? randomQueue.length : queue.length;
-    if (i + 1 < length) {
+    if (i + 1 < queue.length) {
       i += 1;
     } else {
-      i = 0;
       if (!inLoop) {
-        queue = null;
-        trackAudio.currentTime = 30;
-        window.sessionStorage.setItem("playlistPlaying", queue);
-        window.sessionStorage.setItem("queue", queue);
+        pauseTrack();
+        i = length;
+        trackAudio.currentTime = getDuration();
         queueEmitter.emit("queueEnded");
+      }else if(inLoop){
+        i = 0;        
       } else if (isRandom) {
         __shuffle(randomQueue);
       }
@@ -191,7 +192,9 @@ const __checkPreviewURL = () => {
 
 const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
-  if (queue !== null) playQueue();
+  const length = isRandom ? randomQueue.length : queue.length;
+  console.log(length);
+  if (queue !== null && i < length) playQueue();
 };
 
 const addTrackToQueue = (track) => {
@@ -239,8 +242,8 @@ const setRandomQueue = () => {
   window.sessionStorage.setItem("random", isRandom);
   if (isRandom) {
     __shuffle(randomQueue);
-    __removeCurrentTrackFromRandomQueue();
-    i = -1;
+    __moveCurrentTrackInRandomQueue();
+    i = 0;
     window.sessionStorage.setItem("randomQueue", JSON.stringify(randomQueue));
   } else {
     const queueAux = JSON.parse(window.sessionStorage.getItem("queueAux"));
@@ -252,9 +255,10 @@ const __shuffle = (array) => {
   array.sort(() => Math.random() - 0.5);
 };
 
-const __removeCurrentTrackFromRandomQueue = () =>{
+const __moveCurrentTrackInRandomQueue = () =>{
   const i = randomQueue.indexOf(trackObject);
   randomQueue.splice(i, 1);
+  randomQueue.unshift(trackObject)
 }
 
 const setLoopTrack = () => {
