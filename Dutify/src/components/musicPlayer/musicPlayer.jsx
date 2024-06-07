@@ -177,19 +177,13 @@ function MusicPlayer() {
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
-            <div
-              className="artist-container"
-              aria-label="Nombre y autor de la cancion actual"
-            >
-              <span tabIndex={0} aria-description="Canción actual: ">{track ? track.name : "..."}</span>
+            <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
+              <span className="name" aria-description="Canción actual: ">{track ? track.name : "..."}</span>
               <br />
-              {!isSmallScreen ? (
-                <span className="artist-text" tabIndex={0} aria-description="Artista: ">
+                <span className="artist-text" aria-description="Artista: ">
                   {track ? track.artists[0].name : "..."}
                 </span>
-              ) : (
-                ""
-              )}
+              
             </div>
           </div>
           {/* Barra de reproducción */}
