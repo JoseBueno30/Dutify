@@ -13,6 +13,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { useThemeContext } from "../../context/ThemeContext";
 import "./songButtonStyle.css";
+import { GoAlertFill } from "react-icons/go";
 import {
   addTrackToFavorites,
   addTrackToPlayList,
@@ -55,6 +56,7 @@ export default function SongButton({
   const [optionsFocus, setOptionsFocus] = useState(false);
   const songButtonRef = useRef();
   const addButtonRef = useRef();
+  const hasPreview = track.preview_url !== null;
 
 
   useEffect(() => {
@@ -105,6 +107,10 @@ export default function SongButton({
   const timeMS = seg < 10 ? "0" + seg : seg;
 
   const songClickHandler = (e) => {
+    if (!hasPreview) {
+      changeFeedback("La canción no esta disponible")
+      return
+    };
     const id = e.currentTarget.id;
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
 
@@ -137,33 +143,38 @@ export default function SongButton({
       <div
         title={"Reproducir " + track.name}
         id={track.id}
-        className="songButton"
+        className={!hasPreview ? "songButton disabled-song-button" :"songButton"}
         onDoubleClick={songClickHandler}
         onKeyDown={songButtonKeydownHandler}
         role="option"
         aria-label="Canción"
-        aria-description={"Reproducir canción: " + track.name}
+        aria-description={hasPreview ? "Reproducir canción: " + track.name : "La cancion" + track.name + "no se puede reproducir"}
         ref={songButtonRef}
         tabIndex={-1}
       >
-        <div className="playContainer" onClick={songClickHandler}>
+        <div className="playContainer" onClick={songClickHandler} >
           <div
-            className={
+            className={ hasPreview ? (
               isTrackInPlayer(track)
                 ? "songPlayButton playingSong"
                 : "songPlayButton "
-            }
+            ) : "songPlayButton disabled-song-button"}
             style={
               track.album.images[2] !== undefined
                 ? { backgroundImage: "url(" + track.album.images[2].url + ")" }
                 : {}
             }
           >
-            {isTrackInPlayer(track) && isTrackPlaying() ? (
-              <FaPause className="playButton" />
+            {hasPreview ? (
+              isTrackInPlayer(track) && isTrackPlaying() ? (
+                <FaPause className="playButton" />
+              ) : (
+                <FaPlay className="playButton" />
+              )
             ) : (
-              <FaPlay className="playButton" />
+              <GoAlertFill className="noPrev" />
             )}
+
           </div>
         </div>
         <div className="container-fluid">
