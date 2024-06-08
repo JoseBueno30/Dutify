@@ -61,7 +61,7 @@ function Inicio({token}){
             {loading ? 
             <Spinner></Spinner> : 
             <><div className='div-recent-lists' id="listas-recientes">
-                <h5 className='h5-recent-lists' tabIndex="0" aria-labelledby="listas-recientes">Listas recientes:</h5>
+                <h2 className='h5-recent-lists' tabIndex="0" aria-labelledby="listas-recientes">Listas recientes:</h2>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
             <CarouselComponent id="listas-populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>

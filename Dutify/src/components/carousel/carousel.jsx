@@ -48,7 +48,7 @@ const CarouselComponent = ({ lista, name, id }) => {
   return (
     <section className='carrusel-container' aria-label={name} id={id}>
       <div className='carrusel-box'>
-        <h5 className='carrusel-h5' tabIndex="0" aria-labelledby={id}>{name}</h5>
+        <h2 className='carrusel-h5' tabIndex="0" aria-labelledby={id}>{name}</h2>
         <div className="carousel-container">
           <Slider {...settings}>
             {lista.map((playlist, index) => (
