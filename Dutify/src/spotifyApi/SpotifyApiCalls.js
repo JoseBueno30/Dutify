@@ -177,19 +177,22 @@ const mapPlaylistObject = (data) => {
 };
 
 const addTrackToPlayList = async (track, playlistId) => {
-  let status;
+  let status = {message:"",code:0};
   try{
     const playlist = await getPlayList(playlistId)
     const playlistTracks = await getAllTracksFromPlaylist(playlist);
     if(playlistTracks.some(playlistTrack => playlistTrack.uri === track.uri)){
-      status = "Esta canción ya está en "+ playlist.name;
+      status.code=1;
+      status.message = "Esta canción ya está en "+ playlist.name;
     }else{
       spotifyApiObject.addTracksToPlaylist(playlist.id, [track.uri]);
-      status = "Canción añadida a " + playlist.name;
+      status.code=2;
+      status.message = "Canción añadida a " + playlist.name;
     }
   }catch(error){
     console.error("ERROR: ", error);
-    status = "Error añadiendo canción";
+    status.code=0;
+    status.message = "Error añadiendo canción";
   }  
   return status;
 }

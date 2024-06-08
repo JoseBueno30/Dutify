@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.songButton:hover, .songButton:active{
+.songButton:hover, .songButton:active, .songButton:focus-within{
   background-color: var(--color-2); 
   transition-duration: 0.4s;
 }
@@ -56,16 +56,17 @@
   }
 
   .playButton{
+    color: white;
     transition: .4s ease;
     opacity: 0;
   }
   
-  .songButton:hover .songPlayButton,.songButton:active .songPlayButton{
+  .songButton:hover .songPlayButton,.songButton:active .songPlayButton, .songButton:focus-within .songPlayButton{
     transition: .4s ease;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
   }
 
-  .songButton:hover .playButton,.songButton:active .playButton{
+  .songButton:hover .playButton,.songButton:active .playButton,  .songButton:focus-within .playButton{
     transition: .4s ease;
     opacity: 1;
   }
@@ -92,18 +93,32 @@
     text-overflow:ellipsis;
     overflow:hidden;
     cursor:default;
-    @media only screen and (max-width: 768px){
-      width: 80%;
-    }
+
+  }
+
+  .nameSmallContainer{
+    width: 100%;
+    font-size: 1rem;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    cursor:default;
   }
   
   .author{
     width: 30%;
     font-size: 0.75rem;
+    white-space:nowrap;
+    text-overflow:ellipsis;
     cursor:default;
-    @media only screen and (max-width: 768px){
-      width: 70%;
-    }
+  }
+
+  .authorSmallContainer{
+    width: 90%;
+    font-size: 0.75rem;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    cursor:default;
   }
 
   
@@ -174,10 +189,27 @@
 	  border: none;
   }
 
-  .btn-add {
-    background-color: var(--color-theme);
+  .btnAddBig {
+    background-color: var(--color-background);
     border-radius: 10px;
     color: var(--color-text);
-    min-width: 36px;
+    width: 70px;
   }
 
+  .btnAddSmall {
+    background-color: var(--color-background);
+    border-radius: 50%;
+    color: var(--color-text);
+    width: 30px;
+    padding: 5px;
+  }
+
+.noPrev {
+  color: white;
+  scale: 2;
+}
+
+.disabled-song-button {
+  transition: .4s ease;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+}

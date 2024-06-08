@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./playListInfoStyle.css";
 import { FaGear, FaHeart, FaRegHeart } from "react-icons/fa6";
 import PlayListPlayer from "./playListPlayer/playListPlayer";
+import { useThemeContext } from "../../../context/ThemeContext";
 import {
   Menu,
   MenuItem,
@@ -20,30 +21,37 @@ export default function PlayListInfo({
   owned,
   followed,
   followPlaylistHandler,
-  unfollowPlaylistHandler
+  unfollowPlaylistHandler,
 }) {
+  const { contextTheme, setContextTheme } = useThemeContext();
   const timeMIN = Math.trunc(playList.duration_ms / 60000);
   const timeMS = Math.trunc((playList.duration_ms / 1000) % 60);
 
   return (
-    <div className="playListInfoContainer d-flex flex-column container-fluid">
+    <div className="playListInfoContainer d-flex flex-column container-fluid" aria-description="Información de la playlist">
       <div className="d-flex justify-content-xl-evenly  justify-content-center align-items-center ">
-        <p tabIndex={0} title={playList.name} className="playListName " aria-description="nombre playlist">
+        <p
+          tabIndex={0}
+          title={playList.name}
+          className="playListName "
+          aria-description="nombre playlist"
+        >
           {playList.name}
         </p>
       </div>
 
       {playList.images ? (
-        <img className="playListImage" src={playList.images[0].url}></img>
+        <img className="playListImage" src={playList.images[0].url} alt="Imagen de la playlist"></img>
       ) : (
         <img
           className="playListImage"
-          src={"/assets/placeholder-img-light.png"}
+          src={"/assets/placeholder-img-" + contextTheme + ".png"}
+          alt="Imagen de la playlist"
         ></img>
       )}
 
       <div className="playListInfo d-flex align-items-stretch justify-content-evenly">
-        <p tabIndex={0} >{playList.tracks.total + " canciones"}</p>
+        <p tabIndex={0}>{playList.tracks.total + " canciones"}</p>
 
         {owned ? (
           <Options />
@@ -51,11 +59,21 @@ export default function PlayListInfo({
           <>
             {/* ponner los onClick al boton no a los iconos */}
             {followed ? (
-              <button className="playListFollowButton" onClick={() => unfollowPlaylistHandler()}>
-                <FaHeart className="followed"/>
+              <button
+                className="playListFollowButton"
+                title="Dejar de seguir playlist"
+                aria-pressed = "true"
+                onClick={() => unfollowPlaylistHandler()}
+              >
+                <FaHeart className="followed" />
               </button>
             ) : (
-              <button className="playListFollowButton" onClick={() => followPlaylistHandler()}>
+              <button
+                className="playListFollowButton"
+                title="Seguir playlist"
+                aria-pressed = "false"
+                onClick={() => followPlaylistHandler()}
+              >
                 <FaRegHeart />
               </button>
             )}
@@ -80,7 +98,7 @@ function Options({}) {
   return (
     <Menu
       menuButton={
-        <MenuButton tabIndex={0} className={"playListOptionsButton"}>
+        <MenuButton tabIndex={0} className={"playListOptionsButton"} title="Abrir menú configuración">
           <FaGear className="playListOptions" />
         </MenuButton>
       }
@@ -91,12 +109,34 @@ function Options({}) {
       transition
     >
       <MenuItem className={menuItemClassName}>
-        <button data-bs-toggle="modal" data-bs-target="#listModal">
+        <button
+          name="cambiarNombre"
+          title="Cambiar nombre de la lista"
+          data-bs-toggle="modal"
+          data-bs-target="#listModal"
+          aria-controls="listModal"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          onClick={() => {
+            document.getElementsByName("cambiarNombre")[0].setAttribute("aria-expanded", "true");
+          }}
+        >
           Cambiar nombre
         </button>
       </MenuItem>
       <MenuItem className={menuItemClassName}>
-        <button data-bs-toggle="modal" data-bs-target="#deleteListModal">
+        <button
+          data-bs-toggle="modal"
+          name="deleteList"
+          title="Eliminar playlist" 
+          data-bs-target="#deleteListModal"
+          aria-controls="deleteListModal"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          onClick={() => {
+            document.getElementsByName("deleteList")[0].setAttribute("aria-expanded", "true");
+          }}
+        >
           Eliminar playlist
         </button>
       </MenuItem>

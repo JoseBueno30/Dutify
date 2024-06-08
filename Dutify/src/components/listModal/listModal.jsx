@@ -25,7 +25,7 @@ function ListModal({ playlist }) {
     return () => {
       modal.removeEventListener("hidden.bs.modal", hideHandler);
     };
-  },[]);
+  }, []);
 
   function esSoloEspacios(texto) {
     return /^\s*$/.test(texto);
@@ -36,7 +36,7 @@ function ListModal({ playlist }) {
   };
 
   const listPublicChangeHandler = (e) => {
-    setListPublic(e.target.checked);
+    setListPublic(!listPublic);
   };
 
   const hideHandler = () => {
@@ -44,14 +44,25 @@ function ListModal({ playlist }) {
     setListPublic(false);
     setErrorVisibility(false);
     setCanSubmit(true);
-  }
-  
+    if (!playlist) {
+      document
+        .getElementsByName("addCard")[0]
+        .setAttribute("aria-expanded", "false");
+    } else {
+      document
+        .getElementsByName("cambiarNombre")[0]
+        .setAttribute("aria-expanded", "false");
+    }
+  };
+
   const clickHandler = (e) => {
     e.preventDefault();
 
     if (listName === undefined || listName === "" || esSoloEspacios(listName)) {
       setErrorVisibility(true);
-      document.getElementById("inputName").setAttribute("aria-describedby","errorText")
+      document
+        .getElementById("inputName")
+        .setAttribute("aria-describedby", "errorText");
       document.getElementById("inputName").focus();
     } else {
       setCanSubmit(false);
@@ -61,15 +72,20 @@ function ListModal({ playlist }) {
         console.log(playlist);
 
         // Close modal
-        document.getElementById("listModal").setAttribute("style", "display: none");
-        document.getElementById("listModal").setAttribute("aria-hidden", "true");
-        
+        document
+          .getElementById("listModal")
+          .setAttribute("style", "display: none");
+        document
+          .getElementById("listModal")
+          .setAttribute("aria-hidden", "true");
+
         changePlaylistName(playlist.id, listName)
-        .then(status => {
-          changeFeedback(status),
-          sleep(5000).then(() => {
-              window.location.href = "/listas/playlist?playlistId=" + playlist.id;
-            })
+          .then((status) => {
+            changeFeedback(status),
+              sleep(5000).then(() => {
+                window.location.href =
+                  "/listas/playlist?playlistId=" + playlist.id;
+              });
           })
           .catch((error) => {
             console.error(error);
@@ -93,18 +109,20 @@ function ListModal({ playlist }) {
       tabIndex="-1"
       aria-hidden="true"
       role="dialog"
+      aria-modal="true"
+      aria-labelledby="listModalLabel"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="helpModalLabel">
+            <h1 className="modal-title fs-5" id="listModalLabel">
               {playlist ? "Editar nombre de la lista" : "Crear nueva lista"}
             </h1>
             <button
               type="button"
               className="close-button"
               data-bs-dismiss="modal"
-              aria-label="Close"
+              aria-label="Cerrar dialogo"
             >
               <IoClose size={35} />
             </button>
@@ -125,40 +143,49 @@ function ListModal({ playlist }) {
                   onChange={listNameChangeHandler}
                   maxLength={20}
                   disabled={!canSubmit}
+                  aria-required="true"
+                  aria-invalid={errorVisibility}
+                  aria-errormessage="errorText"
                 />
                 <p
                   className={"error-text " + (!errorVisibility ? "d-none" : "")}
                   id="errorText"
                 >
-                  ❌El nombre de la lista no puede estar vacío.❌
+                  ❌El nombre de la lista no puede estar vacío❌
                 </p>
               </div>
               {playlist ? (
                 <></>
               ) : (
                 <>
-                  <div className="mb-4 w-75">
-                    <div className="form-check form-switch ps-0">
-                      <label className="form-check-label mb-1" tabIndex={0}>
-                        Privacidad
-                      </label>
-                      <br />
-                      <input
-                        className="form-check-input ms-1"
-                        aria-label="Privacidad"
-                        type="checkbox"
-                        role="switch"
-                        id="listPublic"
-                        onChange={listPublicChangeHandler}
-                        checked={listPublic}
-                      />
-                      <label
-                        className="form-check-label ps-3"
-                        htmlFor="listPublic"
-                      >
-                        {listPublic ? "Pública" : "Privada"}
-                      </label>
-                    </div>
+                  <p className="mb-1" id="privacyLabel">Privacidad</p>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="listPrivate"
+                      id="privateRadio"
+                      checked={!listPublic}
+                      onChange={listPublicChangeHandler}
+                      aria-labelledby="privacyLabel privateRadio"
+                    />
+                    <label className="form-check-label" htmlFor="privateRadio">
+                      Privada
+                    </label>
+                  </div>
+                  <div className="form-check mb-4">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="listPublic"
+                      id="publicRadio"
+                      checked={listPublic}
+                      onChange={listPublicChangeHandler}
+                      aria-labelledby="privacyLabel publicRadio"
+                    />
+                    <label className="form-check-label" htmlFor="publicRadio">
+                      Pública
+                    </label>
                   </div>
                 </>
               )}

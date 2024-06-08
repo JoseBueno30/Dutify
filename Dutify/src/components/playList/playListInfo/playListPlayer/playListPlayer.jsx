@@ -29,16 +29,15 @@ export default function PlayListPlayer({
     setPlaying(!isPlaying);
   };
   const crossButtonClickHandler = (e) => {
-    setRandomQueue();
     setRandomStatus(!randomStatus);
+    setRandomQueue();
   };
   const loopButtonClickHandler = (e) => {
-    setLoopTrack();
     setLoopStatus(!loopStatus);
+    setLoopTrack();
   };
 
   const crossButtonKeydownHandler = (event) => {
-    console.log("A");
     if (event.key === "Enter" || event.key === " ") {
       crossButtonClickHandler();
     }

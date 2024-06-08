@@ -1,9 +1,7 @@
 
-@media only screen and (max-width: 1199px){
-  .section-song-list{
-    height: 37.5vh;
-    width: 100%;
-    margin-bottom: 40px;
+@media only screen and (max-width: 1199.5px){
+  .list{
+    height: 80%;
 }
 }
 
@@ -14,6 +12,11 @@
     overflow-y:auto;
     overflow-x: hidden;
     z-index: 90;
+    
+}
+
+h2.notFoundMessage{
+  font-weight: 400;
 }
 
 .emptyList{

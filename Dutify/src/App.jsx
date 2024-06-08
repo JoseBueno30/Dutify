@@ -136,9 +136,9 @@ function App() {
               ) : null}
             </div>
             <TopBar></TopBar>
+            <HelpModal />
             <main>
               <RouterProvider router={router}></RouterProvider>
-              <HelpModal />
             </main>
             <footer>
               <MusicPlayer></MusicPlayer>

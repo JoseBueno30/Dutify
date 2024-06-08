@@ -46,20 +46,21 @@
 }
 
 .btn-showMore{
-  background-color: #949494;
-  color: white;
-  width: 50%;
+  background-color: var(--color-4);
+  font-weight: 400;
+  color: var(--color-text);
+  width: 25%;
 }
 
 .btn-showMore:hover{
-  background-color: #707070;
-  color: white;
+  background-color: var(--color-theme);
+  color: var(--color-background);
 }
 
-.btn-showMore:Active{
-  background-color: #585858;
-  color: white;
-}
+ .btn-showMore:focus{
+  background-color: var(--color-theme);
+color: var(--color-background);
+ }
 
 @media only screen and (max-width: 920px){
   
