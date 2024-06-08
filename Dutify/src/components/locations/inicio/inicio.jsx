@@ -1,9 +1,9 @@
 import './inicioStyle.css';
 import { useEffect, useState } from "react";
 import { setAccessToken,getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists, getAccessToken } from "../../../spotifyApi/SpotifyApiCalls";
-import Carousel from '../../carousel/carousel';
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import Spinner from '../../spinner/spinner';
+import CarouselComponent from '../../carousel/carousel';
 
 function Inicio({token}){
     
@@ -15,9 +15,10 @@ function Inicio({token}){
 
 
     const cargarPlaylists = async () =>{
+        
         setLoading(true);
         const user_playlists = await getUserPlaylists(token)
-        setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO
+        setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO*/
         setPopularPlaylists(await getPopularPlaylists(token))
         setRecommendedPlaylists(await getRecommendedPlaylists(token))
         setPopularArtistsPlaylists(await getPopularArtistsPlaylists(token))
@@ -59,13 +60,15 @@ function Inicio({token}){
         <section className='inicio-section' aria-busy={loading}>
             {loading ? 
             <Spinner></Spinner> : 
-            <><div className='div-recent-lists'>
-                <h5 className='h5-recent-lists'>Listas recientes:</h5>
+            <><div className='div-recent-lists' id="listas-recientes">
+                <h2 className='h5-recent-lists' tabIndex="0" aria-labelledby="listas-recientes">Listas recientes:</h2>
                 <CardsGrid type="genrelists" data={recent_playlists} clickFunction={listButtonClickHandler} />
             </div>
-            <Carousel id="carrusel-1" lista={popular_playlists} name="Listas populares:"></Carousel>
-            <Carousel id="carrusel-2" lista={popular_artists_playlists} name="Tus artistas favoritos:"></Carousel>
-            <Carousel id="carrusel-3" lista={recommended_playlists} name="Recomendaciones:"></Carousel></>}
+            <CarouselComponent id="listas-populares" lista={popular_playlists} name="Listas populares:"></CarouselComponent>
+            <CarouselComponent id="tus-artistas-favoritos" lista={popular_artists_playlists} name="Tus artistas favoritos:"></CarouselComponent>
+            <CarouselComponent id="recomendaciones" lista={recommended_playlists} name="Recomendaciones:"></CarouselComponent>
+            </>
+            }
         </section>
     );
 }

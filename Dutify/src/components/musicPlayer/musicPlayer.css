@@ -46,7 +46,7 @@
 .artist-container {
   margin-left: 10px;
   align-content: center;
-  max-width: 300px;
+  max-width: 200px;
   text-overflow: ellipsis;
   overflow: hidden;
   @media screen and (max-width: 1200px) {
@@ -75,6 +75,7 @@
     flex-basis:60%;
   }
 }
+
 
 .song-bar {
   width: 100%;
@@ -180,7 +181,6 @@ input[type="range"].styled-slider.slider-progress {
   --ratio: calc((var(--value) - var(--min)) / var(--range));
   --sx: calc(0.5 * 16px + var(--ratio) * (100% - 16px));
 }
-
 
 /*webkit*/
 input[type="range"].styled-slider::-webkit-slider-thumb {
