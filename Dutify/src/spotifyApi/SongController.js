@@ -56,7 +56,11 @@ const setPausedTrack = (track, time) => {
 };
 
 const __addEvents = () => {
-  const length = isRandom ? randomQueue.length : queue.length;
+  let length = 0;
+  try{
+    length = isRandom ? randomQueue.length : queue.length;
+  }catch(e){};
+
   trackAudio.addEventListener("play", () => {
     window.sessionStorage.setItem("trackStatus", true);
     //console.log("Se ha comenzado/reanudado la reproducción");
@@ -165,6 +169,9 @@ const nextQueueSong = () => {
         __shuffle(randomQueue);
       }
     }
+  }else if(trackAudio){
+    pauseTrack();
+    trackAudio.currentTime = getDuration();
   }
   _saveAndPlay();
 };
@@ -178,6 +185,10 @@ const previousQueueSong = () => {
       i = 0;
       playQueue();
     }
+  }else if(trackAudio){
+    if(isPlaying) pauseTrack();
+    trackAudio.currentTime = 0;
+    playTrack();
   }
   _saveAndPlay();
 };
@@ -195,8 +206,11 @@ const __checkPreviewURL = () => {
 
 const _saveAndPlay = () => {
   window.sessionStorage.setItem("songIndex", i);
-  const length = isRandom ? randomQueue.length : queue.length;
- // console.log(length);
+ let length = 0;
+  try{
+    length = isRandom ? randomQueue.length : queue.length;
+  }catch(e){};
+
   if (queue !== null && i < length) playQueue();
 };
 
