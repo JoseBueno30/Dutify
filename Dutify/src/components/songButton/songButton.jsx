@@ -108,7 +108,7 @@ export default function SongButton({
 
   const songClickHandler = (e) => {
     if (!hasPreview) {
-      changeFeedback("La canción no esta disponible")
+      changeFeedback("Esta canción no está disponible.")
       return
     };
     const id = e.currentTarget.id;
@@ -147,8 +147,8 @@ export default function SongButton({
         onDoubleClick={songClickHandler}
         onKeyDown={songButtonKeydownHandler}
         role="option"
-        aria-label="Canción"
-        aria-description={hasPreview ? "Reproducir canción: " + track.name : "La cancion" + track.name + "no se puede reproducir"}
+        aria-label="Canción: "
+        aria-description={hasPreview ? "Reproducir canción: " + track.name : "La canción '" + track.name + "' no está disponible"}
         ref={songButtonRef}
         tabIndex={-1}
       >

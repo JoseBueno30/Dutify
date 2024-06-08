@@ -47,13 +47,13 @@ function HelpModal() {
 
           <div className="modal-body" aria-description="Descripción de Dutify" tabIndex={0} role="article">
             <p>
-              Dutify es una aplicación web que te permite buscar y reproducir
+              Dutify es una aplicación web que te permite buscar y reproducir muestras de
               tus canciones favoritas de Spotify. Las principales
               funcionalidades de Dutify son:
             </p>
             <ul>
-              <li>Buscar y reproducir canciones.</li>
-              <li>Reproducir canciones en modo aleatorio o repetición.</li>
+              <li>Buscar y reproducir muestras de canciones.</li>
+              <li>Reproducir listas en modo aleatorio o en bucle.</li>
               <li>Crear, editar y eliminar listas de reproducción.</li>
               <li>Añadir o eliminar canciones de tus listas de reproducción.</li>
               <li>Reproducir listas filtradas por género o temas.</li>
