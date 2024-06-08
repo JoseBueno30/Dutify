@@ -92,7 +92,6 @@ function MusicPlayer() {
     const trackSession = JSON.parse(
       window.sessionStorage.getItem("currentTrack")
     );
-    console.log(trackSession);
     setTrack(trackSession);
     setCurrentTime(0);
   };
