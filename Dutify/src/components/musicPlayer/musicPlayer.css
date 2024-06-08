@@ -31,6 +31,12 @@
     gap: 10px;
     flex-basis: 30%;
   }
+  @media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    justify-content: start;
+  }
 }
 
 .simulate-image {
@@ -39,6 +45,7 @@
   aspect-ratio: 1/1;
   background-color: var(--color-theme);
   @media screen and (max-width: 900px) {
+    width: 30%;
     min-width: 55px;
   }
 }
@@ -55,7 +62,7 @@
   @media screen and (max-width: 900px) {
     margin-left: 0px;
     font-size: 90%;
-    max-width: 150px;
+    max-width: 100px;
   }
   @media screen and (min-width: 1920px){
       max-width: 500px;

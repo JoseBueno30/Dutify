@@ -23,7 +23,7 @@ function MusicPlayer() {
   const [playing, change] = useState(
     window.sessionStorage.getItem("trackStatus") === "true"
   );
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const [progressionValue, setProgressionValue] = useState(0);
   const [volumeValue, setvolumeValue] = useState(50);
   const [lastVolumeValue, setLastVolumeValue] = useState(0);
@@ -113,7 +113,7 @@ function MusicPlayer() {
 
   useEffect(() => {
     function handleResize() {
-      setIsSmallScreen(window.innerWidth < 901);
+      setIsSmallScreen(window.innerWidth < 600);
     }
     const trackSession = JSON.parse(
       window.sessionStorage.getItem("currentTrack")
@@ -176,13 +176,24 @@ function MusicPlayer() {
               <div className="simulate-image"></div>
             )}
             {/* Texto de Artista */}
-            <div className="artist-container" aria-label="Nombre y autor de la cancion actual" tabIndex={0}>
-              <span className="name" aria-description="Canción actual: ">{track ? track.name : "..."}</span>
-              <br />
-                <span className="artist-text" aria-description="Artista: ">
-                  {track ? track.artists[0].name : "..."}
-                </span>
-              
+            <div
+              className="artist-container"
+              aria-label="Nombre y autor de la cancion actual"
+              tabIndex={0}
+            >
+              <span className="name" aria-description="Canción actual: ">
+                {track ? track.name : "..."}
+              </span>
+              {!isSmallScreen ? (
+                <>
+                  <br />
+                  <span className="artist-text" aria-description="Artista: ">
+                    {track ? track.artists[0].name : "..."}
+                  </span>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           {/* Barra de reproducción */}
@@ -198,7 +209,15 @@ function MusicPlayer() {
             <div className="timer-buttons-wrapper">
               {/* Temporizador */}
 
-              <span aria-description={"Marca de tiempo actual: " + (track && currentTime ? currentTime.toString().charAt(0) + " segundos" : "indefinido")} tabIndex={0}>
+              <span
+                aria-description={
+                  "Marca de tiempo actual: " +
+                  (track && currentTime
+                    ? currentTime.toString().charAt(0) + " segundos"
+                    : "indefinido")
+                }
+                tabIndex={0}
+              >
                 <div aria-hidden="true">
                   {track && currentTime
                     ? currentTime > 9
@@ -222,12 +241,14 @@ function MusicPlayer() {
                   onClick={switchPlay}
                   onKeyDown={playButtonKeydownHandler}
                   className="play-button"
-                  title={isTrackPlaying() ? "Pausar canción" : "Reproducir canción"}
+                  title={
+                    isTrackPlaying() ? "Pausar canción" : "Reproducir canción"
+                  }
                 >
                   {!isTrackPlaying() ? (
-                    <IoPlayCircleOutline size={35}/>
+                    <IoPlayCircleOutline size={35} />
                   ) : (
-                    <IoPauseCircleOutline size={35}/>
+                    <IoPauseCircleOutline size={35} />
                   )}
                 </button>
                 <button>
@@ -240,10 +261,14 @@ function MusicPlayer() {
                 </button>
               </div>
               {/* Temporizador */}
-              <span tabIndex={0} aria-description={"Marca de tiempo total: " + (track ? "30 segundos" : "indefinido")}>
-               <div aria-hidden="true">
-                {track ? "00:30" : "mm:ss"}
-               </div>
+              <span
+                tabIndex={0}
+                aria-description={
+                  "Marca de tiempo total: " +
+                  (track ? "30 segundos" : "indefinido")
+                }
+              >
+                <div aria-hidden="true">{track ? "00:30" : "mm:ss"}</div>
               </span>
             </div>
           </div>
