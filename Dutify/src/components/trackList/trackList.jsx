@@ -129,7 +129,7 @@ export default function TrackList({
 
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlaylist, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
-      <div tabIndex={0} className="list container-fluid" onKeyDown={keyDownHandler} ref={refContainer} role="list">
+      <div tabIndex={0} className="list container-fluid" onKeyDown={keyDownHandler} ref={refContainer} role="listbox">
         {tracks.length > 0 &&!isSmall? <SongInfo showAddButton={busqueda && playlistId} isSmall={isSmall}/> : (<></>)}
         
         {tracks.length > 0 ? (

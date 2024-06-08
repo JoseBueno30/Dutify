@@ -53,18 +53,20 @@ export default function SongButton({
   const playlistId = useContext(TracksHandlersContext).playlistId;
   
   const [optionsFocus, setOptionsFocus] = useState(false);
-  const focusRef = useRef();
+  const songButtonRef = useRef();
+  const addButtonRef = useRef();
+
 
   useEffect(() => {
     
-    if (focus && focusRef?.current) {
-      focusSong();
+    if (focus && songButtonRef?.current) {
+      songButtonRef.current.focus();
     }
   }, [focus]);
 
   const focusSong = () => {
-    setOptionsFocus(false)
-    focusRef?.current.focus();
+    setOptionsFocus(false);
+    songButtonRef.current.focus();
     setCurrentFocus(index);
   }
 
@@ -72,13 +74,21 @@ export default function SongButton({
     console.log(event.key)
     if (
       event.key === "Enter" &&
-      document.activeElement === focusRef.current
+      document.activeElement === songButtonRef.current
     ) {
       songClickHandler(event);
     }else if(event.key === "ArrowRight"){
-      setOptionsFocus(true);
+      if(enableAddButton && document.activeElement === songButtonRef.current){
+        addButtonRef.current.focus();
+      }else{
+        setOptionsFocus(true);
+      }
+    }else if(event.key === "ArrowLeft"){
+      if(enableAddButton && document.activeElement === addButtonRef.current){
+        songButtonRef.current.focus();
+      }
     }else if(!optionsFocus &&
-      document.activeElement === focusRef.current){
+      document.activeElement === songButtonRef.current){
       handleSongFocus(index, event.key);
     }
   };
@@ -130,10 +140,10 @@ export default function SongButton({
         className="songButton"
         onDoubleClick={songClickHandler}
         onKeyDown={songButtonKeydownHandler}
-        role="listitem"
+        role="option"
         aria-label="Canción"
         aria-description={"Reproducir canción: " + track.name}
-        ref={focusRef}
+        ref={songButtonRef}
         tabIndex={-1}
       >
         <div className="playContainer" onClick={songClickHandler}>
@@ -195,6 +205,8 @@ export default function SongButton({
               <button
                 title="Añadir canción a lista"
                 className={"col-1 d-flex justify-content-center " + (isSmall?"btnAddSmall":"btnAddBig")}
+                ref={addButtonRef}
+                tabIndex={-1}
                 onClick={listClickHandler}
               >
                 {isSmall ? <FaPlus /> : "Añadir"}
@@ -227,7 +239,6 @@ function Options({ track, index, optionsFocus, focusSong }) {
 
   useEffect(() => {
     if (optionsFocus && focusRef?.current) {
-      console.log("BBBBB")
       focusRef?.current.focus();
     }
   }, [optionsFocus]);
