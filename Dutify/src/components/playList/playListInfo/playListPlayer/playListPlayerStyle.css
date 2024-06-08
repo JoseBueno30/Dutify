@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-.arrowCross:hover, .arrowLoop:hover{ 
+.arrowCross:hover, .arrowLoop:hover, .arrowCrossActive:hover, .arrowLoopActive:hover{ 
     transform: scale(1.1);
     transition: 0.3s;
 }

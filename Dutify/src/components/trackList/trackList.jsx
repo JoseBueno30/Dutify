@@ -164,8 +164,8 @@ export default function TrackList({
           <div className="emptyList d-flex flex-column pb-3" tabIndex={0}>
             <h2 className="notFoundMessage">¡Oops, no hemos encontrado nada!</h2>
             <h3>
-              Explora nuevas canciones en{" "}
-              <a className="inicio-link" href="/inicio">  
+              Explora nuevas canciones en la sección de{" "}
+              <a className="inicio-link" href="/inicio" aria-label="Ir a inicio">  
                  Inicio
               </a>
             </h3>
