@@ -139,6 +139,7 @@ function ListModal({ playlist }) {
                     "form-control " + (errorVisibility ? "is-invalid" : "")
                   }
                   id="inputName"
+                  name="inputName"
                   value={listName}
                   onChange={listNameChangeHandler}
                   maxLength={20}
@@ -169,7 +170,7 @@ function ListModal({ playlist }) {
                       onChange={listPublicChangeHandler}
                       aria-labelledby="privacyLabel privateRadio"
                     />
-                    <label className="form-check-label" htmlFor="privateRadio">
+                    <label className="form-check-label" htmlFor="listPrivacity">
                       Privada
                     </label>
                   </div>
@@ -177,13 +178,13 @@ function ListModal({ playlist }) {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="listPublic"
+                      name="listPrivacity"
                       id="publicRadio"
                       checked={listPublic}
                       onChange={listPublicChangeHandler}
                       aria-labelledby="privacyLabel publicRadio"
                     />
-                    <label className="form-check-label" htmlFor="publicRadio">
+                    <label className="form-check-label" htmlFor="listPrivacity">
                       Pública
                     </label>
                   </div>

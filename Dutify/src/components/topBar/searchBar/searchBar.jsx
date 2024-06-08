@@ -62,6 +62,7 @@ function SearchBar({ isOpen }) {
       <label htmlFor="search-bar" className="oculto">Buscar canción</label>
       <input
         id="search-bar"
+        name="search-bar"
         className="search-bar"
         type="text"
         placeholder={"Buscar canción"}
