@@ -14,6 +14,7 @@
 
 .busqueda-container {
     width: 900px;
+    height: 100%;
     @media screen and (max-width: 900px) {
         flex-basis: 100%;
         width: 100%;
@@ -21,7 +22,7 @@
 }
 
 .busqueda {
-    height: 95%;
+    height: 92%;
     display: flex;
     justify-content: center;
     @media screen and (max-width: 768px) {

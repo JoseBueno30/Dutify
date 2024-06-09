@@ -170,7 +170,7 @@ function MusicPlayer({spaceEvent}) {
 
   return (
     <>
-      <div className="sticky-bottom music-bar " onKeyUp={test} tabIndex={0}>
+      <div className="sticky-bottom music-bar " onKeyUp={test}>
         <div className="music-container">
           {/* Información de la cancion */}
           <div className="song-container">
