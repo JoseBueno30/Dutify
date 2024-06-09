@@ -2,7 +2,7 @@
   "name": "dutify",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://JoseBueno30.github.io/User-Interfaces/Dutify",
+  "homepage": "https://JoseBueno30.github.io/Dutify/Dutify",
   "type": "module",
   "scripts": {
     "dev": "vite",
