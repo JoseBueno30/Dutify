@@ -21,7 +21,7 @@ import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 function MusicPlayer({spaceEvent}) {
   const [playing, change] = useState(
-    window.sessionStorage.getItem("trackStatus") === "true"
+    isTrackPlaying()==="true"
   );
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const [progressionValue, setProgressionValue] = useState(0);
@@ -126,8 +126,6 @@ function MusicPlayer({spaceEvent}) {
       window.sessionStorage.getItem("volume") === null
         ? 50
         : parseFloat(window.sessionStorage.getItem("volume")) * 100;
-
-    console.log(window.sessionStorage.getItem("trackStatus"))
     
     if(window.sessionStorage.getItem("trackStatus")!==null){
       switchPlay();
@@ -253,10 +251,10 @@ function MusicPlayer({spaceEvent}) {
                   onKeyUp={playButtonKeyupHandler}
                   className="play-button"
                   title={
-                    isTrackPlaying() ? "Pausar canción" : "Reproducir canción"
+                    playing ? "Pausar canción" : "Reproducir canción"
                   }
                 >
-                  {!isTrackPlaying() ? (
+                  {!playing ? (
                     <IoPlayCircleOutline size={35} />
                   ) : (
                     <IoPauseCircleOutline size={35} />

@@ -4,6 +4,7 @@ import { TbArrowsCross } from "react-icons/tb";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import "./playListPlayerStyle.css";
 import {
+  isTrackPlaying,
   pauseTrack,
   setLoopTrack,
   setRandomQueue,
@@ -56,19 +57,22 @@ export default function PlayListPlayer({
   };
 
   useEffect(() => {
+
+    console.log(isPlaying)
+
     const random = window.sessionStorage.getItem("random") === "true";
     const loop = window.sessionStorage.getItem("loop") === "true";
-    console.log("RANDOM: " + random);
     setRandomStatus(random);
     setLoopStatus(loop);
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     const trackStatus = window.sessionStorage.getItem("trackStatus");
 
-    setPlaying(playlistPlaying === playListId && trackStatus === "true");
+    //setPlaying(playlistPlaying === playListId && trackStatus === "true");
   }, []);
 
   return (
     <div className="playListPlayerContainer d-flex justify-content-around align-items-center">
+      {console.log(isPlaying)}
       <div
         id="crossButton"
         className={randomStatus ? "arrowCrossActive" : "arrowCross"}
@@ -82,17 +86,17 @@ export default function PlayListPlayer({
       >
         <TbArrowsCross className="arrowCrossButton" />
       </div>
-
       <div
         id="playButton"
-        className={isPlaying ? "playListButtonAnimated" : "playListButton"}
+        className={isPlaying? "playListButtonAnimated" : "playListButton"}
         tabIndex={0}
         onClick={playButtonClickHandler}
         onKeyUp={playButtonKeyupHandler}
         role="button"
         title={(isPlaying?"Pausar":"Reproducir") + " playlist"}
       >
-        {isPlaying ? <FaPause className="play" /> : <FaPlay className="play" />}
+
+        {isPlaying? <FaPause className="play" /> : <FaPlay className="play" />}
       </div>
 
       <div
