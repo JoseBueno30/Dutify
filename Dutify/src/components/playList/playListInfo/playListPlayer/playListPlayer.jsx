@@ -76,7 +76,8 @@ export default function PlayListPlayer({
         onClick={crossButtonClickHandler}
         onKeyDown={crossButtonKeydownHandler}
         role="button"
-        title={"Activar reproducción aleatoria"}
+        aria-label="Reproducción aleatoria"
+        title={(randomStatus ? "Desactivar" : "Activar") + " reproducción aleatoria"}
         aria-pressed={randomStatus}
       >
         <TbArrowsCross className="arrowCrossButton" />
@@ -101,7 +102,8 @@ export default function PlayListPlayer({
         onClick={loopButtonClickHandler}
         onKeyDown={loopButtonKeydownHandler}
         role="button"
-        title={"Activar reproducción en bucle"}
+        aria-label="Reproducción en bucle"
+        title={(loopStatus ? "Desactivar" : "Activar") + " reproducción en bucle"}
         aria-pressed={loopStatus}
       >
         <RiLoopLeftFill className="arrowLoopButton"/>
