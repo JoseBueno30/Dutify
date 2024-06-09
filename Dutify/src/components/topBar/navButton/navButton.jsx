@@ -2,7 +2,7 @@ import "./navButtonStyle.css"
 
 function NavButton(props) {
 
-    const activeLocation = window.location.href.split("/")[4].toLowerCase().includes(props.texto.toLowerCase());
+    const activeLocation = window.location.href.split("/")[4]!==undefined?window.location.href.split("/")[4].toLowerCase().includes(props.texto.toLowerCase()):false;
 
     const setLocation = () => {
         window.location.href = "/Dutify/" + props.texto.toLowerCase();
