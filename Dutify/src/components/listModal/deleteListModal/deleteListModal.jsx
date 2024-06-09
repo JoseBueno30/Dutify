@@ -20,7 +20,7 @@ function DeleteListModal({ playlist }) {
   }
 
   const comfirmDeleteClickHandler = (e) => {
-    unfollowPlaylist(playlist).then(sleep(500).then(() => {window.location.href = "/Listas"}));
+    unfollowPlaylist(playlist).then(sleep(500).then(() => {window.location.href = "/Dutify/listas"}));
   };
 
   return (

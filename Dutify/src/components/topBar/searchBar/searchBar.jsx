@@ -53,7 +53,7 @@ function SearchBar({ isOpen }) {
 
   const search = () => {
     if(!document.getElementById("search-bar").value==="" || !esSoloEspacios(document.getElementById("search-bar").value)){
-      window.location.href = "/busqueda?query=" + document.getElementById("search-bar").value;
+      window.location.href = "/Dutify/busqueda?query=" + document.getElementById("search-bar").value;
     }
   }
 

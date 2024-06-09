@@ -53,7 +53,7 @@ function Inicio({token}){
 
     const listButtonClickHandler = (e) => {
         const key = e.currentTarget.id;
-        window.location.href = "listas/playlist?playlistId=" + key;
+        window.location.href = "/Dutify/listas/playlist?playlistId=" + key;
     };
     
     return (

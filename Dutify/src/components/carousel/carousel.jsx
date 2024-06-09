@@ -24,7 +24,7 @@ const CarouselComponent = ({ lista, name, id }) => {
   };
 
   const ClickHandler = (id) => {
-    window.location.href = "/listas/playlist?playlistId=" + id;
+    window.location.href = "/Dutify/listas/playlist?playlistId=" + id;
   };
 
   const handleKeyDown = (event, id) => {

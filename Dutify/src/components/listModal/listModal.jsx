@@ -84,7 +84,7 @@ function ListModal({ playlist }) {
             changeFeedback(status),
               sleep(5000).then(() => {
                 window.location.href =
-                  "/listas/playlist?playlistId=" + playlist.id;
+                  "/Dutify/listas/playlist?playlistId=" + playlist.id;
               });
           })
           .catch((error) => {
@@ -93,7 +93,7 @@ function ListModal({ playlist }) {
       } else {
         createPlaylist(listName, listPublic)
           .then((playlist) => {
-            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+            window.location.href = "/Dutify/listas/playlist?playlistId=" + playlist.id;
           })
           .catch((error) => {
             console.error(error);

@@ -43,7 +43,7 @@ function Genres({ token }) {
 
   const goToListasGenero = (e) => {
     const id = e.currentTarget.id;
-    window.location.href = "/Generos/Listas?genero=" + id;
+    window.location.href = "/Dutify/generos/Listas?genero=" + id;
   };
 
   return (

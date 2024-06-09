@@ -81,7 +81,7 @@ export default function TrackList({
       code === 2
     ) {
       await sleep(2500);
-      window.location.href = "playlist?playlistId=" + addedPlaylistId;
+      window.location.href = "/Dutify/playlist?playlistId=" + addedPlaylistId;
     }
   };
 
@@ -165,7 +165,7 @@ export default function TrackList({
             <h2 className="notFoundMessage">¡Oops, no hemos encontrado nada!</h2>
             <h3>
               Explora nuevas canciones en la sección de{" "}
-              <a className="inicio-link" href="/inicio" aria-label="Ir a inicio">  
+              <a className="inicio-link" href="/Dutify/inicio" aria-label="Ir a inicio">  
                  Inicio
               </a>
             </h3>

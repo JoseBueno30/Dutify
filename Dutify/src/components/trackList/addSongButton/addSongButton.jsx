@@ -11,7 +11,7 @@ export default function AddSongButton({name, artistName, albumName, image, time_
 
 
     const addSongClickHandler = (e) => {
-        window.location.href = "/busqueda?playListId="+ playlistId +"&query=";
+        window.location.href = "/Dutify/busqueda?playListId="+ playlistId +"&query=";
     }
 
     const addButtonKeydownHandler = (event) => {

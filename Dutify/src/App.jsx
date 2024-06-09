@@ -6,9 +6,10 @@ import Lists from "./components/locations/lists/lists";
 import Inicio from "./components/locations/inicio/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   Navigate,
+  createBrowserRouter,
 } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
@@ -45,7 +46,7 @@ function App() {
   }, []);
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URI = "http://localhost:5173/inicio";
+  const REDIRECT_URI = "http://localhost:5173/Dutify/inicio";
   const CLIENT_ID = "212f24bfe4124f9d89ee2c341ae96f19";
   const RESPONSE_TYPE = "token";
 
@@ -73,35 +74,35 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/Dutify',
       element: <Login loginUrl={loginUrl}></Login>,
     },
     {
-      path: "/inicio",
+      path: "/Dutify/inicio",
       element: <Inicio token={token}></Inicio>,
     },
     {
-      path: "/generos",
+      path: "/Dutify/generos",
       element: <Genres token={token}></Genres>,
     },
     {
-      path: "/listas",
+      path: "/Dutify/listas",
       element: <Lists token={token}></Lists>,
     },
     {
-      path: "/Generos/Listas",
+      path: "/Dutify/generos/Listas",
       element: <GenreLists></GenreLists>,
     },
     {
-      path: "Generos/playlist",
+      path: "/Dutify/generos/playlist",
       element: <PlayList />,
     },
     {
-      path: "/listas/playlist",
+      path: "/Dutify/listas/playlist",
       element: <PlayList />,
     },
     {
-      path: "/busqueda",
+      path: "/Dutify/busqueda",
       element: <SearchResults />,
     },
   ]);

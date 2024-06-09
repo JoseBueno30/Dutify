@@ -36,7 +36,7 @@ function GenreLists() {
 
   const listButtonClickHandler = (e) => {
     const key = e.currentTarget.id;
-    window.location.href = "playlist?playlistId=" + key;
+    window.location.href = "/Dutify/playlist?playlistId=" + key;
   };
 
   return (
