@@ -147,7 +147,6 @@ export default function SongButton({
         onDoubleClick={songClickHandler}
         onKeyDown={songButtonKeydownHandler}
         role="option"
-        aria-label="Canción: "
         aria-description={hasPreview ? "Reproducir canción: " + track.name : "La canción '" + track.name + "' no está disponible"}
         ref={songButtonRef}
         tabIndex={-1}
