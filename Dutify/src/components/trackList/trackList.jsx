@@ -12,7 +12,7 @@ import {
   addTrackToPlayList,
   removeTrackFromPlayList,
 } from "../../spotifyApi/SpotifyApiCalls";
-import { FeedbackHandlerContext } from "../../App";
+import { FeedbackHandlerContext, PageHandlerContext } from "../../App";
 import NavButton from "../topBar/navButton/navButton";
 import { addTrackToQueue, removeTrackFromQueue } from "../../spotifyApi/SongController";
 
@@ -31,6 +31,10 @@ export default function TrackList({
   const [rerender, setRerender] = useState(false);
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
   const [currentFocus, setCurrentFocus] = useState();
+
+  const setReload = useContext(PageHandlerContext).setReload;
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
 
   useEffect(() => {
     async function getUserPlayLists() {
@@ -74,15 +78,7 @@ export default function TrackList({
 
 
   const reloadPlaylist = async (addedPlaylistId, code) => {
-    const searchParams = new URLSearchParams(location.search);
-    const currentPlaylistId = searchParams.get("playlistId");
-    if (
-      addedPlaylistId === currentPlaylistId &&
-      code === 2
-    ) {
-      await sleep(2500);
-      window.location.href = "playlist?playlistId=" + addedPlaylistId;
-    }
+    setReload(track.uri);
   };
 
   async function handleAddTrackToPlaylist(track, addedPlaylistId) {
@@ -165,7 +161,7 @@ export default function TrackList({
             <h2 className="notFoundMessage">¡Oops, no hemos encontrado nada!</h2>
             <h3>
               Explora nuevas canciones en la sección de{" "}
-              <a className="inicio-link" href="/inicio" aria-label="Ir a inicio">  
+              <a className="inicio-link" onClick={() => setPage("/inicio")} aria-label="Ir a inicio">  
                  Inicio
               </a>
             </h3>

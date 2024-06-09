@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./searchBarStyle.css";
 import { BiSearch } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
@@ -7,12 +7,15 @@ import { searchTracks } from "../../../spotifyApi/SpotifyApiCalls";
 import TrackList from "../../trackList/trackList";
 import NavButton from "../navButton/navButton";
 import ClickOutside from "./clickOutside";
+import { PageHandlerContext } from "../../../App";
 
 function SearchBar({ isOpen }) {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [text, setText] = useState("");
   const [tracks, setTracks] = useState([]);
   const [visible, setVisible] = useState(false);
+
+  const updateSearchQuery = useContext(PageHandlerContext).updateSearchQuery;
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeydownListener);
@@ -53,7 +56,7 @@ function SearchBar({ isOpen }) {
 
   const search = () => {
     if(!document.getElementById("search-bar").value==="" || !esSoloEspacios(document.getElementById("search-bar").value)){
-      window.location.href = "/busqueda?query=" + document.getElementById("search-bar").value;
+      updateSearchQuery(document.getElementById("search-bar").value);
     }
   }
 

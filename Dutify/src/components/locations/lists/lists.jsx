@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import ListModal from "../../listModal/listModal";
 import { getUserPlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import "./listsStyle.css";
 import Spinner from "../../spinner/spinner";
+import { PageHandlerContext } from "../../../App";
 
 function Lists({}) {
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
 
   const cargarPlaylists = async () => {
     setLoading(true);
@@ -21,7 +25,8 @@ function Lists({}) {
 
   const listButtonClickHandler = (e) => {
     const key = e.currentTarget.id;
-    window.location.href = "listas/playlist?playlistId=" + key;
+    setPlaylistId(key);
+    setPage("/playlist");
   };
 
   return (

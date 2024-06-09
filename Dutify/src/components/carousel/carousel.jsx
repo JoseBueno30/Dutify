@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './carouselStyle.css';
+import { PageHandlerContext } from "../../App";
 
 const CarouselComponent = ({ lista, name, id }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
 
   const settings = {
     dots: true,
@@ -24,7 +28,8 @@ const CarouselComponent = ({ lista, name, id }) => {
   };
 
   const ClickHandler = (id) => {
-    window.location.href = "/listas/playlist?playlistId=" + id;
+    setPlaylistId(id);
+    setPage("/playlist");
   };
 
   const handleKeyDown = (event, id) => {

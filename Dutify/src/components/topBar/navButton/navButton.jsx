@@ -1,11 +1,16 @@
+import { PageHandlerContext } from "../../../App";
 import "./navButtonStyle.css"
+import { useContext } from "react";
 
 function NavButton(props) {
 
-    const activeLocation = window.location.href.split("/")[3].toLowerCase().includes(props.texto.toLowerCase());
+    const setPage = useContext(PageHandlerContext).setPage;
+    const page = window.sessionStorage.getItem("page");
+
+    const activeLocation = page!==undefined?(page ==="/"+props.texto.toLowerCase()):false;
 
     const setLocation = () => {
-        window.location.href = "/" + props.texto.toLowerCase();
+        setPage("/" + props.texto.toLowerCase());
     }
     return (
         <button  onClick={setLocation} 

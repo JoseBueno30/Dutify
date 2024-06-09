@@ -9,7 +9,7 @@ import TrackList from "../../trackList/trackList";
 import "./busqueda.css";
 import Spinner from "../../spinner/spinner";
 
-function SearchResults() {
+function SearchResults({searchQuery, playlistId}) {
   const [tracks, setLists] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,18 +17,15 @@ function SearchResults() {
 
   const cargarlista = async () => {
     setLoading(true);
-    const searchParams = new URLSearchParams(location.search);
-    const query = searchParams.get("query");
-    const playListId = searchParams.get("playListId");
     let lista = [];
-    if (!query) {
+    if (!searchQuery) {
       lista = await searchTopTracks(50);
     } else {
-      lista = await searchTracks(query, 50);
+      lista = await searchTracks(searchQuery, 50);
     }
-    setQuery(query);
+    setQuery(searchQuery);
     setLists(lista);
-    setPlayListId(playListId);
+    setPlayListId(playlistId);
   };
 
   useEffect(() => {

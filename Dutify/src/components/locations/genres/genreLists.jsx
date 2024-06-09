@@ -1,31 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import "./genresStyle.css";
 import Spinner from "../../spinner/spinner";
 import genreData from "../../../data/genreData.json";
-
-const getGenreID = () => {
-  const url = new URL(window.location.href);
-  const id = url.searchParams.get("genero");
-  return id;
-};
+import { PageHandlerContext } from "../../../App";
 
 const getGenreName = (id) => {
   const genre = genreData.find((genre) => genre.id === id);
   return genre.genreName;
 };
 
-function GenreLists() {
+function GenreLists( {genre} ) {
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(false);
-  const genreID = getGenreID();
-  const genreName = getGenreName(genreID);
+  const genreName = getGenreName(genre);
+
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
 
   const cargarPlaylists = async () => {
     setLoading(true);
     setLists(
-      await getCategoriePlaylists(genreID, 30).finally(() => setLoading(false))
+      await getCategoriePlaylists(genre, 30).finally(() => setLoading(false))
     );
   };
 
@@ -36,7 +33,8 @@ function GenreLists() {
 
   const listButtonClickHandler = (e) => {
     const key = e.currentTarget.id;
-    window.location.href = "playlist?playlistId=" + key;
+    setPlaylistId(key);
+    setPage("/playlist");
   };
 
   return (

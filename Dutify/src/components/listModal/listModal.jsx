@@ -7,7 +7,7 @@ import {
   sleep,
 } from "../../spotifyApi/SpotifyApiCalls";
 import "./listModalStyle.css";
-import { FeedbackHandlerContext } from "../../App";
+import { FeedbackHandlerContext, PageHandlerContext } from "../../App";
 
 function ListModal({ playlist }) {
   const [listName, setListName] = useState(playlist ? playlist.name : "");
@@ -16,6 +16,9 @@ function ListModal({ playlist }) {
   const [canSubmit, setCanSubmit] = useState(true);
 
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
+  const setReload = useContext(PageHandlerContext).setReload;
 
   useEffect(() => {
     const modal = document.getElementById("listModal");
@@ -83,8 +86,8 @@ function ListModal({ playlist }) {
           .then((status) => {
             changeFeedback(status),
               sleep(5000).then(() => {
-                window.location.href =
-                  "/listas/playlist?playlistId=" + playlist.id;
+
+                setReload(playlist.id + listName);
               });
           })
           .catch((error) => {
@@ -93,7 +96,8 @@ function ListModal({ playlist }) {
       } else {
         createPlaylist(listName, listPublic)
           .then((playlist) => {
-            window.location.href = "/listas/playlist?playlistId=" + playlist.id;
+            setPlaylistId(playlist.id);
+            setPage("/playlist")
           })
           .catch((error) => {
             console.error(error);

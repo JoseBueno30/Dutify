@@ -1,8 +1,42 @@
 import { BsSpotify } from "react-icons/bs";
 import "./login.css";
+import { PageHandlerContext } from "../../../App";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { getAccessToken, setAccessToken } from "../../../spotifyApi/SpotifyApiCalls";
 
 function Login(loginUrl) {
+
+  const setPage = useContext(PageHandlerContext).setPage;
+
+  useEffect(() => {
+    console.log(location.href.length)
+    console.log(location.href.length > 25)
+    if(location.href.length > 25){
+      let spotifyToken;
+
+      spotifyToken = getTokenFromUrl().access_token;
+      window.sessionStorage.setItem("token", spotifyToken);
+      setAccessToken(spotifyToken);
+      window.sessionStorage.setItem("page", "/inicio")
+      location.href="/Dutify"
+    } 
+  })
+
+  const getTokenFromUrl = () => {
+    let location = window.location; 
+    return location.hash
+      .substring(1)
+      .split("&")
+      .reduce((initial, item) => {
+        let parts = item.split("=");
+        initial[parts[0]] = decodeURIComponent(parts[1]);
+        return initial;
+      }, {});
+  };
+
     const goToLoginUrl = () =>{
+        
         window.location.href = loginUrl.loginUrl;
     }
   return (

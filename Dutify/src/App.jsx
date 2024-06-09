@@ -23,12 +23,22 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import Login from "./components/locations/login/login";
 
 export const FeedbackHandlerContext = createContext(1);
+export const PageHandlerContext = createContext(2);
 
 function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
-  const [token, setToken] = useState("");
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
+
+  const [page, changePage] = useState(getAccessToken()==="undefined" || getAccessToken() === null?"/":window.sessionStorage.getItem("page"));
+  const [playlistId, setPlaylistId] = useState(window.sessionStorage.getItem("playlistId"));
+  const [genre, setGenre] = useState(window.sessionStorage.getItem("genre"));
+  const [searchQuery, setSearchQuery] = useState(window.sessionStorage.getItem("searchQuery"));
+  const [reload,setReload] = useState();
+
+  useEffect(() =>{
+    
+  }, [reload]);
 
   useEffect(() => {
     console.log("useEffect de App.jsx")
@@ -71,6 +81,58 @@ function App() {
     "%20"
   )}&show_dialog=true`;
 
+  const updateSearchQuery = (query, playlistId) => {
+    setSearchQuery(query);
+    setPlaylistId(playlistId);
+    setPage("/busqueda")
+    setReload(Math.random);
+  }
+
+  const setPage = (page) => {
+    window.sessionStorage.setItem("page", page)
+    changePage(page);
+  }
+
+  const pageRender = () => {
+    let pageRender;
+    switch (page) {
+      case "/":
+        pageRender = <Login loginUrl={loginUrl}></Login>;
+        break;
+      case "/inicio":
+        pageRender = <Inicio></Inicio>;
+        window.sessionStorage.setItem("page", page)
+        break;
+      case "/generos":
+        pageRender = <Genres></Genres>;
+        window.sessionStorage.setItem("page", page)
+      break;
+      case "/listas":
+        pageRender = <Lists></Lists>;
+        window.sessionStorage.setItem("page", page)
+      break;
+      case "/generos/listas":
+        pageRender = <GenreLists genre={genre}></GenreLists>;
+        window.sessionStorage.setItem("page", page)
+        window.sessionStorage.setItem("genre", genre)
+      break;
+      case "/playlist":
+        pageRender = <PlayList playlistId = {playlistId}/>
+        window.sessionStorage.setItem("page", page)
+        window.sessionStorage.setItem("playlistId", playlistId)
+      break;
+      case "/busqueda":
+        pageRender = <SearchResults searchQuery={searchQuery} playlistId={playlistId}/>
+        window.sessionStorage.setItem("page", page)
+        window.sessionStorage.setItem("searchQuery", searchQuery)
+        window.sessionStorage.setItem("playlistId", playlistId)
+      break;
+      default:
+        break;
+    }
+    return pageRender;
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -78,15 +140,15 @@ function App() {
     },
     {
       path: "/inicio",
-      element: <Inicio token={token}></Inicio>,
+      element: <Inicio></Inicio>,
     },
     {
       path: "/generos",
-      element: <Genres token={token}></Genres>,
+      element: <Genres></Genres>,
     },
     {
       path: "/listas",
-      element: <Lists token={token}></Lists>,
+      element: <Lists></Lists>,
     },
     {
       path: "/Generos/Listas",
@@ -123,8 +185,8 @@ function App() {
   };
 
   return (
-    <div id={contextTheme} style={{height: '100vh'}}>
-        <>
+    <div id={contextTheme} style={{height: '100vh'}} aria-live="polite">
+        <PageHandlerContext.Provider value={{page, setPage, setPlaylistId, setReload, updateSearchQuery, setGenre}}>
           <FeedbackHandlerContext.Provider value={{changeFeedback}}>
             <div aria-description={feedback} aria-live="assertive">
               {feedback !== "" ? (
@@ -138,13 +200,13 @@ function App() {
             <TopBar></TopBar>
             <HelpModal />
             <main>
-              <RouterProvider router={router}></RouterProvider>
+              {pageRender()}
             </main>
             <footer>
               <MusicPlayer></MusicPlayer>
             </footer>
           </FeedbackHandlerContext.Provider>
-        </>
+        </PageHandlerContext.Provider>
     </div>
   );
 }

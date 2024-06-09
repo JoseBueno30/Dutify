@@ -1,17 +1,19 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { FaEllipsisVertical, FaPlay, FaPause } from "react-icons/fa6";
 import { IoMdAddCircle } from "react-icons/io";
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import "./addSongButtonStyle.css";
+import { PageHandlerContext } from "../../../App";
 
 
 export default function AddSongButton({name, artistName, albumName, image, time_ms, playlistId}){
 
+    const updateSearchQuery = useContext(PageHandlerContext).updateSearchQuery;
 
     const addSongClickHandler = (e) => {
-        window.location.href = "/busqueda?playListId="+ playlistId +"&query=";
+       updateSearchQuery("", playlistId);
     }
 
     const addButtonKeydownHandler = (event) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 
 import listData from "../../../data/listData.json";
@@ -6,9 +6,12 @@ import genreData from "../../../data/genreData.json";
 import recentListsData from "../../../data/recentListsData.json";
 import { getCategoriePlaylists } from "../../../spotifyApi/SpotifyApiCalls";
 import "./genresStyle.css";
+import { PageHandlerContext } from "../../../App";
 
-function Genres({ token }) {
+function Genres() {
   const [genres, setGenres] = useState([]);
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setGenre = useContext(PageHandlerContext).setGenre;
 
   useEffect(() => {
     document.title = "Géneros | Dutify";
@@ -43,7 +46,8 @@ function Genres({ token }) {
 
   const goToListasGenero = (e) => {
     const id = e.currentTarget.id;
-    window.location.href = "/Generos/Listas?genero=" + id;
+    setGenre(id);
+    setPage("/generos/listas");
   };
 
   return (

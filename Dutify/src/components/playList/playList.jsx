@@ -25,7 +25,7 @@ import Spinner from "../spinner/spinner";
 import { FeedbackHandlerContext } from "../../App";
 import { SiTruenas } from "react-icons/si";
 
-export default function PlayList({}) {
+export default function PlayList({playlistId}) {
   const [isPlaying, setPlaying] = useState(false);
   const [playlist, setPlayList] = useState(null);
   const [playlistName, setPlaylistName] = useState("");
@@ -37,8 +37,6 @@ export default function PlayList({}) {
   const changeFeedback = useContext(FeedbackHandlerContext).changeFeedback;
 
   async function loadPlayList() {
-    const searchParams = new URLSearchParams(location.search);
-    const playlistId = searchParams.get("playlistId");
     const playList = await getPlayList(playlistId);
     setPlayList(playList);
     setPlaylistName(playList.name);
@@ -68,8 +66,7 @@ export default function PlayList({}) {
     //console.log("empieza la animacion playlist")
     const currentPlaylistPlaying =
       window.sessionStorage.getItem("playlistPlaying");
-    const searchParams = new URLSearchParams(location.search);
-    const playlistId = searchParams.get("playlistId");
+
     //console.log(isPlaying)
     if (!isPlaying && currentPlaylistPlaying === playlistId) {
       setPlaying(true);

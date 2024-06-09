@@ -1,11 +1,12 @@
 import './inicioStyle.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { setAccessToken,getUserPlaylists, getPopularPlaylists, getPopularArtistsPlaylists, getRecommendedPlaylists, getAccessToken } from "../../../spotifyApi/SpotifyApiCalls";
 import CardsGrid from "../../cardsGrid/cardsGrid";
 import Spinner from '../../spinner/spinner';
 import CarouselComponent from '../../carousel/carousel';
+import { PageHandlerContext } from '../../../App';
 
-function Inicio({token}){
+function Inicio(){
     
     const [recent_playlists, setRecentPlaylists] = useState([]);
     const [popular_playlists, setPopularPlaylists] = useState([]);
@@ -13,47 +14,32 @@ function Inicio({token}){
     const [recommended_playlists, setRecommendedPlaylists] = useState([])
     const [loading, setLoading] = useState(false);
 
+    const setPage = useContext(PageHandlerContext).setPage;
+    const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
+
 
     const cargarPlaylists = async () =>{
         
         setLoading(true);
-        const user_playlists = await getUserPlaylists(token)
+        const user_playlists = await getUserPlaylists()
         setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO*/
-        setPopularPlaylists(await getPopularPlaylists(token))
-        setRecommendedPlaylists(await getRecommendedPlaylists(token))
-        setPopularArtistsPlaylists(await getPopularArtistsPlaylists(token))
+        setPopularPlaylists(await getPopularPlaylists())
+        setRecommendedPlaylists(await getRecommendedPlaylists())
+        setPopularArtistsPlaylists(await getPopularArtistsPlaylists())
     }
 
     useEffect(() => {
         document.title = "Inicio | Dutify";
 
-        let spotifyToken = window.sessionStorage.getItem("token");
-
-        if (!spotifyToken || spotifyToken === "undefined") {
-          spotifyToken = getTokenFromUrl().access_token;
-          window.sessionStorage.setItem("token", spotifyToken);
-        }
-
-        setAccessToken(spotifyToken);
-
         cargarPlaylists().finally(() => setLoading(false));
     }, []);
 
-    const getTokenFromUrl = () => {
-        let location = window.location; 
-        return location.hash
-          .substring(1)
-          .split("&")
-          .reduce((initial, item) => {
-            let parts = item.split("=");
-            initial[parts[0]] = decodeURIComponent(parts[1]);
-            return initial;
-          }, {});
-      };
+    
 
     const listButtonClickHandler = (e) => {
         const key = e.currentTarget.id;
-        window.location.href = "listas/playlist?playlistId=" + key;
+        setPlaylistId(key);
+        setPage("/playlist");
     };
     
     return (

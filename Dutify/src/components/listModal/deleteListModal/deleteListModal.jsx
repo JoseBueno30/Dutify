@@ -1,9 +1,13 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { IoClose } from "react-icons/io5";
 import { unfollowPlaylist, sleep } from "../../../spotifyApi/SpotifyApiCalls";
+import { PageHandlerContext } from "../../../App";
 
 function DeleteListModal({ playlist }) {
+
+  const setPage = useContext(PageHandlerContext).setPage;
+  const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
 
   useEffect(() => {
     const modal = document.getElementById("deleteListModal");
@@ -20,7 +24,7 @@ function DeleteListModal({ playlist }) {
   }
 
   const comfirmDeleteClickHandler = (e) => {
-    unfollowPlaylist(playlist).then(sleep(500).then(() => {window.location.href = "/Listas"}));
+    unfollowPlaylist(playlist).then(sleep(500).then(() => {setPage("/listas")}));
   };
 
   return (
