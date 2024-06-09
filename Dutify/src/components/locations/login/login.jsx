@@ -11,7 +11,7 @@ function Login(loginUrl) {
         <h1 className="title">Dutify</h1>
         <BsSpotify size={220}></BsSpotify>
       </div>
-      <button className="btn-login" onClick={goToLoginUrl}>Iniciar Sesion con Spotify</button>
+      <button className="btn-login" onClick={goToLoginUrl}>Iniciar Sesión con Spotify</button>
     </section>
   );
 }
