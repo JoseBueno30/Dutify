@@ -7,7 +7,7 @@ import Spinner from "../../spinner/spinner";
 
 function Lists({}) {
   const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const cargarPlaylists = async () => {
     setLoading(true);

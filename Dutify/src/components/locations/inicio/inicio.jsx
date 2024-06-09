@@ -11,7 +11,7 @@ function Inicio({token}){
     const [popular_playlists, setPopularPlaylists] = useState([]);
     const [popular_artists_playlists, setPopularArtistsPlaylists] = useState([]);
     const [recommended_playlists, setRecommendedPlaylists] = useState([])
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
 
     const cargarPlaylists = async () =>{

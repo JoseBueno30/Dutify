@@ -18,7 +18,7 @@ const getGenreName = (id) => {
 
 function GenreLists() {
   const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const genreID = getGenreID();
   const genreName = getGenreName(genreID);
 
