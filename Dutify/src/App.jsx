@@ -30,14 +30,17 @@ function App() {
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
 
-  const [page, changePage] = useState(getAccessToken()==="undefined" || getAccessToken() === null?"/":window.sessionStorage.getItem("page"));
+  const [page, changePage] = useState((location.href==="http://localhost:5173/" || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
   const [playlistId, setPlaylistId] = useState(window.sessionStorage.getItem("playlistId"));
   const [genre, setGenre] = useState(window.sessionStorage.getItem("genre"));
   const [searchQuery, setSearchQuery] = useState(window.sessionStorage.getItem("searchQuery"));
   const [reload,setReload] = useState();
 
   useEffect(() =>{
-    
+    console.log(getAccessToken()==="undefined")
+    console.log(getAccessToken() === null)
+    console.log(location.href==="http://localhost:5173/")
+    console.log((getAccessToken()==="undefined" || getAccessToken() === null) || location.href==="http://localhost:5173/")
   }, [reload]);
 
   useEffect(() => {

@@ -24,7 +24,7 @@ let trackVolume =
 
 const setTrack = (track, time) => {
   if (track !== null && track.preview_url !== null) {
-    // console.log(track.preview_url);
+    console.log(track.preview_url);
     pauseTrack();
 
     trackObject = track;
