@@ -219,6 +219,7 @@ function MusicPlayer({spaceEvent}) {
               {/* Temporizador */}
 
               <span
+                aria-live="off"
                 aria-description={
                   "Marca de tiempo actual: " +
                   (track && currentTime
@@ -229,7 +230,7 @@ function MusicPlayer({spaceEvent}) {
               >
                 <div aria-hidden="true">
                   {track && currentTime
-                    ? currentTime > 9
+                    ? currentTime >= 10
                       ? "00:" + currentTime.substring(0, 2)
                       : "00:0" + currentTime.charAt(0)
                     : "mm:ss"}
@@ -272,6 +273,7 @@ function MusicPlayer({spaceEvent}) {
               {/* Temporizador */}
               <span
                 tabIndex={0}
+                aria-live="off"
                 aria-description={
                   "Marca de tiempo total: " +
                   (track ? "30 segundos" : "indefinido")
