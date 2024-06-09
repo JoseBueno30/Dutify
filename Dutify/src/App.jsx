@@ -90,7 +90,7 @@ function App() {
       element: <Lists token={token}></Lists>,
     },
     {
-      path: "/Dutify/generos/Listas",
+      path: "/Dutify/generos/listas",
       element: <GenreLists></GenreLists>,
     },
     {

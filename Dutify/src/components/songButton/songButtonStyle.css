@@ -190,16 +190,16 @@
   }
 
   .btnAddBig {
-    background-color: var(--color-background);
+    background-color: var(--color-theme);
     border-radius: 10px;
-    color: var(--color-text);
+    color: var(--color-background);
     width: 70px;
   }
 
   .btnAddSmall {
-    background-color: var(--color-background);
+    background-color: var(--color-theme);
     border-radius: 50%;
-    color: var(--color-text);
+    color: var(--color-background);
     width: 30px;
     padding: 5px;
   }

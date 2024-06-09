@@ -90,7 +90,9 @@ function SearchBar({ isOpen }) {
               className="btn btn-showMore mt-auto mb-2"
               title="Mostrar más resultados"
             >
-            Mostrar más
+              <div aria-hidden="true">
+                Mostrar más resultados
+              </div>
             </button> : <></>}
 
           </ClickOutside>

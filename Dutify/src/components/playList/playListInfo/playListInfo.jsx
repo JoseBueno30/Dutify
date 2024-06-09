@@ -45,7 +45,7 @@ export default function PlayListInfo({
       ) : (
         <img
           className="playListImage"
-          src={"/assets/placeholder-img-" + contextTheme + ".png"}
+          src={"/Dutify/assets/placeholder-img-" + contextTheme + ".png"}
           alt="Imagen de la playlist"
         ></img>
       )}

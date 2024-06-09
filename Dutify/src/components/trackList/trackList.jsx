@@ -81,7 +81,7 @@ export default function TrackList({
       code === 2
     ) {
       await sleep(2500);
-      window.location.href = "/Dutify/playlist?playlistId=" + addedPlaylistId;
+      window.location.href = "playlist?playlistId=" + addedPlaylistId;
     }
   };
 
