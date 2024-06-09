@@ -105,7 +105,7 @@ export default function TrackList({
     addTrackToFavorites(track).then(status => changeFeedback(status));
   }
 
-  function keyDownHandler(event){
+  function keyUpHandler(event){
     if((event.key === "Enter" || event.key === "ArrowDown") && refContainer.current === document.activeElement){ 
       if(currentFocus!== undefined){
         if(currentFocus === tracks.length - 1){
@@ -129,7 +129,7 @@ export default function TrackList({
 
   return (
     <TracksHandlersContext.Provider value={{handleAddTrackToPlaylist, handleRemoveTrackFromPlaylist, handleAddTrackToFavorites, owned, playlistId, userPlaylists}}>
-      <div tabIndex={0} className="list container-fluid" onKeyDown={keyDownHandler} ref={refContainer} role="listbox">
+      <div tabIndex={0} className="list container-fluid" onKeyUp={keyUpHandler} ref={refContainer} role="listbox">
         {tracks.length > 0 &&!isSmall? <SongInfo showAddButton={busqueda && playlistId} isSmall={isSmall}/> : (<></>)}
         
         {tracks.length > 0 ? (

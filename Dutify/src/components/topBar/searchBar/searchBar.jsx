@@ -15,14 +15,14 @@ function SearchBar({ isOpen }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeydownListener);
+    document.addEventListener("keyup", handleKeyupListener);
 
     return () => {
-      document.removeEventListener("keydown", handleKeydownListener);
+      document.removeEventListener("keyup", handleKeyupListener);
     };
   }, []);
 
-  const handleKeydownListener = (event) => {
+  const handleKeyupListener = (event) => {
     if (event.key === "Enter" && document.activeElement === document.getElementById("search-bar")) {
       search();
     }

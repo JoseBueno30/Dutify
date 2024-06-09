@@ -37,19 +37,19 @@ export default function PlayListPlayer({
     setLoopTrack();
   };
 
-  const crossButtonKeydownHandler = (event) => {
+  const crossButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       crossButtonClickHandler();
     }
   };
 
-  const playButtonKeydownHandler = (event) => {
+  const playButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       playButtonClickHandler();
     }
   };
 
-  const loopButtonKeydownHandler = (event) => {
+  const loopButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       loopButtonClickHandler();
     }
@@ -74,7 +74,7 @@ export default function PlayListPlayer({
         className={randomStatus ? "arrowCrossActive" : "arrowCross"}
         tabIndex={0}
         onClick={crossButtonClickHandler}
-        onKeyDown={crossButtonKeydownHandler}
+        onKeyUp={crossButtonKeyupHandler}
         role="button"
         aria-label="Reproducción aleatoria"
         title={(randomStatus ? "Desactivar" : "Activar") + " reproducción aleatoria"}
@@ -88,7 +88,7 @@ export default function PlayListPlayer({
         className={isPlaying ? "playListButtonAnimated" : "playListButton"}
         tabIndex={0}
         onClick={playButtonClickHandler}
-        onKeyDown={playButtonKeydownHandler}
+        onKeyUp={playButtonKeyupHandler}
         role="button"
         title={(isPlaying?"Pausar":"Reproducir") + " playlist"}
       >
@@ -100,7 +100,7 @@ export default function PlayListPlayer({
         className={loopStatus ? "arrowLoopActive" : "arrowLoop"}
         tabIndex={0}
         onClick={loopButtonClickHandler}
-        onKeyDown={loopButtonKeydownHandler}
+        onKeyUp={loopButtonKeyupHandler}
         role="button"
         aria-label="Reproducción en bucle"
         title={(loopStatus ? "Desactivar" : "Activar") + " reproducción en bucle"}

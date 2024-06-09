@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, useRef } from "react";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer";
 import GenreLists from "./components/locations/genres/genreLists";
@@ -30,9 +30,10 @@ function App() {
   const [token, setToken] = useState("");
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const refContainer = useRef();
 
   useEffect(() => {
-    console.log("useEffect de App.jsx")
 
     const currentTrack = JSON.parse(window.sessionStorage.getItem("currentTrack"));
     const currentTime = window.sessionStorage.getItem("currentTrackTime")
@@ -123,14 +124,21 @@ function App() {
     setOpen(true);
   };
 
+  const handleKeyUpEvent = (event) =>{
+
+    if ((event.key === "Enter" || event.key === " ") && document.activeElement === refContainer.current) {
+      setIsPlaying(!isPlaying)
+    }
+  }
+
   return (
-    <div id={contextTheme} style={{height: '100vh'}}>
+    <div id={contextTheme} style={{height: '100vh'}} tabIndex={-1} onKeyUp={handleKeyUpEvent} role="application" ref={refContainer}>
         <>
           <FeedbackHandlerContext.Provider value={{changeFeedback}}>
-            <div aria-description={feedback} aria-live="assertive">
+            <div aria-description={feedback} >
               {feedback !== "" ? (
                   <ClickAwayListener onClickAway={onClickAway}>
-                    <div className="CustomSnackbar" {...getRootProps()}>
+                    <div className="CustomSnackbar" {...getRootProps()} role="alert">
                       {feedback}
                     </div>
                   </ClickAwayListener>
@@ -142,7 +150,7 @@ function App() {
               <RouterProvider router={router}></RouterProvider>
             </main>
             <footer>
-              <MusicPlayer></MusicPlayer>
+              <MusicPlayer spaceEvent={isPlaying} ></MusicPlayer>
             </footer>
           </FeedbackHandlerContext.Provider>
         </>

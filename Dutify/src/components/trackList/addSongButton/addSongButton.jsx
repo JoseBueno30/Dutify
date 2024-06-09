@@ -14,14 +14,14 @@ export default function AddSongButton({name, artistName, albumName, image, time_
         window.location.href = "/Dutify/busqueda?playListId="+ playlistId +"&query=";
     }
 
-    const addButtonKeydownHandler = (event) => {
+    const addButtonKeyupHandler = (event) => {
         if (event.key === "Enter" || event.key === " " ) {
             addSongClickHandler(event);
         }
       };
 
     return(
-                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler} onKeyDown={addButtonKeydownHandler}>
+                <div title={"Añadir nueva canción"} tabIndex={0} className='addSongButton' onClick={addSongClickHandler} onKeyUp={addButtonKeyupHandler} role="option">
                     <div>
                         <IoMdAddCircle className="addSongIcon"/>
                     </div>

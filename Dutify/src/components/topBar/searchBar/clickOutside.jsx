@@ -5,11 +5,11 @@ export default function ClickOutside({ children, exceptionRef, onClick, classNam
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickListener);
-    document.addEventListener('keydown', handleKeydownListener);
+    document.addEventListener('keyup', handleKeyupListener);
     
     return () => {
       document.removeEventListener('mousedown', handleClickListener);
-      document.removeEventListener('keydown', handleKeydownListener);
+      document.removeEventListener('keyup', handleKeyupListener);
     };
   }, []);
 
@@ -26,7 +26,7 @@ export default function ClickOutside({ children, exceptionRef, onClick, classNam
     else onClick();
   }
 
-  const handleKeydownListener = (event) => {
+  const handleKeyupListener = (event) => {
     if (event.key === "Escape") {
         onClick();
       }

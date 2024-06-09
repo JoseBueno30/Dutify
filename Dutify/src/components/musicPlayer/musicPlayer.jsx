@@ -19,7 +19,7 @@ import {
 } from "react-icons/io5";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
-function MusicPlayer() {
+function MusicPlayer({spaceEvent}) {
   const [playing, change] = useState(
     window.sessionStorage.getItem("trackStatus") === "true"
   );
@@ -127,13 +127,20 @@ function MusicPlayer() {
         ? 50
         : parseFloat(window.sessionStorage.getItem("volume")) * 100;
 
+    console.log(window.sessionStorage.getItem("trackStatus"))
+    
+    if(window.sessionStorage.getItem("trackStatus")!==null){
+      switchPlay();
+    }
+    
+
     setvolumeValue(trackVolume);
 
     return () => {
       __removeEvents();
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [spaceEvent]);
 
   const __addEvents = () => {
     queueEmitter.on("newTrack", loadTrackInfo);
@@ -153,15 +160,19 @@ function MusicPlayer() {
     fillRangeInputs();
   }, [progressionValue, volumeValue]);
 
-  const playButtonKeydownHandler = (event) => {
+  const playButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       switchPlay();
     }
   };
 
+  const test = (event) => {
+    console.log("ASASDDASD")
+  }
+
   return (
     <>
-      <div className="sticky-bottom music-bar ">
+      <div className="sticky-bottom music-bar " onKeyUp={test} tabIndex={0}>
         <div className="music-container">
           {/* Información de la cancion */}
           <div className="song-container">
@@ -239,7 +250,7 @@ function MusicPlayer() {
 
                 <button
                   onClick={switchPlay}
-                  onKeyDown={playButtonKeydownHandler}
+                  onKeyUp={playButtonKeyupHandler}
                   className="play-button"
                   title={
                     isTrackPlaying() ? "Pausar canción" : "Reproducir canción"

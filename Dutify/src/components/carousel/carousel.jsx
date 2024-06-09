@@ -27,7 +27,7 @@ const CarouselComponent = ({ lista, name, id }) => {
     window.location.href = "/Dutify/listas/playlist?playlistId=" + id;
   };
 
-  const handleKeyDown = (event, id) => {
+  const handleKeyUp = (event, id) => {
     if (event.key === 'Enter') {
       ClickHandler(id);
     }
@@ -60,7 +60,7 @@ const CarouselComponent = ({ lista, name, id }) => {
                 aria-live={index === activeIndex ? "assertive" : "off"}
               >
                 {index === activeIndex ?
-                  <button onKeyDown={(event) => index === activeIndex && handleKeyDown(event, playlist.id)}>
+                  <button onKeyUp={(event) => index === activeIndex && handleKeyUp(event, playlist.id)}>
                     <img src={playlist.imageUrl} alt={playlist.description} />
                   </button>
                 :
