@@ -80,7 +80,7 @@ export default function SongButton({
     ) {
       songClickHandler(event);
     }else if(event.key === "ArrowRight"){
-      if(enableAddButton && document.activeElement === songButtonRef.current){
+      if(enableAddButton && playlistId && document.activeElement === songButtonRef.current){
         addButtonRef.current.focus();
       }else{
         setOptionsFocus(true);
@@ -180,31 +180,31 @@ export default function SongButton({
           <div className="row">
             <div className={"nameAuthorContainer col d-flex " + (isSmall?"flex-column":"flex-row justify-content-between align-items-center")}>
               <div
+                aria-label={"Nombre: "+ track.name}
                 title={track.name}
                 className={isSmall?"nameSmallContainer":"name"}
-                aria-description="nombre"
               >
                 {isSmall? track.name.slice(0,20) : track.name.slice(0,40)}
               </div>
               <div
+                aria-label={"Artista: "+ track.artists[0].name}
                 title={track.artists[0].name}
                 className={isSmall?"authorSmallContainer":"author"}
-                aria-description="artista"
               >
                 {isSmall? track.artists[0].name.slice(0,25) : track.artists[0].name}
               </div>
             </div>
             <div
+              aria-label={"Álbum: "+ track.album.name}
               title={track.album.name}
               className={isSmall? "album col-2 d-none":"album col-2"}
-              aria-description="álbum"
             >
               {track.album.name}
             </div>
             <div
-              title={"Duración: " + timeMIN + " minutos y " + seg + " segundos"}
+              aria-label={"Duración: "+ timeMIN + " minutos y " + seg + " segundos"}
+              title={timeMIN + " minutos y " + seg + " segundos"}
               className={"time col-3 col-md-2 d-flex justify-content-center " + (isSmall?"d-none":"")}
-              aria-description="duración"
             >
               <div aria-hidden="true">
                 {timeMIN}:{timeMS}
@@ -214,6 +214,8 @@ export default function SongButton({
             {enableAddButton && playlistId ? (
               <button
                 title="Añadir canción a lista"
+                aria-label="Añadir canción a lista"
+                role="button"
                 className={"col-1 d-flex justify-content-center " + (isSmall?"btnAddSmall":"btnAddBig")}
                 ref={addButtonRef}
                 tabIndex={-1}
