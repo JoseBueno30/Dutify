@@ -12,7 +12,7 @@ import Spinner from "../../spinner/spinner";
 function SearchResults() {
   const [tracks, setLists] = useState([]);
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [playListId, setPlayListId] = useState("");
 
   const cargarlista = async () => {

@@ -57,10 +57,11 @@
   color: var(--color-background);
 }
 
- .btn-showMore:focus{
-  background-color: var(--color-theme);
-color: var(--color-background);
+ .btn-showMore:focus, .btn-showMore:active{
+  background-color: var(--color-theme) !important;
+  color: var(--color-background) !important;
  }
+
 
 @media only screen and (max-width: 920px){
   
