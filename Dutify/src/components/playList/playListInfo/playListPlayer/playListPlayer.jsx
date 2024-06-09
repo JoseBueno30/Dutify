@@ -75,7 +75,9 @@ export default function PlayListPlayer({
         tabIndex={0}
         onClick={crossButtonClickHandler}
         onKeyDown={crossButtonKeydownHandler}
-        title={(randomStatus ? "Desactivar " : "Activar ") + "reproducción aleatoria"}
+        role="button"
+        title={"Activar reproducción aleatoria"}
+        aria-pressed={randomStatus}
       >
         <TbArrowsCross className="arrowCrossButton" />
       </div>
@@ -86,7 +88,8 @@ export default function PlayListPlayer({
         tabIndex={0}
         onClick={playButtonClickHandler}
         onKeyDown={playButtonKeydownHandler}
-        title={(isPlaying ? "Pausar" : "Reproducir") + " playlist"  }
+        role="button"
+        title={(isPlaying?"Pausar":"Reproducir") + " playlist"}
       >
         {isPlaying ? <FaPause className="play" /> : <FaPlay className="play" />}
       </div>
@@ -97,7 +100,9 @@ export default function PlayListPlayer({
         tabIndex={0}
         onClick={loopButtonClickHandler}
         onKeyDown={loopButtonKeydownHandler}
-        title={(loopStatus ? "Desactivar " : "Activar ") + "reproducción en bucle"}
+        role="button"
+        title={"Activar reproducción en bucle"}
+        aria-pressed={loopStatus}
       >
         <RiLoopLeftFill className="arrowLoopButton"/>
       </div>
