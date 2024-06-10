@@ -43,7 +43,7 @@ export default function PlayList({playlistId}) {
     const isFollowed = await isUserFollowingPlaylist(playlistId);
     setFollowed(isFollowed);
     const isOwned = await isPlaylistOwned(playList);
-    setOwned(isOwned);
+    setOwned(isOwned && isFollowed);
     setPlayList(playList);
     const tracksNew = await getTracksFromPlaylist(playList, tracks.length);
     await setTracks(tracksNew);

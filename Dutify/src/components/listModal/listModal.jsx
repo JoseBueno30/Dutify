@@ -86,7 +86,6 @@ function ListModal({ playlist }) {
           .then((status) => {
             changeFeedback(status),
               sleep(5000).then(() => {
-
                 setReload(playlist.id + listName);
               });
           })
@@ -198,6 +197,7 @@ function ListModal({ playlist }) {
                 <button
                   type="button"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                   onClick={clickHandler}
                 >
                   {playlist ? "Guardar cambios" : "Crear lista"}

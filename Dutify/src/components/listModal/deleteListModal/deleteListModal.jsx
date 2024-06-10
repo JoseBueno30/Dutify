@@ -67,6 +67,7 @@ function DeleteListModal({ playlist }) {
               <button
                 type="button"
                 className="btn btn-primary"
+                data-bs-dismiss="modal"
                 onClick={comfirmDeleteClickHandler}
               >
                 Eliminar playlist
