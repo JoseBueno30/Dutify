@@ -20,7 +20,7 @@ function Login(loginUrl) {
       setAccessToken(spotifyToken);
       window.sessionStorage.setItem("page", "/inicio")
       console.log("AAAA")
-      location.href="Dutify/#inicio"
+      location.href="#inicio"
     } 
   })
 

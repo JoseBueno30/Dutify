@@ -33,25 +33,23 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const refContainer = useRef();
 
-  const [page, changePage] = useState((location.href==="http://localhost:5173/Dutify" || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
+  const URL_BASE = "https://josebueno30.github.io/Dutify/"
+
+  const [page, changePage] = useState((location.href===URL_BASE || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
   const [playlistId, setPlaylistId] = useState(window.sessionStorage.getItem("playlistId"));
   const [genre, setGenre] = useState(window.sessionStorage.getItem("genre"));
   const [searchQuery, setSearchQuery] = useState(window.sessionStorage.getItem("searchQuery"));
   const [reload,setReload] = useState();
 
+
   const handleHashChange = (event) => {
     console.log(event.newURL)
-    let newPage = event.newURL.replace('http://localhost:5173/Dutify/#', '');
+    let newPage = event.newURL.replace(URL_BASE + '#', '');
     window.sessionStorage.setItem("page", "/" + newPage);
     changePage("/" + newPage);
   }
 
   useEffect(() =>{
-    console.log(getAccessToken()==="undefined")
-    console.log(getAccessToken() === null)
-    console.log(location.href==="http://localhost:5173/")
-    console.log((getAccessToken()==="undefined" || getAccessToken() === null) || location.href==="http://localhost:5173/")
-
     window.addEventListener("hashchange", handleHashChange);
 
     return () => {
@@ -75,7 +73,7 @@ function App() {
   }, []);
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URI = "http://localhost:5173/Dutify";
+  const REDIRECT_URI = URL_BASE;
   const CLIENT_ID = "212f24bfe4124f9d89ee2c341ae96f19";
   const RESPONSE_TYPE = "token";
 
