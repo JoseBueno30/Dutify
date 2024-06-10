@@ -114,9 +114,7 @@ const getTrackCurrentTime = () => {
 };
 
 const setTrackCurrentTime = (newCurrentTime) => {
-  pauseTrack();
   trackAudio.currentTime = parseFloat(newCurrentTime);
-  playTrack();
 };
 
 const setQueue = (newQueue) => {
