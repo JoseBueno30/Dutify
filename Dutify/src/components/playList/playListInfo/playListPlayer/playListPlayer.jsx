@@ -4,6 +4,7 @@ import { TbArrowsCross } from "react-icons/tb";
 import { FaPlay, FaPause } from "react-icons/fa6";
 import "./playListPlayerStyle.css";
 import {
+  isTrackPlaying,
   pauseTrack,
   setLoopTrack,
   setRandomQueue,
@@ -37,61 +38,65 @@ export default function PlayListPlayer({
     setLoopTrack();
   };
 
-  const crossButtonKeydownHandler = (event) => {
+  const crossButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       crossButtonClickHandler();
     }
   };
 
-  const playButtonKeydownHandler = (event) => {
+  const playButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       playButtonClickHandler();
     }
   };
 
-  const loopButtonKeydownHandler = (event) => {
+  const loopButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       loopButtonClickHandler();
     }
   };
 
   useEffect(() => {
+
+    console.log(isPlaying)
+
     const random = window.sessionStorage.getItem("random") === "true";
     const loop = window.sessionStorage.getItem("loop") === "true";
-    console.log("RANDOM: " + random);
     setRandomStatus(random);
     setLoopStatus(loop);
     const playlistPlaying = window.sessionStorage.getItem("playlistPlaying");
     const trackStatus = window.sessionStorage.getItem("trackStatus");
 
-    setPlaying(playlistPlaying === playListId && trackStatus === "true");
+    //setPlaying(playlistPlaying === playListId && trackStatus === "true");
   }, []);
 
   return (
     <div className="playListPlayerContainer d-flex justify-content-around align-items-center">
+      {console.log(isPlaying)}
       <div
         id="crossButton"
         className={randomStatus ? "arrowCrossActive" : "arrowCross"}
         tabIndex={0}
         onClick={crossButtonClickHandler}
-        onKeyDown={crossButtonKeydownHandler}
+        onKeyUp={crossButtonKeyupHandler}
         role="button"
-        title={"Activar reproducción aleatoria"}
+        aria-label="Reproducción aleatoria"
+        title={(randomStatus ? "Desactivar" : "Activar") + " reproducción aleatoria"}
         aria-pressed={randomStatus}
       >
         <TbArrowsCross className="arrowCrossButton" />
       </div>
-
       <div
         id="playButton"
-        className={isPlaying ? "playListButtonAnimated" : "playListButton"}
+        className={isPlaying? "playListButtonAnimated" : "playListButton"}
         tabIndex={0}
         onClick={playButtonClickHandler}
-        onKeyDown={playButtonKeydownHandler}
+        onKeyUp={playButtonKeyupHandler}
         role="button"
         title={(isPlaying?"Pausar":"Reproducir") + " playlist"}
       >
-        {isPlaying ? <FaPause className="play" /> : <FaPlay className="play" />}
+
+        {isPlaying? <FaPause className="play" /> : <FaPlay className="play" />}
       </div>
 
       <div
@@ -99,9 +104,10 @@ export default function PlayListPlayer({
         className={loopStatus ? "arrowLoopActive" : "arrowLoop"}
         tabIndex={0}
         onClick={loopButtonClickHandler}
-        onKeyDown={loopButtonKeydownHandler}
+        onKeyUp={loopButtonKeyupHandler}
         role="button"
-        title={"Activar reproducción en bucle"}
+        aria-label="Reproducción en bucle"
+        title={(loopStatus ? "Desactivar" : "Activar") + " reproducción en bucle"}
         aria-pressed={loopStatus}
       >
         <RiLoopLeftFill className="arrowLoopButton"/>

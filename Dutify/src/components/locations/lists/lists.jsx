@@ -8,7 +8,7 @@ import { PageHandlerContext } from "../../../App";
 
 function Lists({}) {
   const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const setPage = useContext(PageHandlerContext).setPage;
   const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;

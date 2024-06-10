@@ -13,7 +13,7 @@ const getGenreName = (id) => {
 
 function GenreLists( {genre} ) {
   const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const genreName = getGenreName(genre);
 
   const setPage = useContext(PageHandlerContext).setPage;

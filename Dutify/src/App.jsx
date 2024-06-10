@@ -6,13 +6,14 @@ import Lists from "./components/locations/lists/lists";
 import Inicio from "./components/locations/inicio/inicio";
 import { setAccessToken, getAccessToken } from "./spotifyApi/SpotifyApiCalls";
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
   Navigate,
+  createBrowserRouter,
 } from "react-router-dom";
 import HelpModal from "./components/helpModal/helpModal";
 import { useThemeContext } from "./context/ThemeContext";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, useRef } from "react";
 import PlayList from "./components/playList/playList";
 import MusicPlayer from "./components/musicPlayer/musicPlayer";
 import GenreLists from "./components/locations/genres/genreLists";
@@ -29,6 +30,8 @@ function App() {
   const { contextTheme, setContextTheme } = useThemeContext();
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const refContainer = useRef();
 
   const [page, changePage] = useState((location.href==="http://localhost:5173/Dutify" || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
   const [playlistId, setPlaylistId] = useState(window.sessionStorage.getItem("playlistId"));
@@ -59,7 +62,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log("useEffect de App.jsx")
 
     const currentTrack = JSON.parse(window.sessionStorage.getItem("currentTrack"));
     const currentTime = window.sessionStorage.getItem("currentTrackTime")
@@ -170,14 +172,21 @@ function App() {
     setOpen(true);
   };
 
+  const handleKeyUpEvent = (event) =>{
+
+    if ((event.key === "Enter" || event.key === " ") && document.activeElement === refContainer.current) {
+      setIsPlaying(!isPlaying)
+    }
+  }
+
   return (
-    <div id={contextTheme} style={{height: '100vh'}} aria-live="polite">
+    <div id={contextTheme} style={{height: '100vh'}} tabIndex={-1} onKeyUp={handleKeyUpEvent} role="application" ref={refContainer}>
         <PageHandlerContext.Provider value={{page, setPage, setPlaylistId, setReload, updateSearchQuery, setGenre}}>
           <FeedbackHandlerContext.Provider value={{changeFeedback}}>
-            <div aria-description={feedback} aria-live="assertive">
+            <div aria-description={feedback} >
               {feedback !== "" ? (
                   <ClickAwayListener onClickAway={onClickAway}>
-                    <div className="CustomSnackbar" {...getRootProps()}>
+                    <div className="CustomSnackbar" {...getRootProps()} role="alert">
                       {feedback}
                     </div>
                   </ClickAwayListener>
@@ -189,7 +198,7 @@ function App() {
               {pageRender()}
             </main>
             <footer>
-              <MusicPlayer></MusicPlayer>
+              <MusicPlayer spaceEvent={isPlaying} ></MusicPlayer>
             </footer>
           </FeedbackHandlerContext.Provider>
         </PageHandlerContext.Provider>

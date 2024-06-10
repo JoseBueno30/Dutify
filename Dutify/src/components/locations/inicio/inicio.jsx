@@ -12,7 +12,7 @@ function Inicio(){
     const [popular_playlists, setPopularPlaylists] = useState([]);
     const [popular_artists_playlists, setPopularArtistsPlaylists] = useState([]);
     const [recommended_playlists, setRecommendedPlaylists] = useState([])
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const setPage = useContext(PageHandlerContext).setPage;
     const setPlaylistId = useContext(PageHandlerContext).setPlaylistId;
@@ -22,7 +22,7 @@ function Inicio(){
         
         setLoading(true);
         const user_playlists = await getUserPlaylists()
-        setRecentPlaylists(user_playlists.slice(0,6)) // PENDIENTE DE CAMBIO*/
+        setRecentPlaylists(user_playlists.slice(0,6))
         setPopularPlaylists(await getPopularPlaylists())
         setRecommendedPlaylists(await getRecommendedPlaylists())
         setPopularArtistsPlaylists(await getPopularArtistsPlaylists())

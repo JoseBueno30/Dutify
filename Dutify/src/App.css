@@ -54,6 +54,10 @@
   transition: transform 0.2s ease-out;
   }
 
+  .body{
+    overflow-y: hidden;
+}
+
   @keyframes in-top {
     from {
       transform: translate(0, -12vh);

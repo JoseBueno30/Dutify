@@ -18,14 +18,14 @@ function SearchBar({ isOpen }) {
   const updateSearchQuery = useContext(PageHandlerContext).updateSearchQuery;
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeydownListener);
+    document.addEventListener("keyup", handleKeyupListener);
 
     return () => {
-      document.removeEventListener("keydown", handleKeydownListener);
+      document.removeEventListener("keyup", handleKeyupListener);
     };
   }, []);
 
-  const handleKeydownListener = (event) => {
+  const handleKeyupListener = (event) => {
     if (event.key === "Enter" && document.activeElement === document.getElementById("search-bar")) {
       search();
     }
@@ -93,7 +93,9 @@ function SearchBar({ isOpen }) {
               className="btn btn-showMore mt-auto mb-2"
               title="Mostrar más resultados"
             >
-            Mostrar más
+              <div aria-hidden="true">
+                Mostrar más resultados
+              </div>
             </button> : <></>}
 
           </ClickOutside>

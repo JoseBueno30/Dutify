@@ -74,6 +74,8 @@ export default function PlayList({playlistId}) {
   };
 
   useEffect(() => {
+    console.log(isPlaying)
+
     if(playlistName === ""){
       document.title = "Cargando PlayList | Dutify";
     }

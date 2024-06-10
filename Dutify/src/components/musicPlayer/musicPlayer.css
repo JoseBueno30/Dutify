@@ -135,7 +135,7 @@
 
 .play-button:hover {
   transition-duration: 0.3s;
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 
 .timer-buttons-wrapper {

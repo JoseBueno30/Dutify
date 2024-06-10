@@ -72,7 +72,7 @@ export default function SongButton({
     setCurrentFocus(index);
   }
 
-  const songButtonKeydownHandler = (event) => {
+  const songButtonKeyupHandler = (event) => {
     console.log(event.key)
     if (
       event.key === "Enter" &&
@@ -145,7 +145,7 @@ export default function SongButton({
         id={track.id}
         className={!hasPreview ? "songButton disabled-song-button" :"songButton"}
         onDoubleClick={songClickHandler}
-        onKeyDown={songButtonKeydownHandler}
+        onKeyUp={songButtonKeyupHandler}
         role="option"
         aria-description={hasPreview ? "Reproducir canción: " + track.name : "La canción '" + track.name + "' no está disponible"}
         ref={songButtonRef}
@@ -271,7 +271,7 @@ function Options({ track, index, optionsFocus, focusSong }) {
     hover ? "menuItemHover" : "menuItem";
 
 
-  const onKeyDown = (e) => {
+  const onKeyUp = (e) => {
     e.preventDefault();
     switch (e.key) {
       case "ArrowLeft":
@@ -288,7 +288,7 @@ function Options({ track, index, optionsFocus, focusSong }) {
       <Menu
       menuButton={
         <MenuButton tabIndex={-1}
-        ref={focusRef} title="Opciones" className={"optionsButton"} onKeyDown={onKeyDown}>
+        ref={focusRef} title="Opciones" className={"optionsButton"} onKeyUp={onKeyUp}>
           <FaEllipsisVertical className="options" />
         </MenuButton>
       }

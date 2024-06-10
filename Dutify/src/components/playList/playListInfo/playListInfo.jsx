@@ -45,7 +45,7 @@ export default function PlayListInfo({
       ) : (
         <img
           className="playListImage"
-          src={"/assets/placeholder-img-" + contextTheme + ".png"}
+          src={"/Dutify/assets/placeholder-img-" + contextTheme + ".png"}
           alt="Imagen de la playlist"
         ></img>
       )}
@@ -58,25 +58,15 @@ export default function PlayListInfo({
         ) : (
           <>
             {/* ponner los onClick al boton no a los iconos */}
-            {followed ? (
-              <button
+            <button
                 className="playListFollowButton"
-                title="Dejar de seguir playlist"
-                aria-pressed = "true"
-                onClick={() => unfollowPlaylistHandler()}
+                aria-label="Seguir playlist"
+                title={ (followed ? "Dejar de seguir" : "Seguir") +  " playlist"}
+                aria-pressed = {followed}
+                onClick={followed ? () => unfollowPlaylistHandler() : () => followPlaylistHandler()}
               >
-                <FaHeart className="followed" />
+                {followed ? <FaHeart className="followed" /> : <FaRegHeart />}
               </button>
-            ) : (
-              <button
-                className="playListFollowButton"
-                title="Seguir playlist"
-                aria-pressed = "false"
-                onClick={() => followPlaylistHandler()}
-              >
-                <FaRegHeart />
-              </button>
-            )}
           </>
         )}
       </div>

@@ -19,9 +19,9 @@ import {
 } from "react-icons/io5";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
-function MusicPlayer() {
+function MusicPlayer({spaceEvent}) {
   const [playing, change] = useState(
-    window.sessionStorage.getItem("trackStatus") === "true"
+    isTrackPlaying()==="true"
   );
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const [progressionValue, setProgressionValue] = useState(0);
@@ -126,6 +126,11 @@ function MusicPlayer() {
       window.sessionStorage.getItem("volume") === null
         ? 50
         : parseFloat(window.sessionStorage.getItem("volume")) * 100;
+    
+    if(window.sessionStorage.getItem("trackStatus")!==null){
+      switchPlay();
+    }
+    
 
     setvolumeValue(trackVolume);
 
@@ -133,7 +138,7 @@ function MusicPlayer() {
       __removeEvents();
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [spaceEvent]);
 
   const __addEvents = () => {
     queueEmitter.on("newTrack", loadTrackInfo);
@@ -153,15 +158,19 @@ function MusicPlayer() {
     fillRangeInputs();
   }, [progressionValue, volumeValue]);
 
-  const playButtonKeydownHandler = (event) => {
+  const playButtonKeyupHandler = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       switchPlay();
     }
   };
 
+  const test = (event) => {
+    console.log("ASASDDASD")
+  }
+
   return (
     <>
-      <div className="sticky-bottom music-bar ">
+      <div className="sticky-bottom music-bar " onKeyUp={test}>
         <div className="music-container">
           {/* Información de la cancion */}
           <div className="song-container">
@@ -210,6 +219,7 @@ function MusicPlayer() {
               {/* Temporizador */}
 
               <span
+                aria-live="off"
                 aria-description={
                   "Marca de tiempo actual: " +
                   (track && currentTime
@@ -220,7 +230,7 @@ function MusicPlayer() {
               >
                 <div aria-hidden="true">
                   {track && currentTime
-                    ? currentTime > 9
+                    ? currentTime >= 10
                       ? "00:" + currentTime.substring(0, 2)
                       : "00:0" + currentTime.charAt(0)
                     : "mm:ss"}
@@ -239,13 +249,13 @@ function MusicPlayer() {
 
                 <button
                   onClick={switchPlay}
-                  onKeyDown={playButtonKeydownHandler}
+                  onKeyUp={playButtonKeyupHandler}
                   className="play-button"
                   title={
-                    isTrackPlaying() ? "Pausar canción" : "Reproducir canción"
+                    playing ? "Pausar canción" : "Reproducir canción"
                   }
                 >
-                  {!isTrackPlaying() ? (
+                  {!playing ? (
                     <IoPlayCircleOutline size={35} />
                   ) : (
                     <IoPauseCircleOutline size={35} />
@@ -263,6 +273,7 @@ function MusicPlayer() {
               {/* Temporizador */}
               <span
                 tabIndex={0}
+                aria-live="off"
                 aria-description={
                   "Marca de tiempo total: " +
                   (track ? "30 segundos" : "indefinido")
