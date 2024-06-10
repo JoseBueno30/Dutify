@@ -2,63 +2,63 @@
   /* Colores para cada género de música */
   --color-pop: hsl(336, 50%, 50%);
   --color-pop-2: hsl(36, 50%, 50%);
-  --img-pop: url("assets/genreImages/pop-img.png");
+  --img-pop: url("genreImages/pop-img.png");
 
   --color-rock: hsl(240, 50%, 50%);
   --color-rock-2: hsl(270, 50%, 50%);
-  --img-rock: url("assets/genreImages/rock-img.png");
+  --img-rock: url("genreImages/rock-img.png");
 
   --color-hip-hop: hsl(80, 50%, 50%);
   --color-hip-hop-2: hsl(140, 50%, 50%);
-  --img-hip-hop: url("assets/genreImages/hip-hop-img.png");
+  --img-hip-hop: url("genreImages/hip-hop-img.png");
 
   --color-jazz: hsl(83, 50%, 50%);
   --color-jazz-2: hsl(123, 50%, 50%);
-  --img-jazz: url("assets/genreImages/jazz-img.png");
+  --img-jazz: url("genreImages/jazz-img.png");
 
   --color-indie: hsl(120, 50%, 50%);
   --color-indie-2: hsl(180, 50%, 50%);
-  --img-indie: url("assets/genreImages/indie-img.png");
+  --img-indie: url("genreImages/indie-img.png");
 
   --color-flamenco: hsl(336, 50%, 50%);
   --color-flamenco-2: hsl(36, 50%, 50%);
-  --img-flamenco: url("assets/genreImages/flamenco-img.png");
+  --img-flamenco: url("genreImages/flamenco-img.png");
 
   --color-techno: hsl(67, 70%, 36%);
   --color-techno-2: hsl(67, 92%, 63%);
-  --img-techno: url("assets/genreImages/techno-img.png");
+  --img-techno: url("genreImages/techno-img.png");
 
   --color-metal: hsl(170, 10%, 36%);
   --color-metal-2: hsl(200, 10%, 50%);
-  --img-metal: url("assets/genreImages/metal-img.png");
+  --img-metal: url("genreImages/metal-img.png");
 
   --color-k-pop: hsl(192, 50%, 50%);
   --color-k-pop-2: hsl(252, 50%, 50%);
-  --img-k-pop: url("assets/genreImages/k-pop-img.png");
+  --img-k-pop: url("genreImages/k-pop-img.png");
 
   --color-soul: hsl(170, 10%, 36%);
   --color-soul-2: hsl(200, 10%, 50%);
-  --img-soul: url("assets/genreImages/soul-img.png");
+  --img-soul: url("genreImages/soul-img.png");
 
   --color-clasica: hsl(240, 50%, 50%);
   --color-clasica-2: hsl(270, 50%, 50%);
-  --img-clasica: url("assets/genreImages/clasica-img.png");
+  --img-clasica: url("genreImages/clasica-img.png");
 
   --color-videojuegos: hsl(120, 50%, 50%);
   --color-videojuegos-2: hsl(180, 50%, 50%);
-  --img-videojuegos: url("assets/genreImages/videojuegos-img.png");
+  --img-videojuegos: url("genreImages/videojuegos-img.png");
 
   --color-anime: hsl(240, 50%, 50%);
   --color-anime-2: hsl(270, 50%, 50%);
-  --img-anime: url("assets/genreImages/anime-img.png");
+  --img-anime: url("genreImages/anime-img.png");
 
   --color-alternativa: hsl(192, 50%, 50%);
   --color-alternativa-2: hsl(252, 50%, 50%);
-  --img-alternativa: url("assets/genreImages/alternativa-img.png");
+  --img-alternativa: url("genreImages/alternativa-img.png");
 
   --color-latino: hsl(336, 50%, 50%);
   --color-latino-2: hsl(36, 50%, 50%);
-  --img-latino: url("assets/genreImages/latino-img.png");
+  --img-latino: url("genreImages/latino-img.png");
 }
 
 .genre-img {
