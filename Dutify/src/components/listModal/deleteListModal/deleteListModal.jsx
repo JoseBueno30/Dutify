@@ -24,7 +24,7 @@ function DeleteListModal({ playlist }) {
   }
 
   const comfirmDeleteClickHandler = (e) => {
-    unfollowPlaylist(playlist).then(sleep(500).then(() => {setPage("/listas")}));
+    unfollowPlaylist(playlist).then(sleep(500).then(() => {setPage("listas")}));
   };
 
   return (

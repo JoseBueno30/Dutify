@@ -9,8 +9,9 @@ function NavButton(props) {
 
     const activeLocation = page!==undefined?(page ==="/"+props.texto.toLowerCase()):false;
 
+
     const setLocation = () => {
-        setPage("/" + props.texto.toLowerCase());
+        setPage(props.texto.toLowerCase());
     }
     return (
         <button  onClick={setLocation} 

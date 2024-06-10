@@ -161,7 +161,7 @@ export default function TrackList({
             <h2 className="notFoundMessage">¡Oops, no hemos encontrado nada!</h2>
             <h3>
               Explora nuevas canciones en la sección de{" "}
-              <a className="inicio-link" onClick={() => setPage("/inicio")} aria-label="Ir a inicio">  
+              <a className="inicio-link" onClick={() => setPage("inicio")} aria-label="Ir a inicio">  
                  Inicio
               </a>
             </h3>

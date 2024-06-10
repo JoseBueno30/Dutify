@@ -12,7 +12,7 @@ function Login(loginUrl) {
   useEffect(() => {
     console.log(location.href.length)
     console.log(location.href.length > 25)
-    if(location.href.length > 25){
+    if(location.href.length > 50){
       let spotifyToken;
 
       spotifyToken = getTokenFromUrl().access_token;
@@ -20,7 +20,7 @@ function Login(loginUrl) {
       setAccessToken(spotifyToken);
       window.sessionStorage.setItem("page", "/inicio")
       console.log("AAAA")
-      location.href="/Dutify"
+      location.href="Dutify/#inicio"
     } 
   })
 

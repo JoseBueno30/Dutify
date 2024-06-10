@@ -97,7 +97,7 @@ function ListModal({ playlist }) {
         createPlaylist(listName, listPublic)
           .then((playlist) => {
             setPlaylistId(playlist.id);
-            setPage("/playlist")
+            setPage("playlist")
           })
           .catch((error) => {
             console.error(error);

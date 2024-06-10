@@ -29,7 +29,7 @@ const CarouselComponent = ({ lista, name, id }) => {
 
   const ClickHandler = (id) => {
     setPlaylistId(id);
-    setPage("/playlist");
+    setPage("playlist");
   };
 
   const handleKeyDown = (event, id) => {

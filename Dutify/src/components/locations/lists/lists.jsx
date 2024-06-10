@@ -26,7 +26,7 @@ function Lists({}) {
   const listButtonClickHandler = (e) => {
     const key = e.currentTarget.id;
     setPlaylistId(key);
-    setPage("/playlist");
+    setPage("playlist");
   };
 
   return (

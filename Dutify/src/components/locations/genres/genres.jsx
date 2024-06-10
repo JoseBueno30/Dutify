@@ -47,7 +47,7 @@ function Genres() {
   const goToListasGenero = (e) => {
     const id = e.currentTarget.id;
     setGenre(id);
-    setPage("/generos/listas");
+    setPage("generos/listas");
   };
 
   return (

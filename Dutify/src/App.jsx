@@ -30,18 +30,33 @@ function App() {
   const [feedback, setFeedback] = useState("");
   const [open, setOpen] = useState(false);
 
-  const [page, changePage] = useState((location.href==="http://localhost:5173/" || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
+  const [page, changePage] = useState((location.href==="http://localhost:5173/Dutify" || location.href.length>70)?"/":window.sessionStorage.getItem("page"));
   const [playlistId, setPlaylistId] = useState(window.sessionStorage.getItem("playlistId"));
   const [genre, setGenre] = useState(window.sessionStorage.getItem("genre"));
   const [searchQuery, setSearchQuery] = useState(window.sessionStorage.getItem("searchQuery"));
   const [reload,setReload] = useState();
+
+  const handleHashChange = (event) => {
+    console.log(event.newURL)
+    let newPage = event.newURL.replace('http://localhost:5173/Dutify/#', '');
+    window.sessionStorage.setItem("page", "/" + newPage);
+    changePage("/" + newPage);
+  }
 
   useEffect(() =>{
     console.log(getAccessToken()==="undefined")
     console.log(getAccessToken() === null)
     console.log(location.href==="http://localhost:5173/")
     console.log((getAccessToken()==="undefined" || getAccessToken() === null) || location.href==="http://localhost:5173/")
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+
   }, [reload]);
+
 
   useEffect(() => {
     console.log("useEffect de App.jsx")
@@ -58,7 +73,7 @@ function App() {
   }, []);
 
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URI = "http://localhost:5173/inicio";
+  const REDIRECT_URI = "http://localhost:5173/Dutify";
   const CLIENT_ID = "212f24bfe4124f9d89ee2c341ae96f19";
   const RESPONSE_TYPE = "token";
 
@@ -87,13 +102,16 @@ function App() {
   const updateSearchQuery = (query, playlistId) => {
     setSearchQuery(query);
     setPlaylistId(playlistId);
-    setPage("/busqueda")
+    setPage("busqueda")
     setReload(Math.random);
   }
 
   const setPage = (page) => {
-    window.sessionStorage.setItem("page", page)
-    changePage(page);
+    console.log("AAA")
+    window.sessionStorage.setItem("page", "/" + page)
+    let stateObj = { id: "100" };
+    window.history.pushState(stateObj, page, "#"+page);
+    changePage("/"+page);
   }
 
   const pageRender = () => {
@@ -135,41 +153,6 @@ function App() {
     }
     return pageRender;
   }
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Login loginUrl={loginUrl}></Login>,
-    },
-    {
-      path: "/inicio",
-      element: <Inicio></Inicio>,
-    },
-    {
-      path: "/generos",
-      element: <Genres></Genres>,
-    },
-    {
-      path: "/listas",
-      element: <Lists></Lists>,
-    },
-    {
-      path: "/Generos/Listas",
-      element: <GenreLists></GenreLists>,
-    },
-    {
-      path: "Generos/playlist",
-      element: <PlayList />,
-    },
-    {
-      path: "/listas/playlist",
-      element: <PlayList />,
-    },
-    {
-      path: "/busqueda",
-      element: <SearchResults />,
-    },
-  ]);
 
   const handleClose = () => {
     setFeedback("");
